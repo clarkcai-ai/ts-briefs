@@ -13,109 +13,187 @@
   --blue:#185fa5;--blue-bg:#e6f1fb;--blue-bd:#85b7eb;
   --green:#0f6e56;--green-bg:#e1f5ee;--green-bd:#5dcaa5;
   --purple:#534ab7;--purple-bg:#eeedfe;--purple-bd:#afa9ec;
-  --teal:#1d9e75;--teal-bg:#e1f5ee;--teal-bd:#5dcaa5;
-  --gray-bg:#f1efe8;--r:8px;--rl:14px;
+  --gray-bg:#f1efe8;--gray-bd:#e0ded6;--r:8px;--rl:14px;
 }
-body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,sans-serif;font-size:14px;line-height:1.6}
+body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,sans-serif;font-size:14px;line-height:1.6;overflow-x:hidden}
 
-/* HEADER */
-.site-header{background:var(--text);color:#fff;padding:16px 40px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200}
-.site-hl{display:flex;align-items:baseline;gap:14px}
+.site-header{background:var(--text);color:#fff;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
+.site-hl{display:flex;align-items:baseline;gap:12px}
 .site-title{font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
 .site-sub{font-size:12px;color:rgba(255,255,255,.4)}
-.site-meta{font-size:11px;color:rgba(255,255,255,.3);letter-spacing:.04em}
-.save-ind{font-size:11px;color:rgba(255,255,255,.5);transition:opacity .3s;opacity:0}
+.save-ind{font-size:11px;color:rgba(255,255,255,.45);transition:opacity .3s;opacity:0}
 .save-ind.show{opacity:1}
 
-/* FILTER */
-.filter-bar{background:var(--surface);border-bottom:1px solid var(--border);padding:10px 40px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;position:sticky;top:51px;z-index:100}
-.fl{font-size:11px;font-weight:600;color:var(--faint);letter-spacing:.06em;text-transform:uppercase;margin-right:4px}
-.fb{font-size:12px;font-weight:500;border:1px solid var(--border);border-radius:20px;padding:3px 12px;background:none;color:var(--muted);cursor:pointer;transition:all .15s}
+.filter-bar{background:var(--surface);border-bottom:1px solid var(--border);padding:9px 32px;display:flex;align-items:center;gap:7px;flex-wrap:wrap;position:sticky;top:47px;z-index:40}
+.fl{font-size:10px;font-weight:700;color:var(--faint);letter-spacing:.08em;text-transform:uppercase;margin-right:3px}
+.fb{font-size:11px;font-weight:500;border:1px solid var(--border);border-radius:20px;padding:3px 11px;background:none;color:var(--muted);cursor:pointer;transition:all .15s}
 .fb:hover,.fb.active{border-color:var(--orange);color:var(--orange);background:var(--orange-bg)}
 
-/* LAYOUT */
-.page{display:grid;grid-template-columns:250px 1fr;min-height:calc(100vh - 93px);align-items:start}
-
-/* SIDEBAR */
-.sidebar{position:sticky;top:93px;max-height:calc(100vh - 93px);overflow-y:auto;border-right:1px solid var(--border);background:var(--surface);padding:16px 0 40px}
-.si-title{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);padding:0 18px 10px;border-bottom:1px solid var(--border);margin-bottom:6px}
-.si-group{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);padding:10px 18px 3px;display:flex;align-items:center;gap:6px}
-.si-dot{width:6px;height:6px;border-radius:50%;display:inline-block;flex-shrink:0}
-.si-link{display:block;padding:5px 18px 5px 24px;font-size:11px;color:var(--muted);text-decoration:none;border-left:2px solid transparent;transition:all .1s;line-height:1.3}
-.si-link:hover{color:var(--orange);background:var(--orange-bg);border-left-color:var(--orange-bd)}
-.si-link small{font-size:10px;display:block;color:var(--faint);margin-top:1px}
-
-/* MAIN */
-.main{padding:28px 36px 80px}
-.sec-hdr{display:flex;align-items:center;gap:12px;margin:28px 0 14px}
+.list-wrap{max-width:900px;margin:0 auto;padding:24px 32px 80px}
+.sec-hdr{display:flex;align-items:center;gap:10px;margin:24px 0 10px}
 .sec-hdr:first-child{margin-top:0}
-.sec-lbl{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);display:flex;align-items:center;gap:6px;white-space:nowrap}
+.sec-lbl{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);display:flex;align-items:center;gap:6px;white-space:nowrap}
 .sec-dot{width:8px;height:8px;border-radius:50%;display:inline-block;flex-shrink:0}
 .sec-line{flex:1;height:1px;background:var(--border)}
 .sec-ct{font-size:11px;color:var(--faint);font-weight:500;white-space:nowrap}
-.sec-empty{font-size:12px;color:var(--faint);font-style:italic;padding:12px 0 4px;display:none}
+.sec-empty{font-size:12px;color:var(--faint);font-style:italic;padding:8px 0 2px;display:none}
 .sec-empty.show{display:block}
+.sec-hdr.hidden{display:none}
 
-/* CARD */
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);margin-bottom:14px;overflow:hidden;scroll-margin-top:110px;transition:opacity .2s}
-.card.hidden{display:none}
-.card-hdr{padding:14px 18px 12px;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;justify-content:space-between;gap:16px;background:#fafaf8}
-.card-hdr-l{flex:1;min-width:0}
-.card-hdr-r{display:flex;align-items:center;gap:6px;flex-shrink:0;padding-top:2px}
-.job-name{font-size:13px;font-weight:700;color:var(--text);letter-spacing:.01em;margin-bottom:6px;word-break:break-all;outline:none;border-radius:3px;padding:1px 3px;margin-left:-3px}
-.job-name:focus{background:var(--blue-bg);outline:1px solid var(--blue-bd)}
-.meta-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.row-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;margin-bottom:6px;display:flex;align-items:center;gap:12px;padding:12px 16px;cursor:pointer;transition:all .15s}
+.row-card:hover{border-color:var(--border-strong);box-shadow:0 2px 8px rgba(0,0,0,.07);transform:translateY(-1px)}
+.row-card.hidden{display:none}
+.row-left{flex:1;min-width:0}
+.row-name{font-size:13px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:3px}
+.row-meta{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.row-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.open-btn{font-size:11px;font-weight:600;color:var(--faint);background:none;border:1px solid var(--border);border-radius:6px;padding:3px 10px;cursor:pointer;transition:all .15s;white-space:nowrap}
+.row-card:hover .open-btn{color:var(--blue);border-color:var(--blue-bd);background:var(--blue-bg)}
 
-/* STATUS DROPDOWN */
-.status-wrap{position:relative;display:inline-flex;align-items:center}
-.status-select{font-size:11px;font-weight:600;border-radius:4px;padding:2px 22px 2px 8px;cursor:pointer;border:none;outline:none;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='5' viewBox='0 0 8 5'%3E%3Cpath d='M0 0l4 5 4-5z' fill='%23999'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 6px center}
+.badge{display:inline-flex;align-items:center;font-size:10px;font-weight:600;border-radius:4px;padding:2px 7px;white-space:nowrap}
+.bg{background:var(--gray-bg);color:var(--muted);border:1px solid var(--border)}
 .status-planning{background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-bd)}
 .status-working{background:var(--orange-bg);color:var(--orange);border:1px solid var(--orange-bd)}
 .status-prod-review{background:var(--purple-bg);color:var(--purple);border:1px solid var(--purple-bd)}
 .status-ready-prod{background:var(--green-bg);color:var(--green);border:1px solid var(--green-bd)}
 
-.badge{display:inline-flex;align-items:center;font-size:11px;font-weight:600;border-radius:4px;padding:2px 8px;white-space:nowrap}
-.bg{background:var(--gray-bg);color:var(--muted);border:1px solid var(--border)}
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:200;display:none;align-items:stretch;justify-content:flex-end}
+.modal-overlay.open{display:flex}
+.modal-panel{width:min(940px,96vw);background:var(--surface);height:100vh;overflow-y:auto;display:flex;flex-direction:column;box-shadow:-8px 0 32px rgba(0,0,0,.15);animation:slideIn .2s ease}
+@keyframes slideIn{from{transform:translateX(40px);opacity:0}to{transform:translateX(0);opacity:1}}
 
-/* COPY LINK */
+.modal-hdr{padding:16px 24px 14px;border-bottom:1px solid var(--border);background:#fafaf8;display:flex;align-items:flex-start;gap:16px;position:sticky;top:0;z-index:10}
+.modal-hdr-l{flex:1;min-width:0}
+.modal-hdr-r{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.modal-job-name{font-size:14px;font-weight:700;color:var(--text);word-break:break-all;margin-bottom:5px;outline:none;border-radius:3px;padding:1px 3px;margin-left:-3px}
+.modal-job-name:focus{background:var(--blue-bg);outline:1px solid var(--blue-bd)}
+.modal-meta{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.status-select{font-size:11px;font-weight:600;border-radius:4px;padding:2px 22px 2px 8px;cursor:pointer;border:none;outline:none;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='5' viewBox='0 0 8 5'%3E%3Cpath d='M0 0l4 5 4-5z' fill='%23999'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 6px center}
+.close-btn{font-size:18px;color:var(--muted);background:none;border:none;cursor:pointer;padding:2px 6px;border-radius:4px;line-height:1;transition:all .15s}
+.close-btn:hover{background:var(--gray-bg);color:var(--text)}
 .cl-btn{font-size:11px;font-weight:600;color:var(--faint);background:none;border:1px solid var(--border);border-radius:6px;padding:3px 9px;cursor:pointer;transition:all .15s;white-space:nowrap}
 .cl-btn:hover{color:var(--blue);border-color:var(--blue-bd);background:var(--blue-bg)}
 .cl-btn.copied{color:var(--green);border-color:var(--green-bd);background:var(--green-bg)}
 
-/* TABS */
-.card-tabs{display:flex;border-bottom:1px solid var(--border);background:#fafaf8;padding:0 18px;overflow-x:auto}
-.tab{font-size:12px;font-weight:500;color:var(--muted);background:none;border:none;border-bottom:2px solid transparent;padding:8px 14px;cursor:pointer;transition:all .15s;white-space:nowrap;margin-bottom:-1px}
+.modal-tabs{display:flex;border-bottom:1px solid var(--border);background:#fafaf8;padding:0 24px;flex-shrink:0}
+.tab{font-size:13px;font-weight:500;color:var(--muted);background:none;border:none;border-bottom:2px solid transparent;padding:11px 18px;cursor:pointer;transition:all .15s;white-space:nowrap;margin-bottom:-1px}
 .tab:hover{color:var(--text)}
 .tab.active{color:var(--orange);border-bottom-color:var(--orange);font-weight:600}
 
-/* PANELS */
-.panel{display:none;padding:16px 18px}
+.modal-body{flex:1;overflow-y:auto}
+.panel{display:none;padding:24px}
 .panel.active{display:block}
+
+.panel-section{margin-bottom:28px}
+.panel-section:last-child{margin-bottom:0}
+.section-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border);display:block}
 
 /* FIELD GRID */
 .fg{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
-.fc{padding:9px 13px;border-right:1px solid var(--border);border-bottom:1px solid var(--border)}
+.fc{padding:10px 13px;border-right:1px solid var(--border);border-bottom:1px solid var(--border)}
 .fc:nth-child(3n){border-right:none}
 .fc:nth-last-child(-n+3){border-bottom:none}
-.fk{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-bottom:2px}
+.fk{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-bottom:3px}
 .fv{font-size:13px;color:var(--text);font-weight:500;min-height:18px;outline:none;border-radius:3px;padding:1px 3px;margin:-1px -3px;display:block}
 .fv:focus{background:var(--blue-bg);outline:1px solid var(--blue-bd)}
 .fv.empty{color:var(--faint);font-style:italic;font-weight:400}
 
 /* TEXT AREAS */
-.spanel-label{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
-.ea{font-size:13px;line-height:1.75;color:var(--text);min-height:80px;width:100%;border:1px solid var(--border);border-radius:var(--r);padding:12px;outline:none;resize:vertical;font-family:inherit;background:var(--surface);transition:border-color .15s}
-.ea:focus{border-color:var(--border-strong);background:#fff}
-.tab-hint{font-size:12px;color:var(--faint);margin-bottom:10px;line-height:1.5}
-.tab-hint strong{color:var(--muted);font-weight:600}
+.ea{font-size:13px;line-height:1.75;color:var(--text);min-height:100px;width:100%;border:1px solid var(--border);border-radius:var(--r);padding:13px;outline:none;resize:vertical;font-family:inherit;background:var(--surface);transition:border-color .15s}
+.ea:focus{border-color:var(--border-strong)}
 
-/* SECTION HIDDEN */
-.sec-hdr.hidden{display:none}
+/* ═══ SHARED TABLE CHROME (used by both Ad Sets and Headlines) ═══ */
+.tbl-block{border:1px solid var(--border);border-radius:var(--rl);overflow:hidden;margin-bottom:0}
+.tbl-block-hdr{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--gray-bg);border-bottom:1px solid var(--border);gap:10px}
+.tbl-block-name{font-size:12px;font-weight:700;color:var(--text);outline:none;background:transparent;border:none;font-family:inherit;flex:1;min-width:0}
+.tbl-block-name:focus{background:var(--blue-bg);border-radius:3px;outline:1px solid var(--blue-bd);padding:1px 4px}
+.tbl-block-name::placeholder{color:var(--faint);font-style:italic}
+.tbl-block-del{font-size:12px;font-weight:600;color:var(--faint);background:none;border:1px solid var(--border);border-radius:6px;padding:3px 9px;cursor:pointer;transition:all .15s;white-space:nowrap;flex-shrink:0}
+.tbl-block-del:hover{color:#e24b4a;border-color:#f09595;background:#fcebeb}
+.tbl-add-row-wrap{padding:8px 12px;border-top:1px solid var(--border);background:#fafaf8}
+.tbl-add-row-btn{font-size:11px;font-weight:600;color:var(--blue);background:none;border:1px solid var(--blue-bd);border-radius:6px;padding:4px 11px;cursor:pointer;transition:all .15s}
+.tbl-add-row-btn:hover{background:var(--blue-bg)}
+.tbl-bottom-bar{display:flex;align-items:center;gap:8px;margin-top:12px}
+.tbl-new-btn{font-size:12px;font-weight:600;color:var(--orange);background:var(--orange-bg);border:1px solid var(--orange-bd);border-radius:6px;padding:6px 14px;cursor:pointer;transition:all .15s}
+.tbl-new-btn:hover{background:#ffe4d8}
 
-@media(max-width:800px){
-  .page{grid-template-columns:1fr}
-  .sidebar{display:none}
-  .main,.filter-bar,.site-header{padding-left:18px;padding-right:18px}
+/* ═══ AD SETS ═══ */
+.adsets-wrap{display:flex;flex-direction:column;gap:0;border:1px solid var(--border);border-radius:var(--rl);overflow:hidden}
+.adsets-title-row{background:var(--gray-bg);border-bottom:1px solid var(--border);padding:8px 0;text-align:center;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.adset-block{border-bottom:1px solid var(--border)}
+.adset-block:last-of-type{border-bottom:none}
+.adset-name-cell{display:flex;align-items:center;justify-content:center;padding:10px 14px;border-right:1px solid var(--border);min-width:110px;background:var(--gray-bg)}
+.adset-name-input{font-size:12px;font-weight:700;color:var(--muted);text-align:center;outline:none;background:transparent;border:none;font-family:inherit;width:100%;min-width:60px}
+.adset-name-input:focus{background:rgba(255,255,255,.7);border-radius:3px;outline:1px solid var(--border-strong)}
+.adset-row{display:grid;grid-template-columns:110px 1fr 1fr 36px;border-top:1px solid var(--border);align-items:stretch}
+.adset-row:first-child{border-top:none}
+.adset-row-name{display:flex;align-items:center;justify-content:center;background:var(--gray-bg);border-right:1px solid var(--border);padding:4px 8px}
+.adset-row-name-input{font-size:12px;font-weight:600;color:var(--muted);text-align:center;outline:none;background:transparent;border:none;font-family:inherit;width:100%}
+.adset-row-name-input:focus{background:rgba(255,255,255,.7);border-radius:3px;outline:1px solid var(--border-strong)}
+.adset-cell{padding:0;border-right:1px solid var(--border)}
+.adset-cell:last-of-type{border-right:none}
+.adset-input{width:100%;min-height:40px;padding:8px 11px;border:none;outline:none;font-family:inherit;font-size:12px;color:var(--text);background:transparent;resize:none;display:block;line-height:1.5}
+.adset-input:focus{background:var(--blue-bg)}
+.adset-input::placeholder{color:var(--faint);font-style:italic}
+.adset-row-del{display:flex;align-items:center;justify-content:center;background:none;border:none;cursor:pointer;color:var(--faint);font-size:14px;transition:all .15s;padding:0 6px}
+.adset-row-del:hover{color:#e24b4a;background:#fcebeb}
+.adset-add-row-wrap{padding:6px 10px;border-top:1px solid var(--border);background:#fafaf8;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.adset-add-row-btn{font-size:11px;font-weight:600;color:var(--blue);background:none;border:1px solid var(--blue-bd);border-radius:6px;padding:3px 10px;cursor:pointer;transition:all .15s}
+.adset-add-row-btn:hover{background:var(--blue-bg)}
+.adset-del-btn{font-size:11px;font-weight:600;color:var(--faint);background:none;border:1px solid var(--border);border-radius:6px;padding:3px 9px;cursor:pointer;transition:all .15s}
+.adset-del-btn:hover{color:#e24b4a;border-color:#f09595;background:#fcebeb}
+.adsets-bottom{padding:10px 12px;background:#fafaf8;border-top:1px solid var(--border)}
+.adset-new-btn{font-size:12px;font-weight:600;color:var(--orange);background:var(--orange-bg);border:1px solid var(--orange-bd);border-radius:6px;padding:6px 14px;cursor:pointer;transition:all .15s}
+.adset-new-btn:hover{background:#ffe4d8}
+
+/* ═══ HEADLINES TABLE ═══ */
+.hl-wrap{width:100%;overflow-x:auto}
+.hl-table{width:100%;border-collapse:collapse;font-size:13px;table-layout:fixed}
+.hl-table th{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);padding:8px 12px;background:var(--surface);border-bottom:1px solid var(--border);text-align:left;white-space:nowrap}
+.hl-table td{border-bottom:1px solid var(--border);padding:0;vertical-align:top}
+.hl-table tr:last-child td{border-bottom:none}
+.hl-table td:not(:last-child),.hl-table th:not(:last-child){border-right:1px solid var(--border)}
+.col-label{width:80px}.col-hook{}.col-hldel{width:36px}
+.hl-cell{width:100%;min-height:52px;padding:10px 12px;border:none;outline:none;resize:none;font-family:inherit;font-size:13px;color:var(--text);background:transparent;line-height:1.65;display:block;transition:background .1s}
+.hl-cell:focus{background:var(--blue-bg)}
+.hl-cell::placeholder{color:var(--faint);font-style:italic}
+.hl-row-del{width:100%;height:100%;min-height:52px;display:flex;align-items:center;justify-content:center;background:none;border:none;cursor:pointer;color:var(--faint);font-size:15px;transition:all .15s}
+.hl-row-del:hover{color:#e24b4a;background:#fcebeb}
+
+/* ═══ SS TABLES ═══ */
+.ss-tables-wrap{display:flex;flex-direction:column;gap:14px}
+.ss-block{border:1px solid var(--border);border-radius:var(--rl);overflow:hidden}
+.ss-block-hdr{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--gray-bg);border-bottom:1px solid var(--border);gap:10px}
+.ss-block-name{font-size:12px;font-weight:700;color:var(--text);outline:none;background:transparent;border:none;font-family:inherit;flex:1;min-width:0}
+.ss-block-name:focus{background:var(--blue-bg);border-radius:3px;outline:1px solid var(--blue-bd);padding:1px 4px}
+.ss-block-name::placeholder{color:var(--faint);font-style:italic}
+.ss-block-del{font-size:12px;font-weight:600;color:var(--faint);background:none;border:1px solid var(--border);border-radius:6px;padding:3px 9px;cursor:pointer;transition:all .15s;white-space:nowrap;flex-shrink:0}
+.ss-block-del:hover{color:#e24b4a;border-color:#f09595;background:#fcebeb}
+.ss-wrap{width:100%;overflow-x:auto}
+.ss-table{width:100%;border-collapse:collapse;font-size:13px;table-layout:fixed}
+.ss-table th{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);padding:8px 12px;background:var(--surface);border-bottom:1px solid var(--border);text-align:left;white-space:nowrap}
+.ss-table td{border-bottom:1px solid var(--border);padding:0;vertical-align:top}
+.ss-table tr:last-child td{border-bottom:none}
+.ss-table td:not(:last-child),.ss-table th:not(:last-child){border-right:1px solid var(--border)}
+.col-copy{width:40%}.col-visual{width:33%}.col-notes{width:27%}.col-del{width:36px}
+.ss-cell{width:100%;min-height:68px;padding:10px 12px;border:none;outline:none;resize:none;font-family:inherit;font-size:13px;color:var(--text);background:transparent;line-height:1.65;display:block;transition:background .1s}
+.ss-cell:focus{background:var(--blue-bg)}
+.ss-cell::placeholder{color:var(--faint);font-style:italic}
+.ss-row-del{width:100%;height:100%;min-height:68px;display:flex;align-items:center;justify-content:center;background:none;border:none;cursor:pointer;color:var(--faint);font-size:15px;transition:all .15s}
+.ss-row-del:hover{color:#e24b4a;background:#fcebeb}
+.ss-add-row-wrap{padding:8px 12px;border-top:1px solid var(--border);background:#fafaf8}
+.ss-add-row-btn{font-size:11px;font-weight:600;color:var(--blue);background:none;border:1px solid var(--blue-bd);border-radius:6px;padding:4px 11px;cursor:pointer;transition:all .15s}
+.ss-add-row-btn:hover{background:var(--blue-bg)}
+.ss-bottom-bar{display:flex;align-items:center;gap:8px;margin-top:12px}
+.ss-new-table-btn{font-size:12px;font-weight:600;color:var(--orange);background:var(--orange-bg);border:1px solid var(--orange-bd);border-radius:6px;padding:6px 14px;cursor:pointer;transition:all .15s}
+.ss-new-table-btn:hover{background:#ffe4d8}
+
+@media(max-width:600px){
+  .list-wrap{padding:16px 16px 60px}
+  .modal-panel{width:100vw}
+  .filter-bar,.site-header{padding-left:16px;padding-right:16px}
+  .panel{padding:16px}
 }
 </style>
 </head>
@@ -126,10 +204,7 @@ body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,s
     <span class="site-title">Production Briefs</span>
     <span class="site-sub">Clark · March 2026</span>
   </div>
-  <div style="display:flex;align-items:center;gap:16px">
-    <span class="save-ind" id="saveInd">✓ Saved</span>
-    <span class="site-meta">TubeScience · 15 Jobs</span>
-  </div>
+  <span class="save-ind" id="saveInd">✓ Saved</span>
 </div>
 
 <div class="filter-bar">
@@ -143,332 +218,478 @@ body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,s
   <button class="fb" onclick="applyFilter('STBRD',this)">Scentbird</button>
 </div>
 
-<div class="page">
-  <nav class="sidebar" id="sidebar">
-    <div class="si-title">Jump to Brief</div>
-    <div id="sidebarLinks"></div>
-  </nav>
-  <div class="main" id="main"></div>
+<div class="list-wrap" id="listWrap"></div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
+  <div class="modal-panel" id="modalPanel">
+    <div class="modal-hdr">
+      <div class="modal-hdr-l">
+        <div class="modal-job-name" id="mJobName" contenteditable="true"></div>
+        <div class="modal-meta" id="mMeta"></div>
+      </div>
+      <div class="modal-hdr-r">
+        <button class="cl-btn" id="mCopyBtn" onclick="copyModalLink()">Copy Link</button>
+        <button class="close-btn" onclick="closeModal()">✕</button>
+      </div>
+    </div>
+    <div class="modal-tabs">
+      <button class="tab active" onclick="switchTab(this,'jobinfo')">Job Information</button>
+      <button class="tab" onclick="switchTab(this,'copy')">Copy</button>
+    </div>
+    <div class="modal-body">
+      <div class="panel active" id="panel_jobinfo"></div>
+      <div class="panel" id="panel_copy"></div>
+    </div>
+  </div>
 </div>
 
 <script>
-const STATUSES = [
-  {key:'planning',      label:'Planning',                    color:'#185fa5'},
-  {key:'working',       label:'Working On Brief',            color:'#e85c2b'},
-  {key:'prod-review',   label:'Brief Ready for Prod Review', color:'#534ab7'},
-  {key:'ready-prod',    label:'Ready for Production',        color:'#0f6e56'},
+const STATUSES=[
+  {key:'planning',    label:'Planning',                   color:'#185fa5'},
+  {key:'working',     label:'Working On Brief',           color:'#e85c2b'},
+  {key:'prod-review', label:'Brief Ready for Prod Review',color:'#534ab7'},
+  {key:'ready-prod',  label:'Ready for Production',       color:'#0f6e56'},
 ];
 
-const JOBS = [
+const JOBS=[
   {id:'j1809',status:'working',client:'ILMKG',name:'J1809_ILMKG_Adapt1_CP[#]_MOF_ListicleAdapt3_WULT',sprint:'Sprint 01/26',clientLabel:'Il Makiage',geo:'USA',
    fields:[['Job Owner','Clark'],['Client','Il Makiage'],['Job Type','Adapt'],['Platform','Meta'],['Funnel Stage','MOF'],['Creative Format','Video'],['SKU','WULT'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Base Job #','DRMTLGY ref (adapt3)'],['Music','Yes'],['Total Ad Sets','2'],['Style','Same as base'],['Goal Demo','Novice / lapsed foundation users'],['Total # of Videos','']],
    goal:'Adapting DRMTLGY\'s proven listicle format (iteration 3) into WULT. Hypothesis: the listicle hook structure that has demonstrated stability on DRMTLGY transfers to the WULT shade match angle with a novice/lapsed foundation persona. Target: stable MOF performance.',
-   editing:'Listicle adapt3 from DRMTLGY base. Port structure directly to WULT. Shade Match as creative hero. Single UGC talent. Openers around: (1) avoiding the in-store experience, (2) starting a new glam routine. Persona: novice or lapsed foundation user.',
-   headlines:'',sequence:''},
+   editing:'Listicle adapt3 from DRMTLGY base. Port structure directly to WULT. Shade Match as creative hero. Single UGC talent. Openers around: (1) avoiding the in-store experience, (2) starting a new glam routine.'},
   {id:'j1814',status:'working',client:'ILMKG',name:'J1814_ILMKG_Adapt1_CP[#]_TOF_ListicleAdapt3_WULT',sprint:'Sprint 03/02',clientLabel:'Il Makiage',geo:'CANADA',
    fields:[['Job Owner','Clark'],['Client','Il Makiage'],['Job Type','Adapt'],['Platform','Meta'],['Funnel Stage','TOF'],['Creative Format','Video'],['SKU','WULT'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Base Job #','DRMTLGY ref (adapt3)'],['Music','Yes'],['Total Ad Sets','2'],['Style','Same as base'],['Goal Demo','Novice / lapsed foundation users'],['Total # of Videos','']],
-   goal:'Canada geo version of ILMKG WULT listicle adapt3. Testing whether the DRMTLGY listicle format holds in the Canada market on WULT. Same hypothesis as J1809 with Canada-adjusted targeting.',
-   editing:'Same structure as J1809. Listicle adapt3 from DRMTLGY base, ported to WULT. Canada geo — no offer language. Shade Match as hero. Single UGC talent.',
-   headlines:'',sequence:''},
+   goal:'Canada geo version of ILMKG WULT listicle adapt3. Testing whether the DRMTLGY listicle format holds in the Canada market.',
+   editing:'Same structure as J1809. Canada geo — no offer language. Shade Match as hero. Single UGC talent.'},
   {id:'j523',status:'working',client:'PRTLI',name:'J523_PRTLI_Adapt1_CP[#]_FF_EvergreenBouquet_PrettyLitter',sprint:'Sprint 03/09',clientLabel:'PrettyLitter',geo:'USA · No offer',
    fields:[['Job Owner','Clark'],['Client','PrettyLitter'],['Job Type','Adapt'],['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],['SKU','PrettyLitter'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Base Job #','J125v1a, J457v1c, J101v1a, J146v1d'],['Music','Yes'],['Total Ad Sets','2'],['Offer','None (Evergreen)'],['Persona','Devoted Cat Parent / Smell-focused'],['Total # of Videos','']],
-   goal:'Refreshing the top performer bouquet without any GWP offer language. Hypothesis: these proven creatives hold performance without promotional framing, and non-GWP versions expand audience eligibility.',
-   editing:'Adapt top performers J125v1a, J457v1c, J101v1a, J146v1d. Remove all GWP / promotional offer language throughout. Refresh footage and VO where needed. USA geo.',
-   headlines:'',sequence:''},
+   goal:'Refreshing the top performer bouquet without any GWP offer language. Non-GWP versions expand audience eligibility and allow accurate FF creative measurement.',
+   editing:'Adapt top performers J125v1a, J457v1c, J101v1a, J146v1d. Remove all GWP / promotional offer language. Refresh footage and VO where needed. USA geo.'},
   {id:'j524',status:'working',client:'PRTLI',name:'J524_PRTLI_Adapt1_CP[#]_FF_EvergreenBouquet_PrettyLitter',sprint:'Sprint 03/09',clientLabel:'PrettyLitter',geo:'CANADA · $19.99',
    fields:[['Job Owner','Clark'],['Client','PrettyLitter'],['Job Type','Adapt'],['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],['SKU','PrettyLitter'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Base Job #','J125v1a, J457v1c, J101v1a, J146v1d'],['Music','Yes'],['Total Ad Sets','2'],['Offer','First bag $19.99 (Canada)'],['Persona','Devoted Cat Parent / Smell-focused'],['Total # of Videos','']],
    goal:'Canada geo version of J523. Same top performer bouquet refresh without GWP, adapted for Canada pricing ($19.99 first bag).',
-   editing:'Same as J523. Adapt J125v1a, J457v1c, J101v1a, J146v1d. Remove GWP language. Canada geo — update pricing to first bag $19.99.',
-   headlines:'',sequence:''},
+   editing:'Same as J523. Remove GWP language. Canada geo — update pricing to first bag $19.99.'},
   {id:'j525',status:'working',client:'PRTLI',name:'J525_PRTLI_More1_CP[#]_FF_SmashcutBouquet_PrettyLitter',sprint:'Sprint 03/09',clientLabel:'PrettyLitter',geo:'USA',
    fields:[['Job Owner','Clark'],['Client','PrettyLitter'],['Job Type','More'],['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],['SKU','PrettyLitter'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Base Job #','Smashcut bouquet top performers'],['Music','Yes'],['Total Ad Sets','2'],['Persona','Devoted Cat Parent / Smell-focused'],['Style','Same as base (smashcut)'],['Total # of Videos','TBD — post-meeting']],
-   goal:'More volume on the smashcut bouquet top performers. Adding creative supply within the same entity ID to extend runway without building new audience pools.',
-   editing:'Smashcut bouquet retests. More of the smashcut format from existing top performers. Full editing input will be provided after meeting. USA geo.',
-   headlines:'',sequence:''},
+   goal:'More volume on the smashcut bouquet top performers. Adding creative supply within the same entity ID to extend runway.',
+   editing:'Smashcut bouquet retests. More of the smashcut format. Full editing input after meeting. USA geo.'},
   {id:'j157',status:'working',client:'PAIRE',name:'J157_PAIRE_More1_CP[#]_[Funnel]_GFXGameOfferUpdate_PairEyewear',sprint:'Sprint 03/16',clientLabel:'Pair Eyewear',geo:'',
    fields:[['Job Owner','Clark'],['Client','Pair Eyewear'],['Job Type','More'],['Platform','Meta'],['Funnel Stage',''],['Creative Format','GFX / Interactive'],['SKU','Pair Eyewear'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','None'],['Base Job #','J87'],['Music','Yes'],['Total Ad Sets','2'],['Style','Same as base (GFX game)'],['Goal Demo',''],['Total # of Videos','']],
    goal:'Refreshing J87 GFX/Game format with current Pair Eyewear offers. The game-style creative has proven durable.',
-   editing:'Update J87 GFX/game format. Swap all old offer language for current Pair Eyewear promotions. Keep the interactive/game structure fully intact.',
-   headlines:'',sequence:''},
+   editing:'Update J87 GFX/game format. Swap all old offer language for current promotions. Keep the interactive/game structure fully intact.'},
   {id:'j526',status:'planning',client:'PRTLI',name:'J526_PRTLI_More1_CP[#]_MOF_CatDadOdorControl_PrettyLitter',sprint:'Sprint 03/02',clientLabel:'PrettyLitter',geo:'USA · $14.99',
    fields:[['Job Owner','Clark'],['Client','PrettyLitter'],['Job Type','More'],['Platform','Meta'],['Funnel Stage','MOF'],['Creative Format','Video'],['SKU','PrettyLitter'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Offer','First bag $14.99'],['Music','Yes'],['Total Ad Sets','2'],['Persona','Millennial Cat Dads'],['Text Treatment','Reply-to-comment'],['Total # of Videos','']],
-   goal:'New odor-specific MOF creative targeting millennial cat dads. Odor control is the primary decision driver for this segment. Testing reply-to-comment format.',
-   editing:'Reply-to-comment format. MOF. Hook: "Okay the UTI color changing thing is cool, but I mainly care about odor control." First bag $14.99. USA geo.',
-   headlines:'',sequence:''},
+   goal:'New odor-specific MOF creative targeting millennial cat dads. Odor control is the primary driver for this segment.',
+   editing:'Reply-to-comment format. MOF. Hook: "Okay the UTI color changing thing is cool, but I mainly care about odor control." First bag $14.99. USA geo.'},
   {id:'j2162',status:'planning',client:'KTSCH',name:'J2162_KTSCH_More1_CP[#]_FF_TravelabilityAdapt_Bars',sprint:'Sprint 03/16',clientLabel:'Kitsch',geo:'',
    fields:[['Job Owner','Clark'],['Client','Kitsch'],['Job Type','More'],['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],['SKU','Shampoo Bars'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Base Job #','J2011v1b'],['Music','Yes'],['Total Ad Sets','2'],['Style','Same as base'],['Reference','J2011v1b (Liquid top performer)'],['Total # of Videos','']],
    goal:'Adapting J2011v1b (Liquid Shampoo top performer) into Shampoo Bars with a travelability angle added.',
-   editing:'Adapt J2011v1b for Shampoo Bars SKU. Add travelability messaging — TSA-friendly, no liquid bag needed. Maintain same structure and pacing from base.',
-   headlines:'',sequence:''},
+   editing:'Adapt J2011v1b for Shampoo Bars. Add travelability messaging — TSA-friendly, no liquid bag needed. Maintain same structure and pacing.'},
   {id:'j538',status:'planning',client:'PRTLI',name:'J538_PRTLI_Adapt1_CP[#]_FF_JOChoice1499_PrettyLitter',sprint:'Sprint 03/16',clientLabel:'PrettyLitter',geo:'USA · $14.99',
    fields:[['Job Owner','Clark'],['Client','PrettyLitter'],['Job Type','Adapt'],['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],['SKU','PrettyLitter'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Offer','First bag $14.99'],['Music','Yes'],['Total Ad Sets','2'],['Persona','Devoted Cat Parent'],['Style','JO choice — match base'],['Total # of Videos','']],
    goal:'Adapting existing PrettyLitter top performer into the $14.99 first bag offer. JO has creative discretion on base selection.',
-   editing:'JO choice on base. Adapt into $14.99 first bag offer. Update callouts, end cards, lower thirds. USA geo.',
-   headlines:'',sequence:''},
+   editing:'JO choice on base. Adapt into $14.99 first bag offer. Update callouts, end cards, lower thirds. USA geo.'},
   {id:'j537a',status:'planning',client:'PRTLI',name:'J537_PRTLI_More1_CP[#]_FF_JOChoice1999_PrettyLitter',sprint:'Sprint 03/16',clientLabel:'PrettyLitter',geo:'USA · $19.99',
    fields:[['Job Owner','Clark'],['Client','PrettyLitter'],['Job Type','More'],['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],['SKU','PrettyLitter'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Offer','First bag $19.99'],['Music','Yes'],['Total Ad Sets','2'],['Persona','Devoted Cat Parent'],['Style','JO choice — match base'],['Total # of Videos','']],
    goal:'More volume on the $19.99 first bag offer. USA geo. Parallel to J538.',
-   editing:'JO choice on base. Update offer language to first bag $19.99 throughout. USA geo.',
-   headlines:'',sequence:''},
+   editing:'JO choice on base. Update offer language to first bag $19.99. USA geo.'},
   {id:'j537b',status:'planning',client:'PRTLI',name:'J537_PRTLI_More1_CP[#]_FF_JOChoice1499Canada_PrettyLitter',sprint:'Sprint 03/16',clientLabel:'PrettyLitter',geo:'CANADA · $14.99',
    fields:[['Job Owner','Clark'],['Client','PrettyLitter'],['Job Type','More'],['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],['SKU','PrettyLitter'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Offer','First bag $14.99 (Canada)'],['Music','Yes'],['Total Ad Sets','2'],['Persona','Devoted Cat Parent'],['Style','JO choice — match base'],['Total # of Videos','']],
-   goal:'Canada geo, $14.99 first bag. Parallel to J539 Canada ($19.99) — testing price sensitivity.',
-   editing:'JO choice on base. Update offer to first bag $14.99. Canada geo.',
-   headlines:'',sequence:''},
+   goal:'Canada geo, $14.99 first bag. Testing price sensitivity parallel to J539 Canada.',
+   editing:'JO choice on base. Update offer to first bag $14.99. Canada geo.'},
   {id:'j1844',status:'planning',client:'ILMKG',name:'J1844_ILMKG_Adapt1_CP[#]_MOF_AntiAgingStaticBouquet_PLUMP',sprint:'Sprint 03/16',clientLabel:'Il Makiage',geo:'',
    fields:[['Job Owner','Clark'],['Client','Il Makiage'],['Job Type','Adapt'],['Platform','Meta'],['Funnel Stage','MOF'],['Creative Format','Static'],['SKU','Power Lift Plumping Cream (PLUMP)'],['Aspect Ratio','1x1 / 4x5'],['VO','None'],['Base Job #','1803V1A, 1749V1A, 1766V1D, 1652V1D'],['Music','No'],['Total Ad Sets','2'],['Persona','Anti-aging (35+)'],['Style','Port from WULT statics'],['Total # of Videos','4 statics (1x1 + 4x5 each)']],
-   goal:'Limited static supply on PLUMP anti-aging angle. Porting four best-spending WULT statics to PLUMP to fill the gap. TBYB language must be removed.',
-   editing:'Port four statics from WULT to PLUMP. Remove TBYB from all.\n— 1803V1A → adapt to PLUMP\n— 1749V1A → remove TBYB, "take the quiz to find your new skincare routine"\n— 1766V1D → us vs. them format\n— 1652V1D → whiteboard: "You\'re only as old as you look"; overlay: "no lies detected"\nDeliver 1x1 and 4x5 cuts each.',
-   headlines:'',sequence:''},
+   goal:'Limited static supply on PLUMP anti-aging angle. Porting four best-spending WULT statics to PLUMP. TBYB language must be removed.',
+   editing:'Port four statics from WULT to PLUMP. Remove TBYB from all.\n— 1803V1A → adapt to PLUMP\n— 1749V1A → remove TBYB, quiz CTA\n— 1766V1D → us vs. them format\n— 1652V1D → whiteboard: "You\'re only as old as you look"; overlay: "no lies detected"\nDeliver 1x1 and 4x5 cuts each.'},
   {id:'j539',status:'planning',client:'PRTLI',name:'J539_PRTLI_More1_CP[#]_FF_JOChoice1999Canada_PrettyLitter',sprint:'Sprint 03/16',clientLabel:'PrettyLitter',geo:'CANADA · $19.99',
    fields:[['Job Owner','Clark'],['Client','PrettyLitter'],['Job Type','More'],['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],['SKU','PrettyLitter'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Offer','First bag $19.99 (Canada)'],['Music','Yes'],['Total Ad Sets','2'],['Persona','Devoted Cat Parent'],['Style','JO choice — match base'],['Total # of Videos','']],
-   goal:'Canada geo, $19.99 first bag. Parallel to J537b — testing whether creative holds at the higher Canada price point.',
-   editing:'JO choice on base. Update offer to first bag $19.99 throughout. Canada geo.',
-   headlines:'',sequence:''},
+   goal:'Canada geo, $19.99 first bag. Testing price point performance in Canada.',
+   editing:'JO choice on base. Update offer to first bag $19.99. Canada geo.'},
   {id:'j16',status:'planning',client:'JAVVY',name:'J16_JAVVY_Adapt1_CP[#]_FF_Top3Flavors_JavvyCoffee',sprint:'Sprint 03/16',clientLabel:'Javvy Coffee',geo:'',
    fields:[['Job Owner','Clark'],['Client','Javvy Coffee'],['Job Type','Adapt'],['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],['SKU','Javvy Coffee'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Reference','Scentbird listicle format'],['Music','Yes'],['Total Ad Sets','2'],['Angle','Top 3 flavors — taste-led, anti-chalky'],['Hook','"Top 3 protein coffee flavors that don\'t taste chalky"'],['Total # of Videos','']],
-   goal:'Review analysis flagged flavor differentiation as a major untapped opportunity. "Top 3 protein coffee flavors that don\'t taste chalky" targets the primary objection while differentiating from commodity protein coffees.',
-   editing:'Listicle format — model on Scentbird top performer structure. Lead with the top 3 flavors angle. Roll into: shake your expensive coffee shop habit, 30g protein before noon, feel full all morning.',
-   headlines:'',sequence:''},
+   goal:'Review analysis flagged flavor differentiation as a major untapped opportunity. Adapting Scentbird\'s listicle format to test whether taste-led listicles drive Javvy conversions.',
+   editing:'Listicle format — model on Scentbird top performer structure. Lead with top 3 flavors. Roll into: no chalky taste, 30g protein, feel full all morning.'},
   {id:'j770',status:'planning',client:'STBRD',name:'J770_STBRD_More1_CP[#]_BOF_J680VBJOChoice_Cologne',sprint:'Sprint 03/16',clientLabel:'Scentbird',geo:'Cologne',
    fields:[['Job Owner','Clark'],['Client','Scentbird'],['Job Type','More'],['Platform','Meta'],['Funnel Stage','BOF'],['Creative Format','Video'],['SKU','Cologne'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Base Job #','J680VB'],['Music','Yes'],['Total Ad Sets','2'],['Style','JO choice — see J680VB iteration history'],['Reference','J680VB + prior iterations'],['Total # of Videos','']],
-   goal:'JO choice iteration on J680VB (Cologne BOF). BOF position means the audience is warm; priority is closing efficiency and offer clarity.',
-   editing:'JO choice — review J680VB and all previous iterations. Pick the most underexplored direction. Build from the strongest creative signal in the existing J680 family.',
-   headlines:'',sequence:''},
+   goal:'JO choice iteration on J680VB (Cologne BOF). Audience is warm — priority is closing efficiency and offer clarity.',
+   editing:'JO choice — review J680VB and all previous iterations. Pick the most underexplored direction. Build from the strongest creative signal in the J680 family.'},
 ];
 
-// ── Storage helpers ──────────────────────────────────────────
-function ls(id,key){try{return localStorage.getItem('b_'+id+'_'+key)}catch(e){return null}}
-function ss(id,key,val){try{localStorage.setItem('b_'+id+'_'+key,val)}catch(e){} flashSave()}
-
+// ── Storage ──────────────────────────────────────────────────
+function ls(id,k){try{return localStorage.getItem('b_'+id+'_'+k)}catch(e){return null}}
+function ss(id,k,v){try{localStorage.setItem('b_'+id+'_'+k,v)}catch(e){} flashSave()}
 let saveTimer;
-function flashSave(){
-  clearTimeout(saveTimer);
-  const el=document.getElementById('saveInd');
-  el.classList.add('show');
-  saveTimer=setTimeout(()=>el.classList.remove('show'),1800);
-}
-
-function esc(s){if(!s)return '';return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
-
-// ── Status helpers ───────────────────────────────────────────
+function flashSave(){clearTimeout(saveTimer);const e=document.getElementById('saveInd');e.classList.add('show');saveTimer=setTimeout(()=>e.classList.remove('show'),1800)}
+function esc(s){if(!s)return'';return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
 function getStatus(j){return ls(j.id,'status')||j.status}
-function statusClass(k){return 'status-'+k}
-function statusLabel(k){return (STATUSES.find(s=>s.key===k)||{label:k}).label}
-function statusColor(k){return (STATUSES.find(s=>s.key===k)||{color:'#888'}).color}
+function statusLabel(k){return(STATUSES.find(s=>s.key===k)||{label:k}).label}
+function autoResize(el){el.style.height='auto';el.style.height=el.scrollHeight+'px'}
 
-// ── Render one card ──────────────────────────────────────────
-function renderCard(j){
-  const curStatus = getStatus(j);
-  const badges = [j.sprint,j.clientLabel,j.geo].filter(Boolean).map(b=>`<span class="badge bg">${esc(b)}</span>`).join('');
-  const statusOptions = STATUSES.map(s=>`<option value="${s.key}"${curStatus===s.key?' selected':''}>${s.label}</option>`).join('');
-  const fieldsHtml = j.fields.map(([k,v])=>{
-    const saved=ls(j.id,'field_'+k);
-    const val=saved!==null?saved:v;
-    const empty=!val;
-    return `<div class="fc"><div class="fk">${esc(k)}</div><div class="fv${empty?' empty':''}" contenteditable="true" data-id="${j.id}" data-key="field_${k}" oninput="onEdit(this)" onfocus="onFocus(this)" onblur="onBlur(this)">${esc(val)||(empty?'TBD':'')}</div></div>`;
-  }).join('');
-  const goal=ls(j.id,'goal')??j.goal;
-  const editing=ls(j.id,'editing')??j.editing;
-  const headlines=ls(j.id,'headlines')??j.headlines;
-  const sequence=ls(j.id,'sequence')??j.sequence;
-  const jobname=ls(j.id,'jobname')??j.name;
-
-  return `<div class="card" id="${j.id}" data-status="${curStatus}" data-client="${j.client}">
-  <div class="card-hdr">
-    <div class="card-hdr-l">
-      <div class="job-name" contenteditable="true" data-id="${j.id}" data-key="jobname" oninput="onEdit(this)" onblur="onBlur(this)">${esc(jobname)}</div>
-      <div class="meta-row">
-        <div class="status-wrap">
-          <select class="status-select ${statusClass(curStatus)}" data-id="${j.id}" onchange="changeStatus(this)">${statusOptions}</select>
-        </div>
-        ${badges}
-      </div>
-    </div>
-    <div class="card-hdr-r">
-      <button class="cl-btn" onclick="copyLink('${j.id}',this)">Copy Link</button>
-    </div>
-  </div>
-  <div class="card-tabs">
-    <button class="tab active" onclick="switchTab(this,'${j.id}','overview')">Overview</button>
-    <button class="tab" onclick="switchTab(this,'${j.id}','goal')">JO Goal</button>
-    <button class="tab" onclick="switchTab(this,'${j.id}','editing')">Editing Instructions</button>
-    <button class="tab" onclick="switchTab(this,'${j.id}','headlines')">Headlines / Openers</button>
-    <button class="tab" onclick="switchTab(this,'${j.id}','sequence')">Sales Sequence</button>
-  </div>
-  <div class="panel active" id="${j.id}_overview"><div class="fg">${fieldsHtml}</div></div>
-  <div class="panel" id="${j.id}_goal">
-    <div class="spanel-label">JO Goal</div>
-    <textarea class="ea" data-id="${j.id}" data-key="goal" oninput="onEdit(this)" rows="6">${esc(goal)}</textarea>
-  </div>
-  <div class="panel" id="${j.id}_editing">
-    <div class="spanel-label">Editing Instructions</div>
-    <textarea class="ea" data-id="${j.id}" data-key="editing" oninput="onEdit(this)" rows="6">${esc(editing)}</textarea>
-  </div>
-  <div class="panel" id="${j.id}_headlines">
-    <div class="tab-hint"><strong>Headlines / Openers</strong> — Add hook options here. Label as V1A, V1B, etc.</div>
-    <textarea class="ea" data-id="${j.id}" data-key="headlines" oninput="onEdit(this)" rows="8" placeholder="V1A: &quot;Here's what they don't tell you...&quot;&#10;V1B: &quot;Things I wish I knew before...&quot;&#10;V1C: JO choice">${esc(headlines)}</textarea>
-  </div>
-  <div class="panel" id="${j.id}_sequence">
-    <div class="tab-hint"><strong>Sales Sequence</strong> — Write SS beats here. Use SS1, SS2 for variants.</div>
-    <textarea class="ea" data-id="${j.id}" data-key="sequence" oninput="onEdit(this)" rows="10" placeholder="SS1:&#10;[Beat 1 — hook payoff]&#10;[Beat 2 — problem agitation]&#10;[Beat 3 — product intro]&#10;[Beat 4 — proof / social proof]&#10;[Beat 5 — CTA]&#10;&#10;SS2:&#10;[Variant structure]">${esc(sequence)}</textarea>
-  </div>
-</div>`;
-}
-
-// ── Render all sections ──────────────────────────────────────
-function renderAll(){
-  const main=document.getElementById('main');
-  let html='';
-  STATUSES.forEach(s=>{
-    const jobs=JOBS.filter(j=>getStatus(j)===s.key);
-    html+=`<div class="sec-hdr" id="sec_${s.key}" data-section="${s.key}">
-      <span class="sec-lbl"><span class="sec-dot" style="background:${s.color}"></span>${s.label}</span>
-      <span class="sec-line"></span>
-      <span class="sec-ct" id="ct_${s.key}">${jobs.length} job${jobs.length!==1?'s':''}</span>
-    </div>
-    <div class="sec-empty" id="empty_${s.key}">No jobs in this section.</div>
-    ${jobs.map(renderCard).join('')}`;
-  });
-  main.innerHTML=html;
-  updateSidebar();
-  updateCounts();
-  reapplyFilter();
-}
-
-// ── Update sidebar ───────────────────────────────────────────
-function updateSidebar(){
-  const el=document.getElementById('sidebarLinks');
-  let html='';
-  STATUSES.forEach(s=>{
-    const jobs=JOBS.filter(j=>getStatus(j)===s.key);
-    if(!jobs.length)return;
-    html+=`<div class="si-group"><span class="si-dot" style="background:${s.color}"></span>${s.label}</div>`;
-    jobs.forEach(j=>{
-      const name=ls(j.id,'jobname')||j.name;
-      const shortName=name.split('_').slice(0,2).join(' ');
-      html+=`<a class="si-link" href="#${j.id}"><strong>${shortName}</strong><small>${[j.clientLabel,j.geo].filter(Boolean).join(' · ')}</small></a>`;
+// ═══════════════════════════════════════════════════════════
+// AD SETS
+// ═══════════════════════════════════════════════════════════
+function getAdSets(jobId){try{const v=ls(jobId,'adsets');return v?JSON.parse(v):null}catch(e){return null}}
+function saveAdSets(jobId){
+  const wrap=document.getElementById('adsets_'+jobId);if(!wrap)return;
+  const sets=[];
+  wrap.querySelectorAll('.adset-block').forEach(block=>{
+    const name=block.querySelector('.adset-name-input').value||'';
+    const rows=[];
+    block.querySelectorAll('.adset-row').forEach(row=>{
+      const vname=row.querySelector('.adset-row-name-input').value||'';
+      const recipe=row.querySelector('.adset-input').value||'';
+      rows.push({variant:vname,recipe});
     });
+    sets.push({name,rows});
   });
-  el.innerHTML=html;
+  ss(jobId,'adsets',JSON.stringify(sets));
 }
-
-// ── Update section counts ────────────────────────────────────
-function updateCounts(){
-  STATUSES.forEach(s=>{
-    const jobs=JOBS.filter(j=>getStatus(j)===s.key);
-    const ct=document.getElementById('ct_'+s.key);
-    const em=document.getElementById('empty_'+s.key);
-    const hdr=document.getElementById('sec_'+s.key);
-    if(ct) ct.textContent=`${jobs.length} job${jobs.length!==1?'s':''}`;
-    if(em) em.classList.toggle('show',jobs.length===0);
-    if(hdr) hdr.classList.remove('hidden');
-  });
+function defaultAdSets(){
+  return[
+    {name:'AD SET 1',rows:[{variant:'V1A',recipe:'H1 + SS1'},{variant:'V1B',recipe:'H2 + SS1'},{variant:'V1C',recipe:'H1 + SS2'},{variant:'V1D',recipe:'H2 + SS2'}]},
+    {name:'AD SET 2',rows:[{variant:'V1A',recipe:'H1 + SS1'},{variant:'V1B',recipe:'H2 + SS1'},{variant:'V1C',recipe:'H1 + SS2'},{variant:'V1D',recipe:'H2 + SS2'}]},
+  ];
 }
-
-// ── Change status ────────────────────────────────────────────
-function changeStatus(sel){
-  const id=sel.dataset.id;
-  const newStatus=sel.value;
-  ss(id,'status',newStatus);
-
-  // Move the card DOM element to the right section
-  const card=document.getElementById(id);
-  // Remove old class
-  STATUSES.forEach(s=>card.classList.remove('status-'+s.key));
-  card.dataset.status=newStatus;
-
-  // Update select styling
-  STATUSES.forEach(s=>sel.classList.remove('status-'+s.key));
-  sel.classList.add('status-'+newStatus);
-
-  // Find target section — insert after the empty placeholder of target section
-  const targetEmpty=document.getElementById('empty_'+newStatus);
-  if(targetEmpty){
-    // Collect all cards currently in target section
-    const siblings=[];
-    let el=targetEmpty.nextElementSibling;
-    while(el&&el.classList.contains('card')){siblings.push(el);el=el.nextElementSibling;}
-    // Append card after last sibling or after empty div
-    const insertAfter=siblings.length?siblings[siblings.length-1]:targetEmpty;
-    insertAfter.insertAdjacentElement('afterend',card);
+function renderAdSetRow(jobId,r){
+  return`<div class="adset-row">
+    <div class="adset-row-name"><input class="adset-row-name-input" value="${esc(r.variant)}" placeholder="V1A" oninput="saveAdSets('${jobId}')"></div>
+    <div class="adset-cell"><textarea class="adset-input" placeholder="e.g. H1 + SS1" oninput="saveAdSets('${jobId}')">${esc(r.recipe)}</textarea></div>
+    <div class="adset-cell" style="border-right:none"></div>
+    <button class="adset-row-del" onclick="delAdSetRow(this,'${jobId}')">×</button>
+  </div>`;
+}
+function renderAdSetBlock(jobId,set){
+  return`<div class="adset-block">
+    <div style="display:grid;grid-template-columns:110px 1fr;border-bottom:1px solid var(--border)">
+      <div class="adset-name-cell" style="grid-row:1/3">
+        <input class="adset-name-input" value="${esc(set.name)}" placeholder="AD SET 1" oninput="saveAdSets('${jobId}')">
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--border)">
+        <span style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);padding:6px 12px;background:var(--surface);border-right:1px solid var(--border)">Variant</span>
+        <span style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);padding:6px 12px;background:var(--surface)">Component Recipe</span>
+      </div>
+      <div class="adset-rows">${set.rows.map(r=>renderAdSetRow(jobId,r)).join('')}</div>
+    </div>
+    <div class="adset-add-row-wrap">
+      <button class="adset-add-row-btn" onclick="addAdSetRow(this,'${jobId}')">+ Add variant</button>
+      <button class="adset-del-btn" onclick="delAdSet(this,'${jobId}')">Remove set</button>
+    </div>
+  </div>`;
+}
+function buildAdSets(jobId){
+  const sets=getAdSets(jobId)||defaultAdSets();
+  return`<div class="adsets-wrap" id="adsets_${jobId}">
+    <div class="adsets-title-row">Ad Sets</div>
+    ${sets.map(s=>renderAdSetBlock(jobId,s)).join('')}
+    <div class="adsets-bottom"><button class="adset-new-btn" onclick="addAdSet('${jobId}')">+ Add ad set</button></div>
+  </div>`;
+}
+function addAdSet(jobId){
+  const wrap=document.getElementById('adsets_'+jobId);
+  const count=wrap.querySelectorAll('.adset-block').length+1;
+  const div=document.createElement('div');
+  div.innerHTML=renderAdSetBlock(jobId,{name:'AD SET '+count,rows:[{variant:'V1A',recipe:''},{variant:'V1B',recipe:''}]});
+  wrap.querySelector('.adsets-bottom').insertAdjacentElement('beforebegin',div.firstElementChild);
+  saveAdSets(jobId);
+}
+function addAdSetRow(btn,jobId){
+  const rowsContainer=btn.closest('.adset-block').querySelector('.adset-rows');
+  const div=document.createElement('div');
+  div.innerHTML=renderAdSetRow(jobId,{variant:'',recipe:''});
+  rowsContainer.appendChild(div.firstElementChild);
+  saveAdSets(jobId);
+}
+function delAdSetRow(btn,jobId){btn.closest('.adset-row').remove();saveAdSets(jobId)}
+function delAdSet(btn,jobId){
+  const wrap=document.getElementById('adsets_'+jobId);
+  if(wrap.querySelectorAll('.adset-block').length===1){
+    const b=btn.closest('.adset-block');
+    b.querySelectorAll('.adset-row-name-input,.adset-input').forEach(i=>{i.value='';});
+    b.querySelector('.adset-name-input').value='';
+    saveAdSets(jobId);return;
   }
-
-  // Remove card from old section visually (it's already moved)
-  updateCounts();
-  updateSidebar();
-  reapplyFilter();
+  btn.closest('.adset-block').remove();saveAdSets(jobId);
 }
 
-// ── Tab switch ───────────────────────────────────────────────
-function switchTab(btn,id,panel){
-  const card=document.getElementById(id);
-  card.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  card.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById(id+'_'+panel).classList.add('active');
+// ═══════════════════════════════════════════════════════════
+// HEADLINES TABLE
+// ═══════════════════════════════════════════════════════════
+function getHlRows(jobId){try{const v=ls(jobId,'hlrows');return v?JSON.parse(v):null}catch(e){return null}}
+function saveHlRows(jobId){
+  const tbl=document.getElementById('hl_tbl_'+jobId);if(!tbl)return;
+  const rows=[];
+  tbl.querySelectorAll('tr[data-type="hl"]').forEach(tr=>{
+    const cells=tr.querySelectorAll('.hl-cell');
+    rows.push({label:cells[0]?cells[0].value:'',hook:cells[1]?cells[1].value:''});
+  });
+  ss(jobId,'hlrows',JSON.stringify(rows));
+}
+function defaultHlRows(){
+  return [{label:'H1',hook:''},{label:'H2',hook:''},{label:'H3',hook:''}];
+}
+function renderHlRow(jobId,r){
+  return`<tr data-type="hl">
+    <td class="col-label"><textarea class="hl-cell" placeholder="H1" oninput="autoResize(this);saveHlRows('${jobId}')">${esc(r.label)}</textarea></td>
+    <td class="col-hook"><textarea class="hl-cell" placeholder="Hook / opener text..." oninput="autoResize(this);saveHlRows('${jobId}')">${esc(r.hook)}</textarea></td>
+    <td class="col-hldel"><button class="hl-row-del" onclick="delHlRow(this,'${jobId}')">×</button></td>
+  </tr>`;
+}
+function buildHlTable(jobId){
+  const rows=getHlRows(jobId)||defaultHlRows();
+  return`<div class="tbl-block" id="hl_block_${jobId}">
+    <div class="hl-wrap">
+      <table class="hl-table" id="hl_tbl_${jobId}">
+        <thead><tr>
+          <th class="col-label">Label</th>
+          <th class="col-hook">Hook / Opener</th>
+          <th class="col-hldel"></th>
+        </tr></thead>
+        <tbody>${rows.map(r=>renderHlRow(jobId,r)).join('')}</tbody>
+      </table>
+    </div>
+    <div class="tbl-add-row-wrap">
+      <button class="tbl-add-row-btn" onclick="addHlRow('${jobId}')">+ Add row</button>
+    </div>
+  </div>`;
+}
+function addHlRow(jobId){
+  const tbody=document.querySelector('#hl_tbl_'+jobId+' tbody');
+  const count=tbody.querySelectorAll('tr').length+1;
+  const tr=document.createElement('tr');tr.dataset.type='hl';
+  tr.innerHTML=renderHlRow(jobId,{label:'H'+count,hook:''}).replace(/^<tr[^>]*>/,'').replace(/<\/tr>$/,'');
+  tbody.appendChild(tr);saveHlRows(jobId);
+}
+function delHlRow(btn,jobId){btn.closest('tr').remove();saveHlRows(jobId)}
+
+// ═══════════════════════════════════════════════════════════
+// SS TABLES
+// ═══════════════════════════════════════════════════════════
+function getSsTables(jobId){try{const v=ls(jobId,'sstables');return v?JSON.parse(v):null}catch(e){return null}}
+function saveSsTables(jobId){
+  const wrap=document.getElementById('ss_wrap_'+jobId);if(!wrap)return;
+  const tables=[];
+  wrap.querySelectorAll('.ss-block').forEach(block=>{
+    const name=block.querySelector('.ss-block-name').value||'';
+    const rows=[];
+    block.querySelectorAll('tr[data-type="row"]').forEach(tr=>{
+      const c=tr.querySelectorAll('.ss-cell');
+      rows.push({copy:c[0]?c[0].value:'',visual:c[1]?c[1].value:'',notes:c[2]?c[2].value:''});
+    });
+    tables.push({name,rows});
+  });
+  ss(jobId,'sstables',JSON.stringify(tables));
+}
+function defaultSsTables(){return [{name:'SS1',rows:[{copy:'',visual:'',notes:''},{copy:'',visual:'',notes:''},{copy:'',visual:'',notes:''}]}]}
+function renderSsRow(jobId,r){
+  return`<tr data-type="row">
+    <td class="col-copy"><textarea class="ss-cell" placeholder="Script / copy..." oninput="autoResize(this);saveSsTables('${jobId}')">${esc(r.copy)}</textarea></td>
+    <td class="col-visual"><textarea class="ss-cell" placeholder="Visual direction..." oninput="autoResize(this);saveSsTables('${jobId}')">${esc(r.visual)}</textarea></td>
+    <td class="col-notes"><textarea class="ss-cell" placeholder="Notes / flags..." oninput="autoResize(this);saveSsTables('${jobId}')">${esc(r.notes)}</textarea></td>
+    <td class="col-del"><button class="ss-row-del" onclick="delSsRow(this,'${jobId}')">×</button></td>
+  </tr>`;
+}
+function renderSsBlock(jobId,tbl){
+  return`<div class="ss-block">
+    <div class="ss-block-hdr">
+      <input class="ss-block-name" value="${esc(tbl.name)}" placeholder="Table name (e.g. SS1)" oninput="saveSsTables('${jobId}')">
+      <button class="ss-block-del" onclick="delSsBlock(this,'${jobId}')">Remove table</button>
+    </div>
+    <div class="ss-wrap">
+      <table class="ss-table">
+        <thead><tr><th class="col-copy">Copy / Script</th><th class="col-visual">Visual Direction</th><th class="col-notes">Notes</th><th class="col-del"></th></tr></thead>
+        <tbody>${tbl.rows.map(r=>renderSsRow(jobId,r)).join('')}</tbody>
+      </table>
+    </div>
+    <div class="ss-add-row-wrap"><button class="ss-add-row-btn" onclick="addSsRow(this,'${jobId}')">+ Add row</button></div>
+  </div>`;
+}
+function buildSsSection(jobId){
+  const tables=getSsTables(jobId)||defaultSsTables();
+  return`<div class="ss-tables-wrap" id="ss_wrap_${jobId}">${tables.map(t=>renderSsBlock(jobId,t)).join('')}</div>
+  <div class="ss-bottom-bar"><button class="ss-new-table-btn" onclick="addSsTable('${jobId}')">+ Add new table</button></div>`;
+}
+function addSsTable(jobId){
+  const wrap=document.getElementById('ss_wrap_'+jobId);
+  const count=wrap.querySelectorAll('.ss-block').length+1;
+  const div=document.createElement('div');
+  div.innerHTML=renderSsBlock(jobId,{name:'SS'+count,rows:[{copy:'',visual:'',notes:''},{copy:'',visual:'',notes:''}]});
+  wrap.appendChild(div.firstElementChild);saveSsTables(jobId);
+  setTimeout(()=>wrap.querySelectorAll('.ss-cell').forEach(autoResize),30);
+}
+function addSsRow(btn,jobId){
+  const tbody=btn.closest('.ss-block').querySelector('tbody');
+  const tr=document.createElement('tr');tr.dataset.type='row';
+  tr.innerHTML=renderSsRow(jobId,{copy:'',visual:'',notes:''}).replace(/^<tr[^>]*>/,'').replace(/<\/tr>$/,'');
+  tbody.appendChild(tr);saveSsTables(jobId);
+}
+function delSsRow(btn,jobId){btn.closest('tr').remove();saveSsTables(jobId)}
+function delSsBlock(btn,jobId){
+  const block=btn.closest('.ss-block');
+  if(document.querySelectorAll('#ss_wrap_'+jobId+' .ss-block').length===1){
+    block.querySelectorAll('.ss-cell').forEach(c=>{c.value='';autoResize(c);});
+    block.querySelector('.ss-block-name').value='';
+    saveSsTables(jobId);return;
+  }
+  block.remove();saveSsTables(jobId);
 }
 
-// ── Edit handlers ────────────────────────────────────────────
-function onEdit(el){
-  const val=el.tagName==='TEXTAREA'?el.value:el.innerText;
-  ss(el.dataset.id,el.dataset.key,val);
-}
-function onFocus(el){
-  if(el.classList.contains('empty')){el.classList.remove('empty');if(el.innerText==='TBD')el.innerText='';}
-}
-function onBlur(el){
-  if(el.tagName==='TEXTAREA')return;
-  if(!el.innerText.trim()){el.classList.add('empty');el.innerText='TBD';ss(el.dataset.id,el.dataset.key,'');}
+// ═══════════════════════════════════════════════════════════
+// MODAL
+// ═══════════════════════════════════════════════════════════
+let curJob=null;
+
+function openModal(id){
+  const j=JOBS.find(x=>x.id===id);if(!j)return;
+  curJob=j;
+  const cur=getStatus(j);
+
+  const nameEl=document.getElementById('mJobName');
+  nameEl.innerText=ls(j.id,'jobname')||j.name;
+  nameEl.dataset.id=j.id;nameEl.dataset.key='jobname';
+  nameEl.oninput=function(){ss(this.dataset.id,this.dataset.key,this.innerText)};
+
+  const opts=STATUSES.map(s=>`<option value="${s.key}"${cur===s.key?' selected':''}>${s.label}</option>`).join('');
+  const badges=[j.sprint,j.clientLabel,j.geo].filter(Boolean).map(b=>`<span class="badge bg">${esc(b)}</span>`).join('');
+  document.getElementById('mMeta').innerHTML=`<select class="status-select status-${cur}" data-id="${j.id}" onchange="changeStatus(this)">${opts}</select>${badges}`;
+
+  // ── Job Information ──
+  const fields=j.fields.map(([k,v])=>{
+    const sv=ls(j.id,'field_'+k);const val=sv!==null?sv:v;const emp=!val;
+    return`<div class="fc"><div class="fk">${esc(k)}</div><div class="fv${emp?' empty':''}" contenteditable="true" data-id="${j.id}" data-key="field_${k}" oninput="onFieldEdit(this)" onfocus="onFocus(this)" onblur="onBlur(this)">${esc(val)||(emp?'TBD':'')}</div></div>`;
+  }).join('');
+
+  document.getElementById('panel_jobinfo').innerHTML=`
+    <div class="panel-section">
+      <span class="section-label">Overview</span>
+      <div class="fg">${fields}</div>
+    </div>
+    <div class="panel-section">
+      <span class="section-label">Ad Sets</span>
+      ${buildAdSets(j.id)}
+    </div>
+    <div class="panel-section">
+      <span class="section-label">JO Goal</span>
+      <textarea class="ea" data-id="${j.id}" data-key="goal" oninput="onTAEdit(this)" rows="5">${esc(ls(j.id,'goal')??j.goal)}</textarea>
+    </div>
+    <div class="panel-section">
+      <span class="section-label">Editing Instructions</span>
+      <textarea class="ea" data-id="${j.id}" data-key="editing" oninput="onTAEdit(this)" rows="5">${esc(ls(j.id,'editing')??j.editing)}</textarea>
+    </div>`;
+
+  // ── Copy ──
+  document.getElementById('panel_copy').innerHTML=`
+    <div class="panel-section">
+      <span class="section-label">Headlines / Openers</span>
+      ${buildHlTable(j.id)}
+    </div>
+    <div class="panel-section">
+      <span class="section-label">Sales Sequence</span>
+      ${buildSsSection(j.id)}
+    </div>`;
+
+  // reset tabs
+  document.querySelectorAll('.modal-tabs .tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.modal-tabs .tab')[0].classList.add('active');
+  document.querySelectorAll('.modal-body .panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('panel_jobinfo').classList.add('active');
+
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+  setTimeout(()=>{
+    document.querySelectorAll('.ss-cell,.hl-cell').forEach(autoResize);
+  },60);
 }
 
-// ── Copy link ────────────────────────────────────────────────
-function copyLink(id,btn){
-  const url=window.location.href.split('#')[0]+'#'+id;
-  navigator.clipboard.writeText(url).then(()=>{
+function closeModal(){document.getElementById('modalOverlay').classList.remove('open');document.body.style.overflow='';curJob=null;}
+function handleOverlayClick(e){if(e.target===document.getElementById('modalOverlay'))closeModal()}
+
+function switchTab(btn,panel){
+  document.querySelectorAll('.modal-tabs .tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.modal-body .panel').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');document.getElementById('panel_'+panel).classList.add('active');
+  if(panel==='copy')setTimeout(()=>document.querySelectorAll('.ss-cell,.hl-cell').forEach(autoResize),30);
+}
+
+function onFieldEdit(el){ss(el.dataset.id,el.dataset.key,el.innerText)}
+function onTAEdit(el){ss(el.dataset.id,el.dataset.key,el.value)}
+function onFocus(el){if(el.classList.contains('empty')){el.classList.remove('empty');if(el.innerText==='TBD')el.innerText='';}}
+function onBlur(el){if(!el.innerText.trim()){el.classList.add('empty');el.innerText='TBD';ss(el.dataset.id,el.dataset.key,'');}}
+
+function changeStatus(sel){
+  const id=sel.dataset.id;const ns=sel.value;
+  ss(id,'status',ns);
+  STATUSES.forEach(s=>sel.classList.remove('status-'+s.key));sel.classList.add('status-'+ns);
+  const rc=document.getElementById('rc_'+id);
+  if(rc){
+    const sb=rc.querySelector('.status-badge');
+    if(sb){STATUSES.forEach(s=>sb.classList.remove('status-'+s.key));sb.classList.add('status-'+ns,'badge');sb.textContent=statusLabel(ns);}
+    rc.dataset.status=ns;
+    const tgt=document.getElementById('empty_'+ns);
+    if(tgt){let last=tgt;let nx=tgt.nextElementSibling;while(nx&&nx.classList.contains('row-card')){last=nx;nx=nx.nextElementSibling;}last.insertAdjacentElement('afterend',rc);}
+  }
+  updateCounts();reapplyFilter();
+}
+
+function copyModalLink(){
+  if(!curJob)return;
+  navigator.clipboard.writeText(window.location.href.split('#')[0]+'#'+curJob.id).then(()=>{
+    const btn=document.getElementById('mCopyBtn');
     btn.textContent='Copied!';btn.classList.add('copied');
     setTimeout(()=>{btn.textContent='Copy Link';btn.classList.remove('copied');},2000);
   });
 }
 
-// ── Filter ───────────────────────────────────────────────────
-let currentFilter='all';
-function applyFilter(f,btn){
-  currentFilter=f;
-  document.querySelectorAll('.fb').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  reapplyFilter();
-}
-function reapplyFilter(){
-  document.querySelectorAll('.card').forEach(c=>{
-    if(currentFilter==='all') c.classList.remove('hidden');
-    else c.classList.toggle('hidden',c.dataset.client!==currentFilter);
-  });
-  // Hide empty sections only if filter active
+// ── List ─────────────────────────────────────────────────────
+function renderList(){
+  let html='';
   STATUSES.forEach(s=>{
-    const hdr=document.getElementById('sec_'+s.key);
-    const em=document.getElementById('empty_'+s.key);
-    if(currentFilter==='all'){
-      if(hdr) hdr.classList.remove('hidden');
-    } else {
-      const hasVisible=[...document.querySelectorAll(`#sec_${s.key} ~ .card`)].some(c=>!c.classList.contains('hidden')&&c.dataset.status===s.key);
-      // Simpler: check all cards with this status
-      const sectionCards=[...document.querySelectorAll('.card')].filter(c=>c.dataset.status===s.key&&!c.classList.contains('hidden'));
-      if(hdr) hdr.classList.toggle('hidden',sectionCards.length===0);
-      if(em) em.classList.toggle('show',false);
-    }
+    const jobs=JOBS.filter(j=>getStatus(j)===s.key);
+    html+=`<div class="sec-hdr" id="sec_${s.key}">
+      <span class="sec-lbl"><span class="sec-dot" style="background:${s.color}"></span>${s.label}</span>
+      <span class="sec-line"></span>
+      <span class="sec-ct" id="ct_${s.key}">${jobs.length} job${jobs.length!==1?'s':''}</span>
+    </div>
+    <div class="sec-empty" id="empty_${s.key}"${jobs.length?' style="display:none"':' class="sec-empty show"'}>No jobs in this section.</div>
+    ${jobs.map(j=>{
+      const cur=getStatus(j);
+      const badges=[j.sprint,j.clientLabel,j.geo].filter(Boolean).map(b=>`<span class="badge bg">${esc(b)}</span>`).join('');
+      return`<div class="row-card" id="rc_${j.id}" data-status="${cur}" data-client="${j.client}" onclick="openModal('${j.id}')">
+        <div class="row-left">
+          <div class="row-name">${esc(ls(j.id,'jobname')||j.name)}</div>
+          <div class="row-meta"><span class="badge status-badge status-${cur}">${statusLabel(cur)}</span>${badges}</div>
+        </div>
+        <div class="row-right"><button class="open-btn" onclick="event.stopPropagation();openModal('${j.id}')">Open Brief →</button></div>
+      </div>`;
+    }).join('')}`;
+  });
+  document.getElementById('listWrap').innerHTML=html;
+}
+
+function updateCounts(){
+  STATUSES.forEach(s=>{
+    const jobs=JOBS.filter(j=>getStatus(j)===s.key);
+    const ct=document.getElementById('ct_'+s.key);const em=document.getElementById('empty_'+s.key);
+    if(ct)ct.textContent=`${jobs.length} job${jobs.length!==1?'s':''}`;
+    if(em)em.classList.toggle('show',jobs.length===0);
   });
 }
 
-// ── Init ─────────────────────────────────────────────────────
-renderAll();
-
-if(window.location.hash){
-  setTimeout(()=>{
-    const el=document.querySelector(window.location.hash);
-    if(el)el.scrollIntoView({behavior:'smooth',block:'start'});
-  },120);
+let curFilter='all';
+function applyFilter(f,btn){curFilter=f;document.querySelectorAll('.fb').forEach(b=>b.classList.remove('active'));btn.classList.add('active');reapplyFilter()}
+function reapplyFilter(){
+  document.querySelectorAll('.row-card').forEach(c=>c.classList.toggle('hidden',curFilter!=='all'&&c.dataset.client!==curFilter));
+  STATUSES.forEach(s=>{
+    const hdr=document.getElementById('sec_'+s.key);if(!hdr)return;
+    const vis=[...document.querySelectorAll('.row-card')].filter(c=>c.dataset.status===s.key&&!c.classList.contains('hidden'));
+    hdr.classList.toggle('hidden',vis.length===0);
+  });
 }
+
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+function checkAnchor(){if(window.location.hash){const id=window.location.hash.slice(1);if(JOBS.find(x=>x.id===id))setTimeout(()=>openModal(id),120);}}
+
+renderList();
+checkAnchor();
 </script>
 </body>
 </html>
