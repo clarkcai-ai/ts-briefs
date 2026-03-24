@@ -248,6 +248,138 @@ body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,s
 .ss-new-table-btn{font-size:12px;font-weight:600;color:var(--orange);background:var(--orange-bg);border:1px solid var(--orange-bd);border-radius:6px;padding:6px 14px;cursor:pointer;transition:all .15s}
 .ss-new-table-btn:hover{background:#ffe4d8}
 
+
+/* LINKS / REFERENCES */
+.links-table{width:100%;border-collapse:collapse;table-layout:fixed}
+.links-table th{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);padding:8px 12px;background:var(--surface);border-bottom:1px solid var(--border);text-align:left}
+.links-table td{border-bottom:1px solid var(--border);padding:0;vertical-align:middle}
+.links-table tr:last-child td{border-bottom:none}
+.links-table td:not(:last-child),.links-table th:not(:last-child){border-right:1px solid var(--border)}
+.col-link-label{width:120px}.col-link-url{}.col-link-del{width:36px}
+.link-label-input{width:100%;padding:9px 12px;border:none;outline:none;font-family:inherit;font-size:13px;color:var(--text);background:transparent;display:block}
+.link-label-input:focus{background:var(--blue-bg)}
+.link-label-input::placeholder{color:var(--faint);font-style:italic}
+.link-url-cell{position:relative;display:flex;align-items:center}
+.link-url-input{flex:1;padding:9px 12px;border:none;outline:none;font-family:inherit;font-size:13px;color:var(--blue);background:transparent;display:block;min-width:0}
+.link-url-input:focus{background:var(--blue-bg)}
+.link-url-input::placeholder{color:var(--faint);font-style:italic;color:var(--faint)}
+.link-url-input.has-url{text-decoration:underline;cursor:pointer}
+.link-open-btn{flex-shrink:0;padding:8px 10px;font-size:11px;font-weight:600;color:var(--blue);background:none;border:none;cursor:pointer;opacity:0;transition:opacity .15s;white-space:nowrap}
+.links-table tr:hover .link-open-btn{opacity:1}
+.link-open-btn:hover{color:var(--orange)}
+.link-row-del{width:100%;height:100%;min-height:44px;display:flex;align-items:center;justify-content:center;background:none;border:none;cursor:pointer;color:var(--faint);font-size:15px;transition:all .15s}
+.link-row-del:hover{color:#e24b4a;background:#fcebeb}
+.links-add-row-wrap{padding:8px 12px;border-top:1px solid var(--border);background:#fafaf8}
+.links-add-row-btn{font-size:11px;font-weight:600;color:var(--blue);background:none;border:1px solid var(--blue-bd);border-radius:6px;padding:4px 11px;cursor:pointer;transition:all .15s}
+.links-add-row-btn:hover{background:var(--blue-bg)}
+
+
+/* ═══ RICH TEXT EDITOR ═══════════════════════════════════════ */
+/* Images inside RTE */
+.rte-content img{max-width:100%;height:auto;border-radius:var(--r);display:block;margin:6px 0;cursor:pointer}
+.rte-content img.selected{outline:2px solid var(--blue);border-radius:var(--r)}
+.rte-img-drop-hint{display:none}
+.rte-content.dragover-img{background:var(--blue-bg) !important;outline:2px dashed var(--blue-bd);border-radius:var(--r)}
+.rte-img-bar{display:flex;align-items:center;gap:6px;padding:4px 8px;border-top:1px solid var(--border);background:var(--gray-bg)}
+.rte-img-upload-btn{font-size:11px;font-weight:600;color:var(--muted);background:none;border:1px solid var(--border);border-radius:5px;padding:3px 9px;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:4px}
+.rte-img-upload-btn:hover{color:var(--blue);border-color:var(--blue-bd);background:var(--blue-bg)}
+.rte-img-upload-btn input[type=file]{display:none}
+.rte-img-hint{font-size:11px;color:var(--faint)}
+
+
+.rte-wrap{border:1px solid var(--border);border-radius:var(--r);overflow:hidden;background:var(--surface)}
+.rte-wrap:focus-within{border-color:var(--border-strong)}
+
+.rte-toolbar{
+  display:flex;align-items:center;gap:1px;flex-wrap:wrap;
+  padding:5px 8px;background:var(--gray-bg);border-bottom:1px solid var(--border);
+  position:sticky;top:0;z-index:5;
+}
+.rte-tb-divider{width:1px;height:18px;background:var(--border);margin:0 4px;flex-shrink:0}
+
+.rte-btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-width:26px;height:26px;padding:0 5px;
+  font-size:12px;font-weight:600;color:var(--muted);
+  background:none;border:none;border-radius:4px;cursor:pointer;
+  transition:all .1s;white-space:nowrap;line-height:1;font-family:inherit;
+}
+.rte-btn:hover{background:var(--surface);color:var(--text)}
+.rte-btn.active{background:var(--orange-bg);color:var(--orange)}
+.rte-btn svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+.rte-fmt-select{
+  font-size:11px;font-weight:600;color:var(--muted);
+  background:none;border:1px solid var(--border);border-radius:4px;
+  padding:2px 6px;height:26px;cursor:pointer;outline:none;font-family:inherit;
+}
+.rte-fmt-select:hover{border-color:var(--border-strong)}
+
+.rte-content{
+  min-height:120px;padding:12px 14px;outline:none;
+  font-size:13px;line-height:1.75;color:var(--text);
+  font-family:inherit;word-break:break-word;
+}
+.rte-content:empty::before{content:attr(data-placeholder);color:var(--faint);font-style:italic;pointer-events:none}
+.rte-content:focus{outline:none}
+
+/* Typography inside editor */
+.rte-content h1{font-size:20px;font-weight:700;line-height:1.3;margin:0 0 8px;color:var(--text)}
+.rte-content h2{font-size:16px;font-weight:700;line-height:1.35;margin:0 0 6px;color:var(--text)}
+.rte-content h3{font-size:14px;font-weight:700;line-height:1.4;margin:0 0 4px;color:var(--text)}
+.rte-content p{margin:0 0 6px}
+.rte-content p:last-child{margin-bottom:0}
+.rte-content b,.rte-content strong{font-weight:700}
+.rte-content i,.rte-content em{font-style:italic}
+.rte-content u{text-decoration:underline}
+.rte-content s,.rte-content strike{text-decoration:line-through}
+.rte-content a{color:var(--blue);text-decoration:underline;cursor:pointer}
+.rte-content a:hover{color:var(--orange)}
+
+/* Lists */
+.rte-content ul,.rte-content ol{padding-left:24px;margin:4px 0 8px}
+.rte-content li{margin-bottom:3px}
+.rte-content ul ul,.rte-content ol ol,.rte-content ul ol,.rte-content ol ul{margin:2px 0}
+
+/* Checklist */
+.rte-content ul.checklist{list-style:none;padding-left:4px}
+.rte-content ul.checklist li{
+  display:flex;align-items:flex-start;gap:7px;cursor:pointer;
+  padding:2px 4px;border-radius:4px;transition:background .1s;
+}
+.rte-content ul.checklist li:hover{background:var(--gray-bg)}
+.rte-content ul.checklist li::before{
+  content:'☐';font-size:14px;flex-shrink:0;margin-top:1px;color:var(--muted);
+  transition:all .1s;
+}
+.rte-content ul.checklist li.checked::before{content:'☑';color:var(--green)}
+.rte-content ul.checklist li.checked>span{text-decoration:line-through;color:var(--faint)}
+.rte-content ul.checklist li>span{flex:1;outline:none}
+
+/* Blockquote */
+.rte-content blockquote{
+  border-left:3px solid var(--orange-bd);padding:6px 12px;margin:6px 0;
+  background:var(--orange-bg);border-radius:0 var(--r) var(--r) 0;
+  color:var(--muted);font-style:italic;
+}
+
+/* Link dialog */
+.link-dialog{
+  position:fixed;z-index:300;background:var(--surface);
+  border:1px solid var(--border);border-radius:var(--r);
+  box-shadow:0 8px 24px rgba(0,0,0,.15);padding:12px;
+  display:none;flex-direction:column;gap:8px;min-width:280px;
+}
+.link-dialog.open{display:flex}
+.link-dialog input{font-size:13px;border:1px solid var(--border);border-radius:var(--r);padding:6px 10px;outline:none;font-family:inherit;width:100%}
+.link-dialog input:focus{border-color:var(--blue-bd)}
+.link-dialog-btns{display:flex;gap:6px;justify-content:flex-end}
+.link-dialog-btn{font-size:12px;font-weight:600;padding:5px 12px;border-radius:6px;cursor:pointer;border:none;transition:all .15s}
+.link-dialog-ok{background:var(--blue);color:#fff}
+.link-dialog-ok:hover{background:#0f4f8a}
+.link-dialog-cancel{background:var(--gray-bg);color:var(--muted);border:1px solid var(--border)}
+.link-dialog-cancel:hover{background:var(--border)}
+
 @media(max-width:640px){
   .import-wrap,.list-wrap{padding:16px 16px 60px}
   .modal-overlay{padding:0}
@@ -368,63 +500,63 @@ const CLIENT_NAMES={
 const KNOWN_CLIENTS=['prettylitter','pretty litter','scentbird','il makiage','skinnyrx','skinny rx','pair eyewear','sofi','kitsch','javvy','nobl','paleovalley'];
 
 let JOBS=[
-  {id:'j1809',status:'working',client:'ILMKG',name:'J1809_ILMKG_Adapt1_CP[#]_MOF_ListicleAdapt3_WULT',sprint:'Sprint 01/26',clientLabel:'Il Makiage',geo:'USA',
+  {id:'j1809',status:'working',client:'ILMKG',name:'J1809_ILMKG_Adapt1_CP10_MOF_ListicleAdapt3_WULT',sprint:'Sprint 01/26',clientLabel:'Il Makiage',geo:'USA',
    fields:[['Job Owner','Clark'],['Client','Il Makiage'],['Job Type','Adapt'],['Platform','Meta'],['Funnel Stage','MOF'],['Creative Format','Video'],['SKU','WULT'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Base Job #','DRMTLGY ref (adapt3)'],['Music','Yes'],['Total Ad Sets','2'],['Style','Same as base'],['Goal Demo','Novice / lapsed foundation users'],['Total # of Videos','']],
    goal:'Adapting DRMTLGY\'s proven listicle format (iteration 3) into WULT. Hypothesis: the listicle hook structure that has demonstrated stability on DRMTLGY transfers to the WULT shade match angle with a novice/lapsed foundation persona. Target: stable MOF performance.',
    editing:'Listicle adapt3 from DRMTLGY base. Port structure directly to WULT. Shade Match as creative hero. Single UGC talent. Openers around: (1) avoiding the in-store experience, (2) starting a new glam routine.'},
-  {id:'j1814',status:'working',client:'ILMKG',name:'J1814_ILMKG_Adapt1_CP[#]_TOF_ListicleAdapt3_WULT',sprint:'Sprint 03/02',clientLabel:'Il Makiage',geo:'CANADA',
+  {id:'j1814',status:'working',client:'ILMKG',name:'J1814_ILMKG_Adapt1_CP10_TOF_ListicleAdapt3_WULT',sprint:'Sprint 03/02',clientLabel:'Il Makiage',geo:'CANADA',
    fields:[['Job Owner','Clark'],['Client','Il Makiage'],['Job Type','Adapt'],['Platform','Meta'],['Funnel Stage','TOF'],['Creative Format','Video'],['SKU','WULT'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Base Job #','DRMTLGY ref (adapt3)'],['Music','Yes'],['Total Ad Sets','2'],['Style','Same as base'],['Goal Demo','Novice / lapsed foundation users'],['Total # of Videos','']],
    goal:'Canada geo version of ILMKG WULT listicle adapt3. Testing whether the DRMTLGY listicle format holds in the Canada market.',
    editing:'Same structure as J1809. Canada geo — no offer language. Shade Match as hero. Single UGC talent.'},
-  {id:'j523',status:'working',client:'PRTLI',name:'J523_PRTLI_Adapt1_CP[#]_FF_EvergreenBouquet_PrettyLitter',sprint:'Sprint 03/09',clientLabel:'PrettyLitter',geo:'USA · No offer',
+  {id:'j523',status:'working',client:'PRTLI',name:'J523_PRTLI_Adapt1_CP10_FF_EvergreenBouquet_PrettyLitter',sprint:'Sprint 03/09',clientLabel:'PrettyLitter',geo:'USA · No offer',
    fields:[['Job Owner','Clark'],['Client','PrettyLitter'],['Job Type','Adapt'],['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],['SKU','PrettyLitter'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Base Job #','J125v1a, J457v1c, J101v1a, J146v1d'],['Music','Yes'],['Total Ad Sets','2'],['Offer','None (Evergreen)'],['Persona','Devoted Cat Parent / Smell-focused'],['Total # of Videos','']],
    goal:'Refreshing the top performer bouquet without any GWP offer language. Non-GWP versions expand audience eligibility and allow accurate FF creative measurement.',
    editing:'Adapt top performers J125v1a, J457v1c, J101v1a, J146v1d. Remove all GWP / promotional offer language. Refresh footage and VO where needed. USA geo.'},
-  {id:'j524',status:'working',client:'PRTLI',name:'J524_PRTLI_Adapt1_CP[#]_FF_EvergreenBouquet_PrettyLitter',sprint:'Sprint 03/09',clientLabel:'PrettyLitter',geo:'CANADA · $19.99',
+  {id:'j524',status:'working',client:'PRTLI',name:'J524_PRTLI_Adapt1_CP10_FF_EvergreenBouquet_PrettyLitter',sprint:'Sprint 03/09',clientLabel:'PrettyLitter',geo:'CANADA · $19.99',
    fields:[['Job Owner','Clark'],['Client','PrettyLitter'],['Job Type','Adapt'],['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],['SKU','PrettyLitter'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Base Job #','J125v1a, J457v1c, J101v1a, J146v1d'],['Music','Yes'],['Total Ad Sets','2'],['Offer','First bag $19.99 (Canada)'],['Persona','Devoted Cat Parent / Smell-focused'],['Total # of Videos','']],
    goal:'Canada geo version of J523. Same top performer bouquet refresh without GWP, adapted for Canada pricing ($19.99 first bag).',
    editing:'Same as J523. Remove GWP language. Canada geo — update pricing to first bag $19.99.'},
-  {id:'j525',status:'working',client:'PRTLI',name:'J525_PRTLI_More1_CP[#]_FF_SmashcutBouquet_PrettyLitter',sprint:'Sprint 03/09',clientLabel:'PrettyLitter',geo:'USA',
+  {id:'j525',status:'working',client:'PRTLI',name:'J525_PRTLI_More1_CP10_FF_SmashcutBouquet_PrettyLitter',sprint:'Sprint 03/09',clientLabel:'PrettyLitter',geo:'USA',
    fields:[['Job Owner','Clark'],['Client','PrettyLitter'],['Job Type','More'],['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],['SKU','PrettyLitter'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Base Job #','Smashcut bouquet top performers'],['Music','Yes'],['Total Ad Sets','2'],['Persona','Devoted Cat Parent / Smell-focused'],['Style','Same as base (smashcut)'],['Total # of Videos','TBD']],
    goal:'More volume on the smashcut bouquet top performers. Adding creative supply within the same entity ID to extend runway.',
    editing:'Smashcut bouquet retests. More of the smashcut format. Full editing input after meeting. USA geo.'},
-  {id:'j157',status:'working',client:'PAIRE',name:'J157_PAIRE_More1_CP[#]_[Funnel]_GFXGameOfferUpdate_PairEyewear',sprint:'Sprint 03/16',clientLabel:'Pair Eyewear',geo:'',
+  {id:'j157',status:'working',client:'PAIRE',name:'J157_PAIRE_More1_CP10_[Funnel]_GFXGameOfferUpdate_PairEyewear',sprint:'Sprint 03/16',clientLabel:'Pair Eyewear',geo:'',
    fields:[['Job Owner','Clark'],['Client','Pair Eyewear'],['Job Type','More'],['Platform','Meta'],['Funnel Stage',''],['Creative Format','GFX / Interactive'],['SKU','Pair Eyewear'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','None'],['Base Job #','J87'],['Music','Yes'],['Total Ad Sets','2'],['Style','Same as base (GFX game)'],['Goal Demo',''],['Total # of Videos','']],
    goal:'Refreshing J87 GFX/Game format with current Pair Eyewear offers.',
    editing:'Update J87 GFX/game format. Swap all old offer language for current promotions. Keep the interactive/game structure fully intact.'},
-  {id:'j526',status:'planning',client:'PRTLI',name:'J526_PRTLI_More1_CP[#]_MOF_CatDadOdorControl_PrettyLitter',sprint:'Sprint 03/02',clientLabel:'PrettyLitter',geo:'USA · $14.99',
+  {id:'j526',status:'planning',client:'PRTLI',name:'J526_PRTLI_More1_CP10_MOF_CatDadOdorControl_PrettyLitter',sprint:'Sprint 03/02',clientLabel:'PrettyLitter',geo:'USA · $14.99',
    fields:[['Job Owner','Clark'],['Client','PrettyLitter'],['Job Type','More'],['Platform','Meta'],['Funnel Stage','MOF'],['Creative Format','Video'],['SKU','PrettyLitter'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Offer','First bag $14.99'],['Music','Yes'],['Total Ad Sets','2'],['Persona','Millennial Cat Dads'],['Text Treatment','Reply-to-comment'],['Total # of Videos','']],
    goal:'New odor-specific MOF creative targeting millennial cat dads. Odor control is the primary driver for this segment.',
    editing:'Reply-to-comment format. MOF. Hook: "Okay the UTI color changing thing is cool, but I mainly care about odor control." First bag $14.99. USA geo.'},
-  {id:'j2162',status:'planning',client:'KTSCH',name:'J2162_KTSCH_More1_CP[#]_FF_TravelabilityAdapt_Bars',sprint:'Sprint 03/16',clientLabel:'Kitsch',geo:'',
+  {id:'j2162',status:'planning',client:'KTSCH',name:'J2162_KTSCH_More1_CP10_FF_TravelabilityAdapt_Bars',sprint:'Sprint 03/16',clientLabel:'Kitsch',geo:'',
    fields:[['Job Owner','Clark'],['Client','Kitsch'],['Job Type','More'],['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],['SKU','Shampoo Bars'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Base Job #','J2011v1b'],['Music','Yes'],['Total Ad Sets','2'],['Style','Same as base'],['Reference','J2011v1b'],['Total # of Videos','']],
    goal:'Adapting J2011v1b (Liquid Shampoo top performer) into Shampoo Bars with a travelability angle added.',
    editing:'Adapt J2011v1b for Shampoo Bars. Add travelability messaging — TSA-friendly, no liquid bag needed. Maintain same structure and pacing.'},
-  {id:'j538',status:'planning',client:'PRTLI',name:'J538_PRTLI_Adapt1_CP[#]_FF_JOChoice1499_PrettyLitter',sprint:'Sprint 03/16',clientLabel:'PrettyLitter',geo:'USA · $14.99',
+  {id:'j538',status:'planning',client:'PRTLI',name:'J538_PRTLI_Adapt1_CP10_FF_JOChoice1499_PrettyLitter',sprint:'Sprint 03/16',clientLabel:'PrettyLitter',geo:'USA · $14.99',
    fields:[['Job Owner','Clark'],['Client','PrettyLitter'],['Job Type','Adapt'],['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],['SKU','PrettyLitter'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Offer','First bag $14.99'],['Music','Yes'],['Total Ad Sets','2'],['Persona','Devoted Cat Parent'],['Style','JO choice — match base'],['Total # of Videos','']],
    goal:'Adapting existing PrettyLitter top performer into the $14.99 first bag offer. JO has creative discretion on base selection.',
    editing:'JO choice on base. Adapt into $14.99 first bag offer. Update callouts, end cards, lower thirds. USA geo.'},
-  {id:'j537a',status:'planning',client:'PRTLI',name:'J537_PRTLI_More1_CP[#]_FF_JOChoice1999_PrettyLitter',sprint:'Sprint 03/16',clientLabel:'PrettyLitter',geo:'USA · $19.99',
+  {id:'j537a',status:'planning',client:'PRTLI',name:'J537_PRTLI_More1_CP10_FF_JOChoice1999_PrettyLitter',sprint:'Sprint 03/16',clientLabel:'PrettyLitter',geo:'USA · $19.99',
    fields:[['Job Owner','Clark'],['Client','PrettyLitter'],['Job Type','More'],['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],['SKU','PrettyLitter'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Offer','First bag $19.99'],['Music','Yes'],['Total Ad Sets','2'],['Persona','Devoted Cat Parent'],['Style','JO choice — match base'],['Total # of Videos','']],
    goal:'More volume on the $19.99 first bag offer. USA geo. Parallel to J538.',
    editing:'JO choice on base. Update offer language to first bag $19.99. USA geo.'},
-  {id:'j537b',status:'planning',client:'PRTLI',name:'J537_PRTLI_More1_CP[#]_FF_JOChoice1499Canada_PrettyLitter',sprint:'Sprint 03/16',clientLabel:'PrettyLitter',geo:'CANADA · $14.99',
+  {id:'j537b',status:'planning',client:'PRTLI',name:'J537_PRTLI_More1_CP10_FF_JOChoice1499Canada_PrettyLitter',sprint:'Sprint 03/16',clientLabel:'PrettyLitter',geo:'CANADA · $14.99',
    fields:[['Job Owner','Clark'],['Client','PrettyLitter'],['Job Type','More'],['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],['SKU','PrettyLitter'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Offer','First bag $14.99 (Canada)'],['Music','Yes'],['Total Ad Sets','2'],['Persona','Devoted Cat Parent'],['Style','JO choice — match base'],['Total # of Videos','']],
    goal:'Canada geo, $14.99 first bag. Testing price sensitivity parallel to J539 Canada.',
    editing:'JO choice on base. Update offer to first bag $14.99. Canada geo.'},
-  {id:'j1844',status:'planning',client:'ILMKG',name:'J1844_ILMKG_Adapt1_CP[#]_MOF_AntiAgingStaticBouquet_PLUMP',sprint:'Sprint 03/16',clientLabel:'Il Makiage',geo:'',
+  {id:'j1844',status:'planning',client:'ILMKG',name:'J1844_ILMKG_Adapt1_CP10_MOF_AntiAgingStaticBouquet_PLUMP',sprint:'Sprint 03/16',clientLabel:'Il Makiage',geo:'',
    fields:[['Job Owner','Clark'],['Client','Il Makiage'],['Job Type','Adapt'],['Platform','Meta'],['Funnel Stage','MOF'],['Creative Format','Static'],['SKU','Power Lift Plumping Cream (PLUMP)'],['Aspect Ratio','1x1 / 4x5'],['VO','None'],['Base Job #','1803V1A, 1749V1A, 1766V1D, 1652V1D'],['Music','No'],['Total Ad Sets','2'],['Persona','Anti-aging (35+)'],['Style','Port from WULT statics'],['Total # of Videos','4 statics (1x1 + 4x5 each)']],
    goal:'Limited static supply on PLUMP anti-aging angle. Porting four best-spending WULT statics to PLUMP. TBYB language must be removed.',
    editing:'Port four statics from WULT to PLUMP. Remove TBYB from all.\n— 1803V1A → adapt to PLUMP\n— 1749V1A → remove TBYB, quiz CTA\n— 1766V1D → us vs. them format\n— 1652V1D → whiteboard: "You\'re only as old as you look"; overlay: "no lies detected"\nDeliver 1x1 and 4x5 cuts each.'},
-  {id:'j539',status:'planning',client:'PRTLI',name:'J539_PRTLI_More1_CP[#]_FF_JOChoice1999Canada_PrettyLitter',sprint:'Sprint 03/16',clientLabel:'PrettyLitter',geo:'CANADA · $19.99',
+  {id:'j539',status:'planning',client:'PRTLI',name:'J539_PRTLI_More1_CP10_FF_JOChoice1999Canada_PrettyLitter',sprint:'Sprint 03/16',clientLabel:'PrettyLitter',geo:'CANADA · $19.99',
    fields:[['Job Owner','Clark'],['Client','PrettyLitter'],['Job Type','More'],['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],['SKU','PrettyLitter'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Offer','First bag $19.99 (Canada)'],['Music','Yes'],['Total Ad Sets','2'],['Persona','Devoted Cat Parent'],['Style','JO choice — match base'],['Total # of Videos','']],
    goal:'Canada geo, $19.99 first bag. Testing price point performance in Canada.',
    editing:'JO choice on base. Update offer to first bag $19.99. Canada geo.'},
-  {id:'j16',status:'planning',client:'JAVVY',name:'J16_JAVVY_Adapt1_CP[#]_FF_Top3Flavors_JavvyCoffee',sprint:'Sprint 03/16',clientLabel:'Javvy Coffee',geo:'',
+  {id:'j16',status:'planning',client:'JAVVY',name:'J16_JAVVY_Adapt1_CP10_FF_Top3Flavors_JavvyCoffee',sprint:'Sprint 03/16',clientLabel:'Javvy Coffee',geo:'',
    fields:[['Job Owner','Clark'],['Client','Javvy Coffee'],['Job Type','Adapt'],['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],['SKU','Javvy Coffee'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Reference','Scentbird listicle format'],['Music','Yes'],['Total Ad Sets','2'],['Angle','Top 3 flavors — taste-led, anti-chalky'],['Hook','"Top 3 protein coffee flavors that don\'t taste chalky"'],['Total # of Videos','']],
    goal:'Review analysis flagged flavor differentiation as a major untapped opportunity. Adapting Scentbird\'s listicle format to test whether taste-led listicles drive Javvy conversions.',
    editing:'Listicle format — model on Scentbird top performer structure. Lead with top 3 flavors. Roll into: no chalky taste, 30g protein, feel full all morning.'},
-  {id:'j770',status:'planning',client:'STBRD',name:'J770_STBRD_More1_CP[#]_BOF_J680VBJOChoice_Cologne',sprint:'Sprint 03/16',clientLabel:'Scentbird',geo:'Cologne',
+  {id:'j770',status:'planning',client:'STBRD',name:'J770_STBRD_More1_CP10_BOF_J680VBJOChoice_Cologne',sprint:'Sprint 03/16',clientLabel:'Scentbird',geo:'Cologne',
    fields:[['Job Owner','Clark'],['Client','Scentbird'],['Job Type','More'],['Platform','Meta'],['Funnel Stage','BOF'],['Creative Format','Video'],['SKU','Cologne'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Base Job #','J680VB'],['Music','Yes'],['Total Ad Sets','2'],['Style','JO choice — see J680VB iteration history'],['Reference','J680VB + prior iterations'],['Total # of Videos','']],
    goal:'JO choice iteration on J680VB (Cologne BOF). Audience is warm — priority is closing efficiency and offer clarity.',
    editing:'JO choice — review J680VB and all previous iterations. Pick the most underexplored direction. Build from the strongest creative signal in the J680 family.'},
@@ -696,14 +828,14 @@ ${j.concept}
 TubeScience terminology:
 - JO Goal = what is being tested, why this concept, what success looks like (2–3 sentences, reference job IDs/data where mentioned)
 - Editing Instructions = specific direction for the editor: structure, pacing, assets, variants, GFX notes
-- Job naming convention: J[#]_[CLIENTCODE]_[Type][#]_CP[#]_[Funnel]_[ConceptName]_[SKU]
+- Job naming convention: J[#]_[CLIENTCODE]_[Type][#]_CP10_[Funnel]_[ConceptName]_[SKU]
   - Type: New / More / Adapt
   - Funnel: FF / TOF / MOF / BOF
   - ConceptName: CamelCase up to 4 words
 
 Return ONLY valid JSON, no markdown, no explanation:
 {
-  "jobName": "J[#]_${j.clientCode}_${j.jobType}1_CP[#]_${j.funnel||'FF'}_ConceptName_${j.sku||'SKU'}",
+  "jobName": "J[#]_${j.clientCode}_${j.jobType}1_CP10_${j.funnel||'FF'}_ConceptName_${j.sku||'SKU'}",
   "funnel": "...",
   "format": "...",
   "sku": "...",
@@ -777,7 +909,7 @@ function addImportedBrief(i,btn){
     id:newId,
     status:'planning',
     client:j.clientCode,
-    name:g.jobName||`J[#]_${j.clientCode}_${j.jobType}1_CP[#]_${j.funnel}_NewBrief_${j.sku||'SKU'}`,
+    name:g.jobName||`J[#]_${j.clientCode}_${j.jobType}1_CP10_${j.funnel}_NewBrief_${j.sku||'SKU'}`,
     sprint:'Imported',
     clientLabel:j.clientLabel,
     geo:j.adAccount||'',
@@ -792,7 +924,9 @@ function addImportedBrief(i,btn){
     editing:g.editing||'',
   };
 
+  newJob._dynamic = true;
   JOBS.push(newJob);
+  saveJobsToStorage();
   importJobs[i]._added=true;
   btn.textContent='Added ✓';btn.classList.add('added');btn.disabled=true;
 
@@ -806,6 +940,60 @@ function updateBriefCount(){
 }
 
 // ═══ AD SETS ═════════════════════════════════════════════════
+// ═══ LINKS / REFERENCES ═════════════════════════════════════
+function getLinks(jid){try{const v=ls(jid,'links');return v?JSON.parse(v):null}catch(e){return null}}
+function saveLinks(jid){
+  const tbl=document.getElementById('links_tbl_'+jid);if(!tbl)return;
+  const rows=[];
+  tbl.querySelectorAll('tr[data-type="link"]').forEach(tr=>{
+    const label=tr.querySelector('.link-label-input').value||'';
+    const url=tr.querySelector('.link-url-input').value||'';
+    if(label||url)rows.push({label,url});
+  });
+  ss(jid,'links',JSON.stringify(rows));
+}
+function defaultLinks(){return [{label:'Reference',url:''},{label:'Base Job',url:''}]}
+function renderLinkRow(jid,r){
+  const hasUrl=r.url&&r.url.trim()!='';
+  return`<tr data-type="link">
+    <td class="col-link-label"><input class="link-label-input" value="${esc(r.label)}" placeholder="Label" oninput="saveLinks('${jid}')"></td>
+    <td><div class="link-url-cell">
+      <input class="link-url-input${hasUrl?' has-url':''}" value="${esc(r.url)}" placeholder="https://..." oninput="onLinkUrlInput(this,'${jid}')" onkeydown="if(event.key==='Enter'&&this.value)openLink(this.value)">
+      <button class="link-open-btn" onclick="openLinkFromRow(this)" title="Open link">↗</button>
+    </div></td>
+    <td class="col-link-del"><button class="link-row-del" onclick="delLinkRow(this,'${jid}')">×</button></td>
+  </tr>`;
+}
+function buildLinksTable(jid){
+  const rows=getLinks(jid)||defaultLinks();
+  return`<div class="tbl-block" id="links_block_${jid}">
+    <div class="hl-wrap">
+      <table class="links-table" id="links_tbl_${jid}">
+        <thead><tr><th class="col-link-label">Label</th><th class="col-link-url">URL</th><th class="col-link-del"></th></tr></thead>
+        <tbody>${rows.map(r=>renderLinkRow(jid,r)).join('')}</tbody>
+      </table>
+    </div>
+    <div class="links-add-row-wrap"><button class="links-add-row-btn" onclick="addLinkRow('${jid}')">+ Add link</button></div>
+  </div>`;
+}
+function addLinkRow(jid){
+  const tb=document.querySelector('#links_tbl_'+jid+' tbody');
+  const tr=document.createElement('tr');tr.dataset.type='link';
+  tr.innerHTML=renderLinkRow(jid,{label:'',url:''}).replace(/^<tr[^>]*>/,'').replace(/<\/tr>$/,'');
+  tb.appendChild(tr);
+  tr.querySelector('.link-label-input').focus();
+}
+function delLinkRow(btn,jid){btn.closest('tr').remove();saveLinks(jid)}
+function onLinkUrlInput(input,jid){
+  const v=input.value.trim();
+  input.classList.toggle('has-url',v.startsWith('http')||v.startsWith('fb.me')||v.startsWith('https'));
+  saveLinks(jid);
+}
+function openLinkFromRow(btn){
+  const url=btn.closest('tr').querySelector('.link-url-input').value.trim();
+  if(url)window.open(url,'_blank');
+}
+
 function getAdSets(jid){try{const v=ls(jid,'adsets');return v?JSON.parse(v):null}catch(e){return null}}
 function saveAdSets(jid){const w=document.getElementById('adsets_'+jid);if(!w)return;const sets=[];w.querySelectorAll('.adset-block').forEach(b=>{const name=b.querySelector('.adset-name-input').value||'';const rows=[];b.querySelectorAll('.adset-row').forEach(r=>{rows.push({variant:r.querySelector('.adset-row-name-input').value||'',recipe:r.querySelector('.adset-input').value||''});});sets.push({name,rows});});ss(jid,'adsets',JSON.stringify(sets))}
 function defaultAdSets(){return[{name:'AD SET 1',rows:[{variant:'V1A',recipe:'H1 + SS1'},{variant:'V1B',recipe:'H2 + SS1'},{variant:'V1C',recipe:'H1 + SS2'},{variant:'V1D',recipe:'H2 + SS2'}]},{name:'AD SET 2',rows:[{variant:'V1A',recipe:'H1 + SS1'},{variant:'V1B',recipe:'H2 + SS1'},{variant:'V1C',recipe:'H1 + SS2'},{variant:'V1D',recipe:'H2 + SS2'}]}]}
@@ -850,14 +1038,19 @@ function openModal(id){
   const opts=STATUSES.map(s=>`<option value="${s.key}"${cur===s.key?' selected':''}>${s.label}</option>`).join('');
   const badges=[j.sprint,j.clientLabel,j.geo].filter(Boolean).map(b=>`<span class="badge bg">${esc(b)}</span>`).join('');
   document.getElementById('mMeta').innerHTML=`<select class="status-select status-${cur}" data-id="${j.id}" onchange="changeStatus(this)">${opts}</select>${badges}`;
+  // Pre-seed RTE fields from job data if not yet saved
+  if (!ls(j.id,'goal') && j.goal) { try { localStorage.setItem('b_'+j.id+'_goal', j.goal); } catch(e){} }
+  if (!ls(j.id,'editing') && j.editing) { try { localStorage.setItem('b_'+j.id+'_editing', j.editing); } catch(e){} }
+  if (!ls(j.id,'headlines') && j.headlines) { try { localStorage.setItem('b_'+j.id+'_headlines', j.headlines); } catch(e){} }
   const fields=j.fields.map(([k,v])=>{const sv=ls(j.id,'field_'+k);const val=sv!==null?sv:v;const emp=!val;return`<div class="fc"><div class="fk">${esc(k)}</div><div class="fv${emp?' empty':''}" contenteditable="true" data-id="${j.id}" data-key="field_${k}" oninput="onFieldEdit(this)" onfocus="onFocus(this)" onblur="onBlur(this)">${esc(val)||(emp?'TBD':'')}</div></div>`;}).join('');
   document.getElementById('panel_jobinfo').innerHTML=`
     <div class="panel-section"><span class="section-label">Overview</span><div class="fg">${fields}</div></div>
+    <div class="panel-section"><span class="section-label">Links / References</span>${buildLinksTable(j.id)}</div>
     <div class="panel-section"><span class="section-label">Ad Sets</span>${buildAdSets(j.id)}</div>
-    <div class="panel-section"><span class="section-label">JO Goal</span><textarea class="ea" data-id="${j.id}" data-key="goal" oninput="onTAEdit(this)" rows="5">${esc(ls(j.id,'goal')??j.goal)}</textarea></div>
-    <div class="panel-section"><span class="section-label">Editing Instructions</span><textarea class="ea" data-id="${j.id}" data-key="editing" oninput="onTAEdit(this)" rows="5">${esc(ls(j.id,'editing')??j.editing)}</textarea></div>`;
+    <div class="panel-section"><span class="section-label">JO Goal</span>${createRTE(j.id,'goal','What is this job testing? Why this concept? What does success look like?')}</div>
+    <div class="panel-section"><span class="section-label">Editing Instructions</span>${createRTE(j.id,'editing','Structure, pacing, assets, variants, GFX notes...')}</div>`;
   document.getElementById('panel_copy').innerHTML=`
-    <div class="panel-section"><span class="section-label">Headlines / Openers</span>${buildHlTable(j.id)}</div>
+    <div class="panel-section"><span class="section-label">Headlines / Openers</span>${createRTE(j.id,'headlines','H1: Hook text here...\nH2: Alternative hook...')}</div>
     <div class="panel-section"><span class="section-label">Sales Sequence</span>${buildSsSection(j.id)}</div>`;
   document.querySelectorAll('.modal-tabs .tab').forEach(t=>t.classList.remove('active'));
   document.querySelectorAll('.modal-tabs .tab')[0].classList.add('active');
@@ -889,6 +1082,51 @@ function changeStatus(sel){
 function copyModalLink(){if(!curJob)return;navigator.clipboard.writeText(window.location.href.split('#')[0]+'#'+curJob.id).then(()=>{const btn=document.getElementById('mCopyBtn');btn.textContent='Copied!';btn.classList.add('copied');setTimeout(()=>{btn.textContent='Copy Link';btn.classList.remove('copied');},2000)})}
 
 // ═══ LIST ═════════════════════════════════════════════════════
+
+// ═══ JOB PERSISTENCE ═════════════════════════════════════════
+// Persists the dynamic JOBS array so added briefs survive page refresh
+
+const JOBS_STORE_KEY = 'ts_briefs_jobs_v1';
+
+function saveJobsToStorage() {
+  try {
+    // Only persist dynamically added jobs (imported ones)
+    // We store the full array so any status changes persist too
+    localStorage.setItem(JOBS_STORE_KEY, JSON.stringify(JOBS.map(j => ({
+      id: j.id,
+      status: j.status,
+      client: j.client,
+      name: j.name,
+      sprint: j.sprint,
+      clientLabel: j.clientLabel,
+      geo: j.geo,
+      fields: j.fields,
+      goal: j.goal,
+      editing: j.editing,
+      _dynamic: j._dynamic || false,
+    }))));
+  } catch(e) { console.warn('Could not save jobs:', e); }
+}
+
+function loadDynamicJobsFromStorage() {
+  try {
+    const raw = localStorage.getItem(JOBS_STORE_KEY);
+    if (!raw) return;
+    const saved = JSON.parse(raw);
+    // Add back any dynamically added jobs not in the base JOBS array
+    saved.forEach(sj => {
+      if (sj._dynamic && !JOBS.find(j => j.id === sj.id)) {
+        JOBS.push({...sj, headlines: sj.headlines || ''});
+      }
+      // Restore status changes for base jobs
+      const base = JOBS.find(j => j.id === sj.id);
+      if (base && sj.status && sj.status !== base.status) {
+        // Status is already handled by ls() in getStatus() — no action needed
+      }
+    });
+  } catch(e) { console.warn('Could not load jobs:', e); }
+}
+
 function renderList(){
   let html='';
   STATUSES.forEach(s=>{
@@ -912,8 +1150,323 @@ function reapplyFilter(){document.querySelectorAll('.row-card').forEach(c=>c.cla
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
 function checkAnchor(){if(window.location.hash){const id=window.location.hash.slice(1);if(JOBS.find(x=>x.id===id)){switchTopTab('briefs',document.querySelectorAll('.top-tab')[1]);setTimeout(()=>openModal(id),120);}}}
 
+
+// ═══ RICH TEXT EDITOR ════════════════════════════════════════
+
+let _rteActiveWrap = null;
+let _savedRange = null;
+
+function saveRange() {
+  const sel = window.getSelection();
+  if (sel && sel.rangeCount) _savedRange = sel.getRangeAt(0).cloneRange();
+}
+function restoreRange() {
+  if (!_savedRange) return;
+  const sel = window.getSelection();
+  sel.removeAllRanges();
+  sel.addRange(_savedRange);
+}
+
+function rteExec(cmd, val) {
+  restoreRange();
+  document.execCommand(cmd, false, val || null);
+  if (_rteActiveWrap) {
+    const c = _rteActiveWrap.querySelector('.rte-content');
+    if (c) { saveRTE(c); updateToolbarState(_rteActiveWrap); }
+  }
+}
+
+function rteFormat(fmt) {
+  restoreRange();
+  const sel = window.getSelection();
+  if (!sel || !sel.rangeCount) return;
+  const range = sel.getRangeAt(0);
+  const block = ['h1','h2','h3','p','div'].find(t => {
+    const el = range.commonAncestorContainer;
+    const parent = el.nodeType === 3 ? el.parentElement : el;
+    return parent.closest(t);
+  });
+  document.execCommand('formatBlock', false, fmt);
+  if (_rteActiveWrap) {
+    const c = _rteActiveWrap.querySelector('.rte-content');
+    if (c) saveRTE(c);
+  }
+}
+
+function rteInsertChecklist() {
+  restoreRange();
+  const sel = window.getSelection();
+  if (!sel || !sel.rangeCount) return;
+  const range = sel.getRangeAt(0);
+  const container = range.commonAncestorContainer;
+  const el = container.nodeType === 3 ? container.parentElement : container;
+  const existing = el.closest('ul.checklist');
+  if (existing) {
+    // toggle off — unwrap
+    const items = [...existing.querySelectorAll('li')];
+    const frag = document.createDocumentFragment();
+    items.forEach(li => {
+      const p = document.createElement('p');
+      const span = li.querySelector('span');
+      p.textContent = span ? span.textContent : li.textContent;
+      frag.appendChild(p);
+    });
+    existing.replaceWith(frag);
+  } else {
+    const text = sel.toString() || 'Item';
+    const ul = document.createElement('ul');
+    ul.className = 'checklist';
+    const li = document.createElement('li');
+    const span = document.createElement('span');
+    span.contentEditable = 'true';
+    span.textContent = text;
+    li.appendChild(span);
+    ul.appendChild(li);
+    range.deleteContents();
+    range.insertNode(ul);
+    // position cursor inside span
+    const newRange = document.createRange();
+    newRange.setStart(span, span.childNodes.length);
+    newRange.collapse(true);
+    sel.removeAllRanges();
+    sel.addRange(newRange);
+  }
+  if (_rteActiveWrap) {
+    const c = _rteActiveWrap.querySelector('.rte-content');
+    if (c) saveRTE(c);
+  }
+}
+
+// Handle clicking checklist checkboxes
+document.addEventListener('click', function(e) {
+  const li = e.target.closest('ul.checklist > li');
+  if (!li) return;
+  const span = li.querySelector('span');
+  if (e.target === span) return; // clicking text area — don't toggle
+  li.classList.toggle('checked');
+  const wrap = li.closest('[data-id]');
+  if (wrap) saveRTE(wrap.closest('.rte-content') || wrap);
+});
+
+function updateToolbarState(wrap) {
+  if (!wrap) return;
+  const cmds = ['bold','italic','underline','strikeThrough',
+    'insertUnorderedList','insertOrderedList'];
+  cmds.forEach(cmd => {
+    const btn = wrap.querySelector(`[data-cmd="${cmd}"]`);
+    if (btn) btn.classList.toggle('active', document.queryCommandState(cmd));
+  });
+  const fmt = wrap.querySelector('.rte-fmt-select');
+  if (fmt) {
+    const block = document.queryCommandValue('formatBlock').toLowerCase();
+    fmt.value = ['h1','h2','h3'].includes(block) ? block : 'p';
+  }
+}
+
+// Link dialog
+let _linkWrap = null;
+function openLinkDialog(wrap) {
+  _linkWrap = wrap;
+  saveRange();
+  const sel = window.getSelection();
+  const selectedText = sel ? sel.toString() : '';
+  const dlg = document.getElementById('linkDialog');
+  const inp = document.getElementById('linkUrlInput');
+  inp.value = '';
+  // position near cursor
+  if (sel && sel.rangeCount) {
+    const rect = sel.getRangeAt(0).getBoundingClientRect();
+    dlg.style.top = (rect.bottom + window.scrollY + 6) + 'px';
+    dlg.style.left = Math.max(8, rect.left + window.scrollX) + 'px';
+  }
+  dlg.classList.add('open');
+  inp.focus();
+}
+function closeLinkDialog() {
+  document.getElementById('linkDialog').classList.remove('open');
+  _linkWrap = null; _savedRange = null;
+}
+function confirmLink() {
+  const url = document.getElementById('linkUrlInput').value.trim();
+  if (url) {
+    restoreRange();
+    document.execCommand('createLink', false, url);
+    // make sure links open in new tab
+    if (_rteActiveWrap) {
+      _rteActiveWrap.querySelectorAll('a').forEach(a => { a.target = '_blank'; a.rel = 'noopener'; });
+      const c = _rteActiveWrap.querySelector('.rte-content');
+      if (c) saveRTE(c);
+    }
+  }
+  closeLinkDialog();
+}
+document.getElementById('linkDialog').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') confirmLink();
+  if (e.key === 'Escape') closeLinkDialog();
+});
+
+function saveRTE(el) {
+  const content = el.closest ? el.closest('.rte-content') : el;
+  if (!content) return;
+  ss(content.dataset.id, content.dataset.key, content.innerHTML);
+}
+
+function onRTEFocus(el) {
+  _rteActiveWrap = el.closest('.rte-wrap');
+  updateToolbarState(_rteActiveWrap);
+}
+
+function onRTEKeyup(el) {
+  saveRTE(el);
+  updateToolbarState(el.closest('.rte-wrap'));
+  saveRange();
+}
+
+
+// Image insertion helpers
+function insertImageAtCursor(dataUrl, wrap) {
+  const img = document.createElement('img');
+  img.src = dataUrl;
+  img.style.maxWidth = '100%';
+  const content = wrap.querySelector('.rte-content');
+  if (!content) return;
+  content.focus();
+  const sel = window.getSelection();
+  if (sel && sel.rangeCount) {
+    const range = sel.getRangeAt(0);
+    range.deleteContents();
+    range.insertNode(img);
+    range.setStartAfter(img);
+    range.collapse(true);
+    sel.removeAllRanges();
+    sel.addRange(range);
+  } else {
+    content.appendChild(img);
+  }
+  saveRTE(content);
+}
+
+function fileToDataUrl(file) {
+  return new Promise((res, rej) => {
+    if (!file.type.startsWith('image/')) { rej('Not an image'); return; }
+    const reader = new FileReader();
+    reader.onload = e => res(e.target.result);
+    reader.onerror = rej;
+    reader.readAsDataURL(file);
+  });
+}
+
+function handleRTEImageDrop(e, el) {
+  const wrap = el.closest('.rte-wrap');
+  el.classList.remove('dragover-img');
+  const files = [...(e.dataTransfer.files || [])].filter(f => f.type.startsWith('image/'));
+  if (!files.length) return;
+  e.preventDefault();
+  files.forEach(async f => {
+    try { const url = await fileToDataUrl(f); insertImageAtCursor(url, wrap); }
+    catch(err) { console.warn('Image drop error:', err); }
+  });
+}
+
+function handleRTEImagePaste(e, el) {
+  const items = [...(e.clipboardData?.items || [])].filter(i => i.type.startsWith('image/'));
+  if (!items.length) return;
+  e.preventDefault();
+  const wrap = el.closest('.rte-wrap');
+  items.forEach(item => {
+    const file = item.getAsFile();
+    if (!file) return;
+    fileToDataUrl(file).then(url => insertImageAtCursor(url, wrap)).catch(console.warn);
+  });
+}
+
+function handleRTEImageUpload(input, wrapId) {
+  const wrap = document.getElementById(wrapId);
+  const files = [...input.files].filter(f => f.type.startsWith('image/'));
+  files.forEach(async f => {
+    try { const url = await fileToDataUrl(f); insertImageAtCursor(url, wrap); }
+    catch(err) { console.warn('Image upload error:', err); }
+  });
+  input.value = '';
+}
+
+function createRTE(jid, key, placeholder) {
+  const saved = ls(jid, key) || '';
+  const uid = `rte_${jid.replace(/[^a-z0-9]/gi,'_')}_${key}`;
+  return `<div class="rte-wrap" id="${uid}_wrap">
+    <div class="rte-toolbar">
+      <select class="rte-fmt-select" onmousedown="saveRange()" onchange="rteFormat(this.value);this.blur()">
+        <option value="p">Normal</option>
+        <option value="h1">Heading 1</option>
+        <option value="h2">Heading 2</option>
+        <option value="h3">Heading 3</option>
+        <option value="blockquote">Quote</option>
+      </select>
+      <span class="rte-tb-divider"></span>
+      <button class="rte-btn" data-cmd="bold" title="Bold (Ctrl+B)" onmousedown="event.preventDefault();rteExec('bold')"><b>B</b></button>
+      <button class="rte-btn" data-cmd="italic" title="Italic (Ctrl+I)" onmousedown="event.preventDefault();rteExec('italic')"><i>I</i></button>
+      <button class="rte-btn" data-cmd="underline" title="Underline (Ctrl+U)" onmousedown="event.preventDefault();rteExec('underline')"><u>U</u></button>
+      <button class="rte-btn" data-cmd="strikeThrough" title="Strikethrough" onmousedown="event.preventDefault();rteExec('strikeThrough')"><s>S</s></button>
+      <span class="rte-tb-divider"></span>
+      <button class="rte-btn" data-cmd="insertUnorderedList" title="Bullet list" onmousedown="event.preventDefault();rteExec('insertUnorderedList')">
+        <svg viewBox="0 0 16 16"><circle cx="2" cy="4" r="1.2" fill="currentColor"/><line x1="5" y1="4" x2="15" y2="4"/><circle cx="2" cy="8" r="1.2" fill="currentColor"/><line x1="5" y1="8" x2="15" y2="8"/><circle cx="2" cy="12" r="1.2" fill="currentColor"/><line x1="5" y1="12" x2="15" y2="12"/></svg>
+      </button>
+      <button class="rte-btn" data-cmd="insertOrderedList" title="Numbered list" onmousedown="event.preventDefault();rteExec('insertOrderedList')">
+        <svg viewBox="0 0 16 16"><text x="0" y="5" font-size="5" fill="currentColor">1.</text><line x1="5" y1="4" x2="15" y2="4"/><text x="0" y="9" font-size="5" fill="currentColor">2.</text><line x1="5" y1="8" x2="15" y2="8"/><text x="0" y="13" font-size="5" fill="currentColor">3.</text><line x1="5" y1="12" x2="15" y2="12"/></svg>
+      </button>
+      <button class="rte-btn" title="Checklist" onmousedown="event.preventDefault();rteInsertChecklist()">☑</button>
+      <span class="rte-tb-divider"></span>
+      <button class="rte-btn" title="Indent" onmousedown="event.preventDefault();rteExec('indent')">
+        <svg viewBox="0 0 16 16"><line x1="1" y1="4" x2="15" y2="4"/><line x1="5" y1="8" x2="15" y2="8"/><line x1="5" y1="12" x2="15" y2="12"/><polyline points="1,7 3,8 1,9"/></svg>
+      </button>
+      <button class="rte-btn" title="Outdent" onmousedown="event.preventDefault();rteExec('outdent')">
+        <svg viewBox="0 0 16 16"><line x1="1" y1="4" x2="15" y2="4"/><line x1="5" y1="8" x2="15" y2="8"/><line x1="5" y1="12" x2="15" y2="12"/><polyline points="4,7 2,8 4,9"/></svg>
+      </button>
+      <span class="rte-tb-divider"></span>
+      <button class="rte-btn" title="Insert link" onmousedown="event.preventDefault();saveRange();openLinkDialog(document.getElementById('${uid}_wrap'))">
+        <svg viewBox="0 0 16 16"><path d="M6.5 9.5a3.5 3.5 0 0 0 4.95 0l2-2a3.5 3.5 0 0 0-4.95-4.95l-1 1"/><path d="M9.5 6.5a3.5 3.5 0 0 0-4.95 0l-2 2a3.5 3.5 0 0 0 4.95 4.95l1-1"/></svg>
+      </button>
+      <button class="rte-btn" title="Remove formatting" onmousedown="event.preventDefault();rteExec('removeFormat')">
+        <svg viewBox="0 0 16 16"><line x1="3" y1="3" x2="13" y2="13"/><line x1="13" y1="3" x2="3" y2="13"/></svg>
+      </button>
+    </div>
+    <div class="rte-content"
+      id="${uid}"
+      contenteditable="true"
+      data-id="${jid}"
+      data-key="${key}"
+      data-placeholder="${placeholder}"
+      onfocus="onRTEFocus(this)"
+      onkeyup="onRTEKeyup(this)"
+      oninput="saveRTE(this)"
+      onmouseup="saveRange()"
+      ondragover="event.preventDefault();this.classList.add('dragover-img')"
+      ondragleave="this.classList.remove('dragover-img')"
+      ondrop="handleRTEImageDrop(event,this)"
+      onpaste="handleRTEImagePaste(event,this)"
+    >${saved}</div>
+  <div class="rte-img-bar">
+    <label class="rte-img-upload-btn" title="Insert image">
+      <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="14" height="10" rx="2"/><circle cx="5.5" cy="7" r="1.2"/><polyline points="1,13 5,9 8,12 11,9 15,13"/></svg>
+      Insert photo
+      <input type="file" accept="image/*" multiple onchange="handleRTEImageUpload(this,'${uid}_wrap')">
+    </label>
+    <span class="rte-img-hint">or drag & drop / paste an image into the editor above</span>
+  </div>
+  </div>`;
+}
+
+loadDynamicJobsFromStorage();
 renderList();
 checkAnchor();
 </script>
+
+<div class="link-dialog" id="linkDialog">
+  <input id="linkUrlInput" type="url" placeholder="https://..." />
+  <div class="link-dialog-btns">
+    <button class="link-dialog-btn link-dialog-cancel" onclick="closeLinkDialog()">Cancel</button>
+    <button class="link-dialog-btn link-dialog-ok" onclick="confirmLink()">Insert Link</button>
+  </div>
+</div>
 </body>
 </html>
