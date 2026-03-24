@@ -274,112 +274,20 @@ body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,s
 .links-add-row-btn:hover{background:var(--blue-bg)}
 
 
-/* ═══ RICH TEXT EDITOR ═══════════════════════════════════════ */
-/* Images inside RTE */
-.rte-content img{max-width:100%;height:auto;border-radius:var(--r);display:block;margin:6px 0;cursor:pointer}
-.rte-content img.selected{outline:2px solid var(--blue);border-radius:var(--r)}
-.rte-img-drop-hint{display:none}
-.rte-content.dragover-img{background:var(--blue-bg) !important;outline:2px dashed var(--blue-bd);border-radius:var(--r)}
-.rte-img-bar{display:flex;align-items:center;gap:6px;padding:4px 8px;border-top:1px solid var(--border);background:var(--gray-bg)}
-.rte-img-upload-btn{font-size:11px;font-weight:600;color:var(--muted);background:none;border:1px solid var(--border);border-radius:5px;padding:3px 9px;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:4px}
-.rte-img-upload-btn:hover{color:var(--blue);border-color:var(--blue-bd);background:var(--blue-bg)}
-.rte-img-upload-btn input[type=file]{display:none}
-.rte-img-hint{font-size:11px;color:var(--faint)}
-
-
-.rte-wrap{border:1px solid var(--border);border-radius:var(--r);overflow:hidden;background:var(--surface)}
-.rte-wrap:focus-within{border-color:var(--border-strong)}
-
-.rte-toolbar{
-  display:flex;align-items:center;gap:1px;flex-wrap:wrap;
-  padding:5px 8px;background:var(--gray-bg);border-bottom:1px solid var(--border);
-  position:sticky;top:0;z-index:5;
-}
-.rte-tb-divider{width:1px;height:18px;background:var(--border);margin:0 4px;flex-shrink:0}
-
-.rte-btn{
-  display:inline-flex;align-items:center;justify-content:center;
-  min-width:26px;height:26px;padding:0 5px;
-  font-size:12px;font-weight:600;color:var(--muted);
-  background:none;border:none;border-radius:4px;cursor:pointer;
-  transition:all .1s;white-space:nowrap;line-height:1;font-family:inherit;
-}
-.rte-btn:hover{background:var(--surface);color:var(--text)}
-.rte-btn.active{background:var(--orange-bg);color:var(--orange)}
-.rte-btn svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-
-.rte-fmt-select{
-  font-size:11px;font-weight:600;color:var(--muted);
-  background:none;border:1px solid var(--border);border-radius:4px;
-  padding:2px 6px;height:26px;cursor:pointer;outline:none;font-family:inherit;
-}
-.rte-fmt-select:hover{border-color:var(--border-strong)}
-
-.rte-content{
-  min-height:120px;padding:12px 14px;outline:none;
-  font-size:13px;line-height:1.75;color:var(--text);
-  font-family:inherit;word-break:break-word;
-}
-.rte-content:empty::before{content:attr(data-placeholder);color:var(--faint);font-style:italic;pointer-events:none}
-.rte-content:focus{outline:none}
-
-/* Typography inside editor */
-.rte-content h1{font-size:20px;font-weight:700;line-height:1.3;margin:0 0 8px;color:var(--text)}
-.rte-content h2{font-size:16px;font-weight:700;line-height:1.35;margin:0 0 6px;color:var(--text)}
-.rte-content h3{font-size:14px;font-weight:700;line-height:1.4;margin:0 0 4px;color:var(--text)}
-.rte-content p{margin:0 0 6px}
-.rte-content p:last-child{margin-bottom:0}
-.rte-content b,.rte-content strong{font-weight:700}
-.rte-content i,.rte-content em{font-style:italic}
-.rte-content u{text-decoration:underline}
-.rte-content s,.rte-content strike{text-decoration:line-through}
-.rte-content a{color:var(--blue);text-decoration:underline;cursor:pointer}
-.rte-content a:hover{color:var(--orange)}
-
-/* Lists */
-.rte-content ul,.rte-content ol{padding-left:24px;margin:4px 0 8px}
-.rte-content li{margin-bottom:3px}
-.rte-content ul ul,.rte-content ol ol,.rte-content ul ol,.rte-content ol ul{margin:2px 0}
-
-/* Checklist */
-.rte-content ul.checklist{list-style:none;padding-left:4px}
-.rte-content ul.checklist li{
-  display:flex;align-items:flex-start;gap:7px;cursor:pointer;
-  padding:2px 4px;border-radius:4px;transition:background .1s;
-}
-.rte-content ul.checklist li:hover{background:var(--gray-bg)}
-.rte-content ul.checklist li::before{
-  content:'☐';font-size:14px;flex-shrink:0;margin-top:1px;color:var(--muted);
-  transition:all .1s;
-}
-.rte-content ul.checklist li.checked::before{content:'☑';color:var(--green)}
-.rte-content ul.checklist li.checked>span{text-decoration:line-through;color:var(--faint)}
-.rte-content ul.checklist li>span{flex:1;outline:none}
-
-/* Blockquote */
-.rte-content blockquote{
-  border-left:3px solid var(--orange-bd);padding:6px 12px;margin:6px 0;
-  background:var(--orange-bg);border-radius:0 var(--r) var(--r) 0;
-  color:var(--muted);font-style:italic;
-}
-
-/* Link dialog */
-.link-dialog{
-  position:fixed;z-index:300;background:var(--surface);
-  border:1px solid var(--border);border-radius:var(--r);
-  box-shadow:0 8px 24px rgba(0,0,0,.15);padding:12px;
-  display:none;flex-direction:column;gap:8px;min-width:280px;
-}
-.link-dialog.open{display:flex}
-.link-dialog input{font-size:13px;border:1px solid var(--border);border-radius:var(--r);padding:6px 10px;outline:none;font-family:inherit;width:100%}
-.link-dialog input:focus{border-color:var(--blue-bd)}
-.link-dialog-btns{display:flex;gap:6px;justify-content:flex-end}
-.link-dialog-btn{font-size:12px;font-weight:600;padding:5px 12px;border-radius:6px;cursor:pointer;border:none;transition:all .15s}
-.link-dialog-ok{background:var(--blue);color:#fff}
-.link-dialog-ok:hover{background:#0f4f8a}
-.link-dialog-cancel{background:var(--gray-bg);color:var(--muted);border:1px solid var(--border)}
-.link-dialog-cancel:hover{background:var(--border)}
-
+/* LINK HELPER */
+.field-wrap{position:relative}
+.lhbar{display:flex;align-items:center;gap:6px;margin-bottom:5px}
+.lhbtn{font-size:11px;font-weight:600;color:var(--blue);background:none;border:1px solid var(--blue-bd);border-radius:5px;padding:3px 9px;cursor:pointer;transition:all .15s;font-family:inherit}
+.lhbtn:hover{background:var(--blue-bg)}
+.lhdlg{display:none;position:absolute;top:30px;left:0;z-index:200;background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);box-shadow:0 8px 24px rgba(0,0,0,.15);padding:12px;width:300px;flex-direction:column;gap:8px}
+.lhdlg.open{display:flex}
+.lhdlg-label{font-size:10px;font-weight:700;color:var(--faint);letter-spacing:.06em;text-transform:uppercase}
+.lhdlg input{font-size:12px;border:1px solid var(--border);border-radius:var(--r);padding:6px 9px;outline:none;font-family:inherit;width:100%;color:var(--text)}
+.lhdlg input:focus{border-color:var(--blue-bd);background:var(--blue-bg)}
+.lhdlg-btns{display:flex;gap:6px;justify-content:flex-end}
+.lhdlg-ok{font-size:11px;font-weight:600;padding:4px 12px;border-radius:5px;cursor:pointer;border:none;background:var(--blue);color:#fff}
+.lhdlg-ok:hover{background:#0f4f8a}
+.lhdlg-cancel{font-size:11px;font-weight:600;padding:4px 10px;border-radius:5px;cursor:pointer;background:var(--gray-bg);color:var(--muted);border:1px solid var(--border);font-family:inherit}
 @media(max-width:640px){
   .import-wrap,.list-wrap{padding:16px 16px 60px}
   .modal-overlay{padding:0}
@@ -924,9 +832,7 @@ function addImportedBrief(i,btn){
     editing:g.editing||'',
   };
 
-  newJob._dynamic = true;
   JOBS.push(newJob);
-  saveJobsToStorage();
   importJobs[i]._added=true;
   btn.textContent='Added ✓';btn.classList.add('added');btn.disabled=true;
 
@@ -1038,19 +944,15 @@ function openModal(id){
   const opts=STATUSES.map(s=>`<option value="${s.key}"${cur===s.key?' selected':''}>${s.label}</option>`).join('');
   const badges=[j.sprint,j.clientLabel,j.geo].filter(Boolean).map(b=>`<span class="badge bg">${esc(b)}</span>`).join('');
   document.getElementById('mMeta').innerHTML=`<select class="status-select status-${cur}" data-id="${j.id}" onchange="changeStatus(this)">${opts}</select>${badges}`;
-  // Pre-seed RTE fields from job data if not yet saved
-  if (!ls(j.id,'goal') && j.goal) { try { localStorage.setItem('b_'+j.id+'_goal', j.goal); } catch(e){} }
-  if (!ls(j.id,'editing') && j.editing) { try { localStorage.setItem('b_'+j.id+'_editing', j.editing); } catch(e){} }
-  if (!ls(j.id,'headlines') && j.headlines) { try { localStorage.setItem('b_'+j.id+'_headlines', j.headlines); } catch(e){} }
   const fields=j.fields.map(([k,v])=>{const sv=ls(j.id,'field_'+k);const val=sv!==null?sv:v;const emp=!val;return`<div class="fc"><div class="fk">${esc(k)}</div><div class="fv${emp?' empty':''}" contenteditable="true" data-id="${j.id}" data-key="field_${k}" oninput="onFieldEdit(this)" onfocus="onFocus(this)" onblur="onBlur(this)">${esc(val)||(emp?'TBD':'')}</div></div>`;}).join('');
   document.getElementById('panel_jobinfo').innerHTML=`
     <div class="panel-section"><span class="section-label">Overview</span><div class="fg">${fields}</div></div>
     <div class="panel-section"><span class="section-label">Links / References</span>${buildLinksTable(j.id)}</div>
     <div class="panel-section"><span class="section-label">Ad Sets</span>${buildAdSets(j.id)}</div>
-    <div class="panel-section"><span class="section-label">JO Goal</span>${createRTE(j.id,'goal','What is this job testing? Why this concept? What does success look like?')}</div>
-    <div class="panel-section"><span class="section-label">Editing Instructions</span>${createRTE(j.id,'editing','Structure, pacing, assets, variants, GFX notes...')}</div>`;
+    <div class="panel-section"><span class="section-label">JO Goal</span><div class="field-wrap"><div class="lhbar"><button class="lhbtn" onclick="lhOpen(this.parentNode.nextSibling)">&#128279; Insert Link</button></div><textarea class="ea" data-id="${j.id}" data-key="goal" oninput="onTAEdit(this)" rows="5">${esc(ls(j.id,'goal')??j.goal)}</textarea></div></div>
+    <div class="panel-section"><span class="section-label">Editing Instructions</span><div class="field-wrap"><div class="lhbar"><button class="lhbtn" onclick="lhOpen(this.parentNode.nextSibling)">&#128279; Insert Link</button></div><textarea class="ea" data-id="${j.id}" data-key="editing" oninput="onTAEdit(this)" rows="5">${esc(ls(j.id,'editing')??j.editing)}</textarea></div></div>`;
   document.getElementById('panel_copy').innerHTML=`
-    <div class="panel-section"><span class="section-label">Headlines / Openers</span>${createRTE(j.id,'headlines','H1: Hook text here...\nH2: Alternative hook...')}</div>
+    <div class="panel-section"><span class="section-label">Headlines / Openers</span>${buildHlTable(j.id)}</div>
     <div class="panel-section"><span class="section-label">Sales Sequence</span>${buildSsSection(j.id)}</div>`;
   document.querySelectorAll('.modal-tabs .tab').forEach(t=>t.classList.remove('active'));
   document.querySelectorAll('.modal-tabs .tab')[0].classList.add('active');
@@ -1082,51 +984,6 @@ function changeStatus(sel){
 function copyModalLink(){if(!curJob)return;navigator.clipboard.writeText(window.location.href.split('#')[0]+'#'+curJob.id).then(()=>{const btn=document.getElementById('mCopyBtn');btn.textContent='Copied!';btn.classList.add('copied');setTimeout(()=>{btn.textContent='Copy Link';btn.classList.remove('copied');},2000)})}
 
 // ═══ LIST ═════════════════════════════════════════════════════
-
-// ═══ JOB PERSISTENCE ═════════════════════════════════════════
-// Persists the dynamic JOBS array so added briefs survive page refresh
-
-const JOBS_STORE_KEY = 'ts_briefs_jobs_v1';
-
-function saveJobsToStorage() {
-  try {
-    // Only persist dynamically added jobs (imported ones)
-    // We store the full array so any status changes persist too
-    localStorage.setItem(JOBS_STORE_KEY, JSON.stringify(JOBS.map(j => ({
-      id: j.id,
-      status: j.status,
-      client: j.client,
-      name: j.name,
-      sprint: j.sprint,
-      clientLabel: j.clientLabel,
-      geo: j.geo,
-      fields: j.fields,
-      goal: j.goal,
-      editing: j.editing,
-      _dynamic: j._dynamic || false,
-    }))));
-  } catch(e) { console.warn('Could not save jobs:', e); }
-}
-
-function loadDynamicJobsFromStorage() {
-  try {
-    const raw = localStorage.getItem(JOBS_STORE_KEY);
-    if (!raw) return;
-    const saved = JSON.parse(raw);
-    // Add back any dynamically added jobs not in the base JOBS array
-    saved.forEach(sj => {
-      if (sj._dynamic && !JOBS.find(j => j.id === sj.id)) {
-        JOBS.push({...sj, headlines: sj.headlines || ''});
-      }
-      // Restore status changes for base jobs
-      const base = JOBS.find(j => j.id === sj.id);
-      if (base && sj.status && sj.status !== base.status) {
-        // Status is already handled by ls() in getStatus() — no action needed
-      }
-    });
-  } catch(e) { console.warn('Could not load jobs:', e); }
-}
-
 function renderList(){
   let html='';
   STATUSES.forEach(s=>{
@@ -1151,321 +1008,52 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
 function checkAnchor(){if(window.location.hash){const id=window.location.hash.slice(1);if(JOBS.find(x=>x.id===id)){switchTopTab('briefs',document.querySelectorAll('.top-tab')[1]);setTimeout(()=>openModal(id),120);}}}
 
 
-// ═══ RICH TEXT EDITOR ════════════════════════════════════════
+// ── LINK HELPER ───────────────────────────────────────────
+var _lhTA=null,_lhS=0,_lhE=0;
 
-let _rteActiveWrap = null;
-let _savedRange = null;
-
-function saveRange() {
-  const sel = window.getSelection();
-  if (sel && sel.rangeCount) _savedRange = sel.getRangeAt(0).cloneRange();
-}
-function restoreRange() {
-  if (!_savedRange) return;
-  const sel = window.getSelection();
-  sel.removeAllRanges();
-  sel.addRange(_savedRange);
-}
-
-function rteExec(cmd, val) {
-  restoreRange();
-  document.execCommand(cmd, false, val || null);
-  if (_rteActiveWrap) {
-    const c = _rteActiveWrap.querySelector('.rte-content');
-    if (c) { saveRTE(c); updateToolbarState(_rteActiveWrap); }
-  }
-}
-
-function rteFormat(fmt) {
-  restoreRange();
-  const sel = window.getSelection();
-  if (!sel || !sel.rangeCount) return;
-  const range = sel.getRangeAt(0);
-  const block = ['h1','h2','h3','p','div'].find(t => {
-    const el = range.commonAncestorContainer;
-    const parent = el.nodeType === 3 ? el.parentElement : el;
-    return parent.closest(t);
-  });
-  document.execCommand('formatBlock', false, fmt);
-  if (_rteActiveWrap) {
-    const c = _rteActiveWrap.querySelector('.rte-content');
-    if (c) saveRTE(c);
-  }
-}
-
-function rteInsertChecklist() {
-  restoreRange();
-  const sel = window.getSelection();
-  if (!sel || !sel.rangeCount) return;
-  const range = sel.getRangeAt(0);
-  const container = range.commonAncestorContainer;
-  const el = container.nodeType === 3 ? container.parentElement : container;
-  const existing = el.closest('ul.checklist');
-  if (existing) {
-    // toggle off — unwrap
-    const items = [...existing.querySelectorAll('li')];
-    const frag = document.createDocumentFragment();
-    items.forEach(li => {
-      const p = document.createElement('p');
-      const span = li.querySelector('span');
-      p.textContent = span ? span.textContent : li.textContent;
-      frag.appendChild(p);
-    });
-    existing.replaceWith(frag);
-  } else {
-    const text = sel.toString() || 'Item';
-    const ul = document.createElement('ul');
-    ul.className = 'checklist';
-    const li = document.createElement('li');
-    const span = document.createElement('span');
-    span.contentEditable = 'true';
-    span.textContent = text;
-    li.appendChild(span);
-    ul.appendChild(li);
-    range.deleteContents();
-    range.insertNode(ul);
-    // position cursor inside span
-    const newRange = document.createRange();
-    newRange.setStart(span, span.childNodes.length);
-    newRange.collapse(true);
-    sel.removeAllRanges();
-    sel.addRange(newRange);
-  }
-  if (_rteActiveWrap) {
-    const c = _rteActiveWrap.querySelector('.rte-content');
-    if (c) saveRTE(c);
-  }
-}
-
-// Handle clicking checklist checkboxes
-document.addEventListener('click', function(e) {
-  const li = e.target.closest('ul.checklist > li');
-  if (!li) return;
-  const span = li.querySelector('span');
-  if (e.target === span) return; // clicking text area — don't toggle
-  li.classList.toggle('checked');
-  const wrap = li.closest('[data-id]');
-  if (wrap) saveRTE(wrap.closest('.rte-content') || wrap);
-});
-
-function updateToolbarState(wrap) {
-  if (!wrap) return;
-  const cmds = ['bold','italic','underline','strikeThrough',
-    'insertUnorderedList','insertOrderedList'];
-  cmds.forEach(cmd => {
-    const btn = wrap.querySelector(`[data-cmd="${cmd}"]`);
-    if (btn) btn.classList.toggle('active', document.queryCommandState(cmd));
-  });
-  const fmt = wrap.querySelector('.rte-fmt-select');
-  if (fmt) {
-    const block = document.queryCommandValue('formatBlock').toLowerCase();
-    fmt.value = ['h1','h2','h3'].includes(block) ? block : 'p';
-  }
-}
-
-// Link dialog
-let _linkWrap = null;
-function openLinkDialog(wrap) {
-  _linkWrap = wrap;
-  saveRange();
-  const sel = window.getSelection();
-  const selectedText = sel ? sel.toString() : '';
-  const dlg = document.getElementById('linkDialog');
-  const inp = document.getElementById('linkUrlInput');
-  inp.value = '';
-  // position near cursor
-  if (sel && sel.rangeCount) {
-    const rect = sel.getRangeAt(0).getBoundingClientRect();
-    dlg.style.top = (rect.bottom + window.scrollY + 6) + 'px';
-    dlg.style.left = Math.max(8, rect.left + window.scrollX) + 'px';
-  }
+function lhOpen(ta){
+  _lhTA=ta;_lhS=ta.selectionStart;_lhE=ta.selectionEnd;
+  document.getElementById('lhdlg-text').value=ta.value.slice(_lhS,_lhE)||'';
+  document.getElementById('lhdlg-url').value='';
+  var dlg=document.getElementById('lhdlg');
+  ta.closest('.field-wrap').appendChild(dlg);
   dlg.classList.add('open');
-  inp.focus();
+  document.getElementById('lhdlg-url').focus();
 }
-function closeLinkDialog() {
-  document.getElementById('linkDialog').classList.remove('open');
-  _linkWrap = null; _savedRange = null;
+function lhClose(){document.getElementById('lhdlg').classList.remove('open');_lhTA=null;}
+function lhConfirm(){
+  var url=document.getElementById('lhdlg-url').value.trim();
+  var txt=document.getElementById('lhdlg-text').value.trim();
+  if(!url){lhClose();return;}
+  var ins='[' + (txt||url) + '](' + url + ')';
+  var v=_lhTA.value;
+  _lhTA.value=v.slice(0,_lhS)+ins+v.slice(_lhE);
+  _lhTA.selectionStart=_lhTA.selectionEnd=_lhS+ins.length;
+  _lhTA.focus();
+  _lhTA.dispatchEvent(new Event('input',{bubbles:true}));
+  lhClose();
 }
-function confirmLink() {
-  const url = document.getElementById('linkUrlInput').value.trim();
-  if (url) {
-    restoreRange();
-    document.execCommand('createLink', false, url);
-    // make sure links open in new tab
-    if (_rteActiveWrap) {
-      _rteActiveWrap.querySelectorAll('a').forEach(a => { a.target = '_blank'; a.rel = 'noopener'; });
-      const c = _rteActiveWrap.querySelector('.rte-content');
-      if (c) saveRTE(c);
-    }
-  }
-  closeLinkDialog();
-}
-document.getElementById('linkDialog').addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') confirmLink();
-  if (e.key === 'Escape') closeLinkDialog();
+document.addEventListener('mousedown',function(e){
+  var dlg=document.getElementById('lhdlg');
+  if(dlg.classList.contains('open')&&!dlg.contains(e.target)&&!e.target.classList.contains('lhbtn'))lhClose();
 });
-
-function saveRTE(el) {
-  const content = el.closest ? el.closest('.rte-content') : el;
-  if (!content) return;
-  ss(content.dataset.id, content.dataset.key, content.innerHTML);
-}
-
-function onRTEFocus(el) {
-  _rteActiveWrap = el.closest('.rte-wrap');
-  updateToolbarState(_rteActiveWrap);
-}
-
-function onRTEKeyup(el) {
-  saveRTE(el);
-  updateToolbarState(el.closest('.rte-wrap'));
-  saveRange();
-}
-
-
-// Image insertion helpers
-function insertImageAtCursor(dataUrl, wrap) {
-  const img = document.createElement('img');
-  img.src = dataUrl;
-  img.style.maxWidth = '100%';
-  const content = wrap.querySelector('.rte-content');
-  if (!content) return;
-  content.focus();
-  const sel = window.getSelection();
-  if (sel && sel.rangeCount) {
-    const range = sel.getRangeAt(0);
-    range.deleteContents();
-    range.insertNode(img);
-    range.setStartAfter(img);
-    range.collapse(true);
-    sel.removeAllRanges();
-    sel.addRange(range);
-  } else {
-    content.appendChild(img);
-  }
-  saveRTE(content);
-}
-
-function fileToDataUrl(file) {
-  return new Promise((res, rej) => {
-    if (!file.type.startsWith('image/')) { rej('Not an image'); return; }
-    const reader = new FileReader();
-    reader.onload = e => res(e.target.result);
-    reader.onerror = rej;
-    reader.readAsDataURL(file);
-  });
-}
-
-function handleRTEImageDrop(e, el) {
-  const wrap = el.closest('.rte-wrap');
-  el.classList.remove('dragover-img');
-  const files = [...(e.dataTransfer.files || [])].filter(f => f.type.startsWith('image/'));
-  if (!files.length) return;
-  e.preventDefault();
-  files.forEach(async f => {
-    try { const url = await fileToDataUrl(f); insertImageAtCursor(url, wrap); }
-    catch(err) { console.warn('Image drop error:', err); }
-  });
-}
-
-function handleRTEImagePaste(e, el) {
-  const items = [...(e.clipboardData?.items || [])].filter(i => i.type.startsWith('image/'));
-  if (!items.length) return;
-  e.preventDefault();
-  const wrap = el.closest('.rte-wrap');
-  items.forEach(item => {
-    const file = item.getAsFile();
-    if (!file) return;
-    fileToDataUrl(file).then(url => insertImageAtCursor(url, wrap)).catch(console.warn);
-  });
-}
-
-function handleRTEImageUpload(input, wrapId) {
-  const wrap = document.getElementById(wrapId);
-  const files = [...input.files].filter(f => f.type.startsWith('image/'));
-  files.forEach(async f => {
-    try { const url = await fileToDataUrl(f); insertImageAtCursor(url, wrap); }
-    catch(err) { console.warn('Image upload error:', err); }
-  });
-  input.value = '';
-}
-
-function createRTE(jid, key, placeholder) {
-  const saved = ls(jid, key) || '';
-  const uid = `rte_${jid.replace(/[^a-z0-9]/gi,'_')}_${key}`;
-  return `<div class="rte-wrap" id="${uid}_wrap">
-    <div class="rte-toolbar">
-      <select class="rte-fmt-select" onmousedown="saveRange()" onchange="rteFormat(this.value);this.blur()">
-        <option value="p">Normal</option>
-        <option value="h1">Heading 1</option>
-        <option value="h2">Heading 2</option>
-        <option value="h3">Heading 3</option>
-        <option value="blockquote">Quote</option>
-      </select>
-      <span class="rte-tb-divider"></span>
-      <button class="rte-btn" data-cmd="bold" title="Bold (Ctrl+B)" onmousedown="event.preventDefault();rteExec('bold')"><b>B</b></button>
-      <button class="rte-btn" data-cmd="italic" title="Italic (Ctrl+I)" onmousedown="event.preventDefault();rteExec('italic')"><i>I</i></button>
-      <button class="rte-btn" data-cmd="underline" title="Underline (Ctrl+U)" onmousedown="event.preventDefault();rteExec('underline')"><u>U</u></button>
-      <button class="rte-btn" data-cmd="strikeThrough" title="Strikethrough" onmousedown="event.preventDefault();rteExec('strikeThrough')"><s>S</s></button>
-      <span class="rte-tb-divider"></span>
-      <button class="rte-btn" data-cmd="insertUnorderedList" title="Bullet list" onmousedown="event.preventDefault();rteExec('insertUnorderedList')">
-        <svg viewBox="0 0 16 16"><circle cx="2" cy="4" r="1.2" fill="currentColor"/><line x1="5" y1="4" x2="15" y2="4"/><circle cx="2" cy="8" r="1.2" fill="currentColor"/><line x1="5" y1="8" x2="15" y2="8"/><circle cx="2" cy="12" r="1.2" fill="currentColor"/><line x1="5" y1="12" x2="15" y2="12"/></svg>
-      </button>
-      <button class="rte-btn" data-cmd="insertOrderedList" title="Numbered list" onmousedown="event.preventDefault();rteExec('insertOrderedList')">
-        <svg viewBox="0 0 16 16"><text x="0" y="5" font-size="5" fill="currentColor">1.</text><line x1="5" y1="4" x2="15" y2="4"/><text x="0" y="9" font-size="5" fill="currentColor">2.</text><line x1="5" y1="8" x2="15" y2="8"/><text x="0" y="13" font-size="5" fill="currentColor">3.</text><line x1="5" y1="12" x2="15" y2="12"/></svg>
-      </button>
-      <button class="rte-btn" title="Checklist" onmousedown="event.preventDefault();rteInsertChecklist()">☑</button>
-      <span class="rte-tb-divider"></span>
-      <button class="rte-btn" title="Indent" onmousedown="event.preventDefault();rteExec('indent')">
-        <svg viewBox="0 0 16 16"><line x1="1" y1="4" x2="15" y2="4"/><line x1="5" y1="8" x2="15" y2="8"/><line x1="5" y1="12" x2="15" y2="12"/><polyline points="1,7 3,8 1,9"/></svg>
-      </button>
-      <button class="rte-btn" title="Outdent" onmousedown="event.preventDefault();rteExec('outdent')">
-        <svg viewBox="0 0 16 16"><line x1="1" y1="4" x2="15" y2="4"/><line x1="5" y1="8" x2="15" y2="8"/><line x1="5" y1="12" x2="15" y2="12"/><polyline points="4,7 2,8 4,9"/></svg>
-      </button>
-      <span class="rte-tb-divider"></span>
-      <button class="rte-btn" title="Insert link" onmousedown="event.preventDefault();saveRange();openLinkDialog(document.getElementById('${uid}_wrap'))">
-        <svg viewBox="0 0 16 16"><path d="M6.5 9.5a3.5 3.5 0 0 0 4.95 0l2-2a3.5 3.5 0 0 0-4.95-4.95l-1 1"/><path d="M9.5 6.5a3.5 3.5 0 0 0-4.95 0l-2 2a3.5 3.5 0 0 0 4.95 4.95l1-1"/></svg>
-      </button>
-      <button class="rte-btn" title="Remove formatting" onmousedown="event.preventDefault();rteExec('removeFormat')">
-        <svg viewBox="0 0 16 16"><line x1="3" y1="3" x2="13" y2="13"/><line x1="13" y1="3" x2="3" y2="13"/></svg>
-      </button>
-    </div>
-    <div class="rte-content"
-      id="${uid}"
-      contenteditable="true"
-      data-id="${jid}"
-      data-key="${key}"
-      data-placeholder="${placeholder}"
-      onfocus="onRTEFocus(this)"
-      onkeyup="onRTEKeyup(this)"
-      oninput="saveRTE(this)"
-      onmouseup="saveRange()"
-      ondragover="event.preventDefault();this.classList.add('dragover-img')"
-      ondragleave="this.classList.remove('dragover-img')"
-      ondrop="handleRTEImageDrop(event,this)"
-      onpaste="handleRTEImagePaste(event,this)"
-    >${saved}</div>
-  <div class="rte-img-bar">
-    <label class="rte-img-upload-btn" title="Insert image">
-      <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="14" height="10" rx="2"/><circle cx="5.5" cy="7" r="1.2"/><polyline points="1,13 5,9 8,12 11,9 15,13"/></svg>
-      Insert photo
-      <input type="file" accept="image/*" multiple onchange="handleRTEImageUpload(this,'${uid}_wrap')">
-    </label>
-    <span class="rte-img-hint">or drag & drop / paste an image into the editor above</span>
-  </div>
-  </div>`;
-}
-
-loadDynamicJobsFromStorage();
+document.addEventListener('keydown',function(e){
+  var dlg=document.getElementById('lhdlg');
+  if(!dlg.classList.contains('open'))return;
+  if(e.key==='Escape')lhClose();
+  if(e.key==='Enter'){e.preventDefault();lhConfirm();}
+});
 renderList();
 checkAnchor();
 </script>
 
-<div class="link-dialog" id="linkDialog">
-  <input id="linkUrlInput" type="url" placeholder="https://..." />
-  <div class="link-dialog-btns">
-    <button class="link-dialog-btn link-dialog-cancel" onclick="closeLinkDialog()">Cancel</button>
-    <button class="link-dialog-btn link-dialog-ok" onclick="confirmLink()">Insert Link</button>
+<div class="lhdlg" id="lhdlg">
+  <div class="lhdlg-label">Insert Link</div>
+  <input id="lhdlg-url" type="url" placeholder="https://" />
+  <input id="lhdlg-text" type="text" placeholder="Display text (leave blank to use URL)" />
+  <div class="lhdlg-btns">
+    <button class="lhdlg-cancel" onclick="lhClose()">Cancel</button>
+    <button class="lhdlg-ok" onclick="lhConfirm()">Insert</button>
   </div>
 </div>
 </body>
