@@ -17,6 +17,7 @@
 }
 body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,sans-serif;font-size:14px;line-height:1.6;overflow-x:hidden}
 
+/* HEADER */
 .site-header{background:var(--text);color:#fff;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
 .site-hl{display:flex;align-items:baseline;gap:12px}
 .site-title{font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
@@ -24,11 +25,87 @@ body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,s
 .save-ind{font-size:11px;color:rgba(255,255,255,.45);transition:opacity .3s;opacity:0}
 .save-ind.show{opacity:1}
 
-.filter-bar{background:var(--surface);border-bottom:1px solid var(--border);padding:9px 32px;display:flex;align-items:center;gap:7px;flex-wrap:wrap;position:sticky;top:47px;z-index:40}
+/* TOP-LEVEL NAV TABS */
+.top-nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 32px;display:flex;align-items:center;position:sticky;top:47px;z-index:45}
+.top-tab{font-size:13px;font-weight:500;color:var(--muted);background:none;border:none;border-bottom:3px solid transparent;padding:12px 18px;cursor:pointer;transition:all .15s;white-space:nowrap;margin-bottom:-1px;display:flex;align-items:center;gap:7px}
+.top-tab:hover{color:var(--text)}
+.top-tab.active{color:var(--orange);border-bottom-color:var(--orange);font-weight:600}
+.top-tab-count{font-size:10px;font-weight:700;background:var(--gray-bg);color:var(--faint);border-radius:10px;padding:1px 7px}
+.top-tab.active .top-tab-count{background:var(--orange-bg);color:var(--orange)}
+
+/* TOP SECTION */
+.top-section{display:none}
+.top-section.active{display:block}
+
+/* ═══ IMPORT TAB ═══════════════════════════════════════════ */
+.import-wrap{max-width:800px;margin:0 auto;padding:32px 32px 80px}
+
+.import-intro{font-size:13px;color:var(--muted);margin-bottom:20px;line-height:1.7}
+.import-intro strong{color:var(--text)}
+
+/* DROP ZONE */
+.drop-zone{border:2px dashed var(--border);border-radius:var(--rl);padding:48px 32px;text-align:center;cursor:pointer;transition:all .2s;background:var(--surface);position:relative}
+.drop-zone:hover,.drop-zone.dragover{border-color:var(--orange);background:var(--orange-bg)}
+.drop-zone input[type="file"]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.drop-icon{font-size:28px;margin-bottom:10px;opacity:.4}
+.drop-title{font-size:15px;font-weight:600;color:var(--text);margin-bottom:6px}
+.drop-sub{font-size:12px;color:var(--faint)}
+
+/* IMPORT RESULTS */
+.import-results{margin-top:28px}
+.import-results-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.import-results-title{font-size:13px;font-weight:700;color:var(--text)}
+.import-gen-all-btn{font-size:12px;font-weight:600;background:var(--orange);color:#fff;border:none;border-radius:7px;padding:7px 16px;cursor:pointer;transition:background .15s}
+.import-gen-all-btn:hover{background:#c94e22}
+.import-gen-all-btn:disabled{background:var(--faint);cursor:default}
+
+.import-job-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);margin-bottom:12px;overflow:hidden}
+.import-job-hdr{padding:12px 16px;background:#fafaf8;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:12px}
+.import-job-hdr-l{flex:1;min-width:0}
+.import-job-name{font-size:13px;font-weight:600;color:var(--text);margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.import-job-meta{display:flex;gap:6px;flex-wrap:wrap}
+.import-job-hdr-r{flex-shrink:0}
+
+.import-job-body{padding:14px 16px}
+.import-field-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-bottom:12px}
+.import-fc{padding:8px 12px;border-right:1px solid var(--border);border-bottom:1px solid var(--border)}
+.import-fc:nth-child(3n){border-right:none}
+.import-fc:nth-last-child(-n+3){border-bottom:none}
+.import-fk{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--faint);margin-bottom:2px}
+.import-fv{font-size:12px;color:var(--text);font-weight:500}
+.import-fv.empty{color:var(--faint);font-style:italic}
+
+.import-concept{font-size:12px;color:var(--muted);line-height:1.65;background:var(--gray-bg);border-radius:var(--r);padding:10px 12px;margin-bottom:10px;white-space:pre-wrap;word-break:break-word}
+
+/* Generation states */
+.import-gen-wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.import-gen-btn{font-size:12px;font-weight:600;color:var(--blue);background:none;border:1px solid var(--blue-bd);border-radius:6px;padding:5px 13px;cursor:pointer;transition:all .15s}
+.import-gen-btn:hover{background:var(--blue-bg)}
+.import-gen-btn:disabled{color:var(--faint);border-color:var(--border);cursor:default}
+.import-add-btn{font-size:12px;font-weight:600;color:#fff;background:var(--green);border:none;border-radius:6px;padding:5px 13px;cursor:pointer;transition:background .15s}
+.import-add-btn:hover{background:#0a5a44}
+.import-add-btn:disabled{background:var(--faint);cursor:default}
+.import-add-btn.added{background:var(--faint);cursor:default}
+
+.gen-loading{font-size:12px;color:var(--orange);display:flex;align-items:center;gap:6px}
+.gen-loading::before{content:'';width:12px;height:12px;border:2px solid var(--orange-bd);border-top-color:var(--orange);border-radius:50%;animation:spin .7s linear infinite;display:inline-block;flex-shrink:0}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.gen-preview{margin-top:10px;display:flex;flex-direction:column;gap:8px}
+.gen-preview-block{border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+.gen-preview-label{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);padding:6px 11px;background:var(--gray-bg);border-bottom:1px solid var(--border)}
+.gen-preview-text{font-size:12px;color:var(--text);line-height:1.7;padding:10px 11px;white-space:pre-wrap}
+
+.import-empty{text-align:center;padding:40px;color:var(--faint);font-size:13px;font-style:italic}
+.import-error{background:#fcebeb;border:1px solid #f09595;border-radius:var(--r);padding:10px 14px;font-size:12px;color:#a32d2d;margin-top:12px}
+
+/* FILTER BAR */
+.filter-bar{background:var(--surface);border-bottom:1px solid var(--border);padding:9px 32px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
 .fl{font-size:10px;font-weight:700;color:var(--faint);letter-spacing:.08em;text-transform:uppercase;margin-right:3px}
 .fb{font-size:11px;font-weight:500;border:1px solid var(--border);border-radius:20px;padding:3px 11px;background:none;color:var(--muted);cursor:pointer;transition:all .15s}
 .fb:hover,.fb.active{border-color:var(--orange);color:var(--orange);background:var(--orange-bg)}
 
+/* LIST */
 .list-wrap{max-width:900px;margin:0 auto;padding:24px 32px 80px}
 .sec-hdr{display:flex;align-items:center;gap:10px;margin:24px 0 10px}
 .sec-hdr:first-child{margin-top:0}
@@ -56,42 +133,14 @@ body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,s
 .status-working{background:var(--orange-bg);color:var(--orange);border:1px solid var(--orange-bd)}
 .status-prod-review{background:var(--purple-bg);color:var(--purple);border:1px solid var(--purple-bd)}
 .status-ready-prod{background:var(--green-bg);color:var(--green);border:1px solid var(--green-bd)}
+.badge-new{background:var(--green-bg);color:var(--green);border:1px solid var(--green-bd)}
 
-/* ═══ CENTERED MODAL ═══════════════════════════════════════ */
-.modal-overlay{
-  position:fixed;inset:0;
-  background:rgba(0,0,0,.5);
-  z-index:200;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:24px;
-}
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;display:none;align-items:center;justify-content:center;padding:24px}
 .modal-overlay.open{display:flex}
-
-.modal-panel{
-  width:min(960px,100%);
-  max-height:90vh;
-  background:var(--surface);
-  border-radius:16px;
-  display:flex;
-  flex-direction:column;
-  box-shadow:0 20px 60px rgba(0,0,0,.25);
-  animation:popIn .2s ease;
-  overflow:hidden;
-}
-@keyframes popIn{
-  from{transform:scale(.95) translateY(12px);opacity:0}
-  to{transform:scale(1) translateY(0);opacity:1}
-}
-
-.modal-hdr{
-  padding:16px 24px 14px;
-  border-bottom:1px solid var(--border);
-  background:#fafaf8;
-  display:flex;align-items:flex-start;gap:16px;
-  flex-shrink:0;
-}
+.modal-panel{width:min(960px,100%);max-height:90vh;background:var(--surface);border-radius:16px;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.25);animation:popIn .2s ease;overflow:hidden}
+@keyframes popIn{from{transform:scale(.95) translateY(12px);opacity:0}to{transform:scale(1) translateY(0);opacity:1}}
+.modal-hdr{padding:16px 24px 14px;border-bottom:1px solid var(--border);background:#fafaf8;display:flex;align-items:flex-start;gap:16px;flex-shrink:0}
 .modal-hdr-l{flex:1;min-width:0}
 .modal-hdr-r{display:flex;align-items:center;gap:8px;flex-shrink:0}
 .modal-job-name{font-size:14px;font-weight:700;color:var(--text);word-break:break-all;margin-bottom:5px;outline:none;border-radius:3px;padding:1px 3px;margin-left:-3px}
@@ -103,21 +152,16 @@ body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,s
 .cl-btn{font-size:11px;font-weight:600;color:var(--faint);background:none;border:1px solid var(--border);border-radius:6px;padding:3px 9px;cursor:pointer;transition:all .15s;white-space:nowrap}
 .cl-btn:hover{color:var(--blue);border-color:var(--blue-bd);background:var(--blue-bg)}
 .cl-btn.copied{color:var(--green);border-color:var(--green-bd);background:var(--green-bg)}
-
 .modal-tabs{display:flex;border-bottom:1px solid var(--border);background:#fafaf8;padding:0 24px;flex-shrink:0}
 .tab{font-size:13px;font-weight:500;color:var(--muted);background:none;border:none;border-bottom:2px solid transparent;padding:11px 18px;cursor:pointer;transition:all .15s;white-space:nowrap;margin-bottom:-1px}
 .tab:hover{color:var(--text)}
 .tab.active{color:var(--orange);border-bottom-color:var(--orange);font-weight:600}
-
 .modal-body{flex:1;overflow-y:auto;min-height:0}
 .panel{display:none;padding:24px}
 .panel.active{display:block}
-
 .panel-section{margin-bottom:28px}
 .panel-section:last-child{margin-bottom:0}
 .section-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border);display:block}
-
-/* FIELD GRID */
 .fg{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
 .fc{padding:10px 13px;border-right:1px solid var(--border);border-bottom:1px solid var(--border)}
 .fc:nth-child(3n){border-right:none}
@@ -126,7 +170,6 @@ body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,s
 .fv{font-size:13px;color:var(--text);font-weight:500;min-height:18px;outline:none;border-radius:3px;padding:1px 3px;margin:-1px -3px;display:block}
 .fv:focus{background:var(--blue-bg);outline:1px solid var(--blue-bd)}
 .fv.empty{color:var(--faint);font-style:italic;font-weight:400}
-
 .ea{font-size:13px;line-height:1.75;color:var(--text);min-height:100px;width:100%;border:1px solid var(--border);border-radius:var(--r);padding:13px;outline:none;resize:vertical;font-family:inherit;background:var(--surface);transition:border-color .15s}
 .ea:focus{border-color:var(--border-strong)}
 
@@ -159,7 +202,7 @@ body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,s
 .adset-new-btn{font-size:12px;font-weight:600;color:var(--orange);background:var(--orange-bg);border:1px solid var(--orange-bd);border-radius:6px;padding:6px 14px;cursor:pointer;transition:all .15s}
 .adset-new-btn:hover{background:#ffe4d8}
 
-/* HEADLINES TABLE */
+/* HEADLINES */
 .tbl-block{border:1px solid var(--border);border-radius:var(--rl);overflow:hidden}
 .hl-wrap{width:100%;overflow-x:auto}
 .hl-table{width:100%;border-collapse:collapse;font-size:13px;table-layout:fixed}
@@ -206,11 +249,15 @@ body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,s
 .ss-new-table-btn:hover{background:#ffe4d8}
 
 @media(max-width:640px){
-  .list-wrap{padding:16px 16px 60px}
+  .import-wrap,.list-wrap{padding:16px 16px 60px}
   .modal-overlay{padding:0}
   .modal-panel{width:100%;max-height:100vh;border-radius:0}
-  .filter-bar,.site-header{padding-left:16px;padding-right:16px}
+  .top-nav,.site-header{padding-left:16px;padding-right:16px}
+  .filter-bar{padding:9px 16px}
   .panel{padding:16px}
+  .import-field-row{grid-template-columns:1fr 1fr}
+  .import-fc:nth-child(2n){border-right:none}
+  .import-fc:nth-child(3n){border-right:1px solid var(--border)}
 }
 </style>
 </head>
@@ -224,18 +271,49 @@ body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,s
   <span class="save-ind" id="saveInd">✓ Saved</span>
 </div>
 
-<div class="filter-bar">
-  <span class="fl">Filter</span>
-  <button class="fb active" onclick="applyFilter('all',this)">All</button>
-  <button class="fb" onclick="applyFilter('PRTLI',this)">PrettyLitter</button>
-  <button class="fb" onclick="applyFilter('ILMKG',this)">Il Makiage</button>
-  <button class="fb" onclick="applyFilter('KTSCH',this)">Kitsch</button>
-  <button class="fb" onclick="applyFilter('PAIRE',this)">Pair Eyewear</button>
-  <button class="fb" onclick="applyFilter('JAVVY',this)">Javvy Coffee</button>
-  <button class="fb" onclick="applyFilter('STBRD',this)">Scentbird</button>
+<!-- TOP-LEVEL NAV -->
+<div class="top-nav">
+  <button class="top-tab active" onclick="switchTopTab('import',this)">
+    Import from Planner
+  </button>
+  <button class="top-tab" onclick="switchTopTab('briefs',this)">
+    Briefs
+    <span class="top-tab-count" id="briefsCount">15</span>
+  </button>
 </div>
 
-<div class="list-wrap" id="listWrap"></div>
+<!-- ═══ IMPORT TAB ═══════════════════════════════════════════ -->
+<div class="top-section active" id="section-import">
+  <div class="import-wrap">
+    <p class="import-intro">
+      Export your <strong>coffee pod planner</strong> as a CSV and drop it below. The tool will detect all of Clark's assigned jobs, extract the concept notes, and use AI to generate full brief drafts — JO Goal, Editing Instructions, and job naming — ready to add to your briefs list.
+    </p>
+
+    <div class="drop-zone" id="dropZone">
+      <input type="file" accept=".csv,.tsv,.txt,text/csv" id="fileInput" onchange="handleFileSelect(this)">
+      <div class="drop-icon">⬇</div>
+      <div class="drop-title">Drop your planner CSV here</div>
+      <div class="drop-sub">or click to browse · .csv or .tsv from Google Sheets export</div>
+    </div>
+
+    <div class="import-results" id="importResults" style="display:none"></div>
+  </div>
+</div>
+
+<!-- ═══ BRIEFS TAB ═══════════════════════════════════════════ -->
+<div class="top-section" id="section-briefs">
+  <div class="filter-bar">
+    <span class="fl">Filter</span>
+    <button class="fb active" onclick="applyFilter('all',this)">All</button>
+    <button class="fb" onclick="applyFilter('PRTLI',this)">PrettyLitter</button>
+    <button class="fb" onclick="applyFilter('ILMKG',this)">Il Makiage</button>
+    <button class="fb" onclick="applyFilter('KTSCH',this)">Kitsch</button>
+    <button class="fb" onclick="applyFilter('PAIRE',this)">Pair Eyewear</button>
+    <button class="fb" onclick="applyFilter('JAVVY',this)">Javvy Coffee</button>
+    <button class="fb" onclick="applyFilter('STBRD',this)">Scentbird</button>
+  </div>
+  <div class="list-wrap" id="listWrap"></div>
+</div>
 
 <!-- MODAL -->
 <div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
@@ -269,7 +347,27 @@ const STATUSES=[
   {key:'ready-prod',  label:'Ready for Production',       color:'#0f6e56'},
 ];
 
-const JOBS=[
+const CLIENT_CODES={
+  'prettylitter':'PRTLI','pretty litter':'PRTLI','prtli':'PRTLI',
+  'scentbird':'STBRD','stbrd':'STBRD','sbird':'STBRD',
+  'il makiage':'ILMKG','ilmkg':'ILMKG','ilmk':'ILMKG',
+  'skinnyrx':'SKRX','skinny rx':'SKRX','skrx':'SKRX',
+  'pair eyewear':'PAIRE','pair':'PAIRE','paire':'PAIRE',
+  'sofi':'SOFI','so-fi':'SOFI',
+  'kitsch':'KTSCH','ktsch':'KTSCH',
+  'javvy':'JAVVY','javvy coffee':'JAVVY',
+  'nobl':'NOBL','paleovalley':'PALV',
+};
+
+const CLIENT_NAMES={
+  'PRTLI':'PrettyLitter','STBRD':'Scentbird','ILMKG':'Il Makiage',
+  'SKRX':'SkinnyRx','PAIRE':'Pair Eyewear','SOFI':'SoFi',
+  'KTSCH':'Kitsch','JAVVY':'Javvy Coffee','NOBL':'Nobl','PALV':'Paleovalley',
+};
+
+const KNOWN_CLIENTS=['prettylitter','pretty litter','scentbird','il makiage','skinnyrx','skinny rx','pair eyewear','sofi','kitsch','javvy','nobl','paleovalley'];
+
+let JOBS=[
   {id:'j1809',status:'working',client:'ILMKG',name:'J1809_ILMKG_Adapt1_CP[#]_MOF_ListicleAdapt3_WULT',sprint:'Sprint 01/26',clientLabel:'Il Makiage',geo:'USA',
    fields:[['Job Owner','Clark'],['Client','Il Makiage'],['Job Type','Adapt'],['Platform','Meta'],['Funnel Stage','MOF'],['Creative Format','Video'],['SKU','WULT'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Base Job #','DRMTLGY ref (adapt3)'],['Music','Yes'],['Total Ad Sets','2'],['Style','Same as base'],['Goal Demo','Novice / lapsed foundation users'],['Total # of Videos','']],
    goal:'Adapting DRMTLGY\'s proven listicle format (iteration 3) into WULT. Hypothesis: the listicle hook structure that has demonstrated stability on DRMTLGY transfers to the WULT shade match angle with a novice/lapsed foundation persona. Target: stable MOF performance.',
@@ -287,19 +385,19 @@ const JOBS=[
    goal:'Canada geo version of J523. Same top performer bouquet refresh without GWP, adapted for Canada pricing ($19.99 first bag).',
    editing:'Same as J523. Remove GWP language. Canada geo — update pricing to first bag $19.99.'},
   {id:'j525',status:'working',client:'PRTLI',name:'J525_PRTLI_More1_CP[#]_FF_SmashcutBouquet_PrettyLitter',sprint:'Sprint 03/09',clientLabel:'PrettyLitter',geo:'USA',
-   fields:[['Job Owner','Clark'],['Client','PrettyLitter'],['Job Type','More'],['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],['SKU','PrettyLitter'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Base Job #','Smashcut bouquet top performers'],['Music','Yes'],['Total Ad Sets','2'],['Persona','Devoted Cat Parent / Smell-focused'],['Style','Same as base (smashcut)'],['Total # of Videos','TBD — post-meeting']],
+   fields:[['Job Owner','Clark'],['Client','PrettyLitter'],['Job Type','More'],['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],['SKU','PrettyLitter'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Base Job #','Smashcut bouquet top performers'],['Music','Yes'],['Total Ad Sets','2'],['Persona','Devoted Cat Parent / Smell-focused'],['Style','Same as base (smashcut)'],['Total # of Videos','TBD']],
    goal:'More volume on the smashcut bouquet top performers. Adding creative supply within the same entity ID to extend runway.',
    editing:'Smashcut bouquet retests. More of the smashcut format. Full editing input after meeting. USA geo.'},
   {id:'j157',status:'working',client:'PAIRE',name:'J157_PAIRE_More1_CP[#]_[Funnel]_GFXGameOfferUpdate_PairEyewear',sprint:'Sprint 03/16',clientLabel:'Pair Eyewear',geo:'',
    fields:[['Job Owner','Clark'],['Client','Pair Eyewear'],['Job Type','More'],['Platform','Meta'],['Funnel Stage',''],['Creative Format','GFX / Interactive'],['SKU','Pair Eyewear'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','None'],['Base Job #','J87'],['Music','Yes'],['Total Ad Sets','2'],['Style','Same as base (GFX game)'],['Goal Demo',''],['Total # of Videos','']],
-   goal:'Refreshing J87 GFX/Game format with current Pair Eyewear offers. The game-style creative has proven durable.',
+   goal:'Refreshing J87 GFX/Game format with current Pair Eyewear offers.',
    editing:'Update J87 GFX/game format. Swap all old offer language for current promotions. Keep the interactive/game structure fully intact.'},
   {id:'j526',status:'planning',client:'PRTLI',name:'J526_PRTLI_More1_CP[#]_MOF_CatDadOdorControl_PrettyLitter',sprint:'Sprint 03/02',clientLabel:'PrettyLitter',geo:'USA · $14.99',
    fields:[['Job Owner','Clark'],['Client','PrettyLitter'],['Job Type','More'],['Platform','Meta'],['Funnel Stage','MOF'],['Creative Format','Video'],['SKU','PrettyLitter'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Offer','First bag $14.99'],['Music','Yes'],['Total Ad Sets','2'],['Persona','Millennial Cat Dads'],['Text Treatment','Reply-to-comment'],['Total # of Videos','']],
    goal:'New odor-specific MOF creative targeting millennial cat dads. Odor control is the primary driver for this segment.',
    editing:'Reply-to-comment format. MOF. Hook: "Okay the UTI color changing thing is cool, but I mainly care about odor control." First bag $14.99. USA geo.'},
   {id:'j2162',status:'planning',client:'KTSCH',name:'J2162_KTSCH_More1_CP[#]_FF_TravelabilityAdapt_Bars',sprint:'Sprint 03/16',clientLabel:'Kitsch',geo:'',
-   fields:[['Job Owner','Clark'],['Client','Kitsch'],['Job Type','More'],['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],['SKU','Shampoo Bars'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Base Job #','J2011v1b'],['Music','Yes'],['Total Ad Sets','2'],['Style','Same as base'],['Reference','J2011v1b (Liquid top performer)'],['Total # of Videos','']],
+   fields:[['Job Owner','Clark'],['Client','Kitsch'],['Job Type','More'],['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],['SKU','Shampoo Bars'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Base Job #','J2011v1b'],['Music','Yes'],['Total Ad Sets','2'],['Style','Same as base'],['Reference','J2011v1b'],['Total # of Videos','']],
    goal:'Adapting J2011v1b (Liquid Shampoo top performer) into Shampoo Bars with a travelability angle added.',
    editing:'Adapt J2011v1b for Shampoo Bars. Add travelability messaging — TSA-friendly, no liquid bag needed. Maintain same structure and pacing.'},
   {id:'j538',status:'planning',client:'PRTLI',name:'J538_PRTLI_Adapt1_CP[#]_FF_JOChoice1499_PrettyLitter',sprint:'Sprint 03/16',clientLabel:'PrettyLitter',geo:'USA · $14.99',
@@ -332,6 +430,7 @@ const JOBS=[
    editing:'JO choice — review J680VB and all previous iterations. Pick the most underexplored direction. Build from the strongest creative signal in the J680 family.'},
 ];
 
+// ═══ STORAGE ════════════════════════════════════════════════
 function ls(id,k){try{return localStorage.getItem('b_'+id+'_'+k)}catch(e){return null}}
 function ss(id,k,v){try{localStorage.setItem('b_'+id+'_'+k,v)}catch(e){} flashSave()}
 let saveTimer;
@@ -341,19 +440,374 @@ function getStatus(j){return ls(j.id,'status')||j.status}
 function statusLabel(k){return(STATUSES.find(s=>s.key===k)||{label:k}).label}
 function autoResize(el){el.style.height='auto';el.style.height=el.scrollHeight+'px'}
 
-// AD SETS
-function getAdSets(jid){try{const v=ls(jid,'adsets');return v?JSON.parse(v):null}catch(e){return null}}
-function saveAdSets(jid){
-  const w=document.getElementById('adsets_'+jid);if(!w)return;
-  const sets=[];
-  w.querySelectorAll('.adset-block').forEach(b=>{
-    const name=b.querySelector('.adset-name-input').value||'';
-    const rows=[];
-    b.querySelectorAll('.adset-row').forEach(r=>{rows.push({variant:r.querySelector('.adset-row-name-input').value||'',recipe:r.querySelector('.adset-input').value||''});});
-    sets.push({name,rows});
-  });
-  ss(jid,'adsets',JSON.stringify(sets));
+// ═══ TOP-LEVEL TABS ══════════════════════════════════════════
+function switchTopTab(name,btn){
+  document.querySelectorAll('.top-tab').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.top-section').forEach(s=>s.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('section-'+name).classList.add('active');
 }
+
+// ═══ CSV PARSER ══════════════════════════════════════════════
+function parseCSV(text){
+  const rows=[];
+  let row=[],cell='',inQ=false;
+  for(let i=0;i<text.length;i++){
+    const ch=text[i],nx=text[i+1];
+    if(inQ){
+      if(ch==='"'&&nx==='"'){cell+='"';i++;}
+      else if(ch==='"'){inQ=false;}
+      else{cell+=ch;}
+    }else{
+      if(ch==='"'){inQ=true;}
+      else if(ch===','){row.push(cell.trim());cell='';}
+      else if(ch==='\n'||ch==='\r'){
+        if(ch==='\r'&&nx==='\n')i++;
+        row.push(cell.trim());
+        if(row.some(c=>c!==''))rows.push(row);
+        row=[];cell='';
+      }else{cell+=ch;}
+    }
+  }
+  if(cell||row.length){row.push(cell.trim());if(row.some(c=>c!==''))rows.push(row);}
+  return rows;
+}
+
+function findClientForColumn(rows,colIdx){
+  // Scan upward from current position to find a cell matching a known client name
+  for(let r=0;r<rows.length;r++){
+    if(colIdx<rows[r].length){
+      const cell=rows[r][colIdx].toLowerCase().trim();
+      const match=KNOWN_CLIENTS.find(c=>cell.includes(c));
+      if(match)return CLIENT_CODES[match]||'UNKN';
+    }
+  }
+  // Try nearby columns
+  for(let offset=-5;offset<=5;offset++){
+    const ci=colIdx+offset;
+    if(ci<0)continue;
+    for(let r=0;r<rows.length;r++){
+      if(ci<(rows[r]||[]).length){
+        const cell=(rows[r][ci]||'').toLowerCase().trim();
+        const match=KNOWN_CLIENTS.find(c=>cell.includes(c));
+        if(match)return CLIENT_CODES[match]||'UNKN';
+      }
+    }
+  }
+  return 'UNKN';
+}
+
+function extractJobsFromCSV(rows){
+  const jobs=[];
+  const clarkRe=/^\s*clark\s*$/i;
+  const funnelRe=/\b(TOF|MOF|BOF|FF|full funnel|top of funnel|mid funnel|bottom of funnel)\b/i;
+  const formatRe=/\b(video|static|gif|carousel|GFX|UGC|NUGC|gsUGC)\b/i;
+
+  rows.forEach((row,rowIdx)=>{
+    row.forEach((cell,colIdx)=>{
+      if(!clarkRe.test(cell))return;
+
+      // Found a Clark cell — extract context from this row
+      const allCells=row.filter(c=>c&&c.trim());
+      const clarksRow=row;
+
+      // Ad account is usually one cell before Clark
+      const adAccount=colIdx>0?row[colIdx-1]:'';
+
+      // Cells after Clark: Funnel Stage, Format, Offer/SKU, Persona, Swimlane, Reference, Concept
+      const afterCells=row.slice(colIdx+1).filter(c=>c.trim());
+
+      // Find concept: the longest cell after Clark, or the last substantial one
+      let concept='';
+      let ref='';
+      let funnel='';
+      let format='';
+      let sku='';
+      let offer='';
+      let persona='';
+
+      afterCells.forEach(c=>{
+        const cl=c.toLowerCase();
+        if(funnelRe.test(c)&&!funnel)funnel=c.trim();
+        else if(formatRe.test(c)&&!format)format=c.trim();
+        else if(/\$\d|\%\s*off|promo|free/i.test(c)&&!offer)offer=c.trim();
+        else if(/cat|dog|parent|owner|dad|mom|persona|male|female|millennial|gen.?z/i.test(c)&&!persona)persona=c.trim();
+        else if(/J\d+|v\d+[a-z]/i.test(c)&&!ref)ref=c.trim();
+        else if(c.length>30&&!concept)concept=c.trim();
+        if(c.length>concept.length)concept=c.trim();
+      });
+
+      // Also check cells before Clark for context
+      const beforeCells=row.slice(0,colIdx).filter(c=>c.trim());
+      if(!funnel){const f=beforeCells.find(c=>funnelRe.test(c));if(f)funnel=f;}
+      if(!format){const f=beforeCells.find(c=>formatRe.test(c));if(f)format=f;}
+
+      // Skip if no concept and no meaningful content
+      if(!concept&&afterCells.length<2)return;
+      // Skip if this looks like a header row
+      if(/funnel|format|strategist|swimlane|reference/i.test(concept))return;
+
+      const clientCode=findClientForColumn(rows,colIdx);
+      const clientLabel=CLIENT_NAMES[clientCode]||clientCode;
+
+      // SKU heuristic: look for product-like words in concept or nearby cells
+      const skuMatch=concept.match(/\b(WULT|PLUMP|CAMO|Tirzepatide|Bars|Liquid Shampoo|Cologne|Perfume|Bundle|HairPerfume|RiceWater|WellULT)\b/i);
+      if(skuMatch)sku=skuMatch[1];
+      else{
+        const skuCell=afterCells.find(c=>/\b(WULT|PLUMP|CAMO|tirzepatide|bars|liquid|cologne|perfume|bundle)\b/i.test(c));
+        if(skuCell)sku=skuCell.trim();
+      }
+
+      // Determine job type heuristic
+      let jobType='New';
+      if(/adapt|port|convert|refresh|update/i.test(concept))jobType='Adapt';
+      else if(/more|another|bouquet|retest|iteration/i.test(concept))jobType='More';
+
+      jobs.push({
+        id:`imported_${Date.now()}_${rowIdx}_${colIdx}`,
+        clientCode,
+        clientLabel,
+        adAccount:adAccount.replace(/^usa$/i,'USA').replace(/^canada$/i,'CANADA').trim(),
+        funnel:funnel||'FF',
+        format:format||'Video',
+        sku:sku||'',
+        offer:offer||'',
+        persona:persona||'',
+        ref:ref||'',
+        concept:concept||'(no concept text found)',
+        jobType,
+        rowIdx,colIdx,
+        _generated:null,
+        _added:false,
+      });
+    });
+  });
+
+  // Deduplicate by concept text (same concept appearing in USA + CANADA rows)
+  const seen=new Set();
+  return jobs.filter(j=>{
+    const key=j.clientCode+'::'+j.concept.slice(0,80);
+    if(seen.has(key)&&j.adAccount==='CANADA')return true; // keep CANADA as separate entry
+    if(seen.has(key))return false;
+    seen.add(key);return true;
+  });
+}
+
+// ═══ DRAG & DROP ═════════════════════════════════════════════
+const dropZone=document.getElementById('dropZone');
+dropZone.addEventListener('dragover',e=>{e.preventDefault();dropZone.classList.add('dragover')});
+dropZone.addEventListener('dragleave',()=>dropZone.classList.remove('dragover'));
+dropZone.addEventListener('drop',e=>{
+  e.preventDefault();dropZone.classList.remove('dragover');
+  const file=e.dataTransfer.files[0];
+  if(file)processFile(file);
+});
+
+function handleFileSelect(input){
+  const file=input.files[0];
+  if(file)processFile(file);
+}
+
+function processFile(file){
+  const reader=new FileReader();
+  reader.onload=e=>{
+    const text=e.target.result;
+    const rows=parseCSV(text);
+    const jobs=extractJobsFromCSV(rows);
+    renderImportResults(jobs,rows.length);
+  };
+  reader.readAsText(file);
+}
+
+// ═══ IMPORT RESULTS RENDER ═══════════════════════════════════
+let importJobs=[];
+
+function renderImportResults(jobs,totalRows){
+  importJobs=jobs;
+  const container=document.getElementById('importResults');
+  container.style.display='block';
+
+  if(!jobs.length){
+    container.innerHTML=`<div class="import-error">No Clark jobs detected in this file. Make sure you're uploading a CSV export of the coffee pod planner with Clark listed as Strategist. (Scanned ${totalRows} rows.)</div>`;
+    return;
+  }
+
+  const html=`
+    <div class="import-results-header">
+      <span class="import-results-title">${jobs.length} job${jobs.length!==1?'s':''} detected — Clark's assignments from this planner</span>
+      <button class="import-gen-all-btn" id="genAllBtn" onclick="generateAllBriefs()">Generate All Briefs</button>
+    </div>
+    ${jobs.map((j,i)=>renderImportCard(j,i)).join('')}`;
+  container.innerHTML=html;
+}
+
+function renderImportCard(j,i){
+  const geo=j.adAccount?`<span class="badge bg">${esc(j.adAccount)}</span>`:'';
+  const clientBadge=`<span class="badge bg">${esc(j.clientLabel)}</span>`;
+  const funnelBadge=j.funnel?`<span class="badge bg">${esc(j.funnel)}</span>`:'';
+  const formatBadge=j.format?`<span class="badge bg">${esc(j.format)}</span>`:'';
+
+  return`<div class="import-job-card" id="ic_${i}">
+  <div class="import-job-hdr">
+    <div class="import-job-hdr-l">
+      <div class="import-job-name">${esc(j.clientLabel)} — ${esc(j.concept.slice(0,70))}${j.concept.length>70?'…':''}</div>
+      <div class="import-job-meta">${clientBadge}${geo}${funnelBadge}${formatBadge}${j.sku?`<span class="badge bg">${esc(j.sku)}</span>`:''}</div>
+    </div>
+  </div>
+  <div class="import-job-body">
+    <div class="import-field-row">
+      <div class="import-fc"><div class="import-fk">Client</div><div class="import-fv">${esc(j.clientLabel)}</div></div>
+      <div class="import-fc"><div class="import-fk">Funnel Stage</div><div class="import-fv">${esc(j.funnel)||'—'}</div></div>
+      <div class="import-fc"><div class="import-fk">Format</div><div class="import-fv">${esc(j.format)||'—'}</div></div>
+      <div class="import-fc"><div class="import-fk">SKU</div><div class="import-fv ${j.sku?'':'empty'}">${esc(j.sku)||'TBD'}</div></div>
+      <div class="import-fc"><div class="import-fk">Job Type</div><div class="import-fv">${esc(j.jobType)}</div></div>
+      <div class="import-fc"><div class="import-fk">Base/Ref</div><div class="import-fv ${j.ref?'':'empty'}">${esc(j.ref)||'—'}</div></div>
+    </div>
+    <div class="import-concept">${esc(j.concept)}</div>
+    <div id="ic_state_${i}">
+      <div class="import-gen-wrap">
+        <button class="import-gen-btn" onclick="generateOneBrief(${i})">Generate Brief with AI</button>
+        <button class="import-add-btn" disabled>Add to Briefs</button>
+      </div>
+    </div>
+  </div>
+</div>`;
+}
+
+async function generateOneBrief(i){
+  const j=importJobs[i];
+  const stateEl=document.getElementById('ic_state_'+i);
+  stateEl.innerHTML=`<div class="gen-loading">Generating brief...</div>`;
+
+  const prompt=`You are Clark Cai, a TubeScience Creative Strategist. Parse this sprint planner row and generate a production brief.
+
+CLIENT: ${j.clientLabel} (code: ${j.clientCode})
+AD ACCOUNT / GEO: ${j.adAccount||'USA'}
+FUNNEL STAGE: ${j.funnel||'FF'}
+FORMAT: ${j.format||'Video'}
+SKU / PRODUCT: ${j.sku||'(unknown — infer from concept)'}
+JOB TYPE: ${j.jobType}
+OFFER: ${j.offer||'none specified'}
+PERSONA: ${j.persona||'not specified'}
+BASE / REFERENCE: ${j.ref||'none'}
+RAW CONCEPT NOTES FROM PLANNER:
+${j.concept}
+
+TubeScience terminology:
+- JO Goal = what is being tested, why this concept, what success looks like (2–3 sentences, reference job IDs/data where mentioned)
+- Editing Instructions = specific direction for the editor: structure, pacing, assets, variants, GFX notes
+- Job naming convention: J[#]_[CLIENTCODE]_[Type][#]_CP[#]_[Funnel]_[ConceptName]_[SKU]
+  - Type: New / More / Adapt
+  - Funnel: FF / TOF / MOF / BOF
+  - ConceptName: CamelCase up to 4 words
+
+Return ONLY valid JSON, no markdown, no explanation:
+{
+  "jobName": "J[#]_${j.clientCode}_${j.jobType}1_CP[#]_${j.funnel||'FF'}_ConceptName_${j.sku||'SKU'}",
+  "funnel": "...",
+  "format": "...",
+  "sku": "...",
+  "jobType": "New|More|Adapt",
+  "goal": "...",
+  "editing": "..."
+}`;
+
+  try{
+    const res=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:1000,
+        messages:[{role:'user',content:prompt}]
+      })
+    });
+    const data=await res.json();
+    const raw=data.content?.find(b=>b.type==='text')?.text||'{}';
+    const clean=raw.replace(/```json|```/g,'').trim();
+    const gen=JSON.parse(clean);
+    importJobs[i]._generated=gen;
+
+    stateEl.innerHTML=`
+      <div class="gen-preview">
+        <div class="gen-preview-block">
+          <div class="gen-preview-label">Job Name</div>
+          <div class="gen-preview-text" style="font-size:12px;font-weight:600">${esc(gen.jobName||'')}</div>
+        </div>
+        <div class="gen-preview-block">
+          <div class="gen-preview-label">JO Goal</div>
+          <div class="gen-preview-text">${esc(gen.goal||'')}</div>
+        </div>
+        <div class="gen-preview-block">
+          <div class="gen-preview-label">Editing Instructions</div>
+          <div class="gen-preview-text">${esc(gen.editing||'')}</div>
+        </div>
+      </div>
+      <div class="import-gen-wrap" style="margin-top:10px">
+        <button class="import-gen-btn" onclick="generateOneBrief(${i})">Regenerate</button>
+        <button class="import-add-btn" onclick="addImportedBrief(${i},this)">Add to Briefs →</button>
+      </div>`;
+  }catch(err){
+    stateEl.innerHTML=`
+      <div class="import-error">Generation failed: ${esc(String(err))}. Check your API connection and try again.</div>
+      <div class="import-gen-wrap" style="margin-top:8px">
+        <button class="import-gen-btn" onclick="generateOneBrief(${i})">Retry</button>
+      </div>`;
+  }
+}
+
+async function generateAllBriefs(){
+  const btn=document.getElementById('genAllBtn');
+  btn.disabled=true;btn.textContent='Generating…';
+  for(let i=0;i<importJobs.length;i++){
+    if(!importJobs[i]._generated&&!importJobs[i]._added){
+      await generateOneBrief(i);
+      await new Promise(r=>setTimeout(r,400)); // slight delay between calls
+    }
+  }
+  btn.textContent='All Generated';
+}
+
+function addImportedBrief(i,btn){
+  const j=importJobs[i];
+  const g=j._generated||{};
+
+  const newId='imported_'+Date.now()+'_'+i;
+  const newJob={
+    id:newId,
+    status:'planning',
+    client:j.clientCode,
+    name:g.jobName||`J[#]_${j.clientCode}_${j.jobType}1_CP[#]_${j.funnel}_NewBrief_${j.sku||'SKU'}`,
+    sprint:'Imported',
+    clientLabel:j.clientLabel,
+    geo:j.adAccount||'',
+    fields:[
+      ['Job Owner','Clark'],['Client',j.clientLabel],['Job Type',g.jobType||j.jobType],
+      ['Platform','Meta'],['Funnel Stage',g.funnel||j.funnel||'FF'],['Creative Format',g.format||j.format||'Video'],
+      ['SKU',g.sku||j.sku||''],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],
+      ['Base Job #',j.ref||''],['Music','Yes'],['Total Ad Sets','2'],
+      ['Offer',j.offer||''],['Persona',j.persona||''],['Total # of Videos',''],
+    ],
+    goal:g.goal||j.concept,
+    editing:g.editing||'',
+  };
+
+  JOBS.push(newJob);
+  importJobs[i]._added=true;
+  btn.textContent='Added ✓';btn.classList.add('added');btn.disabled=true;
+
+  // Update count badge
+  updateBriefCount();
+  renderList();
+}
+
+function updateBriefCount(){
+  document.getElementById('briefsCount').textContent=JOBS.length;
+}
+
+// ═══ AD SETS ═════════════════════════════════════════════════
+function getAdSets(jid){try{const v=ls(jid,'adsets');return v?JSON.parse(v):null}catch(e){return null}}
+function saveAdSets(jid){const w=document.getElementById('adsets_'+jid);if(!w)return;const sets=[];w.querySelectorAll('.adset-block').forEach(b=>{const name=b.querySelector('.adset-name-input').value||'';const rows=[];b.querySelectorAll('.adset-row').forEach(r=>{rows.push({variant:r.querySelector('.adset-row-name-input').value||'',recipe:r.querySelector('.adset-input').value||''});});sets.push({name,rows});});ss(jid,'adsets',JSON.stringify(sets))}
 function defaultAdSets(){return[{name:'AD SET 1',rows:[{variant:'V1A',recipe:'H1 + SS1'},{variant:'V1B',recipe:'H2 + SS1'},{variant:'V1C',recipe:'H1 + SS2'},{variant:'V1D',recipe:'H2 + SS2'}]},{name:'AD SET 2',rows:[{variant:'V1A',recipe:'H1 + SS1'},{variant:'V1B',recipe:'H2 + SS1'},{variant:'V1C',recipe:'H1 + SS2'},{variant:'V1D',recipe:'H2 + SS2'}]}]}
 function renderAdSetRow(jid,r){return`<div class="adset-row"><div class="adset-row-name"><input class="adset-row-name-input" value="${esc(r.variant)}" placeholder="V1A" oninput="saveAdSets('${jid}')"></div><div class="adset-cell"><textarea class="adset-input" placeholder="e.g. H1 + SS1" oninput="saveAdSets('${jid}')">${esc(r.recipe)}</textarea></div><div class="adset-cell" style="border-right:none"></div><button class="adset-row-del" onclick="delAdSetRow(this,'${jid}')">×</button></div>`}
 function renderAdSetBlock(jid,set){return`<div class="adset-block"><div style="display:grid;grid-template-columns:110px 1fr;border-bottom:1px solid var(--border)"><div class="adset-name-cell" style="grid-row:1/3"><input class="adset-name-input" value="${esc(set.name)}" placeholder="AD SET 1" oninput="saveAdSets('${jid}')"></div><div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--border)"><span style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);padding:6px 12px;background:var(--surface);border-right:1px solid var(--border)">Variant</span><span style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);padding:6px 12px;background:var(--surface)">Component Recipe</span></div><div class="adset-rows">${set.rows.map(r=>renderAdSetRow(jid,r)).join('')}</div></div><div class="adset-add-row-wrap"><button class="adset-add-row-btn" onclick="addAdSetRow(this,'${jid}')">+ Add variant</button><button class="adset-del-btn" onclick="delAdSet(this,'${jid}')">Remove set</button></div></div>`}
@@ -363,7 +817,7 @@ function addAdSetRow(btn,jid){const rc=btn.closest('.adset-block').querySelector
 function delAdSetRow(btn,jid){btn.closest('.adset-row').remove();saveAdSets(jid)}
 function delAdSet(btn,jid){const w=document.getElementById('adsets_'+jid);if(w.querySelectorAll('.adset-block').length===1){const b=btn.closest('.adset-block');b.querySelectorAll('.adset-row-name-input,.adset-input').forEach(i=>{i.value='';});b.querySelector('.adset-name-input').value='';saveAdSets(jid);return;}btn.closest('.adset-block').remove();saveAdSets(jid)}
 
-// HEADLINES
+// ═══ HEADLINES ════════════════════════════════════════════════
 function getHlRows(jid){try{const v=ls(jid,'hlrows');return v?JSON.parse(v):null}catch(e){return null}}
 function saveHlRows(jid){const t=document.getElementById('hl_tbl_'+jid);if(!t)return;const rows=[];t.querySelectorAll('tr[data-type="hl"]').forEach(tr=>{const c=tr.querySelectorAll('.hl-cell');rows.push({label:c[0]?c[0].value:'',hook:c[1]?c[1].value:''});});ss(jid,'hlrows',JSON.stringify(rows))}
 function defaultHlRows(){return [{label:'H1',hook:''},{label:'H2',hook:''},{label:'H3',hook:''}]}
@@ -372,7 +826,7 @@ function buildHlTable(jid){const rows=getHlRows(jid)||defaultHlRows();return`<di
 function addHlRow(jid){const tb=document.querySelector('#hl_tbl_'+jid+' tbody');const c=tb.querySelectorAll('tr').length+1;const tr=document.createElement('tr');tr.dataset.type='hl';tr.innerHTML=renderHlRow(jid,{label:'H'+c,hook:''}).replace(/^<tr[^>]*>/,'').replace(/<\/tr>$/,'');tb.appendChild(tr);saveHlRows(jid)}
 function delHlRow(btn,jid){btn.closest('tr').remove();saveHlRows(jid)}
 
-// SS TABLES
+// ═══ SS TABLES ════════════════════════════════════════════════
 function getSsTables(jid){try{const v=ls(jid,'sstables');return v?JSON.parse(v):null}catch(e){return null}}
 function saveSsTables(jid){const w=document.getElementById('ss_wrap_'+jid);if(!w)return;const tables=[];w.querySelectorAll('.ss-block').forEach(b=>{const name=b.querySelector('.ss-block-name').value||'';const rows=[];b.querySelectorAll('tr[data-type="row"]').forEach(tr=>{const c=tr.querySelectorAll('.ss-cell');rows.push({copy:c[0]?c[0].value:'',visual:c[1]?c[1].value:'',notes:c[2]?c[2].value:''});});tables.push({name,rows});});ss(jid,'sstables',JSON.stringify(tables))}
 function defaultSsTables(){return [{name:'SS1',rows:[{copy:'',visual:'',notes:''},{copy:'',visual:'',notes:''},{copy:'',visual:'',notes:''}]}]}
@@ -384,7 +838,7 @@ function addSsRow(btn,jid){const tb=btn.closest('.ss-block').querySelector('tbod
 function delSsRow(btn,jid){btn.closest('tr').remove();saveSsTables(jid)}
 function delSsBlock(btn,jid){const b=btn.closest('.ss-block');if(document.querySelectorAll('#ss_wrap_'+jid+' .ss-block').length===1){b.querySelectorAll('.ss-cell').forEach(c=>{c.value='';autoResize(c);});b.querySelector('.ss-block-name').value='';saveSsTables(jid);return;}b.remove();saveSsTables(jid)}
 
-// MODAL
+// ═══ MODAL ════════════════════════════════════════════════════
 let curJob=null;
 function openModal(id){
   const j=JOBS.find(x=>x.id===id);if(!j)return;
@@ -432,26 +886,34 @@ function changeStatus(sel){
   if(rc){const sb=rc.querySelector('.status-badge');if(sb){STATUSES.forEach(s=>sb.classList.remove('status-'+s.key));sb.classList.add('status-'+ns,'badge');sb.textContent=statusLabel(ns);}rc.dataset.status=ns;const tgt=document.getElementById('empty_'+ns);if(tgt){let last=tgt;let nx=tgt.nextElementSibling;while(nx&&nx.classList.contains('row-card')){last=nx;nx=nx.nextElementSibling;}last.insertAdjacentElement('afterend',rc);}}
   updateCounts();reapplyFilter();
 }
-function copyModalLink(){if(!curJob)return;navigator.clipboard.writeText(window.location.href.split('#')[0]+'#'+curJob.id).then(()=>{const btn=document.getElementById('mCopyBtn');btn.textContent='Copied!';btn.classList.add('copied');setTimeout(()=>{btn.textContent='Copy Link';btn.classList.remove('copied');},2000);})}
+function copyModalLink(){if(!curJob)return;navigator.clipboard.writeText(window.location.href.split('#')[0]+'#'+curJob.id).then(()=>{const btn=document.getElementById('mCopyBtn');btn.textContent='Copied!';btn.classList.add('copied');setTimeout(()=>{btn.textContent='Copy Link';btn.classList.remove('copied');},2000)})}
 
-// LIST
+// ═══ LIST ═════════════════════════════════════════════════════
 function renderList(){
   let html='';
   STATUSES.forEach(s=>{
     const jobs=JOBS.filter(j=>getStatus(j)===s.key);
     html+=`<div class="sec-hdr" id="sec_${s.key}"><span class="sec-lbl"><span class="sec-dot" style="background:${s.color}"></span>${s.label}</span><span class="sec-line"></span><span class="sec-ct" id="ct_${s.key}">${jobs.length} job${jobs.length!==1?'s':''}</span></div>
     <div class="sec-empty" id="empty_${s.key}"${jobs.length?' style="display:none"':' class="sec-empty show"'}>No jobs in this section.</div>
-    ${jobs.map(j=>{const cur=getStatus(j);const badges=[j.sprint,j.clientLabel,j.geo].filter(Boolean).map(b=>`<span class="badge bg">${esc(b)}</span>`).join('');return`<div class="row-card" id="rc_${j.id}" data-status="${cur}" data-client="${j.client}" onclick="openModal('${j.id}')"><div class="row-left"><div class="row-name">${esc(ls(j.id,'jobname')||j.name)}</div><div class="row-meta"><span class="badge status-badge status-${cur}">${statusLabel(cur)}</span>${badges}</div></div><div class="row-right"><button class="open-btn" onclick="event.stopPropagation();openModal('${j.id}')">Open Brief →</button></div></div>`;}).join('')}`;
+    ${jobs.map(j=>{
+      const cur=getStatus(j);
+      const badges=[j.sprint,j.clientLabel,j.geo].filter(Boolean).map(b=>`<span class="badge bg">${esc(b)}</span>`).join('');
+      const isNew=j.id.startsWith('imported_')?`<span class="badge badge-new">New</span>`:'';
+      return`<div class="row-card" id="rc_${j.id}" data-status="${cur}" data-client="${j.client}" onclick="openModal('${j.id}')"><div class="row-left"><div class="row-name">${esc(ls(j.id,'jobname')||j.name)}</div><div class="row-meta"><span class="badge status-badge status-${cur}">${statusLabel(cur)}</span>${isNew}${badges}</div></div><div class="row-right"><button class="open-btn" onclick="event.stopPropagation();openModal('${j.id}')">Open Brief →</button></div></div>`;
+    }).join('')}`;
   });
   document.getElementById('listWrap').innerHTML=html;
+  updateBriefCount();
 }
 function updateCounts(){STATUSES.forEach(s=>{const jobs=JOBS.filter(j=>getStatus(j)===s.key);const ct=document.getElementById('ct_'+s.key);const em=document.getElementById('empty_'+s.key);if(ct)ct.textContent=`${jobs.length} job${jobs.length!==1?'s':''}`;if(em)em.classList.toggle('show',jobs.length===0);})}
 let curFilter='all';
 function applyFilter(f,btn){curFilter=f;document.querySelectorAll('.fb').forEach(b=>b.classList.remove('active'));btn.classList.add('active');reapplyFilter()}
 function reapplyFilter(){document.querySelectorAll('.row-card').forEach(c=>c.classList.toggle('hidden',curFilter!=='all'&&c.dataset.client!==curFilter));STATUSES.forEach(s=>{const hdr=document.getElementById('sec_'+s.key);if(!hdr)return;const vis=[...document.querySelectorAll('.row-card')].filter(c=>c.dataset.status===s.key&&!c.classList.contains('hidden'));hdr.classList.toggle('hidden',vis.length===0);})}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
-function checkAnchor(){if(window.location.hash){const id=window.location.hash.slice(1);if(JOBS.find(x=>x.id===id))setTimeout(()=>openModal(id),120);}}
-renderList();checkAnchor();
+function checkAnchor(){if(window.location.hash){const id=window.location.hash.slice(1);if(JOBS.find(x=>x.id===id)){switchTopTab('briefs',document.querySelectorAll('.top-tab')[1]);setTimeout(()=>openModal(id),120);}}}
+
+renderList();
+checkAnchor();
 </script>
 </body>
 </html>
