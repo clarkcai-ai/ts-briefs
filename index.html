@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clark — Production Briefs · March 2026</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f5f4f0;--surface:#fff;--border:#e0ded6;--border-strong:#c8c6be;
+  --text:#1a1916;--muted:#6b6960;--faint:#a09e96;
+  --orange:#e85c2b;--orange-bg:#fff3ef;--orange-bd:#f5b8a0;
+  --blue:#185fa5;--blue-bg:#e6f1fb;--blue-bd:#85b7eb;
+  --green:#0f6e56;--green-bg:#e1f5ee;--green-bd:#5dcaa5;
+  --gray-bg:#f1efe8;--r:8px;--rl:14px;
+}
+body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,sans-serif;font-size:14px;line-height:1.6}
+
+/* HEADER */
+.site-header{background:var(--text);color:#fff;padding:16px 40px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200}
+.site-hl{display:flex;align-items:baseline;gap:14px}
+.site-title{font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.site-sub{font-size:12px;color:rgba(255,255,255,.4)}
+.site-meta{font-size:11px;color:rgba(255,255,255,.3);letter-spacing:.04em}
+.save-indicator{font-size:11px;color:rgba(255,255,255,.5);transition:opacity .3s;opacity:0}
+.save-indicator.show{opacity:1}
+
+/* FILTER */
+.filter-bar{background:var(--surface);border-bottom:1px solid var(--border);padding:10px 40px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;position:sticky;top:51px;z-index:100}
+.fl{font-size:11px;font-weight:600;color:var(--faint);letter-spacing:.06em;text-transform:uppercase;margin-right:4px}
+.fb{font-size:12px;font-weight:500;border:1px solid var(--border);border-radius:20px;padding:3px 12px;background:none;color:var(--muted);cursor:pointer;transition:all .15s}
+.fb:hover,.fb.active{border-color:var(--orange);color:var(--orange);background:var(--orange-bg)}
+
+/* LAYOUT */
+.page{display:grid;grid-template-columns:250px 1fr;min-height:calc(100vh - 93px);align-items:start}
+
+/* SIDEBAR */
+.sidebar{position:sticky;top:93px;max-height:calc(100vh - 93px);overflow-y:auto;border-right:1px solid var(--border);background:var(--surface);padding:16px 0 40px}
+.si-title{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);padding:0 18px 10px;border-bottom:1px solid var(--border);margin-bottom:6px}
+.si-group{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);padding:10px 18px 3px;display:flex;align-items:center;gap:6px}
+.sdot{width:6px;height:6px;border-radius:50%;display:inline-block;flex-shrink:0}
+.sdot-o{background:var(--orange)}.sdot-b{background:var(--blue)}
+.si-link{display:block;padding:5px 18px 5px 24px;font-size:11px;color:var(--muted);text-decoration:none;border-left:2px solid transparent;transition:all .1s;line-height:1.3}
+.si-link:hover{color:var(--orange);background:var(--orange-bg);border-left-color:var(--orange-bd)}
+.si-link small{font-size:10px;display:block;color:var(--faint);margin-top:1px}
+
+/* MAIN */
+.main{padding:28px 36px 80px}
+.sec-hdr{display:flex;align-items:center;gap:12px;margin:28px 0 14px}
+.sec-hdr:first-child{margin-top:0}
+.sec-lbl{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);display:flex;align-items:center;gap:6px;white-space:nowrap}
+.sec-dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+.sec-line{flex:1;height:1px;background:var(--border)}
+.sec-ct{font-size:11px;color:var(--faint);font-weight:500;white-space:nowrap}
+
+/* CARD */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);margin-bottom:14px;overflow:hidden;scroll-margin-top:110px}
+.card-hdr{padding:14px 18px 12px;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;justify-content:space-between;gap:16px;background:#fafaf8}
+.card-hdr-l{flex:1;min-width:0}
+.card-hdr-r{display:flex;align-items:center;gap:6px;flex-shrink:0;padding-top:2px}
+.job-name{font-size:13px;font-weight:700;color:var(--text);letter-spacing:.01em;margin-bottom:4px;word-break:break-all}
+.job-name[contenteditable]{outline:none;border-radius:3px;padding:1px 3px;margin:-1px -3px}
+.job-name[contenteditable]:focus{background:var(--blue-bg);outline:1px solid var(--blue-bd)}
+.meta{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.badge{display:inline-flex;align-items:center;font-size:11px;font-weight:600;border-radius:4px;padding:2px 8px;white-space:nowrap}
+.bo{background:var(--orange-bg);color:var(--orange);border:1px solid var(--orange-bd)}
+.bb{background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-bd)}
+.bg{background:var(--gray-bg);color:var(--muted);border:1px solid var(--border)}
+.bdot{width:7px;height:7px;border-radius:50%;display:inline-block;margin-right:4px}
+.bdot-o{background:var(--orange)}.bdot-b{background:var(--blue)}
+
+/* COPY LINK BTN */
+.cl-btn{font-size:11px;font-weight:600;color:var(--faint);background:none;border:1px solid var(--border);border-radius:6px;padding:3px 9px;cursor:pointer;transition:all .15s;white-space:nowrap}
+.cl-btn:hover{color:var(--blue);border-color:var(--blue-bd);background:var(--blue-bg)}
+.cl-btn.copied{color:var(--green);border-color:var(--green-bd);background:var(--green-bg)}
+
+/* TABS */
+.card-tabs{display:flex;border-bottom:1px solid var(--border);background:#fafaf8;padding:0 18px;gap:0;overflow-x:auto}
+.tab{font-size:12px;font-weight:500;color:var(--muted);background:none;border:none;border-bottom:2px solid transparent;padding:8px 14px;cursor:pointer;transition:all .15s;white-space:nowrap;margin-bottom:-1px}
+.tab:hover{color:var(--text)}
+.tab.active{color:var(--orange);border-bottom-color:var(--orange);font-weight:600}
+
+/* PANELS */
+.panel{display:none;padding:16px 18px}
+.panel.active{display:block}
+
+/* FIELD GRID */
+.fg{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-bottom:0}
+.fc{padding:9px 13px;border-right:1px solid var(--border);border-bottom:1px solid var(--border)}
+.fc:nth-child(3n){border-right:none}
+.fc:nth-last-child(-n+3){border-bottom:none}
+.fk{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-bottom:2px}
+.fv{font-size:13px;color:var(--text);font-weight:500;min-height:18px}
+.fv[contenteditable]{outline:none;border-radius:3px;padding:1px 3px;margin:-1px -3px;display:block}
+.fv[contenteditable]:focus{background:var(--blue-bg);outline:1px solid var(--blue-bd)}
+.fv.empty{color:var(--faint);font-style:italic;font-weight:400}
+
+/* STRATEGY PANELS */
+.spanel-label{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.editable-area{font-size:13px;line-height:1.75;color:var(--text);min-height:80px;width:100%;border:1px solid var(--border);border-radius:var(--r);padding:12px;outline:none;resize:vertical;font-family:inherit;background:var(--surface);transition:border-color .15s}
+.editable-area:focus{border-color:var(--border-strong);background:#fff}
+.editable-area.placeholder-text{color:var(--faint);font-style:italic}
+
+/* NEW TAB HELPERS */
+.tab-helper{font-size:12px;color:var(--faint);margin-bottom:10px;line-height:1.5}
+.tab-helper strong{color:var(--muted);font-weight:600}
+
+/* SECTION HEADER HIDDEN */
+.card.hidden{display:none}
+.sec-hdr.hidden{display:none}
+
+@media(max-width:800px){
+  .page{grid-template-columns:1fr}
+  .sidebar{display:none}
+  .main,.filter-bar,.site-header{padding-left:18px;padding-right:18px}
+}
+</style>
+</head>
+<body>
+
+<div class="site-header">
+  <div class="site-hl">
+    <span class="site-title">Production Briefs</span>
+    <span class="site-sub">Clark · March 2026</span>
+  </div>
+  <div style="display:flex;align-items:center;gap:16px">
+    <span class="save-indicator" id="saveIndicator">✓ Saved</span>
+    <span class="site-meta">TubeScience · 15 Jobs</span>
+  </div>
+</div>
+
+<div class="filter-bar">
+  <span class="fl">Filter</span>
+  <button class="fb active" onclick="filter('all',this)">All</button>
+  <button class="fb" onclick="filter('working',this)">Working On Brief</button>
+  <button class="fb" onclick="filter('planning',this)">Planning</button>
+  <button class="fb" onclick="filter('PRTLI',this)">PrettyLitter</button>
+  <button class="fb" onclick="filter('ILMKG',this)">Il Makiage</button>
+  <button class="fb" onclick="filter('KTSCH',this)">Kitsch</button>
+  <button class="fb" onclick="filter('PAIRE',this)">Pair Eyewear</button>
+  <button class="fb" onclick="filter('JAVVY',this)">Javvy Coffee</button>
+  <button class="fb" onclick="filter('STBRD',this)">Scentbird</button>
+</div>
+
+<div class="page">
+  <nav class="sidebar" id="sidebar">
+    <div class="si-title">Jump to Brief</div>
+    <div class="si-group"><span class="sdot sdot-o"></span>Working On Brief</div>
+    <a class="si-link" href="#j1809"><strong>J1809</strong> — ILMKG Listicle Adapt3<small>Il Makiage · WULT · USA</small></a>
+    <a class="si-link" href="#j1814"><strong>J1814</strong> — ILMKG Listicle Adapt3<small>Il Makiage · WULT · Canada</small></a>
+    <a class="si-link" href="#j523"><strong>J523</strong> — Evergreen Bouquet USA<small>PrettyLitter · No offer</small></a>
+    <a class="si-link" href="#j524"><strong>J524</strong> — Evergreen Bouquet Canada<small>PrettyLitter · $19.99</small></a>
+    <a class="si-link" href="#j525"><strong>J525</strong> — Smashcut Bouquet<small>PrettyLitter · USA</small></a>
+    <a class="si-link" href="#j157"><strong>J157</strong> — GFX Game Offer Update<small>Pair Eyewear</small></a>
+    <div class="si-group"><span class="sdot sdot-b"></span>Planning</div>
+    <a class="si-link" href="#j526"><strong>J526</strong> — Cat Dad Odor Control<small>PrettyLitter · $14.99</small></a>
+    <a class="si-link" href="#j2162"><strong>J2162</strong> — Travelability Adapt<small>Kitsch · Shampoo Bars</small></a>
+    <a class="si-link" href="#j538"><strong>J538</strong> — JO Choice $14.99 USA<small>PrettyLitter</small></a>
+    <a class="si-link" href="#j537a"><strong>J537</strong> — JO Choice $19.99 USA<small>PrettyLitter</small></a>
+    <a class="si-link" href="#j537b"><strong>J537</strong> — JO Choice $14.99 Canada<small>PrettyLitter</small></a>
+    <a class="si-link" href="#j1844"><strong>J1844</strong> — Anti-Aging Static Bouquet<small>Il Makiage · PLUMP</small></a>
+    <a class="si-link" href="#j539"><strong>J539</strong> — JO Choice $19.99 Canada<small>PrettyLitter</small></a>
+    <a class="si-link" href="#j16"><strong>J16</strong> — Top 3 Flavors<small>Javvy Coffee</small></a>
+    <a class="si-link" href="#j770"><strong>J770</strong> — J680VB JO Choice<small>Scentbird · Cologne</small></a>
+  </nav>
+
+  <div class="main" id="main"></div>
+</div>
+
+<script>
+const JOBS = [
+  {
+    id:'j1809',status:'working',client:'ILMKG',
+    name:'J1809_ILMKG_Adapt1_CP[#]_MOF_ListicleAdapt3_WULT',
+    sprint:'Sprint 01/26',clientLabel:'Il Makiage',geo:'USA',
+    fields:[
+      ['Job Owner','Clark'],['Client','Il Makiage'],['Job Type','Adapt'],
+      ['Platform','Meta'],['Funnel Stage','MOF'],['Creative Format','Video'],
+      ['SKU','WULT'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],
+      ['Base Job #','DRMTLGY ref (adapt3)'],['Music','Yes'],['Total Ad Sets','2'],
+      ['Style','Same as base'],['Goal Demo','Novice / lapsed foundation users'],['Total # of Videos','']
+    ],
+    goal:'Adapting DRMTLGY\'s proven listicle format (iteration 3) into WULT. Hypothesis: the listicle hook structure that has demonstrated stability on DRMTLGY transfers to the WULT shade match angle with a novice/lapsed foundation persona. Target: stable MOF performance. Success expands the listicle structure\'s footprint across brands.',
+    editing:'Listicle adapt3 from DRMTLGY base. Port structure directly to WULT. Shade Match as creative hero. Single UGC talent. Openers around: (1) avoiding the in-store experience, (2) starting a new glam routine. Persona: novice or lapsed foundation user discovering Shade Match for the first time.',
+    headlines:'',sequence:''
+  },
+  {
+    id:'j1814',status:'working',client:'ILMKG',
+    name:'J1814_ILMKG_Adapt1_CP[#]_TOF_ListicleAdapt3_WULT',
+    sprint:'Sprint 03/02',clientLabel:'Il Makiage',geo:'CANADA',
+    fields:[
+      ['Job Owner','Clark'],['Client','Il Makiage'],['Job Type','Adapt'],
+      ['Platform','Meta'],['Funnel Stage','TOF'],['Creative Format','Video'],
+      ['SKU','WULT'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],
+      ['Base Job #','DRMTLGY ref (adapt3)'],['Music','Yes'],['Total Ad Sets','2'],
+      ['Style','Same as base'],['Goal Demo','Novice / lapsed foundation users'],['Total # of Videos','']
+    ],
+    goal:'Canada geo version of ILMKG WULT listicle adapt3. Testing whether the DRMTLGY listicle format holds in the Canada market on WULT. Same hypothesis as J1809 with Canada-adjusted targeting. If both geos perform, confirms the listicle structure is geo-agnostic for WULT.',
+    editing:'Same structure as J1809. Listicle adapt3 from DRMTLGY base, ported to WULT. Canada geo — no offer language. Shade Match as hero. Single UGC talent. Openers around in-store avoidance and new glam routine. Persona: novice/lapsed foundation user.',
+    headlines:'',sequence:''
+  },
+  {
+    id:'j523',status:'working',client:'PRTLI',
+    name:'J523_PRTLI_Adapt1_CP[#]_FF_EvergreenBouquet_PrettyLitter',
+    sprint:'Sprint 03/09',clientLabel:'PrettyLitter',geo:'USA · No offer',
+    fields:[
+      ['Job Owner','Clark'],['Client','PrettyLitter'],['Job Type','Adapt'],
+      ['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],
+      ['SKU','PrettyLitter'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],
+      ['Base Job #','J125v1a, J457v1c, J101v1a, J146v1d'],['Music','Yes'],['Total Ad Sets','2'],
+      ['Offer','None (Evergreen)'],['Persona','Devoted Cat Parent / Smell-focused'],['Total # of Videos','']
+    ],
+    goal:'Refreshing the top performer bouquet (J125v1a, J457v1c, J101v1a, J146v1d) without any GWP offer language. Hypothesis: these proven creatives hold performance without promotional framing, and non-GWP versions expand audience eligibility and allow accurate FF creative measurement. Success = comparable CPA to offer versions, validating creative-led performance independent of promotion.',
+    editing:'Adapt top performers J125v1a, J457v1c, J101v1a, J146v1d. Remove all GWP / promotional offer language throughout. Refresh footage and VO where needed. Maintain the same hook, structure, and pacing from each base job. USA geo.',
+    headlines:'',sequence:''
+  },
+  {
+    id:'j524',status:'working',client:'PRTLI',
+    name:'J524_PRTLI_Adapt1_CP[#]_FF_EvergreenBouquet_PrettyLitter',
+    sprint:'Sprint 03/09',clientLabel:'PrettyLitter',geo:'CANADA · $19.99',
+    fields:[
+      ['Job Owner','Clark'],['Client','PrettyLitter'],['Job Type','Adapt'],
+      ['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],
+      ['SKU','PrettyLitter'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],
+      ['Base Job #','J125v1a, J457v1c, J101v1a, J146v1d'],['Music','Yes'],['Total Ad Sets','2'],
+      ['Offer','First bag $19.99 (Canada)'],['Persona','Devoted Cat Parent / Smell-focused'],['Total # of Videos','']
+    ],
+    goal:'Canada geo version of J523. Same top performer bouquet refresh without GWP, adapted for Canada pricing ($19.99 first bag). Testing whether the evergreen creative structure holds across geo. Success alongside J523 confirms geo-agnostic creative performance, opening a scale path in both markets.',
+    editing:'Same as J523. Adapt J125v1a, J457v1c, J101v1a, J146v1d. Remove GWP language. Canada geo — update any pricing references to first bag $19.99. Refresh footage and VO where needed. Maintain same hook, structure, and pacing from each base.',
+    headlines:'',sequence:''
+  },
+  {
+    id:'j525',status:'working',client:'PRTLI',
+    name:'J525_PRTLI_More1_CP[#]_FF_SmashcutBouquet_PrettyLitter',
+    sprint:'Sprint 03/09',clientLabel:'PrettyLitter',geo:'USA',
+    fields:[
+      ['Job Owner','Clark'],['Client','PrettyLitter'],['Job Type','More'],
+      ['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],
+      ['SKU','PrettyLitter'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],
+      ['Base Job #','Smashcut bouquet top performers'],['Music','Yes'],['Total Ad Sets','2'],
+      ['Persona','Devoted Cat Parent / Smell-focused'],['Style','Same as base (smashcut)'],['Total # of Videos','TBD — post-meeting']
+    ],
+    goal:'More volume on the smashcut bouquet top performers. Adding creative supply within the same entity ID to extend runway without building new audience pools. Full input to be finalized after team meeting. Target: match or approach base job ROAS at scaled spend.',
+    editing:'Smashcut bouquet retests. More of the smashcut format from existing top performers. Full editing input will be provided after meeting. Hold production pending final brief notes from Clark. USA geo.',
+    headlines:'',sequence:''
+  },
+  {
+    id:'j157',status:'working',client:'PAIRE',
+    name:'J157_PAIRE_More1_CP[#]_[Funnel]_GFXGameOfferUpdate_PairEyewear',
+    sprint:'Sprint 03/16',clientLabel:'Pair Eyewear',geo:'',
+    fields:[
+      ['Job Owner','Clark'],['Client','Pair Eyewear'],['Job Type','More'],
+      ['Platform','Meta'],['Funnel Stage',''],['Creative Format','GFX / Interactive'],
+      ['SKU','Pair Eyewear'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','None'],
+      ['Base Job #','J87'],['Music','Yes'],['Total Ad Sets','2'],
+      ['Style','Same as base (GFX game)'],['Goal Demo',''],['Total # of Videos','']
+    ],
+    goal:'Refreshing J87 GFX/Game format with current Pair Eyewear offers. The game-style creative has proven durable — this iteration updates offer language and visual callouts to reflect what\'s live now. No structural change needed. Success = maintain J87\'s engagement pattern with current offer accuracy.',
+    editing:'Update J87 GFX/game format. Swap all old offer language for current Pair Eyewear promotions. Adjust headers and visuals as needed — feel free to make small improvements. Keep the interactive/game structure fully intact. Do not change the core creative format.',
+    headlines:'',sequence:''
+  },
+  {
+    id:'j526',status:'planning',client:'PRTLI',
+    name:'J526_PRTLI_More1_CP[#]_MOF_CatDadOdorControl_PrettyLitter',
+    sprint:'Sprint 03/02',clientLabel:'PrettyLitter',geo:'USA · $14.99',
+    fields:[
+      ['Job Owner','Clark'],['Client','PrettyLitter'],['Job Type','More'],
+      ['Platform','Meta'],['Funnel Stage','MOF'],['Creative Format','Video'],
+      ['SKU','PrettyLitter'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],
+      ['Offer','First bag $14.99'],['Music','Yes'],['Total Ad Sets','2'],
+      ['Persona','Millennial Cat Dads'],['Text Treatment','Reply-to-comment'],['Total # of Videos','']
+    ],
+    goal:'New odor-specific MOF creative built from new research data, targeting millennial cat dads. Odor control is the primary decision driver for this segment — UTI detection is secondary. Testing reply-to-comment format to increase engagement authenticity. First bag at $14.99. Success = lower CPAs from the cat dad segment vs. current gender-agnostic targeting.',
+    editing:'Reply-to-comment format. MOF. Lead angle: odor control is the primary reason — UTI color change is cool but secondary. Hook framing: "Okay the UTI color changing thing is cool, but I mainly care about odor control." Include first bag $14.99 offer. Reference Slack thread C05JX09V541 for additional footage notes. USA geo.',
+    headlines:'',sequence:''
+  },
+  {
+    id:'j2162',status:'planning',client:'KTSCH',
+    name:'J2162_KTSCH_More1_CP[#]_FF_TravelabilityAdapt_Bars',
+    sprint:'Sprint 03/16',clientLabel:'Kitsch',geo:'',
+    fields:[
+      ['Job Owner','Clark'],['Client','Kitsch'],['Job Type','More'],
+      ['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],
+      ['SKU','Shampoo Bars'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],
+      ['Base Job #','J2011v1b'],['Music','Yes'],['Total Ad Sets','2'],
+      ['Style','Same as base'],['Reference','J2011v1b (Liquid top performer)'],['Total # of Videos','']
+    ],
+    goal:'Adapting J2011v1b (Liquid Shampoo top performer) into Shampoo Bars with a travelability angle added. J2011 has proven stable — this tests whether the concept holds on Bars SKU while adding a differentiated reason to buy (travel-friendly, no liquid restrictions). If it performs, creates a sustainable cross-SKU scale path from Liquid into Bars.',
+    editing:'Adapt J2011v1b for Shampoo Bars SKU. Add travelability messaging — TSA-friendly, no liquid bag needed, travel without sacrificing your hair routine. Maintain the same listicle structure and pacing from the base. Swap Liquid Shampoo visual references and copy for Bars-specific content. Keep the same hook approach.',
+    headlines:'',sequence:''
+  },
+  {
+    id:'j538',status:'planning',client:'PRTLI',
+    name:'J538_PRTLI_Adapt1_CP[#]_FF_JOChoice1499_PrettyLitter',
+    sprint:'Sprint 03/16',clientLabel:'PrettyLitter',geo:'USA · $14.99',
+    fields:[
+      ['Job Owner','Clark'],['Client','PrettyLitter'],['Job Type','Adapt'],
+      ['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],
+      ['SKU','PrettyLitter'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],
+      ['Offer','First bag $14.99'],['Music','Yes'],['Total Ad Sets','2'],
+      ['Persona','Devoted Cat Parent'],['Style','JO choice — match base'],['Total # of Videos','']
+    ],
+    goal:'Adapting existing PrettyLitter top performer creative into the $14.99 first bag offer. Testing whether proven non-promotional creative holds or improves with a clear price point attached. JO has creative discretion on base selection. Target: match or beat base CPA with offer attached. USA geo.',
+    editing:'JO choice on base job selection. Adapt chosen top performer into $14.99 first bag offer. Include offer language: "First bag $14.99." Update any promotional callouts, end cards, and lower thirds to reflect $14.99 pricing. Keep the creative structure and hook from the base. USA geo.',
+    headlines:'',sequence:''
+  },
+  {
+    id:'j537a',status:'planning',client:'PRTLI',
+    name:'J537_PRTLI_More1_CP[#]_FF_JOChoice1999_PrettyLitter',
+    sprint:'Sprint 03/16',clientLabel:'PrettyLitter',geo:'USA · $19.99',
+    fields:[
+      ['Job Owner','Clark'],['Client','PrettyLitter'],['Job Type','More'],
+      ['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],
+      ['SKU','PrettyLitter'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],
+      ['Offer','First bag $19.99'],['Music','Yes'],['Total Ad Sets','2'],
+      ['Persona','Devoted Cat Parent'],['Style','JO choice — match base'],['Total # of Videos','']
+    ],
+    goal:'More volume on the $19.99 first bag offer. USA geo. Parallel to J538 ($14.99) — if both perform, confirms the first bag offer works across price points. JO choice on base.',
+    editing:'JO choice on base. More of same format. Update offer language to first bag $19.99 throughout — pricing callouts, end cards, lower thirds. USA geo. Keep all other creative elements consistent with base.',
+    headlines:'',sequence:''
+  },
+  {
+    id:'j537b',status:'planning',client:'PRTLI',
+    name:'J537_PRTLI_More1_CP[#]_FF_JOChoice1499Canada_PrettyLitter',
+    sprint:'Sprint 03/16',clientLabel:'PrettyLitter',geo:'CANADA · $14.99',
+    fields:[
+      ['Job Owner','Clark'],['Client','PrettyLitter'],['Job Type','More'],
+      ['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],
+      ['SKU','PrettyLitter'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],
+      ['Offer','First bag $14.99 (Canada)'],['Music','Yes'],['Total Ad Sets','2'],
+      ['Persona','Devoted Cat Parent'],['Style','JO choice — match base'],['Total # of Videos','']
+    ],
+    goal:'Canada geo, $14.99 first bag. More volume on JO-choice base at the lower Canada price point. Parallel to J539 Canada ($19.99) — testing price sensitivity in the Canada market. Part of the 03/16 offer refresh push across all PL geos.',
+    editing:'JO choice on base. More of same format. Update offer to first bag $14.99 throughout. Canada geo. Update all pricing callouts, end cards, and lower thirds. Keep structure and hook from base.',
+    headlines:'',sequence:''
+  },
+  {
+    id:'j1844',status:'planning',client:'ILMKG',
+    name:'J1844_ILMKG_Adapt1_CP[#]_MOF_AntiAgingStaticBouquet_PLUMP',
+    sprint:'Sprint 03/16',clientLabel:'Il Makiage',geo:'',
+    fields:[
+      ['Job Owner','Clark'],['Client','Il Makiage'],['Job Type','Adapt'],
+      ['Platform','Meta'],['Funnel Stage','MOF'],['Creative Format','Static'],
+      ['SKU','Power Lift Plumping Cream (PLUMP)'],['Aspect Ratio','1x1 / 4x5'],['VO','None'],
+      ['Base Job #','1803V1A, 1749V1A, 1766V1D, 1652V1D'],['Music','No'],['Total Ad Sets','2'],
+      ['Persona','Anti-aging (35+)'],['Style','Port from WULT statics'],['Total # of Videos','4 statics (1x1 + 4x5 each)']
+    ],
+    goal:'Limited static supply on PLUMP anti-aging angle. Porting the four best-spending WULT statics (1803V1A, 1749V1A, 1766V1D, 1652V1D) to PLUMP to fill the gap and test whether anti-aging statics from WULT cross over. TBYB language must be removed. Success = one or more statics clearing MOF threshold at scale.',
+    editing:'Port four statics from WULT to PLUMP. Remove TBYB from all. Per base:\n— 1803V1A → adapt to PLUMP, keep format\n— 1749V1A → remove TBYB, focus on "take the quiz to find your new skincare routine"\n— 1766V1D → us vs. them format, adapt for PLUMP\n— 1652V1D → remove TBYB; whiteboard text: "You\'re only as old as you look"; native header overlay: "no lies detected"\nDeliver as 4 individual statics, 1x1 and 4x5 cuts each.',
+    headlines:'',sequence:''
+  },
+  {
+    id:'j539',status:'planning',client:'PRTLI',
+    name:'J539_PRTLI_More1_CP[#]_FF_JOChoice1999Canada_PrettyLitter',
+    sprint:'Sprint 03/16',clientLabel:'PrettyLitter',geo:'CANADA · $19.99',
+    fields:[
+      ['Job Owner','Clark'],['Client','PrettyLitter'],['Job Type','More'],
+      ['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],
+      ['SKU','PrettyLitter'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],
+      ['Offer','First bag $19.99 (Canada)'],['Music','Yes'],['Total Ad Sets','2'],
+      ['Persona','Devoted Cat Parent'],['Style','JO choice — match base'],['Total # of Videos','']
+    ],
+    goal:'Canada geo, $19.99 first bag. More volume on JO-choice base at Canada pricing. Parallel to J537b ($14.99 Canada) — testing whether creative holds at the higher price point. Part of the 03/16 offer refresh push across all PL geos.',
+    editing:'JO choice on base. More of same creative format. Update offer to first bag $19.99 throughout. Canada geo. Update all pricing callouts, end cards, and lower thirds. Keep structure and hook from base.',
+    headlines:'',sequence:''
+  },
+  {
+    id:'j16',status:'planning',client:'JAVVY',
+    name:'J16_JAVVY_Adapt1_CP[#]_FF_Top3Flavors_JavvyCoffee',
+    sprint:'Sprint 03/16',clientLabel:'Javvy Coffee',geo:'',
+    fields:[
+      ['Job Owner','Clark'],['Client','Javvy Coffee'],['Job Type','Adapt'],
+      ['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],
+      ['SKU','Javvy Coffee'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],
+      ['Reference','Scentbird listicle format'],['Music','Yes'],['Total Ad Sets','2'],
+      ['Angle','Top 3 flavors — taste-led, anti-chalky'],['Hook','"Top 3 protein coffee flavors that don\'t taste chalky"'],['Total # of Videos','']
+    ],
+    goal:'Review analysis flagged flavor differentiation as a major untapped opportunity for Javvy. Leading with "Top 3 protein coffee flavors that don\'t taste chalky" targets the primary objection (taste) while differentiating from commodity protein coffees. Scentbird\'s listicle format has proven the structure — adapting it here to test whether taste-led listicles drive Javvy conversions. Success = strong TOF hook rate and FF CPA at or below goal.',
+    editing:'Listicle format — model on Scentbird top performer structure. Lead with: "Top 3 protein coffee flavors that don\'t taste chalky." Describe each flavor in detail similar to how SB describes scents. Then roll into selling points: (1) shake your expensive coffee shop habit, (2) get 30g of protein in before noon, (3) feel full all morning. Conversational and specific throughout — no overly polished delivery.',
+    headlines:'',sequence:''
+  },
+  {
+    id:'j770',status:'planning',client:'STBRD',
+    name:'J770_STBRD_More1_CP[#]_BOF_J680VBJOChoice_Cologne',
+    sprint:'Sprint 03/16',clientLabel:'Scentbird',geo:'Cologne',
+    fields:[
+      ['Job Owner','Clark'],['Client','Scentbird'],['Job Type','More'],
+      ['Platform','Meta'],['Funnel Stage','BOF'],['Creative Format','Video'],
+      ['SKU','Cologne'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],
+      ['Base Job #','J680VB'],['Music','Yes'],['Total Ad Sets','2'],
+      ['Style','JO choice — see J680VB iteration history'],['Reference','J680VB + prior iterations'],['Total # of Videos','']
+    ],
+    goal:'JO choice iteration on J680VB (Cologne BOF). The base has proven iterations — this gives JO creative latitude to identify the next strongest angle from prior iteration data. BOF position means the audience is warm; priority is closing efficiency and offer clarity. JO should reference all prior J680 iterations before selecting direction.',
+    editing:'JO choice — review J680VB and all previous iterations before selecting an angle. Pick the most underexplored or highest-potential direction. Cologne SKU, BOF. See the prior iteration history in the planner for what has and hasn\'t been tested. Build from the strongest creative signal in the existing J680 family.',
+    headlines:'',sequence:''
+  }
+];
+
+// Load saved data from localStorage
+function load(id, key) {
+  try { return localStorage.getItem('brief_'+id+'_'+key) || null; } catch(e) { return null; }
+}
+
+// Save to localStorage
+let saveTimer;
+function save(id, key, val) {
+  try { localStorage.setItem('brief_'+id+'_'+key, val); } catch(e) {}
+  clearTimeout(saveTimer);
+  const ind = document.getElementById('saveIndicator');
+  ind.classList.add('show');
+  saveTimer = setTimeout(() => ind.classList.remove('show'), 1800);
+}
+
+function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;') }
+
+function renderCard(j) {
+  const isWorking = j.status === 'working';
+  const badgeClass = isWorking ? 'bo' : 'bb';
+  const dotClass = isWorking ? 'bdot-o' : 'bdot-b';
+  const statusLabel = isWorking ? 'Working On Brief' : 'Planning';
+
+  const badges = [j.sprint, j.clientLabel, j.geo].filter(Boolean)
+    .map(b => `<span class="badge bg">${esc(b)}</span>`).join('');
+
+  // Fields
+  const fieldsHtml = j.fields.map(([k,v]) => {
+    const saved = load(j.id, 'field_'+k);
+    const val = saved !== null ? saved : v;
+    const isEmpty = !val;
+    return `<div class="fc">
+      <div class="fk">${esc(k)}</div>
+      <div class="fv${isEmpty?' empty':''}" contenteditable="true" data-id="${esc(j.id)}" data-key="field_${esc(k)}" 
+        oninput="onEdit(this)" onfocus="onFocus(this)" onblur="onBlur(this)">${esc(val) || (isEmpty?'TBD':'')}</div>
+    </div>`;
+  }).join('');
+
+  // Goal
+  const savedGoal = load(j.id,'goal');
+  const goalVal = savedGoal !== null ? savedGoal : j.goal;
+
+  // Editing
+  const savedEdit = load(j.id,'editing');
+  const editVal = savedEdit !== null ? savedEdit : j.editing;
+
+  // Headlines
+  const savedHL = load(j.id,'headlines');
+  const hlVal = savedHL !== null ? savedHL : j.headlines;
+
+  // Sequence
+  const savedSeq = load(j.id,'sequence');
+  const seqVal = savedSeq !== null ? savedSeq : j.sequence;
+
+  return `
+<div class="card" id="${j.id}" data-status="${j.status}" data-client="${j.client}">
+  <div class="card-hdr">
+    <div class="card-hdr-l">
+      <div class="job-name" contenteditable="true" data-id="${j.id}" data-key="jobname"
+        oninput="onEdit(this)" onblur="onBlur(this)">${esc(load(j.id,'jobname') || j.name)}</div>
+      <div class="meta">
+        <span class="badge ${badgeClass}"><span class="bdot ${dotClass}"></span>${statusLabel}</span>
+        ${badges}
+      </div>
+    </div>
+    <div class="card-hdr-r">
+      <button class="cl-btn" onclick="copyLink('${j.id}',this)">Copy Link</button>
+    </div>
+  </div>
+  <div class="card-tabs">
+    <button class="tab active" onclick="switchTab(this,'${j.id}','overview')">Overview</button>
+    <button class="tab" onclick="switchTab(this,'${j.id}','goal')">JO Goal</button>
+    <button class="tab" onclick="switchTab(this,'${j.id}','editing')">Editing Instructions</button>
+    <button class="tab" onclick="switchTab(this,'${j.id}','headlines')">Headlines / Openers</button>
+    <button class="tab" onclick="switchTab(this,'${j.id}','sequence')">Sales Sequence</button>
+  </div>
+  <div class="panel active" id="${j.id}_overview">
+    <div class="fg">${fieldsHtml}</div>
+  </div>
+  <div class="panel" id="${j.id}_goal">
+    <div class="spanel-label">JO Goal</div>
+    <textarea class="editable-area" data-id="${j.id}" data-key="goal"
+      oninput="onEdit(this)" rows="6">${esc(goalVal)}</textarea>
+  </div>
+  <div class="panel" id="${j.id}_editing">
+    <div class="spanel-label">Editing Instructions</div>
+    <textarea class="editable-area" data-id="${j.id}" data-key="editing"
+      oninput="onEdit(this)" rows="6">${esc(editVal)}</textarea>
+  </div>
+  <div class="panel" id="${j.id}_headlines">
+    <div class="tab-helper"><strong>Headlines / Openers</strong> — Add your hook options here. Use one per line or label them V1A, V1B, etc.</div>
+    <textarea class="editable-area" data-id="${j.id}" data-key="headlines"
+      oninput="onEdit(this)" rows="8" placeholder="e.g.&#10;V1A: &#34;Here's what they don't tell you about switching to Kitsch&#34;&#10;V1B: &#34;Things I wish I knew before I switched&#34;&#10;V1C: JO choice">${esc(hlVal)}</textarea>
+  </div>
+  <div class="panel" id="${j.id}_sequence">
+    <div class="tab-helper"><strong>Sales Sequence</strong> — Write out the SS beats here. Use SS1, SS2, etc. for variants or timestamp-style breakdowns.</div>
+    <textarea class="editable-area" data-id="${j.id}" data-key="sequence"
+      oninput="onEdit(this)" rows="10" placeholder="e.g.&#10;SS1:&#10;[Beat 1 — hook payoff]&#10;[Beat 2 — problem agitation]&#10;[Beat 3 — product intro]&#10;[Beat 4 — proof / social proof]&#10;[Beat 5 — CTA]&#10;&#10;SS2:&#10;[Variant structure]">${esc(seqVal)}</textarea>
+  </div>
+</div>`;
+}
+
+function switchTab(btn, jobId, panelName) {
+  const card = document.getElementById(jobId);
+  card.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  card.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(jobId+'_'+panelName).classList.add('active');
+}
+
+function onEdit(el) {
+  const val = el.tagName === 'TEXTAREA' ? el.value : el.innerText;
+  save(el.dataset.id, el.dataset.key, val);
+}
+
+function onFocus(el) {
+  if (el.classList.contains('empty')) {
+    el.classList.remove('empty');
+    if (el.innerText === 'TBD') el.innerText = '';
+  }
+}
+
+function onBlur(el) {
+  if (!el.innerText.trim()) {
+    el.classList.add('empty');
+    el.innerText = 'TBD';
+    save(el.dataset.id, el.dataset.key, '');
+  }
+}
+
+function copyLink(id, btn) {
+  const url = window.location.href.split('#')[0]+'#'+id;
+  navigator.clipboard.writeText(url).then(()=>{
+    btn.textContent='Copied!';btn.classList.add('copied');
+    setTimeout(()=>{btn.textContent='Copy Link';btn.classList.remove('copied');},2000);
+  });
+}
+
+function filter(f, btn) {
+  document.querySelectorAll('.fb').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.card').forEach(c=>{
+    if(f==='all') c.classList.remove('hidden');
+    else if(f==='working') c.classList.toggle('hidden',c.dataset.status!=='working');
+    else if(f==='planning') c.classList.toggle('hidden',c.dataset.status!=='planning');
+    else c.classList.toggle('hidden',c.dataset.client!==f);
+  });
+  document.querySelectorAll('.sec-hdr').forEach(h=>{
+    let has=false;let el=h.nextElementSibling;
+    while(el&&!el.classList.contains('sec-hdr')){
+      if(el.classList.contains('card')&&!el.classList.contains('hidden'))has=true;
+      el=el.nextElementSibling;
+    }
+    h.classList.toggle('hidden',!has);
+  });
+}
+
+// RENDER
+const main = document.getElementById('main');
+const working = JOBS.filter(j=>j.status==='working');
+const planning = JOBS.filter(j=>j.status==='planning');
+
+main.innerHTML = `
+  <div class="sec-hdr" data-section="working">
+    <span class="sec-lbl"><span class="sec-dot" style="background:var(--orange)"></span>Working On Brief</span>
+    <span class="sec-line"></span>
+    <span class="sec-ct">${working.length} jobs</span>
+  </div>
+  ${working.map(renderCard).join('')}
+  <div class="sec-hdr" data-section="planning">
+    <span class="sec-lbl"><span class="sec-dot" style="background:var(--blue)"></span>Planning</span>
+    <span class="sec-line"></span>
+    <span class="sec-ct">${planning.length} jobs</span>
+  </div>
+  ${planning.map(renderCard).join('')}
+`;
+
+// Scroll to anchor on load
+if(window.location.hash){
+  setTimeout(()=>{
+    const el=document.querySelector(window.location.hash);
+    if(el)el.scrollIntoView({behavior:'smooth',block:'start'});
+  },100);
+}
+</script>
+</body>
+</html>
