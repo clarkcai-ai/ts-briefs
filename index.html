@@ -13,7 +13,7 @@
   --blue:#185fa5;--blue-bg:#e6f1fb;--blue-bd:#85b7eb;
   --green:#0f6e56;--green-bg:#e1f5ee;--green-bd:#5dcaa5;
   --purple:#534ab7;--purple-bg:#eeedfe;--purple-bd:#afa9ec;
-  --gray-bg:#f1efe8;--gray-bd:#e0ded6;--r:8px;--rl:14px;
+  --gray-bg:#f1efe8;--r:8px;--rl:14px;
 }
 body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,sans-serif;font-size:14px;line-height:1.6;overflow-x:hidden}
 
@@ -57,13 +57,41 @@ body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,s
 .status-prod-review{background:var(--purple-bg);color:var(--purple);border:1px solid var(--purple-bd)}
 .status-ready-prod{background:var(--green-bg);color:var(--green);border:1px solid var(--green-bd)}
 
-/* MODAL */
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:200;display:none;align-items:stretch;justify-content:flex-end}
+/* ═══ CENTERED MODAL ═══════════════════════════════════════ */
+.modal-overlay{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,.5);
+  z-index:200;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+}
 .modal-overlay.open{display:flex}
-.modal-panel{width:min(940px,96vw);background:var(--surface);height:100vh;overflow-y:auto;display:flex;flex-direction:column;box-shadow:-8px 0 32px rgba(0,0,0,.15);animation:slideIn .2s ease}
-@keyframes slideIn{from{transform:translateX(40px);opacity:0}to{transform:translateX(0);opacity:1}}
 
-.modal-hdr{padding:16px 24px 14px;border-bottom:1px solid var(--border);background:#fafaf8;display:flex;align-items:flex-start;gap:16px;position:sticky;top:0;z-index:10}
+.modal-panel{
+  width:min(960px,100%);
+  max-height:90vh;
+  background:var(--surface);
+  border-radius:16px;
+  display:flex;
+  flex-direction:column;
+  box-shadow:0 20px 60px rgba(0,0,0,.25);
+  animation:popIn .2s ease;
+  overflow:hidden;
+}
+@keyframes popIn{
+  from{transform:scale(.95) translateY(12px);opacity:0}
+  to{transform:scale(1) translateY(0);opacity:1}
+}
+
+.modal-hdr{
+  padding:16px 24px 14px;
+  border-bottom:1px solid var(--border);
+  background:#fafaf8;
+  display:flex;align-items:flex-start;gap:16px;
+  flex-shrink:0;
+}
 .modal-hdr-l{flex:1;min-width:0}
 .modal-hdr-r{display:flex;align-items:center;gap:8px;flex-shrink:0}
 .modal-job-name{font-size:14px;font-weight:700;color:var(--text);word-break:break-all;margin-bottom:5px;outline:none;border-radius:3px;padding:1px 3px;margin-left:-3px}
@@ -81,7 +109,7 @@ body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,s
 .tab:hover{color:var(--text)}
 .tab.active{color:var(--orange);border-bottom-color:var(--orange);font-weight:600}
 
-.modal-body{flex:1;overflow-y:auto}
+.modal-body{flex:1;overflow-y:auto;min-height:0}
 .panel{display:none;padding:24px}
 .panel.active{display:block}
 
@@ -99,26 +127,10 @@ body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,s
 .fv:focus{background:var(--blue-bg);outline:1px solid var(--blue-bd)}
 .fv.empty{color:var(--faint);font-style:italic;font-weight:400}
 
-/* TEXT AREAS */
 .ea{font-size:13px;line-height:1.75;color:var(--text);min-height:100px;width:100%;border:1px solid var(--border);border-radius:var(--r);padding:13px;outline:none;resize:vertical;font-family:inherit;background:var(--surface);transition:border-color .15s}
 .ea:focus{border-color:var(--border-strong)}
 
-/* ═══ SHARED TABLE CHROME (used by both Ad Sets and Headlines) ═══ */
-.tbl-block{border:1px solid var(--border);border-radius:var(--rl);overflow:hidden;margin-bottom:0}
-.tbl-block-hdr{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--gray-bg);border-bottom:1px solid var(--border);gap:10px}
-.tbl-block-name{font-size:12px;font-weight:700;color:var(--text);outline:none;background:transparent;border:none;font-family:inherit;flex:1;min-width:0}
-.tbl-block-name:focus{background:var(--blue-bg);border-radius:3px;outline:1px solid var(--blue-bd);padding:1px 4px}
-.tbl-block-name::placeholder{color:var(--faint);font-style:italic}
-.tbl-block-del{font-size:12px;font-weight:600;color:var(--faint);background:none;border:1px solid var(--border);border-radius:6px;padding:3px 9px;cursor:pointer;transition:all .15s;white-space:nowrap;flex-shrink:0}
-.tbl-block-del:hover{color:#e24b4a;border-color:#f09595;background:#fcebeb}
-.tbl-add-row-wrap{padding:8px 12px;border-top:1px solid var(--border);background:#fafaf8}
-.tbl-add-row-btn{font-size:11px;font-weight:600;color:var(--blue);background:none;border:1px solid var(--blue-bd);border-radius:6px;padding:4px 11px;cursor:pointer;transition:all .15s}
-.tbl-add-row-btn:hover{background:var(--blue-bg)}
-.tbl-bottom-bar{display:flex;align-items:center;gap:8px;margin-top:12px}
-.tbl-new-btn{font-size:12px;font-weight:600;color:var(--orange);background:var(--orange-bg);border:1px solid var(--orange-bd);border-radius:6px;padding:6px 14px;cursor:pointer;transition:all .15s}
-.tbl-new-btn:hover{background:#ffe4d8}
-
-/* ═══ AD SETS ═══ */
+/* AD SETS */
 .adsets-wrap{display:flex;flex-direction:column;gap:0;border:1px solid var(--border);border-radius:var(--rl);overflow:hidden}
 .adsets-title-row{background:var(--gray-bg);border-bottom:1px solid var(--border);padding:8px 0;text-align:center;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 .adset-block{border-bottom:1px solid var(--border)}
@@ -147,21 +159,25 @@ body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,s
 .adset-new-btn{font-size:12px;font-weight:600;color:var(--orange);background:var(--orange-bg);border:1px solid var(--orange-bd);border-radius:6px;padding:6px 14px;cursor:pointer;transition:all .15s}
 .adset-new-btn:hover{background:#ffe4d8}
 
-/* ═══ HEADLINES TABLE ═══ */
+/* HEADLINES TABLE */
+.tbl-block{border:1px solid var(--border);border-radius:var(--rl);overflow:hidden}
 .hl-wrap{width:100%;overflow-x:auto}
 .hl-table{width:100%;border-collapse:collapse;font-size:13px;table-layout:fixed}
-.hl-table th{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);padding:8px 12px;background:var(--surface);border-bottom:1px solid var(--border);text-align:left;white-space:nowrap}
+.hl-table th{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);padding:8px 12px;background:var(--surface);border-bottom:1px solid var(--border);text-align:left}
 .hl-table td{border-bottom:1px solid var(--border);padding:0;vertical-align:top}
 .hl-table tr:last-child td{border-bottom:none}
 .hl-table td:not(:last-child),.hl-table th:not(:last-child){border-right:1px solid var(--border)}
-.col-label{width:80px}.col-hook{}.col-hldel{width:36px}
+.col-label{width:80px}.col-hldel{width:36px}
 .hl-cell{width:100%;min-height:52px;padding:10px 12px;border:none;outline:none;resize:none;font-family:inherit;font-size:13px;color:var(--text);background:transparent;line-height:1.65;display:block;transition:background .1s}
 .hl-cell:focus{background:var(--blue-bg)}
 .hl-cell::placeholder{color:var(--faint);font-style:italic}
 .hl-row-del{width:100%;height:100%;min-height:52px;display:flex;align-items:center;justify-content:center;background:none;border:none;cursor:pointer;color:var(--faint);font-size:15px;transition:all .15s}
 .hl-row-del:hover{color:#e24b4a;background:#fcebeb}
+.tbl-add-row-wrap{padding:8px 12px;border-top:1px solid var(--border);background:#fafaf8}
+.tbl-add-row-btn{font-size:11px;font-weight:600;color:var(--blue);background:none;border:1px solid var(--blue-bd);border-radius:6px;padding:4px 11px;cursor:pointer;transition:all .15s}
+.tbl-add-row-btn:hover{background:var(--blue-bg)}
 
-/* ═══ SS TABLES ═══ */
+/* SS TABLES */
 .ss-tables-wrap{display:flex;flex-direction:column;gap:14px}
 .ss-block{border:1px solid var(--border);border-radius:var(--rl);overflow:hidden}
 .ss-block-hdr{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--gray-bg);border-bottom:1px solid var(--border);gap:10px}
@@ -172,7 +188,7 @@ body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,s
 .ss-block-del:hover{color:#e24b4a;border-color:#f09595;background:#fcebeb}
 .ss-wrap{width:100%;overflow-x:auto}
 .ss-table{width:100%;border-collapse:collapse;font-size:13px;table-layout:fixed}
-.ss-table th{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);padding:8px 12px;background:var(--surface);border-bottom:1px solid var(--border);text-align:left;white-space:nowrap}
+.ss-table th{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);padding:8px 12px;background:var(--surface);border-bottom:1px solid var(--border);text-align:left}
 .ss-table td{border-bottom:1px solid var(--border);padding:0;vertical-align:top}
 .ss-table tr:last-child td{border-bottom:none}
 .ss-table td:not(:last-child),.ss-table th:not(:last-child){border-right:1px solid var(--border)}
@@ -189,9 +205,10 @@ body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,s
 .ss-new-table-btn{font-size:12px;font-weight:600;color:var(--orange);background:var(--orange-bg);border:1px solid var(--orange-bd);border-radius:6px;padding:6px 14px;cursor:pointer;transition:all .15s}
 .ss-new-table-btn:hover{background:#ffe4d8}
 
-@media(max-width:600px){
+@media(max-width:640px){
   .list-wrap{padding:16px 16px 60px}
-  .modal-panel{width:100vw}
+  .modal-overlay{padding:0}
+  .modal-panel{width:100%;max-height:100vh;border-radius:0}
   .filter-bar,.site-header{padding-left:16px;padding-right:16px}
   .panel{padding:16px}
 }
@@ -315,7 +332,6 @@ const JOBS=[
    editing:'JO choice — review J680VB and all previous iterations. Pick the most underexplored direction. Build from the strongest creative signal in the J680 family.'},
 ];
 
-// ── Storage ──────────────────────────────────────────────────
 function ls(id,k){try{return localStorage.getItem('b_'+id+'_'+k)}catch(e){return null}}
 function ss(id,k,v){try{localStorage.setItem('b_'+id+'_'+k,v)}catch(e){} flashSave()}
 let saveTimer;
@@ -325,371 +341,117 @@ function getStatus(j){return ls(j.id,'status')||j.status}
 function statusLabel(k){return(STATUSES.find(s=>s.key===k)||{label:k}).label}
 function autoResize(el){el.style.height='auto';el.style.height=el.scrollHeight+'px'}
 
-// ═══════════════════════════════════════════════════════════
 // AD SETS
-// ═══════════════════════════════════════════════════════════
-function getAdSets(jobId){try{const v=ls(jobId,'adsets');return v?JSON.parse(v):null}catch(e){return null}}
-function saveAdSets(jobId){
-  const wrap=document.getElementById('adsets_'+jobId);if(!wrap)return;
+function getAdSets(jid){try{const v=ls(jid,'adsets');return v?JSON.parse(v):null}catch(e){return null}}
+function saveAdSets(jid){
+  const w=document.getElementById('adsets_'+jid);if(!w)return;
   const sets=[];
-  wrap.querySelectorAll('.adset-block').forEach(block=>{
-    const name=block.querySelector('.adset-name-input').value||'';
+  w.querySelectorAll('.adset-block').forEach(b=>{
+    const name=b.querySelector('.adset-name-input').value||'';
     const rows=[];
-    block.querySelectorAll('.adset-row').forEach(row=>{
-      const vname=row.querySelector('.adset-row-name-input').value||'';
-      const recipe=row.querySelector('.adset-input').value||'';
-      rows.push({variant:vname,recipe});
-    });
+    b.querySelectorAll('.adset-row').forEach(r=>{rows.push({variant:r.querySelector('.adset-row-name-input').value||'',recipe:r.querySelector('.adset-input').value||''});});
     sets.push({name,rows});
   });
-  ss(jobId,'adsets',JSON.stringify(sets));
+  ss(jid,'adsets',JSON.stringify(sets));
 }
-function defaultAdSets(){
-  return[
-    {name:'AD SET 1',rows:[{variant:'V1A',recipe:'H1 + SS1'},{variant:'V1B',recipe:'H2 + SS1'},{variant:'V1C',recipe:'H1 + SS2'},{variant:'V1D',recipe:'H2 + SS2'}]},
-    {name:'AD SET 2',rows:[{variant:'V1A',recipe:'H1 + SS1'},{variant:'V1B',recipe:'H2 + SS1'},{variant:'V1C',recipe:'H1 + SS2'},{variant:'V1D',recipe:'H2 + SS2'}]},
-  ];
-}
-function renderAdSetRow(jobId,r){
-  return`<div class="adset-row">
-    <div class="adset-row-name"><input class="adset-row-name-input" value="${esc(r.variant)}" placeholder="V1A" oninput="saveAdSets('${jobId}')"></div>
-    <div class="adset-cell"><textarea class="adset-input" placeholder="e.g. H1 + SS1" oninput="saveAdSets('${jobId}')">${esc(r.recipe)}</textarea></div>
-    <div class="adset-cell" style="border-right:none"></div>
-    <button class="adset-row-del" onclick="delAdSetRow(this,'${jobId}')">×</button>
-  </div>`;
-}
-function renderAdSetBlock(jobId,set){
-  return`<div class="adset-block">
-    <div style="display:grid;grid-template-columns:110px 1fr;border-bottom:1px solid var(--border)">
-      <div class="adset-name-cell" style="grid-row:1/3">
-        <input class="adset-name-input" value="${esc(set.name)}" placeholder="AD SET 1" oninput="saveAdSets('${jobId}')">
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--border)">
-        <span style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);padding:6px 12px;background:var(--surface);border-right:1px solid var(--border)">Variant</span>
-        <span style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);padding:6px 12px;background:var(--surface)">Component Recipe</span>
-      </div>
-      <div class="adset-rows">${set.rows.map(r=>renderAdSetRow(jobId,r)).join('')}</div>
-    </div>
-    <div class="adset-add-row-wrap">
-      <button class="adset-add-row-btn" onclick="addAdSetRow(this,'${jobId}')">+ Add variant</button>
-      <button class="adset-del-btn" onclick="delAdSet(this,'${jobId}')">Remove set</button>
-    </div>
-  </div>`;
-}
-function buildAdSets(jobId){
-  const sets=getAdSets(jobId)||defaultAdSets();
-  return`<div class="adsets-wrap" id="adsets_${jobId}">
-    <div class="adsets-title-row">Ad Sets</div>
-    ${sets.map(s=>renderAdSetBlock(jobId,s)).join('')}
-    <div class="adsets-bottom"><button class="adset-new-btn" onclick="addAdSet('${jobId}')">+ Add ad set</button></div>
-  </div>`;
-}
-function addAdSet(jobId){
-  const wrap=document.getElementById('adsets_'+jobId);
-  const count=wrap.querySelectorAll('.adset-block').length+1;
-  const div=document.createElement('div');
-  div.innerHTML=renderAdSetBlock(jobId,{name:'AD SET '+count,rows:[{variant:'V1A',recipe:''},{variant:'V1B',recipe:''}]});
-  wrap.querySelector('.adsets-bottom').insertAdjacentElement('beforebegin',div.firstElementChild);
-  saveAdSets(jobId);
-}
-function addAdSetRow(btn,jobId){
-  const rowsContainer=btn.closest('.adset-block').querySelector('.adset-rows');
-  const div=document.createElement('div');
-  div.innerHTML=renderAdSetRow(jobId,{variant:'',recipe:''});
-  rowsContainer.appendChild(div.firstElementChild);
-  saveAdSets(jobId);
-}
-function delAdSetRow(btn,jobId){btn.closest('.adset-row').remove();saveAdSets(jobId)}
-function delAdSet(btn,jobId){
-  const wrap=document.getElementById('adsets_'+jobId);
-  if(wrap.querySelectorAll('.adset-block').length===1){
-    const b=btn.closest('.adset-block');
-    b.querySelectorAll('.adset-row-name-input,.adset-input').forEach(i=>{i.value='';});
-    b.querySelector('.adset-name-input').value='';
-    saveAdSets(jobId);return;
-  }
-  btn.closest('.adset-block').remove();saveAdSets(jobId);
-}
+function defaultAdSets(){return[{name:'AD SET 1',rows:[{variant:'V1A',recipe:'H1 + SS1'},{variant:'V1B',recipe:'H2 + SS1'},{variant:'V1C',recipe:'H1 + SS2'},{variant:'V1D',recipe:'H2 + SS2'}]},{name:'AD SET 2',rows:[{variant:'V1A',recipe:'H1 + SS1'},{variant:'V1B',recipe:'H2 + SS1'},{variant:'V1C',recipe:'H1 + SS2'},{variant:'V1D',recipe:'H2 + SS2'}]}]}
+function renderAdSetRow(jid,r){return`<div class="adset-row"><div class="adset-row-name"><input class="adset-row-name-input" value="${esc(r.variant)}" placeholder="V1A" oninput="saveAdSets('${jid}')"></div><div class="adset-cell"><textarea class="adset-input" placeholder="e.g. H1 + SS1" oninput="saveAdSets('${jid}')">${esc(r.recipe)}</textarea></div><div class="adset-cell" style="border-right:none"></div><button class="adset-row-del" onclick="delAdSetRow(this,'${jid}')">×</button></div>`}
+function renderAdSetBlock(jid,set){return`<div class="adset-block"><div style="display:grid;grid-template-columns:110px 1fr;border-bottom:1px solid var(--border)"><div class="adset-name-cell" style="grid-row:1/3"><input class="adset-name-input" value="${esc(set.name)}" placeholder="AD SET 1" oninput="saveAdSets('${jid}')"></div><div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--border)"><span style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);padding:6px 12px;background:var(--surface);border-right:1px solid var(--border)">Variant</span><span style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);padding:6px 12px;background:var(--surface)">Component Recipe</span></div><div class="adset-rows">${set.rows.map(r=>renderAdSetRow(jid,r)).join('')}</div></div><div class="adset-add-row-wrap"><button class="adset-add-row-btn" onclick="addAdSetRow(this,'${jid}')">+ Add variant</button><button class="adset-del-btn" onclick="delAdSet(this,'${jid}')">Remove set</button></div></div>`}
+function buildAdSets(jid){const sets=getAdSets(jid)||defaultAdSets();return`<div class="adsets-wrap" id="adsets_${jid}"><div class="adsets-title-row">Ad Sets</div>${sets.map(s=>renderAdSetBlock(jid,s)).join('')}<div class="adsets-bottom"><button class="adset-new-btn" onclick="addAdSet('${jid}')">+ Add ad set</button></div></div>`}
+function addAdSet(jid){const w=document.getElementById('adsets_'+jid);const c=w.querySelectorAll('.adset-block').length+1;const d=document.createElement('div');d.innerHTML=renderAdSetBlock(jid,{name:'AD SET '+c,rows:[{variant:'V1A',recipe:''},{variant:'V1B',recipe:''}]});w.querySelector('.adsets-bottom').insertAdjacentElement('beforebegin',d.firstElementChild);saveAdSets(jid)}
+function addAdSetRow(btn,jid){const rc=btn.closest('.adset-block').querySelector('.adset-rows');const d=document.createElement('div');d.innerHTML=renderAdSetRow(jid,{variant:'',recipe:''});rc.appendChild(d.firstElementChild);saveAdSets(jid)}
+function delAdSetRow(btn,jid){btn.closest('.adset-row').remove();saveAdSets(jid)}
+function delAdSet(btn,jid){const w=document.getElementById('adsets_'+jid);if(w.querySelectorAll('.adset-block').length===1){const b=btn.closest('.adset-block');b.querySelectorAll('.adset-row-name-input,.adset-input').forEach(i=>{i.value='';});b.querySelector('.adset-name-input').value='';saveAdSets(jid);return;}btn.closest('.adset-block').remove();saveAdSets(jid)}
 
-// ═══════════════════════════════════════════════════════════
-// HEADLINES TABLE
-// ═══════════════════════════════════════════════════════════
-function getHlRows(jobId){try{const v=ls(jobId,'hlrows');return v?JSON.parse(v):null}catch(e){return null}}
-function saveHlRows(jobId){
-  const tbl=document.getElementById('hl_tbl_'+jobId);if(!tbl)return;
-  const rows=[];
-  tbl.querySelectorAll('tr[data-type="hl"]').forEach(tr=>{
-    const cells=tr.querySelectorAll('.hl-cell');
-    rows.push({label:cells[0]?cells[0].value:'',hook:cells[1]?cells[1].value:''});
-  });
-  ss(jobId,'hlrows',JSON.stringify(rows));
-}
-function defaultHlRows(){
-  return [{label:'H1',hook:''},{label:'H2',hook:''},{label:'H3',hook:''}];
-}
-function renderHlRow(jobId,r){
-  return`<tr data-type="hl">
-    <td class="col-label"><textarea class="hl-cell" placeholder="H1" oninput="autoResize(this);saveHlRows('${jobId}')">${esc(r.label)}</textarea></td>
-    <td class="col-hook"><textarea class="hl-cell" placeholder="Hook / opener text..." oninput="autoResize(this);saveHlRows('${jobId}')">${esc(r.hook)}</textarea></td>
-    <td class="col-hldel"><button class="hl-row-del" onclick="delHlRow(this,'${jobId}')">×</button></td>
-  </tr>`;
-}
-function buildHlTable(jobId){
-  const rows=getHlRows(jobId)||defaultHlRows();
-  return`<div class="tbl-block" id="hl_block_${jobId}">
-    <div class="hl-wrap">
-      <table class="hl-table" id="hl_tbl_${jobId}">
-        <thead><tr>
-          <th class="col-label">Label</th>
-          <th class="col-hook">Hook / Opener</th>
-          <th class="col-hldel"></th>
-        </tr></thead>
-        <tbody>${rows.map(r=>renderHlRow(jobId,r)).join('')}</tbody>
-      </table>
-    </div>
-    <div class="tbl-add-row-wrap">
-      <button class="tbl-add-row-btn" onclick="addHlRow('${jobId}')">+ Add row</button>
-    </div>
-  </div>`;
-}
-function addHlRow(jobId){
-  const tbody=document.querySelector('#hl_tbl_'+jobId+' tbody');
-  const count=tbody.querySelectorAll('tr').length+1;
-  const tr=document.createElement('tr');tr.dataset.type='hl';
-  tr.innerHTML=renderHlRow(jobId,{label:'H'+count,hook:''}).replace(/^<tr[^>]*>/,'').replace(/<\/tr>$/,'');
-  tbody.appendChild(tr);saveHlRows(jobId);
-}
-function delHlRow(btn,jobId){btn.closest('tr').remove();saveHlRows(jobId)}
+// HEADLINES
+function getHlRows(jid){try{const v=ls(jid,'hlrows');return v?JSON.parse(v):null}catch(e){return null}}
+function saveHlRows(jid){const t=document.getElementById('hl_tbl_'+jid);if(!t)return;const rows=[];t.querySelectorAll('tr[data-type="hl"]').forEach(tr=>{const c=tr.querySelectorAll('.hl-cell');rows.push({label:c[0]?c[0].value:'',hook:c[1]?c[1].value:''});});ss(jid,'hlrows',JSON.stringify(rows))}
+function defaultHlRows(){return [{label:'H1',hook:''},{label:'H2',hook:''},{label:'H3',hook:''}]}
+function renderHlRow(jid,r){return`<tr data-type="hl"><td class="col-label"><textarea class="hl-cell" placeholder="H1" oninput="autoResize(this);saveHlRows('${jid}')">${esc(r.label)}</textarea></td><td><textarea class="hl-cell" placeholder="Hook / opener text..." oninput="autoResize(this);saveHlRows('${jid}')">${esc(r.hook)}</textarea></td><td class="col-hldel"><button class="hl-row-del" onclick="delHlRow(this,'${jid}')">×</button></td></tr>`}
+function buildHlTable(jid){const rows=getHlRows(jid)||defaultHlRows();return`<div class="tbl-block" id="hl_block_${jid}"><div class="hl-wrap"><table class="hl-table" id="hl_tbl_${jid}"><thead><tr><th class="col-label">Label</th><th>Hook / Opener</th><th class="col-hldel"></th></tr></thead><tbody>${rows.map(r=>renderHlRow(jid,r)).join('')}</tbody></table></div><div class="tbl-add-row-wrap"><button class="tbl-add-row-btn" onclick="addHlRow('${jid}')">+ Add row</button></div></div>`}
+function addHlRow(jid){const tb=document.querySelector('#hl_tbl_'+jid+' tbody');const c=tb.querySelectorAll('tr').length+1;const tr=document.createElement('tr');tr.dataset.type='hl';tr.innerHTML=renderHlRow(jid,{label:'H'+c,hook:''}).replace(/^<tr[^>]*>/,'').replace(/<\/tr>$/,'');tb.appendChild(tr);saveHlRows(jid)}
+function delHlRow(btn,jid){btn.closest('tr').remove();saveHlRows(jid)}
 
-// ═══════════════════════════════════════════════════════════
 // SS TABLES
-// ═══════════════════════════════════════════════════════════
-function getSsTables(jobId){try{const v=ls(jobId,'sstables');return v?JSON.parse(v):null}catch(e){return null}}
-function saveSsTables(jobId){
-  const wrap=document.getElementById('ss_wrap_'+jobId);if(!wrap)return;
-  const tables=[];
-  wrap.querySelectorAll('.ss-block').forEach(block=>{
-    const name=block.querySelector('.ss-block-name').value||'';
-    const rows=[];
-    block.querySelectorAll('tr[data-type="row"]').forEach(tr=>{
-      const c=tr.querySelectorAll('.ss-cell');
-      rows.push({copy:c[0]?c[0].value:'',visual:c[1]?c[1].value:'',notes:c[2]?c[2].value:''});
-    });
-    tables.push({name,rows});
-  });
-  ss(jobId,'sstables',JSON.stringify(tables));
-}
+function getSsTables(jid){try{const v=ls(jid,'sstables');return v?JSON.parse(v):null}catch(e){return null}}
+function saveSsTables(jid){const w=document.getElementById('ss_wrap_'+jid);if(!w)return;const tables=[];w.querySelectorAll('.ss-block').forEach(b=>{const name=b.querySelector('.ss-block-name').value||'';const rows=[];b.querySelectorAll('tr[data-type="row"]').forEach(tr=>{const c=tr.querySelectorAll('.ss-cell');rows.push({copy:c[0]?c[0].value:'',visual:c[1]?c[1].value:'',notes:c[2]?c[2].value:''});});tables.push({name,rows});});ss(jid,'sstables',JSON.stringify(tables))}
 function defaultSsTables(){return [{name:'SS1',rows:[{copy:'',visual:'',notes:''},{copy:'',visual:'',notes:''},{copy:'',visual:'',notes:''}]}]}
-function renderSsRow(jobId,r){
-  return`<tr data-type="row">
-    <td class="col-copy"><textarea class="ss-cell" placeholder="Script / copy..." oninput="autoResize(this);saveSsTables('${jobId}')">${esc(r.copy)}</textarea></td>
-    <td class="col-visual"><textarea class="ss-cell" placeholder="Visual direction..." oninput="autoResize(this);saveSsTables('${jobId}')">${esc(r.visual)}</textarea></td>
-    <td class="col-notes"><textarea class="ss-cell" placeholder="Notes / flags..." oninput="autoResize(this);saveSsTables('${jobId}')">${esc(r.notes)}</textarea></td>
-    <td class="col-del"><button class="ss-row-del" onclick="delSsRow(this,'${jobId}')">×</button></td>
-  </tr>`;
-}
-function renderSsBlock(jobId,tbl){
-  return`<div class="ss-block">
-    <div class="ss-block-hdr">
-      <input class="ss-block-name" value="${esc(tbl.name)}" placeholder="Table name (e.g. SS1)" oninput="saveSsTables('${jobId}')">
-      <button class="ss-block-del" onclick="delSsBlock(this,'${jobId}')">Remove table</button>
-    </div>
-    <div class="ss-wrap">
-      <table class="ss-table">
-        <thead><tr><th class="col-copy">Copy / Script</th><th class="col-visual">Visual Direction</th><th class="col-notes">Notes</th><th class="col-del"></th></tr></thead>
-        <tbody>${tbl.rows.map(r=>renderSsRow(jobId,r)).join('')}</tbody>
-      </table>
-    </div>
-    <div class="ss-add-row-wrap"><button class="ss-add-row-btn" onclick="addSsRow(this,'${jobId}')">+ Add row</button></div>
-  </div>`;
-}
-function buildSsSection(jobId){
-  const tables=getSsTables(jobId)||defaultSsTables();
-  return`<div class="ss-tables-wrap" id="ss_wrap_${jobId}">${tables.map(t=>renderSsBlock(jobId,t)).join('')}</div>
-  <div class="ss-bottom-bar"><button class="ss-new-table-btn" onclick="addSsTable('${jobId}')">+ Add new table</button></div>`;
-}
-function addSsTable(jobId){
-  const wrap=document.getElementById('ss_wrap_'+jobId);
-  const count=wrap.querySelectorAll('.ss-block').length+1;
-  const div=document.createElement('div');
-  div.innerHTML=renderSsBlock(jobId,{name:'SS'+count,rows:[{copy:'',visual:'',notes:''},{copy:'',visual:'',notes:''}]});
-  wrap.appendChild(div.firstElementChild);saveSsTables(jobId);
-  setTimeout(()=>wrap.querySelectorAll('.ss-cell').forEach(autoResize),30);
-}
-function addSsRow(btn,jobId){
-  const tbody=btn.closest('.ss-block').querySelector('tbody');
-  const tr=document.createElement('tr');tr.dataset.type='row';
-  tr.innerHTML=renderSsRow(jobId,{copy:'',visual:'',notes:''}).replace(/^<tr[^>]*>/,'').replace(/<\/tr>$/,'');
-  tbody.appendChild(tr);saveSsTables(jobId);
-}
-function delSsRow(btn,jobId){btn.closest('tr').remove();saveSsTables(jobId)}
-function delSsBlock(btn,jobId){
-  const block=btn.closest('.ss-block');
-  if(document.querySelectorAll('#ss_wrap_'+jobId+' .ss-block').length===1){
-    block.querySelectorAll('.ss-cell').forEach(c=>{c.value='';autoResize(c);});
-    block.querySelector('.ss-block-name').value='';
-    saveSsTables(jobId);return;
-  }
-  block.remove();saveSsTables(jobId);
-}
+function renderSsRow(jid,r){return`<tr data-type="row"><td class="col-copy"><textarea class="ss-cell" placeholder="Script / copy..." oninput="autoResize(this);saveSsTables('${jid}')">${esc(r.copy)}</textarea></td><td class="col-visual"><textarea class="ss-cell" placeholder="Visual direction..." oninput="autoResize(this);saveSsTables('${jid}')">${esc(r.visual)}</textarea></td><td class="col-notes"><textarea class="ss-cell" placeholder="Notes / flags..." oninput="autoResize(this);saveSsTables('${jid}')">${esc(r.notes)}</textarea></td><td class="col-del"><button class="ss-row-del" onclick="delSsRow(this,'${jid}')">×</button></td></tr>`}
+function renderSsBlock(jid,tbl){return`<div class="ss-block"><div class="ss-block-hdr"><input class="ss-block-name" value="${esc(tbl.name)}" placeholder="Table name (e.g. SS1)" oninput="saveSsTables('${jid}')"><button class="ss-block-del" onclick="delSsBlock(this,'${jid}')">Remove table</button></div><div class="ss-wrap"><table class="ss-table"><thead><tr><th class="col-copy">Copy / Script</th><th class="col-visual">Visual Direction</th><th class="col-notes">Notes</th><th class="col-del"></th></tr></thead><tbody>${tbl.rows.map(r=>renderSsRow(jid,r)).join('')}</tbody></table></div><div class="ss-add-row-wrap"><button class="ss-add-row-btn" onclick="addSsRow(this,'${jid}')">+ Add row</button></div></div>`}
+function buildSsSection(jid){const tables=getSsTables(jid)||defaultSsTables();return`<div class="ss-tables-wrap" id="ss_wrap_${jid}">${tables.map(t=>renderSsBlock(jid,t)).join('')}</div><div class="ss-bottom-bar"><button class="ss-new-table-btn" onclick="addSsTable('${jid}')">+ Add new table</button></div>`}
+function addSsTable(jid){const w=document.getElementById('ss_wrap_'+jid);const c=w.querySelectorAll('.ss-block').length+1;const d=document.createElement('div');d.innerHTML=renderSsBlock(jid,{name:'SS'+c,rows:[{copy:'',visual:'',notes:''},{copy:'',visual:'',notes:''}]});w.appendChild(d.firstElementChild);saveSsTables(jid);setTimeout(()=>w.querySelectorAll('.ss-cell').forEach(autoResize),30)}
+function addSsRow(btn,jid){const tb=btn.closest('.ss-block').querySelector('tbody');const tr=document.createElement('tr');tr.dataset.type='row';tr.innerHTML=renderSsRow(jid,{copy:'',visual:'',notes:''}).replace(/^<tr[^>]*>/,'').replace(/<\/tr>$/,'');tb.appendChild(tr);saveSsTables(jid)}
+function delSsRow(btn,jid){btn.closest('tr').remove();saveSsTables(jid)}
+function delSsBlock(btn,jid){const b=btn.closest('.ss-block');if(document.querySelectorAll('#ss_wrap_'+jid+' .ss-block').length===1){b.querySelectorAll('.ss-cell').forEach(c=>{c.value='';autoResize(c);});b.querySelector('.ss-block-name').value='';saveSsTables(jid);return;}b.remove();saveSsTables(jid)}
 
-// ═══════════════════════════════════════════════════════════
 // MODAL
-// ═══════════════════════════════════════════════════════════
 let curJob=null;
-
 function openModal(id){
   const j=JOBS.find(x=>x.id===id);if(!j)return;
-  curJob=j;
-  const cur=getStatus(j);
-
+  curJob=j;const cur=getStatus(j);
   const nameEl=document.getElementById('mJobName');
   nameEl.innerText=ls(j.id,'jobname')||j.name;
   nameEl.dataset.id=j.id;nameEl.dataset.key='jobname';
   nameEl.oninput=function(){ss(this.dataset.id,this.dataset.key,this.innerText)};
-
   const opts=STATUSES.map(s=>`<option value="${s.key}"${cur===s.key?' selected':''}>${s.label}</option>`).join('');
   const badges=[j.sprint,j.clientLabel,j.geo].filter(Boolean).map(b=>`<span class="badge bg">${esc(b)}</span>`).join('');
   document.getElementById('mMeta').innerHTML=`<select class="status-select status-${cur}" data-id="${j.id}" onchange="changeStatus(this)">${opts}</select>${badges}`;
-
-  // ── Job Information ──
-  const fields=j.fields.map(([k,v])=>{
-    const sv=ls(j.id,'field_'+k);const val=sv!==null?sv:v;const emp=!val;
-    return`<div class="fc"><div class="fk">${esc(k)}</div><div class="fv${emp?' empty':''}" contenteditable="true" data-id="${j.id}" data-key="field_${k}" oninput="onFieldEdit(this)" onfocus="onFocus(this)" onblur="onBlur(this)">${esc(val)||(emp?'TBD':'')}</div></div>`;
-  }).join('');
-
+  const fields=j.fields.map(([k,v])=>{const sv=ls(j.id,'field_'+k);const val=sv!==null?sv:v;const emp=!val;return`<div class="fc"><div class="fk">${esc(k)}</div><div class="fv${emp?' empty':''}" contenteditable="true" data-id="${j.id}" data-key="field_${k}" oninput="onFieldEdit(this)" onfocus="onFocus(this)" onblur="onBlur(this)">${esc(val)||(emp?'TBD':'')}</div></div>`;}).join('');
   document.getElementById('panel_jobinfo').innerHTML=`
-    <div class="panel-section">
-      <span class="section-label">Overview</span>
-      <div class="fg">${fields}</div>
-    </div>
-    <div class="panel-section">
-      <span class="section-label">Ad Sets</span>
-      ${buildAdSets(j.id)}
-    </div>
-    <div class="panel-section">
-      <span class="section-label">JO Goal</span>
-      <textarea class="ea" data-id="${j.id}" data-key="goal" oninput="onTAEdit(this)" rows="5">${esc(ls(j.id,'goal')??j.goal)}</textarea>
-    </div>
-    <div class="panel-section">
-      <span class="section-label">Editing Instructions</span>
-      <textarea class="ea" data-id="${j.id}" data-key="editing" oninput="onTAEdit(this)" rows="5">${esc(ls(j.id,'editing')??j.editing)}</textarea>
-    </div>`;
-
-  // ── Copy ──
+    <div class="panel-section"><span class="section-label">Overview</span><div class="fg">${fields}</div></div>
+    <div class="panel-section"><span class="section-label">Ad Sets</span>${buildAdSets(j.id)}</div>
+    <div class="panel-section"><span class="section-label">JO Goal</span><textarea class="ea" data-id="${j.id}" data-key="goal" oninput="onTAEdit(this)" rows="5">${esc(ls(j.id,'goal')??j.goal)}</textarea></div>
+    <div class="panel-section"><span class="section-label">Editing Instructions</span><textarea class="ea" data-id="${j.id}" data-key="editing" oninput="onTAEdit(this)" rows="5">${esc(ls(j.id,'editing')??j.editing)}</textarea></div>`;
   document.getElementById('panel_copy').innerHTML=`
-    <div class="panel-section">
-      <span class="section-label">Headlines / Openers</span>
-      ${buildHlTable(j.id)}
-    </div>
-    <div class="panel-section">
-      <span class="section-label">Sales Sequence</span>
-      ${buildSsSection(j.id)}
-    </div>`;
-
-  // reset tabs
+    <div class="panel-section"><span class="section-label">Headlines / Openers</span>${buildHlTable(j.id)}</div>
+    <div class="panel-section"><span class="section-label">Sales Sequence</span>${buildSsSection(j.id)}</div>`;
   document.querySelectorAll('.modal-tabs .tab').forEach(t=>t.classList.remove('active'));
   document.querySelectorAll('.modal-tabs .tab')[0].classList.add('active');
   document.querySelectorAll('.modal-body .panel').forEach(p=>p.classList.remove('active'));
   document.getElementById('panel_jobinfo').classList.add('active');
-
   document.getElementById('modalOverlay').classList.add('open');
   document.body.style.overflow='hidden';
-  setTimeout(()=>{
-    document.querySelectorAll('.ss-cell,.hl-cell').forEach(autoResize);
-  },60);
+  setTimeout(()=>document.querySelectorAll('.ss-cell,.hl-cell').forEach(autoResize),60);
 }
-
-function closeModal(){document.getElementById('modalOverlay').classList.remove('open');document.body.style.overflow='';curJob=null;}
+function closeModal(){document.getElementById('modalOverlay').classList.remove('open');document.body.style.overflow='';curJob=null}
 function handleOverlayClick(e){if(e.target===document.getElementById('modalOverlay'))closeModal()}
-
 function switchTab(btn,panel){
   document.querySelectorAll('.modal-tabs .tab').forEach(t=>t.classList.remove('active'));
   document.querySelectorAll('.modal-body .panel').forEach(p=>p.classList.remove('active'));
   btn.classList.add('active');document.getElementById('panel_'+panel).classList.add('active');
   if(panel==='copy')setTimeout(()=>document.querySelectorAll('.ss-cell,.hl-cell').forEach(autoResize),30);
 }
-
 function onFieldEdit(el){ss(el.dataset.id,el.dataset.key,el.innerText)}
 function onTAEdit(el){ss(el.dataset.id,el.dataset.key,el.value)}
 function onFocus(el){if(el.classList.contains('empty')){el.classList.remove('empty');if(el.innerText==='TBD')el.innerText='';}}
 function onBlur(el){if(!el.innerText.trim()){el.classList.add('empty');el.innerText='TBD';ss(el.dataset.id,el.dataset.key,'');}}
-
 function changeStatus(sel){
-  const id=sel.dataset.id;const ns=sel.value;
-  ss(id,'status',ns);
+  const id=sel.dataset.id;const ns=sel.value;ss(id,'status',ns);
   STATUSES.forEach(s=>sel.classList.remove('status-'+s.key));sel.classList.add('status-'+ns);
   const rc=document.getElementById('rc_'+id);
-  if(rc){
-    const sb=rc.querySelector('.status-badge');
-    if(sb){STATUSES.forEach(s=>sb.classList.remove('status-'+s.key));sb.classList.add('status-'+ns,'badge');sb.textContent=statusLabel(ns);}
-    rc.dataset.status=ns;
-    const tgt=document.getElementById('empty_'+ns);
-    if(tgt){let last=tgt;let nx=tgt.nextElementSibling;while(nx&&nx.classList.contains('row-card')){last=nx;nx=nx.nextElementSibling;}last.insertAdjacentElement('afterend',rc);}
-  }
+  if(rc){const sb=rc.querySelector('.status-badge');if(sb){STATUSES.forEach(s=>sb.classList.remove('status-'+s.key));sb.classList.add('status-'+ns,'badge');sb.textContent=statusLabel(ns);}rc.dataset.status=ns;const tgt=document.getElementById('empty_'+ns);if(tgt){let last=tgt;let nx=tgt.nextElementSibling;while(nx&&nx.classList.contains('row-card')){last=nx;nx=nx.nextElementSibling;}last.insertAdjacentElement('afterend',rc);}}
   updateCounts();reapplyFilter();
 }
+function copyModalLink(){if(!curJob)return;navigator.clipboard.writeText(window.location.href.split('#')[0]+'#'+curJob.id).then(()=>{const btn=document.getElementById('mCopyBtn');btn.textContent='Copied!';btn.classList.add('copied');setTimeout(()=>{btn.textContent='Copy Link';btn.classList.remove('copied');},2000);})}
 
-function copyModalLink(){
-  if(!curJob)return;
-  navigator.clipboard.writeText(window.location.href.split('#')[0]+'#'+curJob.id).then(()=>{
-    const btn=document.getElementById('mCopyBtn');
-    btn.textContent='Copied!';btn.classList.add('copied');
-    setTimeout(()=>{btn.textContent='Copy Link';btn.classList.remove('copied');},2000);
-  });
-}
-
-// ── List ─────────────────────────────────────────────────────
+// LIST
 function renderList(){
   let html='';
   STATUSES.forEach(s=>{
     const jobs=JOBS.filter(j=>getStatus(j)===s.key);
-    html+=`<div class="sec-hdr" id="sec_${s.key}">
-      <span class="sec-lbl"><span class="sec-dot" style="background:${s.color}"></span>${s.label}</span>
-      <span class="sec-line"></span>
-      <span class="sec-ct" id="ct_${s.key}">${jobs.length} job${jobs.length!==1?'s':''}</span>
-    </div>
+    html+=`<div class="sec-hdr" id="sec_${s.key}"><span class="sec-lbl"><span class="sec-dot" style="background:${s.color}"></span>${s.label}</span><span class="sec-line"></span><span class="sec-ct" id="ct_${s.key}">${jobs.length} job${jobs.length!==1?'s':''}</span></div>
     <div class="sec-empty" id="empty_${s.key}"${jobs.length?' style="display:none"':' class="sec-empty show"'}>No jobs in this section.</div>
-    ${jobs.map(j=>{
-      const cur=getStatus(j);
-      const badges=[j.sprint,j.clientLabel,j.geo].filter(Boolean).map(b=>`<span class="badge bg">${esc(b)}</span>`).join('');
-      return`<div class="row-card" id="rc_${j.id}" data-status="${cur}" data-client="${j.client}" onclick="openModal('${j.id}')">
-        <div class="row-left">
-          <div class="row-name">${esc(ls(j.id,'jobname')||j.name)}</div>
-          <div class="row-meta"><span class="badge status-badge status-${cur}">${statusLabel(cur)}</span>${badges}</div>
-        </div>
-        <div class="row-right"><button class="open-btn" onclick="event.stopPropagation();openModal('${j.id}')">Open Brief →</button></div>
-      </div>`;
-    }).join('')}`;
+    ${jobs.map(j=>{const cur=getStatus(j);const badges=[j.sprint,j.clientLabel,j.geo].filter(Boolean).map(b=>`<span class="badge bg">${esc(b)}</span>`).join('');return`<div class="row-card" id="rc_${j.id}" data-status="${cur}" data-client="${j.client}" onclick="openModal('${j.id}')"><div class="row-left"><div class="row-name">${esc(ls(j.id,'jobname')||j.name)}</div><div class="row-meta"><span class="badge status-badge status-${cur}">${statusLabel(cur)}</span>${badges}</div></div><div class="row-right"><button class="open-btn" onclick="event.stopPropagation();openModal('${j.id}')">Open Brief →</button></div></div>`;}).join('')}`;
   });
   document.getElementById('listWrap').innerHTML=html;
 }
-
-function updateCounts(){
-  STATUSES.forEach(s=>{
-    const jobs=JOBS.filter(j=>getStatus(j)===s.key);
-    const ct=document.getElementById('ct_'+s.key);const em=document.getElementById('empty_'+s.key);
-    if(ct)ct.textContent=`${jobs.length} job${jobs.length!==1?'s':''}`;
-    if(em)em.classList.toggle('show',jobs.length===0);
-  });
-}
-
+function updateCounts(){STATUSES.forEach(s=>{const jobs=JOBS.filter(j=>getStatus(j)===s.key);const ct=document.getElementById('ct_'+s.key);const em=document.getElementById('empty_'+s.key);if(ct)ct.textContent=`${jobs.length} job${jobs.length!==1?'s':''}`;if(em)em.classList.toggle('show',jobs.length===0);})}
 let curFilter='all';
 function applyFilter(f,btn){curFilter=f;document.querySelectorAll('.fb').forEach(b=>b.classList.remove('active'));btn.classList.add('active');reapplyFilter()}
-function reapplyFilter(){
-  document.querySelectorAll('.row-card').forEach(c=>c.classList.toggle('hidden',curFilter!=='all'&&c.dataset.client!==curFilter));
-  STATUSES.forEach(s=>{
-    const hdr=document.getElementById('sec_'+s.key);if(!hdr)return;
-    const vis=[...document.querySelectorAll('.row-card')].filter(c=>c.dataset.status===s.key&&!c.classList.contains('hidden'));
-    hdr.classList.toggle('hidden',vis.length===0);
-  });
-}
-
+function reapplyFilter(){document.querySelectorAll('.row-card').forEach(c=>c.classList.toggle('hidden',curFilter!=='all'&&c.dataset.client!==curFilter));STATUSES.forEach(s=>{const hdr=document.getElementById('sec_'+s.key);if(!hdr)return;const vis=[...document.querySelectorAll('.row-card')].filter(c=>c.dataset.status===s.key&&!c.classList.contains('hidden'));hdr.classList.toggle('hidden',vis.length===0);})}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
 function checkAnchor(){if(window.location.hash){const id=window.location.hash.slice(1);if(JOBS.find(x=>x.id===id))setTimeout(()=>openModal(id),120);}}
-
-renderList();
-checkAnchor();
+renderList();checkAnchor();
 </script>
 </body>
 </html>
