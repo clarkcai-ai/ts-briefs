@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Clark ‚Äî Production Briefs ¬∑ March 2026</title>
+<title>Clark &mdash; Production Briefs &middot; March 2026</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -41,7 +41,7 @@ body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,s
 .top-section{display:none}
 .top-section.active{display:block}
 
-/* ‚ïê‚ïê‚ïê IMPORT TAB ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê */
+/* === IMPORT TAB =========================================== */
 .import-wrap{max-width:800px;margin:0 auto;padding:32px 32px 80px}
 
 .import-intro{font-size:13px;color:var(--muted);margin-bottom:20px;line-height:1.7}
@@ -292,7 +292,7 @@ body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,s
 .lhdlg-ok{font-size:11px;font-weight:600;padding:4px 12px;border-radius:5px;cursor:pointer;border:none;background:var(--blue);color:#fff}
 .lhdlg-ok:hover{background:#0f4f8a}
 .lhdlg-cancel{font-size:11px;font-weight:600;padding:4px 10px;border-radius:5px;cursor:pointer;background:var(--gray-bg);color:var(--muted);border:1px solid var(--border);font-family:inherit}
-/* ‚ïê‚ïê‚ïê RICH TEXT TOOLBAR ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê */
+/* === RICH TEXT TOOLBAR ====================================== */
 .rte-toolbar{
   display:flex;align-items:center;gap:2px;
   background:#fafaf8;border-bottom:1px solid var(--border);
@@ -400,10 +400,10 @@ body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,s
 <div class="site-header">
   <div class="site-hl">
     <span class="site-title">Production Briefs</span>
-    <span class="site-sub">Clark ¬∑ March 2026</span>
+    <span class="site-sub">Clark &middot; March 2026</span>
   </div>
   <div class="site-hr">
-    <span class="save-ind" id="saveInd">‚úì Saved</span>
+    <span class="save-ind" id="saveInd">&check; Saved</span>
     <button class="data-btn" onclick="exportData()" title="Download all brief data as JSON"><svg viewBox="0 0 16 16"><path d="M8 1v9m0 0l-3-3m3 3l3-3M2 12v1.5A1.5 1.5 0 003.5 15h9a1.5 1.5 0 001.5-1.5V12"/></svg>Export</button>
     <button class="data-btn" onclick="document.getElementById('importFileInput').click()" title="Load brief data from a JSON file"><svg viewBox="0 0 16 16"><path d="M8 10V1m0 0L5 4m3-3l3 3M2 12v1.5A1.5 1.5 0 003.5 15h9a1.5 1.5 0 001.5-1.5V12"/></svg>Import</button>
     <input type="file" id="importFileInput" accept=".json" style="display:none" onchange="importData(event)">
@@ -421,25 +421,25 @@ body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,s
   </button>
 </div>
 
-<!-- ‚ïê‚ïê‚ïê IMPORT TAB ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê -->
+<!-- === IMPORT TAB =========================================== -->
 <div class="top-section active" id="section-import">
   <div class="import-wrap">
     <p class="import-intro">
-      Export your <strong>coffee pod planner</strong> as a CSV and drop it below. The tool will detect all of Clark's assigned jobs, extract the concept notes, and use AI to generate full brief drafts ‚Äî JO Goal, Editing Instructions, and job naming ‚Äî ready to add to your briefs list.
+      Export your <strong>coffee pod planner</strong> as a CSV and drop it below. The tool will detect all of Clark's assigned jobs, extract the concept notes, and use AI to generate full brief drafts &mdash; JO Goal, Editing Instructions, and job naming &mdash; ready to add to your briefs list.
     </p>
 
     <div class="drop-zone" id="dropZone">
       <input type="file" accept=".csv,.tsv,.txt,text/csv" id="fileInput" onchange="handleFileSelect(this)">
-      <div class="drop-icon">‚¨á</div>
+      <div class="drop-icon">&darr;</div>
       <div class="drop-title">Drop your planner CSV here</div>
-      <div class="drop-sub">or click to browse ¬∑ .csv or .tsv from Google Sheets export</div>
+      <div class="drop-sub">or click to browse &middot; .csv or .tsv from Google Sheets export</div>
     </div>
 
     <div class="import-results" id="importResults" style="display:none"></div>
   </div>
 </div>
 
-<!-- ‚ïê‚ïê‚ïê BRIEFS TAB ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê -->
+<!-- === BRIEFS TAB =========================================== -->
 <div class="top-section" id="section-briefs">
   <div class="filter-bar">
     <span class="fl">Filter</span>
@@ -464,7 +464,7 @@ body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,s
       </div>
       <div class="modal-hdr-r">
         <button class="cl-btn" id="mCopyBtn" onclick="copyModalLink()">Copy Link</button>
-        <button class="close-btn" onclick="closeModal()">‚úï</button>
+        <button class="close-btn" onclick="closeModal()">&times;</button>
       </div>
     </div>
     <div class="modal-tabs">
@@ -472,8 +472,8 @@ body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,s
       <button class="tab" onclick="switchTab(this,'copy')">Copy</button>
     </div>
     <div class="rte-toolbar" id="rteToolbar">
-      <button class="rte-btn" data-cmd="undo" title="Undo (‚åòZ)"><svg viewBox="0 0 16 16"><polyline points="2 6 2 2 6 2" fill="none"/><path d="M2 2L6.5 6.5" fill="none"/><path d="M4 8a6 6 0 0110 4" fill="none"/></svg></button>
-      <button class="rte-btn" data-cmd="redo" title="Redo (‚åò‚áßZ)"><svg viewBox="0 0 16 16"><polyline points="14 6 14 2 10 2" fill="none"/><path d="M14 2L9.5 6.5" fill="none"/><path d="M12 8a6 6 0 01-10 4" fill="none"/></svg></button>
+      <button class="rte-btn" data-cmd="undo" title="Undo (Cmd+Z)"><svg viewBox="0 0 16 16"><polyline points="2 6 2 2 6 2" fill="none"/><path d="M2 2L6.5 6.5" fill="none"/><path d="M4 8a6 6 0 0110 4" fill="none"/></svg></button>
+      <button class="rte-btn" data-cmd="redo" title="Redo (Cmd+Shift+Z)"><svg viewBox="0 0 16 16"><polyline points="14 6 14 2 10 2" fill="none"/><path d="M14 2L9.5 6.5" fill="none"/><path d="M12 8a6 6 0 01-10 4" fill="none"/></svg></button>
       <div class="rte-sep"></div>
       <select class="rte-heading-select" id="rteHeadingSelect" title="Heading level">
         <option value="p">Normal</option>
@@ -482,12 +482,12 @@ body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,s
         <option value="h3">Heading 3</option>
       </select>
       <div class="rte-sep"></div>
-      <button class="rte-btn" data-cmd="bold" title="Bold (‚åòB)"><b>B</b></button>
-      <button class="rte-btn" data-cmd="italic" title="Italic (‚åòI)"><i>I</i></button>
-      <button class="rte-btn" data-cmd="underline" title="Underline (‚åòU)"><u>U</u></button>
+      <button class="rte-btn" data-cmd="bold" title="Bold (Cmd+B)"><b>B</b></button>
+      <button class="rte-btn" data-cmd="italic" title="Italic (Cmd+I)"><i>I</i></button>
+      <button class="rte-btn" data-cmd="underline" title="Underline (Cmd+U)"><u>U</u></button>
       <button class="rte-btn" data-cmd="strikeThrough" title="Strikethrough"><s>S</s></button>
       <div class="rte-sep"></div>
-      <button class="rte-btn" data-cmd="createLink" title="Insert link (‚åòK)"><svg viewBox="0 0 16 16"><path d="M6.5 9.5a3.5 3.5 0 005 0l2-2a3.5 3.5 0 00-5-5l-1 1" fill="none"/><path d="M9.5 6.5a3.5 3.5 0 00-5 0l-2 2a3.5 3.5 0 005 5l1-1" fill="none"/></svg></button>
+      <button class="rte-btn" data-cmd="createLink" title="Insert link (Cmd+K)"><svg viewBox="0 0 16 16"><path d="M6.5 9.5a3.5 3.5 0 005 0l2-2a3.5 3.5 0 00-5-5l-1 1" fill="none"/><path d="M9.5 6.5a3.5 3.5 0 00-5 0l-2 2a3.5 3.5 0 005 5l1-1" fill="none"/></svg></button>
       <button class="rte-btn" id="rteImgBtn" title="Insert image"><svg viewBox="0 0 16 16"><rect x="1.5" y="2.5" width="13" height="11" rx="1.5" fill="none"/><circle cx="5" cy="6" r="1.3" fill="currentColor" stroke="none"/><polyline points="1.5 11 5 7.5 8 10.5 10.5 8 14.5 12" fill="none"/></svg></button>
       <div class="rte-sep"></div>
       <button class="rte-btn" data-cmd="justifyLeft" title="Align left"><svg viewBox="0 0 16 16"><line x1="1" y1="2" x2="15" y2="2"/><line x1="1" y1="5.5" x2="10" y2="5.5"/><line x1="1" y1="9" x2="15" y2="9"/><line x1="1" y1="12.5" x2="10" y2="12.5"/></svg></button>
@@ -543,15 +543,15 @@ let JOBS=[
   {id:'j1814',status:'working',client:'ILMKG',name:'J1814_ILMKG_Adapt1_CP10_TOF_ListicleAdapt3_WULT',sprint:'Sprint 03/02',clientLabel:'Il Makiage',geo:'CANADA',
    fields:[['Job Owner','Clark'],['Client','Il Makiage'],['Job Type','Adapt'],['Platform','Meta'],['Funnel Stage','TOF'],['Creative Format','Video'],['SKU','WULT'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Base Job #','DRMTLGY ref (adapt3)'],['Music','Yes'],['Total Ad Sets','2'],['Style','Same as base'],['Goal Demo','Novice / lapsed foundation users'],['Total # of Videos','']],
    goal:'Canada geo version of ILMKG WULT listicle adapt3. Testing whether the DRMTLGY listicle format holds in the Canada market.',
-   editing:'Same structure as J1809. Canada geo ‚Äî no offer language. Shade Match as hero. Single UGC talent.'},
-  {id:'j523',status:'working',client:'PRTLI',name:'J523_PRTLI_Adapt1_CP10_FF_EvergreenBouquet_PrettyLitter',sprint:'Sprint 03/09',clientLabel:'PrettyLitter',geo:'USA ¬∑ No offer',
+   editing:'Same structure as J1809. Canada geo &mdash; no offer language. Shade Match as hero. Single UGC talent.'},
+  {id:'j523',status:'working',client:'PRTLI',name:'J523_PRTLI_Adapt1_CP10_FF_EvergreenBouquet_PrettyLitter',sprint:'Sprint 03/09',clientLabel:'PrettyLitter',geo:'USA &middot; No offer',
    fields:[['Job Owner','Clark'],['Client','PrettyLitter'],['Job Type','Adapt'],['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],['SKU','PrettyLitter'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Base Job #','J125v1a, J457v1c, J101v1a, J146v1d'],['Music','Yes'],['Total Ad Sets','2'],['Offer','None (Evergreen)'],['Persona','Devoted Cat Parent / Smell-focused'],['Total # of Videos','']],
    goal:'Refreshing the top performer bouquet without any GWP offer language. Non-GWP versions expand audience eligibility and allow accurate FF creative measurement.',
    editing:'Adapt top performers J125v1a, J457v1c, J101v1a, J146v1d. Remove all GWP / promotional offer language. Refresh footage and VO where needed. USA geo.'},
-  {id:'j524',status:'working',client:'PRTLI',name:'J524_PRTLI_Adapt1_CP10_FF_EvergreenBouquet_PrettyLitter',sprint:'Sprint 03/09',clientLabel:'PrettyLitter',geo:'CANADA ¬∑ $19.99',
+  {id:'j524',status:'working',client:'PRTLI',name:'J524_PRTLI_Adapt1_CP10_FF_EvergreenBouquet_PrettyLitter',sprint:'Sprint 03/09',clientLabel:'PrettyLitter',geo:'CANADA &middot; $19.99',
    fields:[['Job Owner','Clark'],['Client','PrettyLitter'],['Job Type','Adapt'],['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],['SKU','PrettyLitter'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Base Job #','J125v1a, J457v1c, J101v1a, J146v1d'],['Music','Yes'],['Total Ad Sets','2'],['Offer','First bag $19.99 (Canada)'],['Persona','Devoted Cat Parent / Smell-focused'],['Total # of Videos','']],
    goal:'Canada geo version of J523. Same top performer bouquet refresh without GWP, adapted for Canada pricing ($19.99 first bag).',
-   editing:'Same as J523. Remove GWP language. Canada geo ‚Äî update pricing to first bag $19.99.'},
+   editing:'Same as J523. Remove GWP language. Canada geo &mdash; update pricing to first bag $19.99.'},
   {id:'j525',status:'working',client:'PRTLI',name:'J525_PRTLI_More1_CP10_FF_SmashcutBouquet_PrettyLitter',sprint:'Sprint 03/09',clientLabel:'PrettyLitter',geo:'USA',
    fields:[['Job Owner','Clark'],['Client','PrettyLitter'],['Job Type','More'],['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],['SKU','PrettyLitter'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Base Job #','Smashcut bouquet top performers'],['Music','Yes'],['Total Ad Sets','2'],['Persona','Devoted Cat Parent / Smell-focused'],['Style','Same as base (smashcut)'],['Total # of Videos','TBD']],
    goal:'More volume on the smashcut bouquet top performers. Adding creative supply within the same entity ID to extend runway.',
@@ -560,45 +560,45 @@ let JOBS=[
    fields:[['Job Owner','Clark'],['Client','Pair Eyewear'],['Job Type','More'],['Platform','Meta'],['Funnel Stage',''],['Creative Format','GFX / Interactive'],['SKU','Pair Eyewear'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','None'],['Base Job #','J87'],['Music','Yes'],['Total Ad Sets','2'],['Style','Same as base (GFX game)'],['Goal Demo',''],['Total # of Videos','']],
    goal:'Refreshing J87 GFX/Game format with current Pair Eyewear offers.',
    editing:'Update J87 GFX/game format. Swap all old offer language for current promotions. Keep the interactive/game structure fully intact.'},
-  {id:'j526',status:'planning',client:'PRTLI',name:'J526_PRTLI_More1_CP10_MOF_CatDadOdorControl_PrettyLitter',sprint:'Sprint 03/02',clientLabel:'PrettyLitter',geo:'USA ¬∑ $14.99',
+  {id:'j526',status:'planning',client:'PRTLI',name:'J526_PRTLI_More1_CP10_MOF_CatDadOdorControl_PrettyLitter',sprint:'Sprint 03/02',clientLabel:'PrettyLitter',geo:'USA &middot; $14.99',
    fields:[['Job Owner','Clark'],['Client','PrettyLitter'],['Job Type','More'],['Platform','Meta'],['Funnel Stage','MOF'],['Creative Format','Video'],['SKU','PrettyLitter'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Offer','First bag $14.99'],['Music','Yes'],['Total Ad Sets','2'],['Persona','Millennial Cat Dads'],['Text Treatment','Reply-to-comment'],['Total # of Videos','']],
    goal:'New odor-specific MOF creative targeting millennial cat dads. Odor control is the primary driver for this segment.',
    editing:'Reply-to-comment format. MOF. Hook: "Okay the UTI color changing thing is cool, but I mainly care about odor control." First bag $14.99. USA geo.'},
   {id:'j2162',status:'planning',client:'KTSCH',name:'J2162_KTSCH_More1_CP10_FF_TravelabilityAdapt_Bars',sprint:'Sprint 03/16',clientLabel:'Kitsch',geo:'',
    fields:[['Job Owner','Clark'],['Client','Kitsch'],['Job Type','More'],['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],['SKU','Shampoo Bars'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Base Job #','J2011v1b'],['Music','Yes'],['Total Ad Sets','2'],['Style','Same as base'],['Reference','J2011v1b'],['Total # of Videos','']],
    goal:'Adapting J2011v1b (Liquid Shampoo top performer) into Shampoo Bars with a travelability angle added.',
-   editing:'Adapt J2011v1b for Shampoo Bars. Add travelability messaging ‚Äî TSA-friendly, no liquid bag needed. Maintain same structure and pacing.'},
-  {id:'j538',status:'planning',client:'PRTLI',name:'J538_PRTLI_Adapt1_CP10_FF_JOChoice1499_PrettyLitter',sprint:'Sprint 03/16',clientLabel:'PrettyLitter',geo:'USA ¬∑ $14.99',
-   fields:[['Job Owner','Clark'],['Client','PrettyLitter'],['Job Type','Adapt'],['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],['SKU','PrettyLitter'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Offer','First bag $14.99'],['Music','Yes'],['Total Ad Sets','2'],['Persona','Devoted Cat Parent'],['Style','JO choice ‚Äî match base'],['Total # of Videos','']],
+   editing:'Adapt J2011v1b for Shampoo Bars. Add travelability messaging &mdash; TSA-friendly, no liquid bag needed. Maintain same structure and pacing.'},
+  {id:'j538',status:'planning',client:'PRTLI',name:'J538_PRTLI_Adapt1_CP10_FF_JOChoice1499_PrettyLitter',sprint:'Sprint 03/16',clientLabel:'PrettyLitter',geo:'USA &middot; $14.99',
+   fields:[['Job Owner','Clark'],['Client','PrettyLitter'],['Job Type','Adapt'],['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],['SKU','PrettyLitter'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Offer','First bag $14.99'],['Music','Yes'],['Total Ad Sets','2'],['Persona','Devoted Cat Parent'],['Style','JO choice &mdash; match base'],['Total # of Videos','']],
    goal:'Adapting existing PrettyLitter top performer into the $14.99 first bag offer. JO has creative discretion on base selection.',
    editing:'JO choice on base. Adapt into $14.99 first bag offer. Update callouts, end cards, lower thirds. USA geo.'},
-  {id:'j537a',status:'planning',client:'PRTLI',name:'J537_PRTLI_More1_CP10_FF_JOChoice1999_PrettyLitter',sprint:'Sprint 03/16',clientLabel:'PrettyLitter',geo:'USA ¬∑ $19.99',
-   fields:[['Job Owner','Clark'],['Client','PrettyLitter'],['Job Type','More'],['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],['SKU','PrettyLitter'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Offer','First bag $19.99'],['Music','Yes'],['Total Ad Sets','2'],['Persona','Devoted Cat Parent'],['Style','JO choice ‚Äî match base'],['Total # of Videos','']],
+  {id:'j537a',status:'planning',client:'PRTLI',name:'J537_PRTLI_More1_CP10_FF_JOChoice1999_PrettyLitter',sprint:'Sprint 03/16',clientLabel:'PrettyLitter',geo:'USA &middot; $19.99',
+   fields:[['Job Owner','Clark'],['Client','PrettyLitter'],['Job Type','More'],['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],['SKU','PrettyLitter'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Offer','First bag $19.99'],['Music','Yes'],['Total Ad Sets','2'],['Persona','Devoted Cat Parent'],['Style','JO choice &mdash; match base'],['Total # of Videos','']],
    goal:'More volume on the $19.99 first bag offer. USA geo. Parallel to J538.',
    editing:'JO choice on base. Update offer language to first bag $19.99. USA geo.'},
-  {id:'j537b',status:'planning',client:'PRTLI',name:'J537_PRTLI_More1_CP10_FF_JOChoice1499Canada_PrettyLitter',sprint:'Sprint 03/16',clientLabel:'PrettyLitter',geo:'CANADA ¬∑ $14.99',
-   fields:[['Job Owner','Clark'],['Client','PrettyLitter'],['Job Type','More'],['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],['SKU','PrettyLitter'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Offer','First bag $14.99 (Canada)'],['Music','Yes'],['Total Ad Sets','2'],['Persona','Devoted Cat Parent'],['Style','JO choice ‚Äî match base'],['Total # of Videos','']],
+  {id:'j537b',status:'planning',client:'PRTLI',name:'J537_PRTLI_More1_CP10_FF_JOChoice1499Canada_PrettyLitter',sprint:'Sprint 03/16',clientLabel:'PrettyLitter',geo:'CANADA &middot; $14.99',
+   fields:[['Job Owner','Clark'],['Client','PrettyLitter'],['Job Type','More'],['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],['SKU','PrettyLitter'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Offer','First bag $14.99 (Canada)'],['Music','Yes'],['Total Ad Sets','2'],['Persona','Devoted Cat Parent'],['Style','JO choice &mdash; match base'],['Total # of Videos','']],
    goal:'Canada geo, $14.99 first bag. Testing price sensitivity parallel to J539 Canada.',
    editing:'JO choice on base. Update offer to first bag $14.99. Canada geo.'},
   {id:'j1844',status:'planning',client:'ILMKG',name:'J1844_ILMKG_Adapt1_CP10_MOF_AntiAgingStaticBouquet_PLUMP',sprint:'Sprint 03/16',clientLabel:'Il Makiage',geo:'',
    fields:[['Job Owner','Clark'],['Client','Il Makiage'],['Job Type','Adapt'],['Platform','Meta'],['Funnel Stage','MOF'],['Creative Format','Static'],['SKU','Power Lift Plumping Cream (PLUMP)'],['Aspect Ratio','1x1 / 4x5'],['VO','None'],['Base Job #','1803V1A, 1749V1A, 1766V1D, 1652V1D'],['Music','No'],['Total Ad Sets','2'],['Persona','Anti-aging (35+)'],['Style','Port from WULT statics'],['Total # of Videos','4 statics (1x1 + 4x5 each)']],
    goal:'Limited static supply on PLUMP anti-aging angle. Porting four best-spending WULT statics to PLUMP. TBYB language must be removed.',
-   editing:'Port four statics from WULT to PLUMP. Remove TBYB from all.\n‚Äî 1803V1A ‚Üí adapt to PLUMP\n‚Äî 1749V1A ‚Üí remove TBYB, quiz CTA\n‚Äî 1766V1D ‚Üí us vs. them format\n‚Äî 1652V1D ‚Üí whiteboard: "You\'re only as old as you look"; overlay: "no lies detected"\nDeliver 1x1 and 4x5 cuts each.'},
-  {id:'j539',status:'planning',client:'PRTLI',name:'J539_PRTLI_More1_CP10_FF_JOChoice1999Canada_PrettyLitter',sprint:'Sprint 03/16',clientLabel:'PrettyLitter',geo:'CANADA ¬∑ $19.99',
-   fields:[['Job Owner','Clark'],['Client','PrettyLitter'],['Job Type','More'],['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],['SKU','PrettyLitter'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Offer','First bag $19.99 (Canada)'],['Music','Yes'],['Total Ad Sets','2'],['Persona','Devoted Cat Parent'],['Style','JO choice ‚Äî match base'],['Total # of Videos','']],
+   editing:'Port four statics from WULT to PLUMP. Remove TBYB from all.\n&mdash; 1803V1A &rarr; adapt to PLUMP\n&mdash; 1749V1A &rarr; remove TBYB, quiz CTA\n&mdash; 1766V1D &rarr; us vs. them format\n&mdash; 1652V1D &rarr; whiteboard: "You\'re only as old as you look"; overlay: "no lies detected"\nDeliver 1x1 and 4x5 cuts each.'},
+  {id:'j539',status:'planning',client:'PRTLI',name:'J539_PRTLI_More1_CP10_FF_JOChoice1999Canada_PrettyLitter',sprint:'Sprint 03/16',clientLabel:'PrettyLitter',geo:'CANADA &middot; $19.99',
+   fields:[['Job Owner','Clark'],['Client','PrettyLitter'],['Job Type','More'],['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],['SKU','PrettyLitter'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Offer','First bag $19.99 (Canada)'],['Music','Yes'],['Total Ad Sets','2'],['Persona','Devoted Cat Parent'],['Style','JO choice &mdash; match base'],['Total # of Videos','']],
    goal:'Canada geo, $19.99 first bag. Testing price point performance in Canada.',
    editing:'JO choice on base. Update offer to first bag $19.99. Canada geo.'},
   {id:'j16',status:'planning',client:'JAVVY',name:'J16_JAVVY_Adapt1_CP10_FF_Top3Flavors_JavvyCoffee',sprint:'Sprint 03/16',clientLabel:'Javvy Coffee',geo:'',
-   fields:[['Job Owner','Clark'],['Client','Javvy Coffee'],['Job Type','Adapt'],['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],['SKU','Javvy Coffee'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Reference','Scentbird listicle format'],['Music','Yes'],['Total Ad Sets','2'],['Angle','Top 3 flavors ‚Äî taste-led, anti-chalky'],['Hook','"Top 3 protein coffee flavors that don\'t taste chalky"'],['Total # of Videos','']],
+   fields:[['Job Owner','Clark'],['Client','Javvy Coffee'],['Job Type','Adapt'],['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],['SKU','Javvy Coffee'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Reference','Scentbird listicle format'],['Music','Yes'],['Total Ad Sets','2'],['Angle','Top 3 flavors &mdash; taste-led, anti-chalky'],['Hook','"Top 3 protein coffee flavors that don\'t taste chalky"'],['Total # of Videos','']],
    goal:'Review analysis flagged flavor differentiation as a major untapped opportunity. Adapting Scentbird\'s listicle format to test whether taste-led listicles drive Javvy conversions.',
-   editing:'Listicle format ‚Äî model on Scentbird top performer structure. Lead with top 3 flavors. Roll into: no chalky taste, 30g protein, feel full all morning.'},
+   editing:'Listicle format &mdash; model on Scentbird top performer structure. Lead with top 3 flavors. Roll into: no chalky taste, 30g protein, feel full all morning.'},
   {id:'j770',status:'planning',client:'STBRD',name:'J770_STBRD_More1_CP10_BOF_J680VBJOChoice_Cologne',sprint:'Sprint 03/16',clientLabel:'Scentbird',geo:'Cologne',
-   fields:[['Job Owner','Clark'],['Client','Scentbird'],['Job Type','More'],['Platform','Meta'],['Funnel Stage','BOF'],['Creative Format','Video'],['SKU','Cologne'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Base Job #','J680VB'],['Music','Yes'],['Total Ad Sets','2'],['Style','JO choice ‚Äî see J680VB iteration history'],['Reference','J680VB + prior iterations'],['Total # of Videos','']],
-   goal:'JO choice iteration on J680VB (Cologne BOF). Audience is warm ‚Äî priority is closing efficiency and offer clarity.',
-   editing:'JO choice ‚Äî review J680VB and all previous iterations. Pick the most underexplored direction. Build from the strongest creative signal in the J680 family.'},
+   fields:[['Job Owner','Clark'],['Client','Scentbird'],['Job Type','More'],['Platform','Meta'],['Funnel Stage','BOF'],['Creative Format','Video'],['SKU','Cologne'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Base Job #','J680VB'],['Music','Yes'],['Total Ad Sets','2'],['Style','JO choice &mdash; see J680VB iteration history'],['Reference','J680VB + prior iterations'],['Total # of Videos','']],
+   goal:'JO choice iteration on J680VB (Cologne BOF). Audience is warm &mdash; priority is closing efficiency and offer clarity.',
+   editing:'JO choice &mdash; review J680VB and all previous iterations. Pick the most underexplored direction. Build from the strongest creative signal in the J680 family.'},
 ];
 
-// ‚ïê‚ïê‚ïê STORAGE ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê
+// === STORAGE ================================================
 function ls(id,k){try{return localStorage.getItem('b_'+id+'_'+k)}catch(e){return null}}
 function ss(id,k,v){try{localStorage.setItem('b_'+id+'_'+k,v)}catch(e){} flashSave()}
 let saveTimer;
@@ -608,7 +608,7 @@ function getStatus(j){return ls(j.id,'status')||j.status}
 function statusLabel(k){return(STATUSES.find(s=>s.key===k)||{label:k}).label}
 function autoResize(el){el.style.height='auto';el.style.height=el.scrollHeight+'px'}
 
-// ‚ïê‚ïê‚ïê EXPORT / IMPORT ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê
+// === EXPORT / IMPORT ========================================
 function exportData(){
   const data={};
   for(let i=0;i<localStorage.length;i++){
@@ -645,7 +645,7 @@ function importData(ev){
   ev.target.value='';
 }
 
-// ‚ïê‚ïê‚ïê TOP-LEVEL TABS ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê
+// === TOP-LEVEL TABS ==========================================
 function switchTopTab(name,btn){
   document.querySelectorAll('.top-tab').forEach(b=>b.classList.remove('active'));
   document.querySelectorAll('.top-section').forEach(s=>s.classList.remove('active'));
@@ -653,7 +653,7 @@ function switchTopTab(name,btn){
   document.getElementById('section-'+name).classList.add('active');
 }
 
-// ‚ïê‚ïê‚ïê CSV PARSER ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê
+// === CSV PARSER ==============================================
 function parseCSV(text){
   const rows=[];
   let row=[],cell='',inQ=false;
@@ -712,7 +712,7 @@ function extractJobsFromCSV(rows){
     row.forEach((cell,colIdx)=>{
       if(!clarkRe.test(cell))return;
 
-      // Found a Clark cell ‚Äî extract context from this row
+      // Found a Clark cell &mdash; extract context from this row
       const allCells=row.filter(c=>c&&c.trim());
       const clarksRow=row;
 
@@ -798,7 +798,7 @@ function extractJobsFromCSV(rows){
   });
 }
 
-// ‚ïê‚ïê‚ïê DRAG & DROP ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê
+// === DRAG & DROP =============================================
 const dropZone=document.getElementById('dropZone');
 dropZone.addEventListener('dragover',e=>{e.preventDefault();dropZone.classList.add('dragover')});
 dropZone.addEventListener('dragleave',()=>dropZone.classList.remove('dragover'));
@@ -824,7 +824,7 @@ function processFile(file){
   reader.readAsText(file);
 }
 
-// ‚ïê‚ïê‚ïê IMPORT RESULTS RENDER ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê
+// === IMPORT RESULTS RENDER ===================================
 let importJobs=[];
 
 function renderImportResults(jobs,totalRows){
@@ -839,7 +839,7 @@ function renderImportResults(jobs,totalRows){
 
   const html=`
     <div class="import-results-header">
-      <span class="import-results-title">${jobs.length} job${jobs.length!==1?'s':''} detected ‚Äî Clark's assignments from this planner</span>
+      <span class="import-results-title">${jobs.length} job${jobs.length!==1?'s':''} detected &mdash; Clark's assignments from this planner</span>
       <button class="import-gen-all-btn" id="genAllBtn" onclick="generateAllBriefs()">Generate All Briefs</button>
     </div>
     ${jobs.map((j,i)=>renderImportCard(j,i)).join('')}`;
@@ -855,18 +855,18 @@ function renderImportCard(j,i){
   return`<div class="import-job-card" id="ic_${i}">
   <div class="import-job-hdr">
     <div class="import-job-hdr-l">
-      <div class="import-job-name">${esc(j.clientLabel)} ‚Äî ${esc(j.concept.slice(0,70))}${j.concept.length>70?'‚Ä¶':''}</div>
+      <div class="import-job-name">${esc(j.clientLabel)} &mdash; ${esc(j.concept.slice(0,70))}${j.concept.length>70?'...':''}</div>
       <div class="import-job-meta">${clientBadge}${geo}${funnelBadge}${formatBadge}${j.sku?`<span class="badge bg">${esc(j.sku)}</span>`:''}</div>
     </div>
   </div>
   <div class="import-job-body">
     <div class="import-field-row">
       <div class="import-fc"><div class="import-fk">Client</div><div class="import-fv">${esc(j.clientLabel)}</div></div>
-      <div class="import-fc"><div class="import-fk">Funnel Stage</div><div class="import-fv">${esc(j.funnel)||'‚Äî'}</div></div>
-      <div class="import-fc"><div class="import-fk">Format</div><div class="import-fv">${esc(j.format)||'‚Äî'}</div></div>
+      <div class="import-fc"><div class="import-fk">Funnel Stage</div><div class="import-fv">${esc(j.funnel)||'&mdash;'}</div></div>
+      <div class="import-fc"><div class="import-fk">Format</div><div class="import-fv">${esc(j.format)||'&mdash;'}</div></div>
       <div class="import-fc"><div class="import-fk">SKU</div><div class="import-fv ${j.sku?'':'empty'}">${esc(j.sku)||'TBD'}</div></div>
       <div class="import-fc"><div class="import-fk">Job Type</div><div class="import-fv">${esc(j.jobType)}</div></div>
-      <div class="import-fc"><div class="import-fk">Base/Ref</div><div class="import-fv ${j.ref?'':'empty'}">${esc(j.ref)||'‚Äî'}</div></div>
+      <div class="import-fc"><div class="import-fk">Base/Ref</div><div class="import-fv ${j.ref?'':'empty'}">${esc(j.ref)||'&mdash;'}</div></div>
     </div>
     <div class="import-concept">${esc(j.concept)}</div>
     <div id="ic_state_${i}">
@@ -890,7 +890,7 @@ CLIENT: ${j.clientLabel} (code: ${j.clientCode})
 AD ACCOUNT / GEO: ${j.adAccount||'USA'}
 FUNNEL STAGE: ${j.funnel||'FF'}
 FORMAT: ${j.format||'Video'}
-SKU / PRODUCT: ${j.sku||'(unknown ‚Äî infer from concept)'}
+SKU / PRODUCT: ${j.sku||'(unknown &mdash; infer from concept)'}
 JOB TYPE: ${j.jobType}
 OFFER: ${j.offer||'none specified'}
 PERSONA: ${j.persona||'not specified'}
@@ -899,7 +899,7 @@ RAW CONCEPT NOTES FROM PLANNER:
 ${j.concept}
 
 TubeScience terminology:
-- JO Goal = what is being tested, why this concept, what success looks like (2‚Äì3 sentences, reference job IDs/data where mentioned)
+- JO Goal = what is being tested, why this concept, what success looks like (2-3 sentences, reference job IDs/data where mentioned)
 - Editing Instructions = specific direction for the editor: structure, pacing, assets, variants, GFX notes
 - Job naming convention: J[#]_[CLIENTCODE]_[Type][#]_CP10_[Funnel]_[ConceptName]_[SKU]
   - Type: New / More / Adapt
@@ -950,7 +950,7 @@ Return ONLY valid JSON, no markdown, no explanation:
       </div>
       <div class="import-gen-wrap" style="margin-top:10px">
         <button class="import-gen-btn" onclick="generateOneBrief(${i})">Regenerate</button>
-        <button class="import-add-btn" onclick="addImportedBrief(${i},this)">Add to Briefs ‚Üí</button>
+        <button class="import-add-btn" onclick="addImportedBrief(${i},this)">Add to Briefs &rarr;</button>
       </div>`;
   }catch(err){
     stateEl.innerHTML=`
@@ -963,7 +963,7 @@ Return ONLY valid JSON, no markdown, no explanation:
 
 async function generateAllBriefs(){
   const btn=document.getElementById('genAllBtn');
-  btn.disabled=true;btn.textContent='Generating‚Ä¶';
+  btn.disabled=true;btn.textContent='Generating...';
   for(let i=0;i<importJobs.length;i++){
     if(!importJobs[i]._generated&&!importJobs[i]._added){
       await generateOneBrief(i);
@@ -999,7 +999,7 @@ function addImportedBrief(i,btn){
 
   JOBS.push(newJob);
   importJobs[i]._added=true;
-  btn.textContent='Added ‚úì';btn.classList.add('added');btn.disabled=true;
+  btn.textContent='Added &check;';btn.classList.add('added');btn.disabled=true;
 
   // Update count badge
   updateBriefCount();
@@ -1010,8 +1010,8 @@ function updateBriefCount(){
   document.getElementById('briefsCount').textContent=JOBS.length;
 }
 
-// ‚ïê‚ïê‚ïê AD SETS ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê
-// ‚ïê‚ïê‚ïê LINKS / REFERENCES ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê
+// === AD SETS =================================================
+// === LINKS / REFERENCES =====================================
 function getLinks(jid){try{const v=ls(jid,'links');return v?JSON.parse(v):null}catch(e){return null}}
 function saveLinks(jid){
   const tbl=document.getElementById('links_tbl_'+jid);if(!tbl)return;
@@ -1030,9 +1030,9 @@ function renderLinkRow(jid,r){
     <td class="col-link-label"><input class="link-label-input" value="${esc(r.label)}" placeholder="Label" oninput="saveLinks('${jid}')"></td>
     <td><div class="link-url-cell">
       <input class="link-url-input${hasUrl?' has-url':''}" value="${esc(r.url)}" placeholder="https://..." oninput="onLinkUrlInput(this,'${jid}')" onkeydown="if(event.key==='Enter'&&this.value)openLink(this.value)">
-      <button class="link-open-btn" onclick="openLinkFromRow(this)" title="Open link">‚Üó</button>
+      <button class="link-open-btn" onclick="openLinkFromRow(this)" title="Open link">&nearr;</button>
     </div></td>
-    <td class="col-link-del"><button class="link-row-del" onclick="delLinkRow(this,'${jid}')">√ó</button></td>
+    <td class="col-link-del"><button class="link-row-del" onclick="delLinkRow(this,'${jid}')">&times;</button></td>
   </tr>`;
 }
 function buildLinksTable(jid){
@@ -1068,7 +1068,7 @@ function openLinkFromRow(btn){
 function getAdSets(jid){try{const v=ls(jid,'adsets');return v?JSON.parse(v):null}catch(e){return null}}
 function saveAdSets(jid){const w=document.getElementById('adsets_'+jid);if(!w)return;const sets=[];w.querySelectorAll('.adset-block').forEach(b=>{const name=b.querySelector('.adset-name-input').value||'';const rows=[];b.querySelectorAll('.adset-row').forEach(r=>{rows.push({variant:r.querySelector('.adset-row-name-input').value||'',recipe:r.querySelector('.adset-input')?r.querySelector('.adset-input').innerHTML:''});});sets.push({name,rows});});ss(jid,'adsets',JSON.stringify(sets))}
 function defaultAdSets(){return[{name:'AD SET 1',rows:[{variant:'V1A',recipe:'H1 + SS1'},{variant:'V1B',recipe:'H2 + SS1'},{variant:'V1C',recipe:'H1 + SS2'},{variant:'V1D',recipe:'H2 + SS2'}]},{name:'AD SET 2',rows:[{variant:'V1A',recipe:'H1 + SS1'},{variant:'V1B',recipe:'H2 + SS1'},{variant:'V1C',recipe:'H1 + SS2'},{variant:'V1D',recipe:'H2 + SS2'}]}]}
-function renderAdSetRow(jid,r){return`<div class="adset-row"><div class="adset-row-name"><input class="adset-row-name-input" value="${esc(r.variant)}" placeholder="V1A" oninput="saveAdSets('${jid}')"></div><div class="adset-cell"><div class="adset-input rte-adset" contenteditable="true" data-placeholder="e.g. H1 + SS1" oninput="saveAdSets('${jid}')">${toRteHtml(r.recipe)}</div></div><div class="adset-cell" style="border-right:none"></div><button class="adset-row-del" onclick="delAdSetRow(this,'${jid}')">√ó</button></div>`}
+function renderAdSetRow(jid,r){return`<div class="adset-row"><div class="adset-row-name"><input class="adset-row-name-input" value="${esc(r.variant)}" placeholder="V1A" oninput="saveAdSets('${jid}')"></div><div class="adset-cell"><div class="adset-input rte-adset" contenteditable="true" data-placeholder="e.g. H1 + SS1" oninput="saveAdSets('${jid}')">${toRteHtml(r.recipe)}</div></div><div class="adset-cell" style="border-right:none"></div><button class="adset-row-del" onclick="delAdSetRow(this,'${jid}')">&times;</button></div>`}
 function renderAdSetBlock(jid,set){return`<div class="adset-block"><div style="display:grid;grid-template-columns:110px 1fr;border-bottom:1px solid var(--border)"><div class="adset-name-cell" style="grid-row:1/3"><input class="adset-name-input" value="${esc(set.name)}" placeholder="AD SET 1" oninput="saveAdSets('${jid}')"></div><div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--border)"><span style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);padding:6px 12px;background:var(--surface);border-right:1px solid var(--border)">Variant</span><span style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);padding:6px 12px;background:var(--surface)">Component Recipe</span></div><div class="adset-rows">${set.rows.map(r=>renderAdSetRow(jid,r)).join('')}</div></div><div class="adset-add-row-wrap"><button class="adset-add-row-btn" onclick="addAdSetRow(this,'${jid}')">+ Add variant</button><button class="adset-del-btn" onclick="delAdSet(this,'${jid}')">Remove set</button></div></div>`}
 function buildAdSets(jid){const sets=getAdSets(jid)||defaultAdSets();return`<div class="adsets-wrap" id="adsets_${jid}"><div class="adsets-title-row">Ad Sets</div>${sets.map(s=>renderAdSetBlock(jid,s)).join('')}<div class="adsets-bottom"><button class="adset-new-btn" onclick="addAdSet('${jid}')">+ Add ad set</button></div></div>`}
 function addAdSet(jid){const w=document.getElementById('adsets_'+jid);const c=w.querySelectorAll('.adset-block').length+1;const d=document.createElement('div');d.innerHTML=renderAdSetBlock(jid,{name:'AD SET '+c,rows:[{variant:'V1A',recipe:''},{variant:'V1B',recipe:''}]});w.querySelector('.adsets-bottom').insertAdjacentElement('beforebegin',d.firstElementChild);saveAdSets(jid)}
@@ -1076,20 +1076,20 @@ function addAdSetRow(btn,jid){const rc=btn.closest('.adset-block').querySelector
 function delAdSetRow(btn,jid){btn.closest('.adset-row').remove();saveAdSets(jid)}
 function delAdSet(btn,jid){const w=document.getElementById('adsets_'+jid);if(w.querySelectorAll('.adset-block').length===1){const b=btn.closest('.adset-block');b.querySelectorAll('.adset-row-name-input').forEach(i=>{i.value='';});b.querySelectorAll('.adset-input').forEach(i=>{i.innerHTML='';});b.querySelector('.adset-name-input').value='';saveAdSets(jid);return;}btn.closest('.adset-block').remove();saveAdSets(jid)}
 
-// ‚ïê‚ïê‚ïê HEADLINES ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê
+// === HEADLINES ================================================
 function getHlRows(jid){try{const v=ls(jid,'hlrows');return v?JSON.parse(v):null}catch(e){return null}}
 function saveHlRows(jid){const t=document.getElementById('hl_tbl_'+jid);if(!t)return;const rows=[];t.querySelectorAll('tr[data-type="hl"]').forEach(tr=>{const c=tr.querySelectorAll('.hl-cell');rows.push({label:c[0]?c[0].innerHTML:'',hook:c[1]?c[1].innerHTML:''});});ss(jid,'hlrows',JSON.stringify(rows))}
 function defaultHlRows(){return [{label:'H1',hook:''},{label:'H2',hook:''},{label:'H3',hook:''}]}
-function renderHlRow(jid,r){return`<tr data-type="hl"><td class="col-label"><div class="hl-cell rte-cell" contenteditable="true" data-placeholder="H1" oninput="saveHlRows('${jid}')">${toRteHtml(r.label)}</div></td><td><div class="hl-cell rte-cell" contenteditable="true" data-placeholder="Hook / opener text..." oninput="saveHlRows('${jid}')">${toRteHtml(r.hook)}</div></td><td class="col-hldel"><button class="hl-row-del" onclick="delHlRow(this,'${jid}')">√ó</button></td></tr>`}
+function renderHlRow(jid,r){return`<tr data-type="hl"><td class="col-label"><div class="hl-cell rte-cell" contenteditable="true" data-placeholder="H1" oninput="saveHlRows('${jid}')">${toRteHtml(r.label)}</div></td><td><div class="hl-cell rte-cell" contenteditable="true" data-placeholder="Hook / opener text..." oninput="saveHlRows('${jid}')">${toRteHtml(r.hook)}</div></td><td class="col-hldel"><button class="hl-row-del" onclick="delHlRow(this,'${jid}')">&times;</button></td></tr>`}
 function buildHlTable(jid){const rows=getHlRows(jid)||defaultHlRows();return`<div class="tbl-block" id="hl_block_${jid}"><div class="hl-wrap"><table class="hl-table" id="hl_tbl_${jid}"><thead><tr><th class="col-label">Label</th><th>Hook / Opener</th><th class="col-hldel"></th></tr></thead><tbody>${rows.map(r=>renderHlRow(jid,r)).join('')}</tbody></table></div><div class="tbl-add-row-wrap"><button class="tbl-add-row-btn" onclick="addHlRow('${jid}')">+ Add row</button></div></div>`}
 function addHlRow(jid){const tb=document.querySelector('#hl_tbl_'+jid+' tbody');const c=tb.querySelectorAll('tr').length+1;const tr=document.createElement('tr');tr.dataset.type='hl';tr.innerHTML=renderHlRow(jid,{label:'H'+c,hook:''}).replace(/^<tr[^>]*>/,'').replace(/<\/tr>$/,'');tb.appendChild(tr);saveHlRows(jid)}
 function delHlRow(btn,jid){btn.closest('tr').remove();saveHlRows(jid)}
 
-// ‚ïê‚ïê‚ïê SS TABLES ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê
+// === SS TABLES ================================================
 function getSsTables(jid){try{const v=ls(jid,'sstables');return v?JSON.parse(v):null}catch(e){return null}}
 function saveSsTables(jid){const w=document.getElementById('ss_wrap_'+jid);if(!w)return;const tables=[];w.querySelectorAll('.ss-block').forEach(b=>{const name=b.querySelector('.ss-block-name').value||'';const rows=[];b.querySelectorAll('tr[data-type="row"]').forEach(tr=>{const c=tr.querySelectorAll('.ss-cell');rows.push({copy:c[0]?c[0].innerHTML:'',visual:c[1]?c[1].innerHTML:'',notes:c[2]?c[2].innerHTML:''});});tables.push({name,rows});});ss(jid,'sstables',JSON.stringify(tables))}
 function defaultSsTables(){return [{name:'SS1',rows:[{copy:'',visual:'',notes:''},{copy:'',visual:'',notes:''},{copy:'',visual:'',notes:''}]}]}
-function renderSsRow(jid,r){return`<tr data-type="row"><td class="col-copy"><div class="ss-cell rte-cell" contenteditable="true" data-placeholder="Script / copy..." oninput="saveSsTables('${jid}')">${toRteHtml(r.copy)}</div></td><td class="col-visual"><div class="ss-cell rte-cell" contenteditable="true" data-placeholder="Visual direction..." oninput="saveSsTables('${jid}')">${toRteHtml(r.visual)}</div></td><td class="col-notes"><div class="ss-cell rte-cell" contenteditable="true" data-placeholder="Notes / flags..." oninput="saveSsTables('${jid}')">${toRteHtml(r.notes)}</div></td><td class="col-del"><button class="ss-row-del" onclick="delSsRow(this,'${jid}')">√ó</button></td></tr>`}
+function renderSsRow(jid,r){return`<tr data-type="row"><td class="col-copy"><div class="ss-cell rte-cell" contenteditable="true" data-placeholder="Script / copy..." oninput="saveSsTables('${jid}')">${toRteHtml(r.copy)}</div></td><td class="col-visual"><div class="ss-cell rte-cell" contenteditable="true" data-placeholder="Visual direction..." oninput="saveSsTables('${jid}')">${toRteHtml(r.visual)}</div></td><td class="col-notes"><div class="ss-cell rte-cell" contenteditable="true" data-placeholder="Notes / flags..." oninput="saveSsTables('${jid}')">${toRteHtml(r.notes)}</div></td><td class="col-del"><button class="ss-row-del" onclick="delSsRow(this,'${jid}')">&times;</button></td></tr>`}
 function renderSsBlock(jid,tbl){return`<div class="ss-block"><div class="ss-block-hdr"><input class="ss-block-name" value="${esc(tbl.name)}" placeholder="Table name (e.g. SS1)" oninput="saveSsTables('${jid}')"><button class="ss-block-del" onclick="delSsBlock(this,'${jid}')">Remove table</button></div><div class="ss-wrap"><table class="ss-table"><thead><tr><th class="col-copy">Copy / Script</th><th class="col-visual">Visual Direction</th><th class="col-notes">Notes</th><th class="col-del"></th></tr></thead><tbody>${tbl.rows.map(r=>renderSsRow(jid,r)).join('')}</tbody></table></div><div class="ss-add-row-wrap"><button class="ss-add-row-btn" onclick="addSsRow(this,'${jid}')">+ Add row</button></div></div>`}
 function buildSsSection(jid){const tables=getSsTables(jid)||defaultSsTables();return`<div class="ss-tables-wrap" id="ss_wrap_${jid}">${tables.map(t=>renderSsBlock(jid,t)).join('')}</div><div class="ss-bottom-bar"><button class="ss-new-table-btn" onclick="addSsTable('${jid}')">+ Add new table</button></div>`}
 function addSsTable(jid){const w=document.getElementById('ss_wrap_'+jid);const c=w.querySelectorAll('.ss-block').length+1;const d=document.createElement('div');d.innerHTML=renderSsBlock(jid,{name:'SS'+c,rows:[{copy:'',visual:'',notes:''},{copy:'',visual:'',notes:''}]});w.appendChild(d.firstElementChild);saveSsTables(jid)}
@@ -1097,7 +1097,7 @@ function addSsRow(btn,jid){const tb=btn.closest('.ss-block').querySelector('tbod
 function delSsRow(btn,jid){btn.closest('tr').remove();saveSsTables(jid)}
 function delSsBlock(btn,jid){const b=btn.closest('.ss-block');if(document.querySelectorAll('#ss_wrap_'+jid+' .ss-block').length===1){b.querySelectorAll('.ss-cell').forEach(c=>{c.innerHTML='';});b.querySelector('.ss-block-name').value='';saveSsTables(jid);return;}b.remove();saveSsTables(jid)}
 
-// ‚ïê‚ïê‚ïê MODAL ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê
+// === MODAL ====================================================
 let curJob=null;
 function openModal(id){
   const j=JOBS.find(x=>x.id===id);if(!j)return;
@@ -1149,7 +1149,7 @@ function changeStatus(sel){
 }
 function copyModalLink(){if(!curJob)return;navigator.clipboard.writeText(window.location.href.split('#')[0]+'#'+curJob.id).then(()=>{const btn=document.getElementById('mCopyBtn');btn.textContent='Copied!';btn.classList.add('copied');setTimeout(()=>{btn.textContent='Copy Link';btn.classList.remove('copied');},2000)})}
 
-// ‚ïê‚ïê‚ïê LIST ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê
+// === LIST =====================================================
 function renderList(){
   let html='';
   STATUSES.forEach(s=>{
@@ -1160,7 +1160,7 @@ function renderList(){
       const cur=getStatus(j);
       const badges=[j.sprint,j.clientLabel,j.geo].filter(Boolean).map(b=>`<span class="badge bg">${esc(b)}</span>`).join('');
       const isNew=j.id.startsWith('imported_')?`<span class="badge badge-new">New</span>`:'';
-      return`<div class="row-card" id="rc_${j.id}" data-status="${cur}" data-client="${j.client}" onclick="openModal('${j.id}')"><div class="row-left"><div class="row-name">${esc(ls(j.id,'jobname')||j.name)}</div><div class="row-meta"><span class="badge status-badge status-${cur}">${statusLabel(cur)}</span>${isNew}${badges}</div></div><div class="row-right"><button class="open-btn" onclick="event.stopPropagation();openModal('${j.id}')">Open Brief ‚Üí</button></div></div>`;
+      return`<div class="row-card" id="rc_${j.id}" data-status="${cur}" data-client="${j.client}" onclick="openModal('${j.id}')"><div class="row-left"><div class="row-name">${esc(ls(j.id,'jobname')||j.name)}</div><div class="row-meta"><span class="badge status-badge status-${cur}">${statusLabel(cur)}</span>${isNew}${badges}</div></div><div class="row-right"><button class="open-btn" onclick="event.stopPropagation();openModal('${j.id}')">Open Brief &rarr;</button></div></div>`;
     }).join('')}`;
   });
   document.getElementById('listWrap').innerHTML=html;
@@ -1173,7 +1173,7 @@ function reapplyFilter(){document.querySelectorAll('.row-card').forEach(c=>c.cla
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(document.getElementById('rteLinkDlg')?.classList.contains('open'))return;closeModal();}});
 function checkAnchor(){if(window.location.hash){const id=window.location.hash.slice(1);if(JOBS.find(x=>x.id===id)){switchTopTab('briefs',document.querySelectorAll('.top-tab')[1]);setTimeout(()=>openModal(id),120);}}}
 
-// ‚ïê‚ïê‚ïê RICH TEXT EDITOR ENGINE ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê
+// === RICH TEXT EDITOR ENGINE ================================
 // Deferred to run after DOM is fully parsed (toolbar HTML is below the script)
 document.addEventListener('DOMContentLoaded',function(){
   const toolbar=document.getElementById('rteToolbar');
@@ -1287,7 +1287,7 @@ document.addEventListener('DOMContentLoaded',function(){
     if(_activeRTE)updateToolbarState();
   });
 
-  // ‚îÄ‚îÄ KEYBOARD SHORTCUTS ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ
+  // -- KEYBOARD SHORTCUTS -------------------------------------
   document.addEventListener('keydown',function(e){
     const el=getActiveRTE();
     if(!el)return;
@@ -1313,7 +1313,7 @@ document.addEventListener('DOMContentLoaded',function(){
     }
   });
 
-  // ‚îÄ‚îÄ PASTE CLEANING ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ
+  // -- PASTE CLEANING ----------------------------------------
   document.addEventListener('paste',function(e){
     const el=getActiveRTE();
     if(!el)return;
@@ -1340,7 +1340,7 @@ document.addEventListener('DOMContentLoaded',function(){
       el.dispatchEvent(new Event('input',{bubbles:true}));
       return;
     }
-    // Plain text ‚Äî let browser handle (already inserts text)
+    // Plain text &mdash; let browser handle (already inserts text)
   });
 
   function cleanPastedHtml(html){
@@ -1371,7 +1371,7 @@ document.addEventListener('DOMContentLoaded',function(){
     return result;
   }
 
-  // ‚îÄ‚îÄ IMAGE DRAG & DROP ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ
+  // -- IMAGE DRAG & DROP ---------------------------------------
   document.addEventListener('dragover',function(e){
     const el=e.target.closest&&e.target.closest(RTE_SEL);
     if(!el)return;
@@ -1427,7 +1427,7 @@ document.addEventListener('DOMContentLoaded',function(){
     reader.readAsDataURL(file);
   }
 
-  // ‚îÄ‚îÄ IMAGE RESIZING ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ
+  // -- IMAGE RESIZING -----------------------------------------
   function makeImgResizable(img){
     let startX,startY,startW,startH,resizing=false;
     img.style.cursor='default';
@@ -1480,7 +1480,7 @@ document.addEventListener('DOMContentLoaded',function(){
   });
   mo.observe(document.body,{childList:true,subtree:true});
 
-  // ‚îÄ‚îÄ RTE LINK DIALOG ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ
+  // -- RTE LINK DIALOG ----------------------------------------
   const linkDlg=document.getElementById('rteLinkDlg');
   const linkUrlIn=document.getElementById('rteLinkUrl');
   const linkTextIn=document.getElementById('rteLinkText');
@@ -1526,7 +1526,7 @@ document.addEventListener('DOMContentLoaded',function(){
   });
 });
 
-// ‚îÄ‚îÄ LINK HELPER ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ
+// -- LINK HELPER -------------------------------------------
 var _lhTA=null,_lhS=0,_lhE=0;
 
 function lhOpen(ta){
