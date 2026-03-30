@@ -103,6 +103,27 @@ body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,s
 .import-empty{text-align:center;padding:40px;color:var(--faint);font-size:13px;font-style:italic}
 .import-error{background:#fcebeb;border:1px solid #f09595;border-radius:var(--r);padding:10px 14px;font-size:12px;color:#a32d2d;margin-top:12px}
 
+/* Screenshot upload */
+.import-steps{display:flex;gap:16px;margin-bottom:20px;align-items:flex-start}
+.import-step{flex:1}
+.import-step-label{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.import-step-num{width:20px;height:20px;border-radius:50%;background:var(--gray-bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--muted)}
+.import-step-num.done{background:var(--green-bg);border-color:var(--green);color:var(--green)}
+.drop-zone-sm{border:2px dashed var(--border);border-radius:var(--r);padding:20px 16px;text-align:center;cursor:pointer;transition:all .2s;background:var(--surface);position:relative;min-height:100px}
+.drop-zone-sm:hover,.drop-zone-sm.dragover{border-color:var(--orange);background:var(--orange-bg)}
+.drop-zone-sm input[type="file"]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.drop-zone-sm .drop-title{font-size:13px;font-weight:600;margin-bottom:4px}
+.drop-zone-sm .drop-sub{font-size:11px;color:var(--faint)}
+.screenshot-preview{margin-top:8px;border:1px solid var(--border);border-radius:var(--r);overflow:hidden;position:relative}
+.screenshot-preview img{width:100%;display:block}
+.screenshot-preview .ocr-overlay{position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:600}
+.jnum-match{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;color:var(--green);background:var(--green-bg);border:1px solid var(--green-bd);border-radius:4px;padding:2px 8px}
+.jnum-match.unmatched{color:var(--faint);background:var(--gray-bg);border-color:var(--border)}
+.jnum-list{margin-top:10px;display:flex;flex-wrap:wrap;gap:6px}
+.jnum-chip{font-size:11px;font-weight:600;background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-bd);border-radius:5px;padding:3px 9px}
+.jnum-chip.matched{background:var(--green-bg);color:var(--green);border-color:var(--green-bd);text-decoration:line-through;opacity:.5}
+@media(max-width:640px){.import-steps{flex-direction:column}}
+
 /* FILTER BAR */
 .filter-bar{background:var(--surface);border-bottom:1px solid var(--border);padding:9px 32px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
 .fl{font-size:10px;font-weight:700;color:var(--faint);letter-spacing:.08em;text-transform:uppercase;margin-right:3px}
@@ -425,14 +446,28 @@ body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,s
 <div class="top-section active" id="section-import">
   <div class="import-wrap">
     <p class="import-intro">
-      Export your <strong>coffee pod planner</strong> as a CSV and drop it below. The tool will detect all of Clark's assigned jobs, extract the concept notes, and use AI to generate full brief drafts &mdash; JO Goal, Editing Instructions, and job naming &mdash; ready to add to your briefs list.
+      <strong>Step 1:</strong> Upload your Coffeepod screenshot to extract J-numbers. <strong>Step 2:</strong> Drop your planner CSV. The tool will match J-numbers to concepts and generate full briefs with correct naming.
     </p>
 
-    <div class="drop-zone" id="dropZone">
-      <input type="file" accept=".csv,.tsv,.txt,text/csv" id="fileInput" onchange="handleFileSelect(this)">
-      <div class="drop-icon">&darr;</div>
-      <div class="drop-title">Drop your planner CSV here</div>
-      <div class="drop-sub">or click to browse &middot; .csv or .tsv from Google Sheets export</div>
+    <div class="import-steps">
+      <div class="import-step">
+        <div class="import-step-label"><span class="import-step-num" id="stepNum1">1</span> Planner Screenshot (optional)</div>
+        <div class="drop-zone-sm" id="screenshotZone">
+          <input type="file" accept="image/*" id="screenshotInput" onchange="handleScreenshotSelect(this)">
+          <div class="drop-title">Drop screenshot here</div>
+          <div class="drop-sub">PNG or JPG of your job assignments from Coffeepod</div>
+        </div>
+        <div id="screenshotPreview" style="display:none"></div>
+        <div id="jnumResults" style="display:none"></div>
+      </div>
+      <div class="import-step">
+        <div class="import-step-label"><span class="import-step-num" id="stepNum2">2</span> Planner CSV</div>
+        <div class="drop-zone-sm" id="dropZone">
+          <input type="file" accept=".csv,.tsv,.txt,text/csv" id="fileInput" onchange="handleFileSelect(this)">
+          <div class="drop-title">Drop planner CSV here</div>
+          <div class="drop-sub">.csv or .tsv from Google Sheets export</div>
+        </div>
+      </div>
     </div>
 
     <div class="import-results" id="importResults" style="display:none"></div>
@@ -798,6 +833,103 @@ function extractJobsFromCSV(rows){
   });
 }
 
+// === SCREENSHOT OCR & J-NUMBER EXTRACTION ====================
+let extractedJNumbers=[];
+
+function handleScreenshotSelect(input){
+  const file=input.files[0];
+  if(file)processScreenshot(file);
+}
+
+async function processScreenshot(file){
+  const preview=document.getElementById('screenshotPreview');
+  const results=document.getElementById('jnumResults');
+  
+  // Show preview with loading overlay
+  const reader=new FileReader();
+  reader.onload=async function(e){
+    const base64=e.target.result.split(',')[1];
+    const mediaType=file.type||'image/png';
+    
+    preview.style.display='block';
+    preview.innerHTML=`<div class="screenshot-preview"><img src="${e.target.result}"><div class="ocr-overlay"><span class="gen-loading">Extracting J-numbers...</span></div></div>`;
+    
+    try{
+      const res=await fetch('https://api.anthropic.com/v1/messages',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({
+          model:'claude-sonnet-4-20250514',
+          max_tokens:1000,
+          messages:[{role:'user',content:[
+            {type:'image',source:{type:'base64',media_type:mediaType,data:base64}},
+            {type:'text',text:`Extract all job requests from this Coffeepod project management screenshot. For each row, extract the job ID (starts with J and a number), the client code, job type, and description.
+
+Return ONLY valid JSON, no markdown, no explanation:
+{"jobs":[{"jobId":"J1853","clientCode":"ILMKG","jobType":"More1","description":"Il Makiage WULT More1"},...]}`}
+          ]}]
+        })
+      });
+      const data=await res.json();
+      const raw=data.content?.find(b=>b.type==='text')?.text||'{}';
+      const clean=raw.replace(/```json|```/g,'').trim();
+      const parsed=JSON.parse(clean);
+      extractedJNumbers=parsed.jobs||[];
+      
+      // Update preview - remove overlay
+      preview.innerHTML=`<div class="screenshot-preview"><img src="${e.target.result}" style="max-height:120px;object-fit:cover"></div>`;
+      document.getElementById('stepNum1').classList.add('done');
+      document.getElementById('stepNum1').textContent='✓';
+      
+      // Show extracted J-numbers
+      results.style.display='block';
+      results.innerHTML=`<div class="jnum-list">${extractedJNumbers.map(j=>`<span class="jnum-chip" id="jchip_${j.jobId}">${esc(j.jobId)} · ${esc(j.clientCode)} · ${esc(j.description||j.jobType||'')}</span>`).join('')}</div>`;
+      
+      // If planner was already imported, re-render to show matches
+      if(importJobs.length)renderImportResults(importJobs,0);
+      
+    }catch(err){
+      preview.innerHTML=`<div class="import-error">Screenshot OCR failed: ${esc(String(err))}. You can still import the CSV without J-numbers.</div>`;
+    }
+  };
+  reader.readAsDataURL(file);
+}
+
+function matchJNumber(importedJob){
+  if(!extractedJNumbers.length)return null;
+  // Try to match by client code + job type + SKU keywords
+  const candidates=extractedJNumbers.filter(j=>{
+    const code=(j.clientCode||'').toUpperCase();
+    const iCode=(importedJob.clientCode||'').toUpperCase();
+    return code===iCode||code.includes(iCode)||iCode.includes(code);
+  });
+  if(!candidates.length)return null;
+  if(candidates.length===1)return candidates[0];
+  
+  // Score candidates by keyword overlap with concept/sku/jobType
+  const conceptWords=(importedJob.concept+' '+importedJob.sku+' '+importedJob.jobType).toLowerCase().split(/\W+/).filter(w=>w.length>2);
+  let best=null,bestScore=0;
+  candidates.forEach(c=>{
+    const desc=(c.description+' '+c.jobType+' '+c.jobId).toLowerCase();
+    let score=0;
+    conceptWords.forEach(w=>{if(desc.includes(w))score++;});
+    // Bonus for job type match
+    if(importedJob.jobType&&c.jobType&&c.jobType.toLowerCase().includes(importedJob.jobType.toLowerCase()))score+=3;
+    if(score>bestScore){bestScore=score;best=c;}
+  });
+  return best;
+}
+
+// === SCREENSHOT DRAG & DROP ==================================
+const screenshotZone=document.getElementById('screenshotZone');
+screenshotZone.addEventListener('dragover',e=>{e.preventDefault();screenshotZone.classList.add('dragover')});
+screenshotZone.addEventListener('dragleave',()=>screenshotZone.classList.remove('dragover'));
+screenshotZone.addEventListener('drop',e=>{
+  e.preventDefault();screenshotZone.classList.remove('dragover');
+  const file=e.dataTransfer.files[0];
+  if(file&&file.type.startsWith('image/'))processScreenshot(file);
+});
+
 // === DRAG & DROP =============================================
 const dropZone=document.getElementById('dropZone');
 dropZone.addEventListener('dragover',e=>{e.preventDefault();dropZone.classList.add('dragover')});
@@ -819,6 +951,8 @@ function processFile(file){
     const text=e.target.result;
     const rows=parseCSV(text);
     const jobs=extractJobsFromCSV(rows);
+    document.getElementById('stepNum2').classList.add('done');
+    document.getElementById('stepNum2').textContent='\u2713';
     renderImportResults(jobs,rows.length);
   };
   reader.readAsText(file);
@@ -851,11 +985,20 @@ function renderImportCard(j,i){
   const clientBadge=`<span class="badge bg">${esc(j.clientLabel)}</span>`;
   const funnelBadge=j.funnel?`<span class="badge bg">${esc(j.funnel)}</span>`:'';
   const formatBadge=j.format?`<span class="badge bg">${esc(j.format)}</span>`:'';
+  
+  // J-number match
+  const match=matchJNumber(j);
+  j._matchedJNum=match;
+  const jnumBadge=match
+    ?`<span class="jnum-match">${esc(match.jobId)}</span>`
+    :`<span class="jnum-match unmatched">J# TBD</span>`;
+  // Mark chip as matched
+  if(match){const chip=document.getElementById('jchip_'+match.jobId);if(chip)chip.classList.add('matched');}
 
   return`<div class="import-job-card" id="ic_${i}">
   <div class="import-job-hdr">
     <div class="import-job-hdr-l">
-      <div class="import-job-name">${esc(j.clientLabel)} &mdash; ${esc(j.concept.slice(0,70))}${j.concept.length>70?'...':''}</div>
+      <div class="import-job-name">${jnumBadge} ${esc(j.clientLabel)} &mdash; ${esc(j.concept.slice(0,70))}${j.concept.length>70?'...':''}</div>
       <div class="import-job-meta">${clientBadge}${geo}${funnelBadge}${formatBadge}${j.sku?`<span class="badge bg">${esc(j.sku)}</span>`:''}</div>
     </div>
   </div>
@@ -884,6 +1027,7 @@ async function generateOneBrief(i){
   const stateEl=document.getElementById('ic_state_'+i);
   stateEl.innerHTML=`<div class="gen-loading">Generating brief...</div>`;
 
+  const jNum=j._matchedJNum?j._matchedJNum.jobId:'J[#]';
   const prompt=`You are Clark Cai, a TubeScience Creative Strategist. Parse this sprint planner row and generate a production brief.
 
 CLIENT: ${j.clientLabel} (code: ${j.clientCode})
@@ -895,20 +1039,21 @@ JOB TYPE: ${j.jobType}
 OFFER: ${j.offer||'none specified'}
 PERSONA: ${j.persona||'not specified'}
 BASE / REFERENCE: ${j.ref||'none'}
+ASSIGNED J-NUMBER: ${jNum}
 RAW CONCEPT NOTES FROM PLANNER:
 ${j.concept}
 
 TubeScience terminology:
 - JO Goal = what is being tested, why this concept, what success looks like (2-3 sentences, reference job IDs/data where mentioned)
 - Editing Instructions = specific direction for the editor: structure, pacing, assets, variants, GFX notes
-- Job naming convention: J[#]_[CLIENTCODE]_[Type][#]_CP10_[Funnel]_[ConceptName]_[SKU]
-  - Type: New / More / Adapt
-  - Funnel: FF / TOF / MOF / BOF
-  - ConceptName: CamelCase up to 4 words
+- Job naming convention (Coffeepod format): ${jNum}_[CLIENTCODE]_[Type][#]_Sprint Week XX/XX Clark - [Client] [SKU/Description] [Type][#]
+  - Type: New / More1 / Adapt1 / Upgrade1
+  - Use the Sprint Week date from the planner context
+  - Example: J1853_ILMKG_More1_Sprint Week 03/23 Clark - Il Makiage WULT More1
 
 Return ONLY valid JSON, no markdown, no explanation:
 {
-  "jobName": "J[#]_${j.clientCode}_${j.jobType}1_CP10_${j.funnel||'FF'}_ConceptName_${j.sku||'SKU'}",
+  "jobName": "${jNum}_${j.clientCode}_${j.jobType}1_Sprint Week XX/XX Clark - ${j.clientLabel} ${j.sku||'[SKU]'} ${j.jobType}1",
   "funnel": "...",
   "format": "...",
   "sku": "...",
@@ -982,8 +1127,8 @@ function addImportedBrief(i,btn){
     id:newId,
     status:'planning',
     client:j.clientCode,
-    name:g.jobName||`J[#]_${j.clientCode}_${j.jobType}1_CP10_${j.funnel}_NewBrief_${j.sku||'SKU'}`,
-    sprint:'Imported',
+    name:g.jobName||`${j._matchedJNum?j._matchedJNum.jobId:'J[#]'}_${j.clientCode}_${j.jobType}1_Sprint Week XX/XX Clark - ${j.clientLabel} ${j.sku||'SKU'} ${j.jobType}1`,
+    sprint:'Sprint 03/23',
     clientLabel:j.clientLabel,
     geo:j.adAccount||'',
     fields:[
