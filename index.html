@@ -108,6 +108,9 @@ body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,s
 
 .import-empty{text-align:center;padding:40px;color:var(--faint);font-size:13px;font-style:italic}
 .import-error{background:#fcebeb;border:1px solid #f09595;border-radius:var(--r);padding:10px 14px;font-size:12px;color:#a32d2d;margin-top:12px}
+.import-jobname-row{display:flex;align-items:center;gap:8px;margin-bottom:10px;background:var(--blue-bg);border:1px solid var(--blue-bd);border-radius:var(--r);padding:7px 10px}
+.import-jobname-label{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--blue);white-space:nowrap;flex-shrink:0}
+.import-jobname-input{flex:1;font-size:12px;font-weight:600;color:var(--text);background:none;border:none;outline:none;font-family:monospace;min-width:0}
 
 /* Screenshot upload */
 .import-steps{display:flex;gap:16px;margin-bottom:20px;align-items:flex-start}
@@ -1012,6 +1015,13 @@ function renderImportResults(jobs,totalRows){
   container.innerHTML=html;
 }
 
+function computeJobName(j){
+  const jNum=j._matchedJNum?j._matchedJNum.jobId:'J[#]';
+  const sprint=j._sprint||'XX/XX';
+  const sku=j.sku||'[SKU]';
+  return`${jNum}_${j.clientCode}_${j.jobType}1_Sprint Week ${sprint} Clark - ${j.clientLabel} ${sku} ${j.jobType}1`;
+}
+
 function renderImportCard(j,i){
   const geo=j.adAccount?`<span class="badge bg">${esc(j.adAccount)}</span>`:'';
   const clientBadge=`<span class="badge bg">${esc(j.clientLabel)}</span>`;
@@ -1027,6 +1037,10 @@ function renderImportCard(j,i){
   // Mark chip as matched
   if(match){const chip=document.getElementById('jchip_'+match.jobId);if(chip)chip.classList.add('matched');}
 
+  // Auto-compute job name if not manually edited
+  if(!j._jobNameEdited) j._jobName=computeJobName(j);
+  const jobNameVal=j._jobName||computeJobName(j);
+
   return`<div class="import-job-card" id="ic_${i}">
   <div class="import-job-hdr">
     <div class="import-job-hdr-l">
@@ -1035,6 +1049,10 @@ function renderImportCard(j,i){
     </div>
   </div>
   <div class="import-job-body">
+    <div class="import-jobname-row">
+      <span class="import-jobname-label">Job Name</span>
+      <input class="import-jobname-input" id="icname_${i}" value="${esc(jobNameVal)}" oninput="importJobs[${i}]._jobName=this.value;importJobs[${i}]._jobNameEdited=true;" placeholder="J[#]_CLIENT_Type1_Sprint Week XX/XX Clark - Client SKU Type1">
+    </div>
     <div class="import-field-row">
       <div class="import-fc"><div class="import-fk">Client</div><div class="import-fv">${esc(j.clientLabel)}</div></div>
       <div class="import-fc"><div class="import-fk">Funnel Stage</div><div class="import-fv">${esc(j.funnel)||'&mdash;'}</div></div>
@@ -1055,12 +1073,12 @@ function renderImportCard(j,i){
 }
 
 async function generateOneBrief(i){
-  if(!apiKey.startsWith('sk-')){alert('Paste your Anthropic API key in the field at the top right before generating.');return;}
   const j=importJobs[i];
   const stateEl=document.getElementById('ic_state_'+i);
   stateEl.innerHTML=`<div class="gen-loading">Generating brief...</div>`;
 
   const jNum=j._matchedJNum?j._matchedJNum.jobId:'J[#]';
+  const resolvedJobName=j._jobName||computeJobName(j);
   const prompt=`You are Clark Cai, a TubeScience Creative Strategist. Parse this sprint planner row and generate a production brief.
 
 CLIENT: ${j.clientLabel} (code: ${j.clientCode})
@@ -1072,21 +1090,20 @@ JOB TYPE: ${j.jobType}
 OFFER: ${j.offer||'none specified'}
 PERSONA: ${j.persona||'not specified'}
 BASE / REFERENCE: ${j.ref||'none'}
-ASSIGNED J-NUMBER: ${jNum}
+ASSIGNED JOB NAME: ${resolvedJobName}
 RAW CONCEPT NOTES FROM PLANNER:
 ${j.concept}
 
 TubeScience terminology:
 - JO Goal = what is being tested, why this concept, what success looks like (2-3 sentences, reference job IDs/data where mentioned)
 - Editing Instructions = specific direction for the editor: structure, pacing, assets, variants, GFX notes
-- Job naming convention (Coffeepod format): ${jNum}_[CLIENTCODE]_[Type][#]_Sprint Week XX/XX Clark - [Client] [SKU/Description] [Type][#]
+- Job naming convention (Coffeepod format): ${resolvedJobName}
   - Type: New / More1 / Adapt1 / Upgrade1
-  - Use the Sprint Week date from the planner context
   - Example: J1853_ILMKG_More1_Sprint Week 03/23 Clark - Il Makiage WULT More1
 
 Return ONLY valid JSON, no markdown, no explanation:
 {
-  "jobName": "${jNum}_${j.clientCode}_${j.jobType}1_Sprint Week XX/XX Clark - ${j.clientLabel} ${j.sku||'[SKU]'} ${j.jobType}1",
+  "jobName": "${resolvedJobName}",
   "funnel": "...",
   "format": "...",
   "sku": "...",
@@ -1140,7 +1157,6 @@ Return ONLY valid JSON, no markdown, no explanation:
 }
 
 async function generateAllBriefs(){
-  if(!apiKey.startsWith('sk-')){alert('Paste your Anthropic API key in the field at the top right before generating.');return;}
   const btn=document.getElementById('genAllBtn');
   btn.disabled=true;btn.textContent='Generating...';
   for(let i=0;i<importJobs.length;i++){
@@ -1161,7 +1177,7 @@ function addImportedBrief(i,btn){
     id:newId,
     status:'planning',
     client:j.clientCode,
-    name:g.jobName||`${j._matchedJNum?j._matchedJNum.jobId:'J[#]'}_${j.clientCode}_${j.jobType}1_Sprint Week XX/XX Clark - ${j.clientLabel} ${j.sku||'SKU'} ${j.jobType}1`,
+    name:g.jobName||j._jobName||computeJobName(j),
     sprint:'Sprint 03/23',
     clientLabel:j.clientLabel,
     geo:j.adAccount||'',
