@@ -28,6 +28,12 @@ body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,s
 .data-btn{font-size:11px;font-weight:600;color:rgba(255,255,255,.55);background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:5px 12px;cursor:pointer;transition:all .15s;letter-spacing:.02em}
 .data-btn:hover{color:#fff;background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.25)}
 .data-btn svg{width:13px;height:13px;vertical-align:-2px;margin-right:4px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.api-key-wrap{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:4px 10px}
+.api-key-wrap label{font-size:10px;font-weight:700;color:rgba(255,255,255,.4);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.api-key-input{font-size:11px;background:none;border:none;outline:none;color:rgba(255,255,255,.75);width:180px;font-family:monospace;letter-spacing:.04em}
+.api-key-input::placeholder{color:rgba(255,255,255,.25)}
+.api-key-dot{width:7px;height:7px;border-radius:50%;background:#e24b4a;flex-shrink:0;transition:background .2s}
+.api-key-dot.ok{background:#2dcb8c}
 
 /* TOP-LEVEL NAV TABS */
 .top-nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 32px;display:flex;align-items:center;position:sticky;top:47px;z-index:45}
@@ -425,6 +431,11 @@ body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,s
   </div>
   <div class="site-hr">
     <span class="save-ind" id="saveInd">&check; Saved</span>
+    <div class="api-key-wrap" title="Anthropic API key — stored in localStorage">
+      <span class="api-key-dot" id="apiKeyDot"></span>
+      <label for="apiKeyInput">API Key</label>
+      <input class="api-key-input" id="apiKeyInput" type="password" placeholder="sk-ant-..." autocomplete="off" oninput="onApiKeyInput(this.value)">
+    </div>
     <button class="data-btn" onclick="exportData()" title="Download all brief data as JSON"><svg viewBox="0 0 16 16"><path d="M8 1v9m0 0l-3-3m3 3l3-3M2 12v1.5A1.5 1.5 0 003.5 15h9a1.5 1.5 0 001.5-1.5V12"/></svg>Export</button>
     <button class="data-btn" onclick="document.getElementById('importFileInput').click()" title="Load brief data from a JSON file"><svg viewBox="0 0 16 16"><path d="M8 10V1m0 0L5 4m3-3l3 3M2 12v1.5A1.5 1.5 0 003.5 15h9a1.5 1.5 0 001.5-1.5V12"/></svg>Import</button>
     <input type="file" id="importFileInput" accept=".json" style="display:none" onchange="importData(event)">
@@ -543,6 +554,27 @@ body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,s
 </div>
 
 <script>
+// === API KEY =================================================
+let apiKey=localStorage.getItem('ts_api_key')||'';
+function onApiKeyInput(v){
+  apiKey=v.trim();
+  localStorage.setItem('ts_api_key',apiKey);
+  document.getElementById('apiKeyDot').className='api-key-dot'+(apiKey.startsWith('sk-ant-')?' ok':'');
+}
+function getApiHeaders(){
+  return{
+    'Content-Type':'application/json',
+    'x-api-key':apiKey,
+    'anthropic-dangerous-direct-browser-access':'true'
+  };
+}
+// Init key field on load
+window.addEventListener('DOMContentLoaded',function(){
+  const inp=document.getElementById('apiKeyInput');
+  if(inp&&apiKey){inp.value=apiKey;}
+  document.getElementById('apiKeyDot').className='api-key-dot'+(apiKey.startsWith('sk-ant-')?' ok':'');
+});
+
 const STATUSES=[
   {key:'planning',    label:'Planning',                   color:'#185fa5'},
   {key:'working',     label:'Working On Brief',           color:'#e85c2b'},
@@ -857,7 +889,7 @@ async function processScreenshot(file){
     try{
       const res=await fetch('https://api.anthropic.com/v1/messages',{
         method:'POST',
-        headers:{'Content-Type':'application/json'},
+        headers:getApiHeaders(),
         body:JSON.stringify({
           model:'claude-sonnet-4-20250514',
           max_tokens:1000,
@@ -1023,6 +1055,7 @@ function renderImportCard(j,i){
 }
 
 async function generateOneBrief(i){
+  if(!apiKey.startsWith('sk-ant-')){alert('Paste your Anthropic API key in the field at the top right before generating.');return;}
   const j=importJobs[i];
   const stateEl=document.getElementById('ic_state_'+i);
   stateEl.innerHTML=`<div class="gen-loading">Generating brief...</div>`;
@@ -1065,7 +1098,7 @@ Return ONLY valid JSON, no markdown, no explanation:
   try{
     const res=await fetch('https://api.anthropic.com/v1/messages',{
       method:'POST',
-      headers:{'Content-Type':'application/json'},
+      headers:getApiHeaders(),
       body:JSON.stringify({
         model:'claude-sonnet-4-20250514',
         max_tokens:1000,
@@ -1107,6 +1140,7 @@ Return ONLY valid JSON, no markdown, no explanation:
 }
 
 async function generateAllBriefs(){
+  if(!apiKey.startsWith('sk-ant-')){alert('Paste your Anthropic API key in the field at the top right before generating.');return;}
   const btn=document.getElementById('genAllBtn');
   btn.disabled=true;btn.textContent='Generating...';
   for(let i=0;i<importJobs.length;i++){
