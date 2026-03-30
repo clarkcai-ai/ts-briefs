@@ -559,7 +559,7 @@ let apiKey=localStorage.getItem('ts_api_key')||'';
 function onApiKeyInput(v){
   apiKey=v.trim();
   localStorage.setItem('ts_api_key',apiKey);
-  document.getElementById('apiKeyDot').className='api-key-dot'+(apiKey.startsWith('sk-ant-')?' ok':'');
+  document.getElementById('apiKeyDot').className='api-key-dot'+(apiKey.startsWith('sk-')?' ok':'');
 }
 function getApiHeaders(){
   return{
@@ -572,7 +572,7 @@ function getApiHeaders(){
 window.addEventListener('DOMContentLoaded',function(){
   const inp=document.getElementById('apiKeyInput');
   if(inp&&apiKey){inp.value=apiKey;}
-  document.getElementById('apiKeyDot').className='api-key-dot'+(apiKey.startsWith('sk-ant-')?' ok':'');
+  document.getElementById('apiKeyDot').className='api-key-dot'+(apiKey.startsWith('sk-')?' ok':'');
 });
 
 const STATUSES=[
@@ -1055,7 +1055,7 @@ function renderImportCard(j,i){
 }
 
 async function generateOneBrief(i){
-  if(!apiKey.startsWith('sk-ant-')){alert('Paste your Anthropic API key in the field at the top right before generating.');return;}
+  if(!apiKey.startsWith('sk-')){alert('Paste your Anthropic API key in the field at the top right before generating.');return;}
   const j=importJobs[i];
   const stateEl=document.getElementById('ic_state_'+i);
   stateEl.innerHTML=`<div class="gen-loading">Generating brief...</div>`;
@@ -1140,7 +1140,7 @@ Return ONLY valid JSON, no markdown, no explanation:
 }
 
 async function generateAllBriefs(){
-  if(!apiKey.startsWith('sk-ant-')){alert('Paste your Anthropic API key in the field at the top right before generating.');return;}
+  if(!apiKey.startsWith('sk-')){alert('Paste your Anthropic API key in the field at the top right before generating.');return;}
   const btn=document.getElementById('genAllBtn');
   btn.disabled=true;btn.textContent='Generating...';
   for(let i=0;i<importJobs.length;i++){
