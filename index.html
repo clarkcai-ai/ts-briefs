@@ -108,12 +108,9 @@ body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,s
 .fl{font-size:10px;font-weight:700;color:var(--faint);letter-spacing:.08em;text-transform:uppercase;margin-right:3px}
 .fb{font-size:11px;font-weight:500;border:1px solid var(--border);border-radius:20px;padding:3px 11px;background:none;color:var(--muted);cursor:pointer;transition:all .15s}
 .fb:hover,.fb.active{border-color:var(--orange);color:var(--orange);background:var(--orange-bg)}
-.search-input{margin-left:auto;font-size:12px;padding:5px 12px;border:1px solid var(--border);border-radius:20px;background:#fff;color:var(--text);width:260px;font-family:inherit;transition:border-color .15s,box-shadow .15s}
-.search-input:focus{outline:none;border-color:var(--orange);box-shadow:0 0 0 3px var(--orange-bg)}
-.search-input::placeholder{color:var(--faint)}
-.search-clear{background:none;border:none;font-size:18px;color:var(--faint);cursor:pointer;padding:0 6px;line-height:1;display:none}
-.search-clear.visible{display:inline-block}
-.search-clear:hover{color:var(--text)}
+.brand-select{margin-left:auto;font-size:12px;font-weight:500;padding:5px 28px 5px 14px;border:1px solid var(--border);border-radius:20px;background:#fff;color:var(--muted);font-family:inherit;cursor:pointer;transition:all .15s;-webkit-appearance:none;-moz-appearance:none;appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'><path fill='%236b6960' d='M3 5l3 3 3-3z'/></svg>");background-repeat:no-repeat;background-position:right 8px center}
+.brand-select:hover{border-color:var(--orange);color:var(--orange)}
+.brand-select:focus{outline:none;border-color:var(--orange);box-shadow:0 0 0 3px var(--orange-bg)}
 
 /* LIST */
 .list-wrap{max-width:900px;margin:0 auto;padding:24px 32px 80px}
@@ -542,8 +539,20 @@ try {
     <button class="fb" onclick="applyFilter('PAIRE',this)">Pair Eyewear</button>
     <button class="fb" onclick="applyFilter('JAVVY',this)">Javvy Coffee</button>
     <button class="fb" onclick="applyFilter('STBRD',this)">Scentbird</button>
-    <input type="text" id="searchInput" class="search-input" placeholder="Search briefs (J#, name, talent, SKU…)" oninput="applySearch(this.value)">
-    <button class="search-clear" id="searchClear" onclick="clearSearch()" title="Clear search">&times;</button>
+    <select id="brandSelect" class="brand-select" onchange="applyBrandSelect(this.value)" title="Filter by brand code">
+      <option value="all">All brands</option>
+      <option value="KTSCH">KTSCH</option>
+      <option value="PRTLI">PRTLI</option>
+      <option value="THRVE">THRVE</option>
+      <option value="PAIRE">PAIRE</option>
+      <option value="ILMKG">ILMKG</option>
+      <option value="JAVVY">JAVVY</option>
+      <option value="STBRD">STBRD</option>
+      <option value="SKRX">SKRX</option>
+      <option value="SOFI">SOFI</option>
+      <option value="NOBL">NOBL</option>
+      <option value="PALV">PALV</option>
+    </select>
   </div>
   <div class="list-wrap" id="listWrap"></div>
 </div>
@@ -2760,32 +2769,35 @@ function renderList(){
 }
 function updateCounts(){STATUSES.forEach(s=>{const jobs=JOBS.filter(j=>getStatus(j)===s.key);const ct=document.getElementById('ct_'+s.key);const em=document.getElementById('empty_'+s.key);if(ct)ct.textContent=`${jobs.length} job${jobs.length!==1?'s':''}`;if(em)em.classList.toggle('show',jobs.length===0);})}
 let curFilter='all';
-let curSearch='';
-function applyFilter(f,btn){curFilter=f;document.querySelectorAll('.fb').forEach(b=>b.classList.remove('active'));btn.classList.add('active');reapplyFilter()}
-function applySearch(q){
-  curSearch=(q||'').toLowerCase().trim();
-  var clr=document.getElementById('searchClear');
-  if(clr)clr.classList.toggle('visible',!!curSearch);
+function applyFilter(f,btn){
+  curFilter=f;
+  document.querySelectorAll('.fb').forEach(b=>b.classList.remove('active'));
+  if(btn)btn.classList.add('active');
+  // Sync the brand-code dropdown
+  var sel=document.getElementById('brandSelect');
+  if(sel)sel.value=f==='all'?'all':f;
   reapplyFilter();
 }
-function clearSearch(){
-  var inp=document.getElementById('searchInput');
-  if(inp){inp.value='';inp.focus();}
-  applySearch('');
-}
-function _matchesSearch(card){
-  if(!curSearch)return true;
-  // Match on visible card text + dataset attrs (catches J#, name, talent, client, status badges)
-  var hay=(card.textContent+' '+card.dataset.client+' '+card.dataset.status).toLowerCase();
-  // Support multi-token AND (e.g. "ktsch sherline")
-  var tokens=curSearch.split(/\s+/).filter(Boolean);
-  return tokens.every(function(t){return hay.indexOf(t)>-1;});
+function applyBrandSelect(code){
+  curFilter=code;
+  // Sync the filter buttons (highlight matching one, or "All")
+  document.querySelectorAll('.fb').forEach(function(b){
+    b.classList.remove('active');
+  });
+  var btns=document.querySelectorAll('.fb');
+  var found=false;
+  btns.forEach(function(b){
+    var onClick=b.getAttribute('onclick')||'';
+    var m=onClick.match(/applyFilter\('([^']+)'/);
+    if(m && m[1]===code){ b.classList.add('active'); found=true; }
+  });
+  if(!found && btns[0]) btns[0].classList.add('active'); // fall back to "All"
+  reapplyFilter();
 }
 function reapplyFilter(){
   document.querySelectorAll('.row-card').forEach(function(c){
     var hideByClient=curFilter!=='all'&&c.dataset.client!==curFilter;
-    var hideBySearch=!_matchesSearch(c);
-    c.classList.toggle('hidden',hideByClient||hideBySearch);
+    c.classList.toggle('hidden',hideByClient);
   });
   STATUSES.forEach(function(s){
     var hdr=document.getElementById('sec_'+s.key);
