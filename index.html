@@ -834,8 +834,16 @@ let JOBS=[
    editing:'Base: J21. Single-creator UGC scale — 2 variants. Same script proven 6+ times, just swap talent. Use any new influencer; do NOT use Kelly Tappan (blue shirt — already deployed). FF, video. Delivery 5/13.'},
   {id:'j82_thrve_men_freshly_video',status:'planning',client:'THRVE',name:'J82_THRVE_Adapt2_MenFreshlyVideoAdapt_BFreshlyJ767_CP10_FF_Membership',sprint:'Sprint 04/27',clientLabel:'Thrive Market',geo:'',
    fields:[['Job Owner','Clark'],['Client','Thrive Market'],['Job Type','Adapt'],['Job Subtype','Adapt2'],['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],['SKU','Thrive Market Membership'],['Aspect Ratio','9:16 (4:5 Safe)'],['VO','Human VO'],['Base Job #','Freshly J767'],['Music','Yes'],['Total Ad Sets','2'],['Persona','Men'],['Delivery','5/20'],['Total # of Videos','8']],
-   goal:'Adapt2 of Freshly J767 into Thrive Market. Video version of J80 men-eliminating-takeout angle. Requires prod brief. Delivery 5/20.',
-   editing:'Adapt J80 static script (men eliminating takeout, ready-to-eat angle) into video format. Base: Freshly J767. Men\'s persona. Requires prod brief. Delivery 5/20.'},
+   goal:'Adapt2 of Freshly J767 into Thrive Market. Video version of J80 men-eliminating-takeout angle. Same script as J80, video execution. Delivery 5/20.',
+   editing:'Use J80\'s script verbatim — adapt static format into video. Base: Freshly J767. Men\'s persona. Delivery 5/20.'},
+  {id:'j90_thrve_court_applovin',status:'planning',client:'THRVE',name:'J90_THRVE_More1_CourtAppLovinAdapt_BJ13_CP10_FF_Membership',sprint:'Sprint 05/04',clientLabel:'Thrive Market',geo:'',
+   fields:[['Job Owner','Clark'],['Client','Thrive Market'],['Job Type','More'],['Job Subtype','More1'],['Platform','AppLovin'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],['SKU','Thrive Market Membership'],['Aspect Ratio','9:16 (4:5 Safe)'],['VO','AI VO (match J57 voice)'],['Base Job #','J13 (Court Kline)'],['Music','Yes'],['Total Ad Sets','2'],['Style','AppLovin — full-stack, problem-solution, barrier-busting'],['Delivery','5/13'],['Total # of Videos','4']],
+   goal:'More1 of J13 SS1 (Court Kline expert recommendation arc) — adapt for AppLovin format. Full-stack, infomercially, problem-solution, barrier-busting. 2 variants from base. AI VO matching J57 voice.',
+   editing:'Base: J13 SS1 (Court Kline health coach for GLP-1 women). Adapt for AppLovin — longer, problem-solution, barrier-busting. AI VO matching J57 voice. Delivery 5/13.'},
+  {id:'j91_thrve_nurse_walkthrough',status:'planning',client:'THRVE',name:'J91_THRVE_Upgrade1_NurseGLP1Walkthrough_CP10_FF_Membership',sprint:'Sprint 05/04',clientLabel:'Thrive Market',geo:'',
+   fields:[['Job Owner','Clark'],['Client','Thrive Market'],['Job Type','Upgrade'],['Job Subtype','Upgrade1'],['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],['SKU','Thrive Market Membership'],['Aspect Ratio','9:16 (4:5 Safe)'],['VO','Human VO (Nurse Talent) or AI VO'],['Base Job #','J21 (format)'],['Music','Yes'],['Total Ad Sets','2'],['Style','Expert walkthrough — nurse perspective'],['Reference','https://ts.app/app/dapperai/ad_details?adId=120228245313220205'],['Delivery','5/13'],['Total # of Videos','8']],
+   goal:'Upgrade1 — Nurse expert walkthrough on what to buy from Thrive Market for GLP-1 patients (and how to do it). Builds on J21 format with nurse credibility. Reference Dapper ad link.',
+   editing:'Format based on J21 GLP1 car. Cast nurse talent (or AI VO). Walkthrough: hook (nurse authority) → 3 product picks (protein, fiber, hydration) → trust → CTA. Reference: https://ts.app/app/dapperai/ad_details?adId=120228245313220205. Delivery 5/13.'},
   {id:'ktsch_adc_01',status:'planning',client:'KTSCH',name:'JXXX_KTSCH_Adapt1_FrizzyHairFix_B2008V1D_CP10_FF_FeaturesAndBenefits_AirDryCream',sprint:'Sprint 04/20',clientLabel:'Kitsch',geo:'',
    fields:[['Job Owner','Clark'],['Client','Kitsch'],['Job Type','Adapt'],['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],['SKU','Air Dry Cream'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','AI VO'],['Base Job #','J2008V1D'],['Music','Yes'],['Total Ad Sets','2'],['Total # of Videos','8']],
    goal:'Adapt J2008V1D ("My hair was falling out before I used THIS") into Air Dry Cream. Shift from "hair falling out" to "hair frizzing out." The structure (problem \u2192 ingredient science \u2192 results list \u2192 price \u2192 guarantee) is the most stable Kitsch framework.',
@@ -1303,6 +1311,140 @@ function _initBriefs() {
       links: JSON.stringify([
         {label:'Base J11V1D',url:''},
         {label:'R2 Static Winners',url:''}
+      ])
+    },
+    'j81_thrve_talent_scale_ugc': {
+      hlrows: JSON.stringify([
+        {label:'H1',hook:'How moms save TONS of $$$ on GLP-1 friendly grocery'},
+        {label:'H2',hook:'How busy moms feed their family clean food without spending hours at the store'}
+      ]),
+      sstables: JSON.stringify([
+        {name:'SS1 — GLP-1 talent script (single-creator UGC, ~30s)',rows:[
+          {copy:'Let me be real for a second — if you’re on a GLP-1 and just winging your grocery shopping, you’re making this so much harder than it needs to be.',visual:'Talent direct to cam, car or kitchen.',notes:'Hook — same opener as J21. Pattern interrupt + intimacy.'},
+          {copy:'Here’s what you do. Go to Thrive Market. They have an entire GLP-1 friendly section — already filtered.',visual:'Phone screen recording: Thrive app GLP-1 filter UI.',notes:'Solution intro. Show the filter — this is the differentiator.'},
+          {copy:'High-protein snacks, trusted ingredients. They do the label reading for you. No guessing.',visual:'B-roll: protein bars, bone broth, jerky, almond butter.',notes:'Product proof. Pre-vetted = no label reading.'},
+          {copy:'I was paying $15 for collagen at Whole Foods. $9.99 here.',visual:'Side-by-side price comparison overlay.',notes:'Confirmed claim from TS proposal. Specific dollar amount = trust.'},
+          {copy:'30% off your first order plus a free $60 gift. Stop overthinking your food.',visual:'Bold text overlay: "30% OFF + FREE $60 GIFT." End card Thrive logo.',notes:'Clean CTA close.'}
+        ]},
+        {name:'SS2 — Busy mom talent script (single-creator UGC, ~30s)',rows:[
+          {copy:'If you’re a busy mom trying to feed your family clean food without spending hours at the grocery store — this changed everything for me.',visual:'Talent direct to cam, kitchen or pantry.',notes:'Hook — mom persona. Time + family framing.'},
+          {copy:'Thrive Market does the label reading for you. Filter by what your family actually needs — kid-safe, organic, high-protein.',visual:'Phone screen recording: filter UI showing kid-safe + organic + high-protein toggles.',notes:'Filter is the hero. 90+ filters do label reading for you.'},
+          {copy:'Snacks for school lunches, breakfast bars, dinner staples. All delivered.',visual:'B-roll: organic fruit snacks, protein bars, pantry staples on counter.',notes:'Product showcase — family-coded items.'},
+          {copy:'Same brands you’d buy at Whole Foods, up to 30% less.',visual:'Side-by-side price comparison.',notes:'30% savings confirmed from TS proposal.'},
+          {copy:'30% off your first order plus a free $60 gift.',visual:'Bold text overlay: "30% OFF + FREE $60 GIFT." End card.',notes:'Clean close.'}
+        ]}
+      ]),
+      links: JSON.stringify([
+        {label:'Base: J21 GLP-1 car testimonial',url:''},
+        {label:'Talent footage folder',url:''}
+      ]),
+      adsets: JSON.stringify([
+        {name:'AD SET 1',rows:[{variant:'V1A',recipe:'H1 + SS1'},{variant:'V1B',recipe:'H2 + SS2'}]},
+        {name:'AD SET 2',rows:[{variant:'V1A',recipe:'H1 + SS1'},{variant:'V1B',recipe:'H2 + SS2'}]}
+      ])
+    },
+    'j80_thrve_men_takeout': {
+      hlrows: JSON.stringify([
+        {label:'H1',hook:'I quit ordering $20 "cheap" takeout.'},
+        {label:'H2',hook:'Last week I ordered takeout 4 days in a row. Done.'}
+      ]),
+      sstables: JSON.stringify([
+        {name:'SS1 — Static cards (8 total, men eliminating takeout)',rows:[
+          {copy:'I quit ordering $20 "cheap" takeout.',visual:'Receipt screenshot. Highlighted breakdown: $10 meal + $4 service fee + $3 delivery + tip = $20.',notes:'Hook — cost reveal. Pattern interrupt for guys ordering takeout regularly.'},
+          {copy:'Last week I ordered takeout 4 days in a row.',visual:'Calendar with TAKEOUT stamps on M-T-W-Th. Red X over the calendar.',notes:'Frequency pain. Validates the audience.'},
+          {copy:'Thrive Market = takeout’s replacement.',visual:'3-step icon flow: phone (order) → box (ships to door) → microwave/fridge (ready when I am).',notes:'Solution intro. Replaces takeout, not just supplements it.'},
+          {copy:'Real food. Real macros.',visual:'4-up product grid: RXBars, protein cups, ready-to-heat meals, jerky.',notes:'Product showcase. Lean into Thrive’s ready-to-eat + snack offerings (replaces Freshly’s pre-cooked angle).'},
+          {copy:'Sort by exactly what you need.',visual:'Phone screen recording: Thrive filter UI — high-protein, low-carb, no seed oils, no junk toggles.',notes:'Filter UI = the differentiator. 90+ filters.'},
+          {copy:'Real macros, no guessing.',visual:'Product hero shot with macro callout overlays: "48g protein," "0g added sugar," "420 calories," "33g carbs."',notes:'Macro overlays for the gym/health-conscious guy audience.'},
+          {copy:'Cheaper than your takeout habit.',visual:'Side-by-side price comparison: same brands at Whole Foods vs. Thrive. "Up to 30% less" overlay.',notes:'30% savings confirmed from TS proposal.'},
+          {copy:'30% off your first order plus a free $60 gift.',visual:'Bold offer overlay end card. Thrive Market logo.',notes:'Clean CTA. End card.'}
+        ]}
+      ]),
+      links: JSON.stringify([
+        {label:'Base: Freshly J67',url:''},
+        {label:'Thrive RTE / Snacks category',url:''}
+      ])
+    },
+    'j82_thrve_men_freshly_video': {
+      hlrows: JSON.stringify([
+        {label:'H1',hook:'I quit ordering $20 "cheap" takeout.'},
+        {label:'H2',hook:'Last week I ordered takeout 4 days in a row. Done.'}
+      ]),
+      sstables: JSON.stringify([
+        {name:'SS1 — Video adapt of J80 (men eliminating takeout, ~40s)',rows:[
+          {copy:'I quit ordering $20 "cheap" takeout. Order a $10 meal, with the service charge and delivery fee, ends up being $20 every time.',visual:'Talent direct to cam, holding receipt. Cut to receipt close-up with breakdown overlay.',notes:'Hook — cost reveal. Same beat as J80 static #1.'},
+          {copy:'Last week I ordered takeout 4 days in a row. I knew it had to stop.',visual:'Calendar montage with TAKEOUT stamps. Talent looking annoyed.',notes:'Frequency pain. Same as J80 static #2.'},
+          {copy:'Now I keep Thrive Market stocked. Order on phone, ships to door, ready when I’m hungry.',visual:'Phone (ordering) → box delivered → talent opening fridge full of Thrive items.',notes:'Solution intro. Show the actual flow.'},
+          {copy:'RXBars, protein cups, ready-to-heat meals, jerky. Real food, real macros. 48g protein, 0g added sugar.',visual:'B-roll product grid + macro overlays.',notes:'Product showcase + macros.'},
+          {copy:'Sort by exactly what I need — high-protein, low-carb, no junk. Filter once, store is curated.',visual:'Phone screen recording: filter UI in action.',notes:'Filter is the hero.'},
+          {copy:'Same brands as Whole Foods, up to 30% less. Cheaper than my old takeout habit.',visual:'Side-by-side price comparison. Total monthly savings overlay.',notes:'30% savings confirmed from TS proposal.'},
+          {copy:'30% off your first order plus a free $60 gift.',visual:'Bold text overlay: "30% OFF + FREE $60 GIFT." End card Thrive.',notes:'Clean CTA.'}
+        ]}
+      ]),
+      links: JSON.stringify([
+        {label:'Base: Freshly J767',url:''},
+        {label:'J80 (static base)',url:''}
+      ])
+    },
+    'j90_thrve_court_applovin': {
+      hlrows: JSON.stringify([
+        {label:'H1',hook:'I’m on my GLP-1 journey and I’m struggling to find the right foods at grocery stores...'},
+        {label:'H2',hook:'PSA: Your grocery store isn’t built for GLP-1 patients. Here’s what is.'}
+      ]),
+      sstables: JSON.stringify([
+        {name:'SS1 — AppLovin v1 (Health coach, full-stack, ~50s)',rows:[
+          {copy:'If you’re on a GLP-1 and standing in the grocery store reading every single label trying to figure out what’s clean — I have to share this.',visual:'Talent direct to cam, grocery store aisle background or clean studio.',notes:'Hook — immediate problem identification. AppLovin opener should be high-intent.'},
+          {copy:'I’m a health coach for women on GLP-1s. This is the #1 thing my clients struggle with. They want to eat well, but they’re tired of label reading and second-guessing every snack.',visual:'Authority frame. Lower-third with credentials.',notes:'Authority + problem expansion. Establishes credibility for AppLovin direct response audience.'},
+          {copy:'That’s why I always recommend Thrive Market. They’ve already done the label reading for you. Over 1,000 sketchy ingredients restricted before anything hits the site.',visual:'Cut to phone screen: Thrive Market loading. Text overlay: "1,000+ ingredients restricted."',notes:'Solution intro + barrier 1 (selection). Problem-solution structure.'},
+          {copy:'There’s a filter specifically for GLP-1 friendly options. One click — your entire store is curated for your medication.',visual:'Phone screen recording: GLP-1 filter being toggled. Products populating.',notes:'Barrier 2 (filter / ease). Quiz/filter is the AppLovin payoff.'},
+          {copy:'Everything ships to your door. No more wandering the store for an hour second-guessing every label.',visual:'B-roll: Thrive box at front door, talent unboxing.',notes:'Barrier 3 (delivery / time).'},
+          {copy:'And the prices — same brands as the grocery store, up to 30% less.',visual:'Side-by-side price comparison overlay.',notes:'Barrier 4 (price). Confirmed 30% claim from TS proposal.'},
+          {copy:'30% off your first Thrive Market order plus a free $60 gift. It’s honestly one of the best tools I recommend for all my clients.',visual:'Bold text overlay: "30% OFF + FREE $60 GIFT." End card.',notes:'Authority CTA close. "All my clients" reinforces expert framing.'}
+        ]},
+        {name:'SS2 — AppLovin v2 (Problem-solution, faster ~35s)',rows:[
+          {copy:'PSA: If you’re on a GLP-1, your grocery store is sabotaging you.',visual:'Talent direct to cam, urgent tone. Red X over a generic grocery aisle.',notes:'Hook — sharper, more direct. AppLovin attention grab.'},
+          {copy:'Most snacks aren’t designed for low appetite. Most labels are confusing. You’re spending money on food that doesn’t work.',visual:'Quick-cut B-roll: confusing labels, products being put back on shelves.',notes:'Problem expansion — 3 specific pain points.'},
+          {copy:'Thrive Market fixes both. Pre-vetted ingredients. GLP-1 friendly filter built in.',visual:'Phone screen: GLP-1 filter toggle.',notes:'Solution — tight, dual-feature.'},
+          {copy:'Ships to your door. Up to 30% less than Whole Foods.',visual:'Box at door + price comparison overlay.',notes:'Trust beat — delivery + savings combined.'},
+          {copy:'30% off + free $60 gift. Link below.',visual:'Bold text overlay end card.',notes:'Tight CTA.'}
+        ]}
+      ]),
+      links: JSON.stringify([
+        {label:'Base: J13 (Court Kline)',url:''},
+        {label:'AppLovin reference',url:''},
+        {label:'J57 (AI VO voice match)',url:''}
+      ]),
+      adsets: JSON.stringify([
+        {name:'AD SET 1',rows:[{variant:'V1A',recipe:'H1 + SS1'},{variant:'V1B',recipe:'H2 + SS2'}]},
+        {name:'AD SET 2',rows:[{variant:'V1A',recipe:'H1 + SS1'},{variant:'V1B',recipe:'H2 + SS2'}]}
+      ])
+    },
+    'j91_thrve_nurse_walkthrough': {
+      hlrows: JSON.stringify([
+        {label:'H1',hook:'I’m a nurse — here’s exactly what to buy for GLP-1 patients.'},
+        {label:'H2',hook:'Nurse-approved Thrive Market grocery list for anyone on a GLP-1.'}
+      ]),
+      sstables: JSON.stringify([
+        {name:'SS1 — Nurse walkthrough (long, ~50s)',rows:[
+          {copy:'As a nurse, I see patients struggle with GLP-1 nutrition every day. So let me walk you through exactly what to buy.',visual:'Nurse talent direct to cam, scrubs, professional setting.',notes:'Hook — expert authority. Reference Dapper link for visual format match.'},
+          {copy:'Open Thrive Market. Hit the GLP-1 friendly filter. Everything you see from here is already approved.',visual:'Phone screen recording: app opens → GLP-1 filter toggled → results populate.',notes:'Setup — walkthrough begins. Show the actual app.'},
+          {copy:'First: protein. Bone broth, jerky, protein bars, chicken in a can. You need 30g protein at every meal — even when your appetite is low.',visual:'Product showcase: bone broth, jerky packs, RXBars, canned chicken. Macro overlay: "30g protein."',notes:'Pick #1. Protein is the #1 GLP-1 nutrition concern.'},
+          {copy:'Second: fiber-rich foods. Almond butter, gut-health snacks, low-sugar fruits. Helps with the side effects.',visual:'B-roll: almond butter jar, gut nuts, low-sugar fruit options.',notes:'Pick #2. Side effects = relatable for GLP-1 audience.'},
+          {copy:'Third: hydration. Electrolytes, mineral waters. GLP-1s dehydrate you fast — you have to stay ahead of it.',visual:'Electrolyte packets, mineral water bottles.',notes:'Pick #3. Hydration is under-discussed but critical.'},
+          {copy:'Everything’s pre-vetted. Ships to your door. No label reading, no guessing.',visual:'Thrive box at front door. Talent unboxing on counter.',notes:'Trust beat. Same as J21 structure.'},
+          {copy:'30% off your first order plus a free $60 gift. Take the guesswork out of GLP-1 grocery shopping.',visual:'Bold text overlay: "30% OFF + FREE $60 GIFT." End card.',notes:'CTA — nurse authority frames the close.'}
+        ]},
+        {name:'SS2 — Nurse walkthrough (short, ~30s)',rows:[
+          {copy:'Nurse-approved Thrive Market list for GLP-1 patients.',visual:'Nurse talent intro, lower-third "RN."',notes:'Hook — tight credentialed open.'},
+          {copy:'Protein: bone broth + jerky. Fiber: almond butter + gut-health snacks. Hydration: electrolytes + mineral water.',visual:'Quick product montage — each item 1.5s on screen with macro/category overlay.',notes:'3-pick rapid. Easy to remember structure.'},
+          {copy:'All filtered for GLP-1. All pre-vetted. All delivered.',visual:'Phone screen: filter toggle + box at door.',notes:'Trust — condensed.'},
+          {copy:'30% off + free $60 gift. Link below.',visual:'Bold overlay end card.',notes:'Tight CTA.'}
+        ]}
+      ]),
+      links: JSON.stringify([
+        {label:'Reference: Dapper format',url:'https://ts.app/app/dapperai/ad_details?adId=120228245313220205'},
+        {label:'Base: J21 GLP-1 car (format)',url:''},
+        {label:'Nurse talent footage',url:''}
       ])
     },
     'ktsch_adc_01': {
