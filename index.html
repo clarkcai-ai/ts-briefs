@@ -108,6 +108,12 @@ body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,s
 .fl{font-size:10px;font-weight:700;color:var(--faint);letter-spacing:.08em;text-transform:uppercase;margin-right:3px}
 .fb{font-size:11px;font-weight:500;border:1px solid var(--border);border-radius:20px;padding:3px 11px;background:none;color:var(--muted);cursor:pointer;transition:all .15s}
 .fb:hover,.fb.active{border-color:var(--orange);color:var(--orange);background:var(--orange-bg)}
+.search-input{margin-left:auto;font-size:12px;padding:5px 12px;border:1px solid var(--border);border-radius:20px;background:#fff;color:var(--text);width:260px;font-family:inherit;transition:border-color .15s,box-shadow .15s}
+.search-input:focus{outline:none;border-color:var(--orange);box-shadow:0 0 0 3px var(--orange-bg)}
+.search-input::placeholder{color:var(--faint)}
+.search-clear{background:none;border:none;font-size:18px;color:var(--faint);cursor:pointer;padding:0 6px;line-height:1;display:none}
+.search-clear.visible{display:inline-block}
+.search-clear:hover{color:var(--text)}
 
 /* LIST */
 .list-wrap{max-width:900px;margin:0 auto;padding:24px 32px 80px}
@@ -536,6 +542,8 @@ try {
     <button class="fb" onclick="applyFilter('PAIRE',this)">Pair Eyewear</button>
     <button class="fb" onclick="applyFilter('JAVVY',this)">Javvy Coffee</button>
     <button class="fb" onclick="applyFilter('STBRD',this)">Scentbird</button>
+    <input type="text" id="searchInput" class="search-input" placeholder="Search briefs (J#, name, talent, SKU…)" oninput="applySearch(this.value)">
+    <button class="search-clear" id="searchClear" onclick="clearSearch()" title="Clear search">&times;</button>
   </div>
   <div class="list-wrap" id="listWrap"></div>
 </div>
@@ -635,50 +643,18 @@ let JOBS=[
    fields:[['Job Owner','Clark'],['Client','Il Makiage'],['Job Type','Adapt'],['Platform','Meta'],['Funnel Stage','TOF'],['Creative Format','Video'],['SKU','WULT'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Base Job #','DRMTLGY ref (adapt3)'],['Music','Yes'],['Total Ad Sets','2'],['Style','Same as base'],['Goal Demo','Novice / lapsed foundation users'],['Total # of Videos','']],
    goal:'Canada geo version of ILMKG WULT listicle adapt3. Testing whether the DRMTLGY listicle format holds in the Canada market.',
    editing:'Same structure as J1809. Canada geo — no offer language. Shade Match as hero. Single UGC talent.'},
-  {id:'j523',status:'working',client:'PRTLI',name:'J523_PRTLI_Adapt1_CP10_FF_EvergreenBouquet_PrettyLitter',sprint:'Sprint 03/09',clientLabel:'PrettyLitter',geo:'USA · No offer',
-   fields:[['Job Owner','Clark'],['Client','PrettyLitter'],['Job Type','Adapt'],['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],['SKU','PrettyLitter'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Base Job #','J125v1a, J457v1c, J101v1a, J146v1d'],['Music','Yes'],['Total Ad Sets','2'],['Offer','None (Evergreen)'],['Persona','Devoted Cat Parent / Smell-focused'],['Total # of Videos','']],
-   goal:'Refreshing the top performer bouquet without any GWP offer language. Non-GWP versions expand audience eligibility and allow accurate FF creative measurement.',
-   editing:'Adapt top performers J125v1a, J457v1c, J101v1a, J146v1d. Remove all GWP / promotional offer language. Refresh footage and VO where needed. USA geo.'},
-  {id:'j524',status:'working',client:'PRTLI',name:'J524_PRTLI_Adapt1_CP10_FF_EvergreenBouquet_PrettyLitter',sprint:'Sprint 03/09',clientLabel:'PrettyLitter',geo:'CANADA · $19.99',
-   fields:[['Job Owner','Clark'],['Client','PrettyLitter'],['Job Type','Adapt'],['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],['SKU','PrettyLitter'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Base Job #','J125v1a, J457v1c, J101v1a, J146v1d'],['Music','Yes'],['Total Ad Sets','2'],['Offer','First bag $19.99 (Canada)'],['Persona','Devoted Cat Parent / Smell-focused'],['Total # of Videos','']],
-   goal:'Canada geo version of J523. Same top performer bouquet refresh without GWP, adapted for Canada pricing ($19.99 first bag).',
-   editing:'Same as J523. Remove GWP language. Canada geo — update pricing to first bag $19.99.'},
-  {id:'j525',status:'working',client:'PRTLI',name:'J525_PRTLI_More1_CP10_FF_SmashcutBouquet_PrettyLitter',sprint:'Sprint 03/09',clientLabel:'PrettyLitter',geo:'USA',
-   fields:[['Job Owner','Clark'],['Client','PrettyLitter'],['Job Type','More'],['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],['SKU','PrettyLitter'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Base Job #','Smashcut bouquet top performers'],['Music','Yes'],['Total Ad Sets','2'],['Persona','Devoted Cat Parent / Smell-focused'],['Style','Same as base (smashcut)'],['Total # of Videos','TBD']],
-   goal:'More volume on the smashcut bouquet top performers. Adding creative supply within the same entity ID to extend runway.',
-   editing:'Smashcut bouquet retests. More of the smashcut format. Full editing input after meeting. USA geo.'},
   {id:'j157',status:'working',client:'PAIRE',name:'J157_PAIRE_More1_CP10_[Funnel]_GFXGameOfferUpdate_PairEyewear',sprint:'Sprint 03/16',clientLabel:'Pair Eyewear',geo:'',
    fields:[['Job Owner','Clark'],['Client','Pair Eyewear'],['Job Type','More'],['Platform','Meta'],['Funnel Stage',''],['Creative Format','GFX / Interactive'],['SKU','Pair Eyewear'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','None'],['Base Job #','J87'],['Music','Yes'],['Total Ad Sets','2'],['Style','Same as base (GFX game)'],['Goal Demo',''],['Total # of Videos','']],
    goal:'Refreshing J87 GFX/Game format with current Pair Eyewear offers.',
    editing:'Update J87 GFX/game format. Swap all old offer language for current promotions. Keep the interactive/game structure fully intact.'},
-  {id:'j526',status:'planning',client:'PRTLI',name:'J526_PRTLI_More1_CP10_MOF_CatDadOdorControl_PrettyLitter',sprint:'Sprint 03/02',clientLabel:'PrettyLitter',geo:'USA · $14.99',
-   fields:[['Job Owner','Clark'],['Client','PrettyLitter'],['Job Type','More'],['Platform','Meta'],['Funnel Stage','MOF'],['Creative Format','Video'],['SKU','PrettyLitter'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Offer','First bag $14.99'],['Music','Yes'],['Total Ad Sets','2'],['Persona','Millennial Cat Dads'],['Text Treatment','Reply-to-comment'],['Total # of Videos','']],
-   goal:'New odor-specific MOF creative targeting millennial cat dads. Odor control is the primary driver for this segment.',
-   editing:'Reply-to-comment format. MOF. Hook: "Okay the UTI color changing thing is cool, but I mainly care about odor control." First bag $14.99. USA geo.'},
   {id:'j2162',status:'planning',client:'KTSCH',name:'J2162_KTSCH_More1_TravelabilityAdapt_CP10_FF_FeaturesandBenefits_Bars',sprint:'Sprint 03/16',clientLabel:'Kitsch',geo:'',
    fields:[['Job Owner','Clark'],['Client','Kitsch'],['Job Type','More'],['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],['SKU','Shampoo Bars'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','AI VO'],['Base Job #','J2011v1b'],['Music','Yes'],['Total Ad Sets','2'],['Style','Same as base'],['Reference','J2011v1b'],['Total # of Videos','']],
    goal:'Adapting J2011v1b (Liquid Shampoo top performer) into Shampoo Bars with a travelability angle added.',
    editing:'Adapt J2011v1b for Shampoo Bars. Add travelability messaging — TSA-friendly, no liquid bag needed. Maintain same structure and pacing.'},
-  {id:'j538',status:'planning',client:'PRTLI',name:'J538_PRTLI_Adapt1_CP10_FF_JOChoice1499_PrettyLitter',sprint:'Sprint 03/16',clientLabel:'PrettyLitter',geo:'USA · $14.99',
-   fields:[['Job Owner','Clark'],['Client','PrettyLitter'],['Job Type','Adapt'],['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],['SKU','PrettyLitter'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Offer','First bag $14.99'],['Music','Yes'],['Total Ad Sets','2'],['Persona','Devoted Cat Parent'],['Style','JO choice — match base'],['Total # of Videos','']],
-   goal:'Adapting existing PrettyLitter top performer into the $14.99 first bag offer. JO has creative discretion on base selection.',
-   editing:'JO choice on base. Adapt into $14.99 first bag offer. Update callouts, end cards, lower thirds. USA geo.'},
-  {id:'j537a',status:'planning',client:'PRTLI',name:'J537_PRTLI_More1_CP10_FF_JOChoice1999_PrettyLitter',sprint:'Sprint 03/16',clientLabel:'PrettyLitter',geo:'USA · $19.99',
-   fields:[['Job Owner','Clark'],['Client','PrettyLitter'],['Job Type','More'],['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],['SKU','PrettyLitter'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Offer','First bag $19.99'],['Music','Yes'],['Total Ad Sets','2'],['Persona','Devoted Cat Parent'],['Style','JO choice — match base'],['Total # of Videos','']],
-   goal:'More volume on the $19.99 first bag offer. USA geo. Parallel to J538.',
-   editing:'JO choice on base. Update offer language to first bag $19.99. USA geo.'},
-  {id:'j537b',status:'planning',client:'PRTLI',name:'J537_PRTLI_More1_CP10_FF_JOChoice1499Canada_PrettyLitter',sprint:'Sprint 03/16',clientLabel:'PrettyLitter',geo:'CANADA · $14.99',
-   fields:[['Job Owner','Clark'],['Client','PrettyLitter'],['Job Type','More'],['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],['SKU','PrettyLitter'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Offer','First bag $14.99 (Canada)'],['Music','Yes'],['Total Ad Sets','2'],['Persona','Devoted Cat Parent'],['Style','JO choice — match base'],['Total # of Videos','']],
-   goal:'Canada geo, $14.99 first bag. Testing price sensitivity parallel to J539 Canada.',
-   editing:'JO choice on base. Update offer to first bag $14.99. Canada geo.'},
   {id:'j1844',status:'planning',client:'ILMKG',name:'J1844_ILMKG_Adapt1_CP10_MOF_AntiAgingStaticBouquet_PLUMP',sprint:'Sprint 03/16',clientLabel:'Il Makiage',geo:'',
    fields:[['Job Owner','Clark'],['Client','Il Makiage'],['Job Type','Adapt'],['Platform','Meta'],['Funnel Stage','MOF'],['Creative Format','Static'],['SKU','Power Lift Plumping Cream (PLUMP)'],['Aspect Ratio','1x1 / 4x5'],['VO','None'],['Base Job #','1803V1A, 1749V1A, 1766V1D, 1652V1D'],['Music','No'],['Total Ad Sets','2'],['Persona','Anti-aging (35+)'],['Style','Port from WULT statics'],['Total # of Videos','4 statics (1x1 + 4x5 each)']],
    goal:'Limited static supply on PLUMP anti-aging angle. Porting four best-spending WULT statics to PLUMP. TBYB language must be removed.',
    editing:'Port four statics from WULT to PLUMP. Remove TBYB from all.\n— 1803V1A → adapt to PLUMP\n— 1749V1A → remove TBYB, quiz CTA\n— 1766V1D → us vs. them format\n— 1652V1D → whiteboard: "You\'re only as old as you look"; overlay: "no lies detected"\nDeliver 1x1 and 4x5 cuts each.'},
-  {id:'j539',status:'planning',client:'PRTLI',name:'J539_PRTLI_More1_CP10_FF_JOChoice1999Canada_PrettyLitter',sprint:'Sprint 03/16',clientLabel:'PrettyLitter',geo:'CANADA · $19.99',
-   fields:[['Job Owner','Clark'],['Client','PrettyLitter'],['Job Type','More'],['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],['SKU','PrettyLitter'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Offer','First bag $19.99 (Canada)'],['Music','Yes'],['Total Ad Sets','2'],['Persona','Devoted Cat Parent'],['Style','JO choice — match base'],['Total # of Videos','']],
-   goal:'Canada geo, $19.99 first bag. Testing price point performance in Canada.',
-   editing:'JO choice on base. Update offer to first bag $19.99. Canada geo.'},
   {id:'j16',status:'planning',client:'JAVVY',name:'J16_JAVVY_Adapt1_CP10_FF_Top3Flavors_JavvyCoffee',sprint:'Sprint 03/16',clientLabel:'Javvy Coffee',geo:'',
    fields:[['Job Owner','Clark'],['Client','Javvy Coffee'],['Job Type','Adapt'],['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],['SKU','Javvy Coffee'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Reference','Scentbird listicle format'],['Music','Yes'],['Total Ad Sets','2'],['Angle','Top 3 flavors — taste-led, anti-chalky'],['Hook','"Top 3 protein coffee flavors that don\'t taste chalky"'],['Total # of Videos','']],
    goal:'Review analysis flagged flavor differentiation as a major untapped opportunity. Adapting Scentbird\'s listicle format to test whether taste-led listicles drive Javvy conversions.',
@@ -687,10 +663,6 @@ let JOBS=[
    fields:[['Job Owner','Clark'],['Client','Scentbird'],['Job Type','More'],['Platform','Meta'],['Funnel Stage','BOF'],['Creative Format','Video'],['SKU','Cologne'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Base Job #','J680VB'],['Music','Yes'],['Total Ad Sets','2'],['Style','JO choice — see J680VB iteration history'],['Reference','J680VB + prior iterations'],['Total # of Videos','']],
    goal:'JO choice iteration on J680VB (Cologne BOF). Audience is warm — priority is closing efficiency and offer clarity.',
    editing:'JO choice — review J680VB and all previous iterations. Pick the most underexplored direction. Build from the strongest creative signal in the J680 family.'},
-  {id:'j559',status:'planning',client:'PRTLI',name:'J559_PRTLI_Adapt1_CP10_FF_TopPerformer1499_PrettyLitter',sprint:'Sprint 03/02',clientLabel:'PrettyLitter',geo:'USA · $14.99',
-   fields:[['Job Owner','Clark'],['Client','PrettyLitter'],['Job Type','Adapt'],['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],['SKU','PrettyLitter'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Offer','First bag $14.99'],['Music','Yes'],['Total Ad Sets','2'],['Persona','Devoted Cat Parent / Smell-focused'],['Total # of Videos','']],
-   goal:'Adapting existing PrettyLitter top performer into the $14.99 first bag offer. USA geo.',
-   editing:'Adapt top performer into $14.99 first bag offer. Update callouts, end cards, lower thirds. USA geo.'},
   {id:'j1853',status:'planning',client:'ILMKG',name:'J1853_ILMKG_More1_CP10_FF_BestOpenerTest_WULT',sprint:'Sprint 03/23',clientLabel:'Il Makiage',geo:'',
    fields:[['Job Owner','Clark'],['Client','Il Makiage'],['Job Type','More'],['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],['SKU','WULT'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Music','Yes'],['Total Ad Sets','2'],['Total # of Videos','']],
    goal:'Finding the BEST opener for WULT sales sequences that already perform. Testing AI openers (no AI openers exist for WULT yet) plus thumbstoppy openers against proven sales sequences.',
@@ -719,10 +691,6 @@ let JOBS=[
    fields:[['Job Owner','Clark'],['Client','Kitsch'],['Job Type','Upgrade'],['Platform','Meta'],['Funnel Stage',''],['Creative Format','Video'],['SKU','Shampoo Bars'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','AI VO'],['Music','Yes'],['Total Ad Sets','2'],['Total # of Videos','']],
    goal:'Upgrade J2026v1c. Changing headline to "hair down to waist," testing other sales sequences, shifting talent to older demographic.',
    editing:'Base: J2026v1c. Change headline (hair down to waist). Test other SS here. Talent shift to older.'},
-  {id:'j558',status:'working',client:'PRTLI',name:'J558_PRTLI_More1_CP10_FF_JOChoice1499_PrettyLitter',sprint:'Sprint 03/16',clientLabel:'PrettyLitter',geo:'USA · $14.99',
-   fields:[['Job Owner','Clark'],['Client','PrettyLitter'],['Job Type','More'],['Platform','Meta'],['Funnel Stage','Full Funnel (FF)'],['Creative Format','Video'],['SKU','PrettyLitter'],['Aspect Ratio','9x16 (4:5 Safe)'],['VO','Human VO'],['Offer','First bag $14.99'],['Music','Yes'],['Total Ad Sets','2'],['Persona','Devoted Cat Parent'],['Style','JO choice — match base'],['Total # of Videos','']],
-   goal:'More volume on PrettyLitter $14.99 first bag offer. USA geo.',
-   editing:'JO choice on base. Update offer language to first bag $14.99. USA geo.'},
   {id:'thrve_rachel',status:'planning',client:'THRVE',name:'J14_THRVE_Adapt2_CP10_FF_InfluencerWL_TransformTestimonial_rachellaurice',sprint:'Sprint 04/07',clientLabel:'Thrive Market',geo:'',
    fields:[['Job Owner','Clark'],['Client','Thrive Market'],['Job Type','New'],['Platform','Meta'],['Funnel Stage','Full funnel'],['Creative Format','Video'],['SKU','Thrive Membership'],['Aspect Ratio','9:16 (4:5 Safe)'],['VO','Human VO (Influencer)'],['Base Job #','N/A (net new)'],['Music','Yes'],['Total Ad Sets','2'],['Style','Influencer WL — testimonial'],['Goal Demo','Health-conscious women 25-45 / weight mgmt / gut health'],['Total # of Videos','8']],
    goal:'Influencer whitelisting ad using @rachellaurice\'s client-provided footage. Health Transformation persona (G) — under-exploited in account, "most emotionally powerful testimonials" per review analysis. Two sales sequences test a full transformation arc (SS1) vs a short offer-first product haul (SS2). Two hooks test a pattern-interrupt transformation open (H1) vs an offer-first value open (H2). Expands auction footprint beyond saturated Mom persona. Front-loads hook and offer per TS proposal recs.',
@@ -2818,8 +2786,40 @@ function renderList(){
 }
 function updateCounts(){STATUSES.forEach(s=>{const jobs=JOBS.filter(j=>getStatus(j)===s.key);const ct=document.getElementById('ct_'+s.key);const em=document.getElementById('empty_'+s.key);if(ct)ct.textContent=`${jobs.length} job${jobs.length!==1?'s':''}`;if(em)em.classList.toggle('show',jobs.length===0);})}
 let curFilter='all';
+let curSearch='';
 function applyFilter(f,btn){curFilter=f;document.querySelectorAll('.fb').forEach(b=>b.classList.remove('active'));btn.classList.add('active');reapplyFilter()}
-function reapplyFilter(){document.querySelectorAll('.row-card').forEach(c=>c.classList.toggle('hidden',curFilter!=='all'&&c.dataset.client!==curFilter));STATUSES.forEach(s=>{const hdr=document.getElementById('sec_'+s.key);if(!hdr)return;const vis=[...document.querySelectorAll('.row-card')].filter(c=>c.dataset.status===s.key&&!c.classList.contains('hidden'));hdr.classList.toggle('hidden',vis.length===0);})}
+function applySearch(q){
+  curSearch=(q||'').toLowerCase().trim();
+  var clr=document.getElementById('searchClear');
+  if(clr)clr.classList.toggle('visible',!!curSearch);
+  reapplyFilter();
+}
+function clearSearch(){
+  var inp=document.getElementById('searchInput');
+  if(inp){inp.value='';inp.focus();}
+  applySearch('');
+}
+function _matchesSearch(card){
+  if(!curSearch)return true;
+  // Match on visible card text + dataset attrs (catches J#, name, talent, client, status badges)
+  var hay=(card.textContent+' '+card.dataset.client+' '+card.dataset.status).toLowerCase();
+  // Support multi-token AND (e.g. "ktsch sherline")
+  var tokens=curSearch.split(/\s+/).filter(Boolean);
+  return tokens.every(function(t){return hay.indexOf(t)>-1;});
+}
+function reapplyFilter(){
+  document.querySelectorAll('.row-card').forEach(function(c){
+    var hideByClient=curFilter!=='all'&&c.dataset.client!==curFilter;
+    var hideBySearch=!_matchesSearch(c);
+    c.classList.toggle('hidden',hideByClient||hideBySearch);
+  });
+  STATUSES.forEach(function(s){
+    var hdr=document.getElementById('sec_'+s.key);
+    if(!hdr)return;
+    var vis=[...document.querySelectorAll('.row-card')].filter(function(c){return c.dataset.status===s.key&&!c.classList.contains('hidden');});
+    hdr.classList.toggle('hidden',vis.length===0);
+  });
+}
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(document.getElementById('rteLinkDlg')?.classList.contains('open'))return;closeModal();}});
 function checkAnchor(){if(window.location.hash){const id=window.location.hash.slice(1);if(JOBS.find(x=>x.id===id)){switchTopTab('briefs',document.querySelectorAll('.top-tab')[1]);setTimeout(()=>openModal(id),120);}}}
 
