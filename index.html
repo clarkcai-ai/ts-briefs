@@ -133,9 +133,21 @@ body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,s
 .row-name{font-size:13px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:3px}
 .row-meta{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 .row-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
-.row-del-btn{display:none;font-size:16px;color:var(--faint);background:none;border:none;cursor:pointer;padding:2px 6px;border-radius:4px;transition:all .15s;line-height:1}
+.row-del-btn{display:inline-flex;font-size:16px;color:var(--faint);background:none;border:none;cursor:pointer;padding:2px 6px;border-radius:4px;transition:all .15s;line-height:1;margin-left:6px}
 .row-del-btn:hover{color:#c0392b;background:rgba(192,57,43,.08)}
-.is-admin .row-del-btn{display:inline-flex}
+
+/* Confirm dialog (used for cancel/remove actions) */
+.confirm-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:9999;display:none;align-items:center;justify-content:center;padding:16px}
+.confirm-overlay.open{display:flex}
+.confirm-panel{background:var(--surface);border-radius:var(--rl);padding:24px 28px;max-width:380px;width:100%;box-shadow:0 12px 40px rgba(0,0,0,.2);text-align:center}
+.confirm-title{font-size:16px;font-weight:600;color:var(--text);margin-bottom:8px}
+.confirm-msg{font-size:13px;color:var(--muted);margin-bottom:20px;line-height:1.5}
+.confirm-btns{display:flex;gap:8px;justify-content:center}
+.confirm-btn{font-size:13px;font-weight:500;padding:8px 18px;border-radius:6px;border:1px solid var(--border);cursor:pointer;font-family:inherit;transition:all .15s}
+.confirm-btn-cancel{background:#fff;color:var(--muted)}
+.confirm-btn-cancel:hover{border-color:var(--border-strong);color:var(--text)}
+.confirm-btn-yes{background:#c0392b;color:#fff;border-color:#c0392b;font-weight:600}
+.confirm-btn-yes:hover{background:#a52e22;border-color:#a52e22}
 .open-btn{font-size:11px;font-weight:600;color:var(--faint);background:none;border:1px solid var(--border);border-radius:6px;padding:3px 10px;cursor:pointer;transition:all .15s;white-space:nowrap}
 .row-card:hover .open-btn{color:var(--blue);border-color:var(--blue-bd);background:var(--blue-bg)}
 
@@ -555,6 +567,18 @@ try {
     </select>
   </div>
   <div class="list-wrap" id="listWrap"></div>
+</div>
+
+<!-- CONFIRM DIALOG (Are you sure?) -->
+<div class="confirm-overlay" id="confirmOverlay" onclick="if(event.target===this)confirmClose()">
+  <div class="confirm-panel">
+    <div class="confirm-title">Are you sure?</div>
+    <div class="confirm-msg" id="confirmMsg">This action cannot be undone.</div>
+    <div class="confirm-btns">
+      <button class="confirm-btn confirm-btn-cancel" onclick="confirmClose()">Cancel</button>
+      <button class="confirm-btn confirm-btn-yes" id="confirmYesBtn" onclick="confirmYes()">Yes, remove</button>
+    </div>
+  </div>
 </div>
 
 <!-- MODAL -->
@@ -2843,11 +2867,41 @@ function changeStatus(sel){
   if(rc){const sb=rc.querySelector('.status-badge');if(sb){STATUSES.forEach(s=>sb.classList.remove('status-'+s.key));sb.classList.add('status-'+ns,'badge');sb.textContent=statusLabel(ns);}rc.dataset.status=ns;const tgt=document.getElementById('empty_'+ns);if(tgt){let last=tgt;let nx=tgt.nextElementSibling;while(nx&&nx.classList.contains('row-card')){last=nx;nx=nx.nextElementSibling;}last.insertAdjacentElement('afterend',rc);}}
   updateCounts();reapplyFilter();
 }
+// === Confirm dialog ==========================================
+var _confirmCb = null;
+function showConfirm(message, onYes, opts){
+  opts = opts || {};
+  document.getElementById('confirmMsg').textContent = message || 'Are you sure?';
+  var yesBtn = document.getElementById('confirmYesBtn');
+  if(yesBtn) yesBtn.textContent = opts.yesLabel || 'Yes, remove';
+  _confirmCb = onYes;
+  document.getElementById('confirmOverlay').classList.add('open');
+}
+function confirmClose(){
+  document.getElementById('confirmOverlay').classList.remove('open');
+  _confirmCb = null;
+}
+function confirmYes(){
+  var cb = _confirmCb;
+  confirmClose();
+  if(cb) try { cb(); } catch(e) { console.error(e); }
+}
+document.addEventListener('keydown',function(e){
+  var o = document.getElementById('confirmOverlay');
+  if(o && o.classList.contains('open')){
+    if(e.key === 'Escape') confirmClose();
+    if(e.key === 'Enter'){ e.preventDefault(); confirmYes(); }
+  }
+});
+
 function hideJob(id){
-  if(!confirm('Remove this job from your list?'))return;
-  ss(id,'_hidden','1');
-  JOBS=JOBS.filter(j=>j.id!==id);
-  renderList();reapplyFilter();
+  var j = JOBS.find(function(x){return x.id===id;});
+  var name = j ? (ls(id,'jobname') || j.name) : 'this job';
+  showConfirm('Remove "' + name + '" from your list? You can\'t undo this.', function(){
+    ss(id,'_hidden','1');
+    JOBS = JOBS.filter(function(x){return x.id!==id;});
+    renderList(); reapplyFilter();
+  });
 }
 function copyModalLink(){if(!curJob)return;navigator.clipboard.writeText(window.location.href.split('#')[0]+'#'+curJob.id).then(()=>{const btn=document.getElementById('mCopyBtn');btn.textContent='Copied!';btn.classList.add('copied');setTimeout(()=>{btn.textContent='Copy Link';btn.classList.remove('copied');},2000)})}
 
