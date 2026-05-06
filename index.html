@@ -108,6 +108,20 @@ body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,s
 .fl{font-size:10px;font-weight:700;color:var(--faint);letter-spacing:.08em;text-transform:uppercase;margin-right:3px}
 .fb{font-size:11px;font-weight:500;border:1px solid var(--border);border-radius:20px;padding:3px 11px;background:none;color:var(--muted);cursor:pointer;transition:all .15s}
 .fb:hover,.fb.active{border-color:var(--orange);color:var(--orange);background:var(--orange-bg)}
+
+/* === STRATEGY HUB === */
+.hub-wrap{max-width:900px;margin:0 auto;padding:32px}
+.hub-h2{font-size:22px;font-weight:600;color:var(--text);margin:0 0 6px}
+.hub-sub{font-size:13px;color:var(--muted);margin:0 0 28px}
+.hub-brand{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:20px 24px;margin-bottom:16px}
+.hub-brand-hdr{display:flex;align-items:baseline;gap:10px;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+.hub-brand-code{font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--orange);background:var(--orange-bg);padding:3px 9px;border-radius:4px}
+.hub-brand-name{font-size:15px;font-weight:600;color:var(--text)}
+.hub-tab-row{display:flex;flex-wrap:wrap;gap:8px}
+.hub-tab{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;padding:8px 14px;background:#fafaf8;border:1px solid var(--border);border-radius:8px;color:var(--text);text-decoration:none;transition:all .15s;cursor:pointer}
+.hub-tab:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-bg)}
+.hub-tab-arrow{font-size:14px;color:var(--faint);transition:color .15s}
+.hub-tab:hover .hub-tab-arrow{color:var(--blue)}
 .brand-select{margin-left:auto;font-size:12px;font-weight:500;padding:5px 28px 5px 14px;border:1px solid var(--border);border-radius:20px;background:#fff;color:var(--muted);font-family:inherit;cursor:pointer;transition:all .15s;-webkit-appearance:none;-moz-appearance:none;appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'><path fill='%236b6960' d='M3 5l3 3 3-3z'/></svg>");background-repeat:no-repeat;background-position:right 8px center}
 .brand-select:hover{border-color:var(--orange);color:var(--orange)}
 .brand-select:focus{outline:none;border-color:var(--orange);box-shadow:0 0 0 3px var(--orange-bg)}
@@ -513,35 +527,38 @@ try {
 
 <!-- TOP-LEVEL NAV -->
 <div class="top-nav">
-  <button class="top-tab active" onclick="switchTopTab('import',this)">
-    Import from Planner
-  </button>
-  <button class="top-tab" onclick="switchTopTab('briefs',this)">
+  <button class="top-tab active" onclick="switchTopTab('briefs',this)">
     Briefs
     <span class="top-tab-count" id="briefsCount">15</span>
   </button>
+  <button class="top-tab" onclick="switchTopTab('hub',this)">
+    Strategy Hub
+  </button>
 </div>
 
-<!-- === IMPORT TAB =========================================== -->
-<div class="top-section active" id="section-import">
-  <div class="import-wrap">
-    <p class="import-intro">
-      Export your <strong>coffee pod planner</strong> as a CSV and drop it below. The tool will detect all of Clark's assigned jobs, extract the concept notes, and use AI to generate full brief drafts — JO Goal, Editing Instructions, and job naming — ready to add to your briefs list.
-    </p>
+<!-- === STRATEGY HUB TAB ===================================== -->
+<div class="top-section" id="section-hub">
+  <div class="hub-wrap">
+    <h2 class="hub-h2">Strategy Hub</h2>
+    <p class="hub-sub">Brand-specific resources, references, and shared docs.</p>
 
-    <div class="drop-zone" id="dropZone">
-      <input type="file" accept=".csv,.tsv,.txt,text/csv" id="fileInput" onchange="handleFileSelect(this)">
-      <div class="drop-icon">&darr;</div>
-      <div class="drop-title">Drop your planner CSV here</div>
-      <div class="drop-sub">or click to browse · .csv or .tsv from Google Sheets export</div>
+    <div class="hub-brand">
+      <div class="hub-brand-hdr">
+        <span class="hub-brand-code">KTSCH</span>
+        <span class="hub-brand-name">Kitsch</span>
+      </div>
+      <div class="hub-tab-row">
+        <a class="hub-tab" href="https://docs.google.com/spreadsheets/d/1IU1c-8m-vQfz8ZTRo8tEC4uWYjz00Ianktok2SVGH9E/edit?gid=1471582876#gid=1471582876" target="_blank" rel="noopener noreferrer">
+          <span class="hub-tab-label">Naming Convention</span>
+          <span class="hub-tab-arrow">&rarr;</span>
+        </a>
+      </div>
     </div>
-
-    <div class="import-results" id="importResults" style="display:none"></div>
   </div>
 </div>
 
 <!-- === BRIEFS TAB =========================================== -->
-<div class="top-section" id="section-briefs">
+<div class="top-section active" id="section-briefs">
   <div class="filter-bar">
     <span class="fl">Filter</span>
     <button class="fb active" onclick="applyFilter('all',this)">All</button>
@@ -3119,7 +3136,7 @@ function reapplyFilter(){
   });
 }
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(document.getElementById('rteLinkDlg')?.classList.contains('open'))return;closeModal();}});
-function checkAnchor(){if(window.location.hash){const id=window.location.hash.slice(1);if(JOBS.find(x=>x.id===id)){switchTopTab('briefs',document.querySelectorAll('.top-tab')[1]);setTimeout(()=>openModal(id),120);}}}
+function checkAnchor(){if(window.location.hash){const id=window.location.hash.slice(1);if(JOBS.find(x=>x.id===id)){switchTopTab('briefs',document.querySelectorAll('.top-tab')[0]);setTimeout(()=>openModal(id),120);}}}
 
 // === RICH TEXT EDITOR ENGINE ================================
 // Deferred to run after DOM is fully parsed (toolbar HTML is below the script)
