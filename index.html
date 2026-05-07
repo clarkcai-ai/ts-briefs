@@ -19,6 +19,14 @@ body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,s
 
 /* HEADER */
 .site-header{background:var(--text);color:#fff;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
+.cloud-status{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:500;padding:4px 10px;border-radius:14px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.85);cursor:pointer;transition:background .15s;margin-right:6px}
+.cloud-status:hover{background:rgba(255,255,255,.12)}
+.cloud-dot{width:7px;height:7px;border-radius:50%;background:#9aa0a6;flex-shrink:0;transition:background .2s}
+.cloud-status[data-state="synced"] .cloud-dot{background:#2ecc71;box-shadow:0 0 6px rgba(46,204,113,.5)}
+.cloud-status[data-state="syncing"] .cloud-dot{background:#f39c12;animation:pulse 1.2s infinite}
+.cloud-status[data-state="error"] .cloud-dot{background:#e74c3c;box-shadow:0 0 6px rgba(231,76,60,.5)}
+.cloud-status[data-state="offline"] .cloud-dot{background:#95a5a6}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 .site-hl{display:flex;align-items:baseline;gap:12px}
 .site-title{font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
 .site-sub{font-size:12px;color:rgba(255,255,255,.4)}
@@ -109,19 +117,6 @@ body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,s
 .fb{font-size:11px;font-weight:500;border:1px solid var(--border);border-radius:20px;padding:3px 11px;background:none;color:var(--muted);cursor:pointer;transition:all .15s}
 .fb:hover,.fb.active{border-color:var(--orange);color:var(--orange);background:var(--orange-bg)}
 
-/* === STRATEGY HUB === */
-.hub-wrap{max-width:900px;margin:0 auto;padding:32px}
-.hub-h2{font-size:22px;font-weight:600;color:var(--text);margin:0 0 6px}
-.hub-sub{font-size:13px;color:var(--muted);margin:0 0 28px}
-.hub-brand{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:20px 24px;margin-bottom:16px}
-.hub-brand-hdr{display:flex;align-items:baseline;gap:10px;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--border)}
-.hub-brand-code{font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--orange);background:var(--orange-bg);padding:3px 9px;border-radius:4px}
-.hub-brand-name{font-size:15px;font-weight:600;color:var(--text)}
-.hub-tab-row{display:flex;flex-wrap:wrap;gap:8px}
-.hub-tab{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;padding:8px 14px;background:#fafaf8;border:1px solid var(--border);border-radius:8px;color:var(--text);text-decoration:none;transition:all .15s;cursor:pointer}
-.hub-tab:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-bg)}
-.hub-tab-arrow{font-size:14px;color:var(--faint);transition:color .15s}
-.hub-tab:hover .hub-tab-arrow{color:var(--blue)}
 .brand-select{margin-left:auto;font-size:12px;font-weight:500;padding:5px 28px 5px 14px;border:1px solid var(--border);border-radius:20px;background:#fff;color:var(--muted);font-family:inherit;cursor:pointer;transition:all .15s;-webkit-appearance:none;-moz-appearance:none;appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'><path fill='%236b6960' d='M3 5l3 3 3-3z'/></svg>");background-repeat:no-repeat;background-position:right 8px center}
 .brand-select:hover{border-color:var(--orange);color:var(--orange)}
 .brand-select:focus{outline:none;border-color:var(--orange);box-shadow:0 0 0 3px var(--orange-bg)}
@@ -518,6 +513,11 @@ try {
     <span class="site-sub">Clark · March 2026</span>
   </div>
   <div class="site-hr">
+    <span class="cloud-status" id="cloudStatus" title="Click for details" onclick="showSyncDetails()">
+      <span class="cloud-dot" id="cloudDot"></span>
+      <span class="cloud-text" id="cloudText">Connecting…</span>
+    </span>
+    <button class="data-btn" id="syncAllBtn" onclick="syncAllToCloud()" title="Force-push every saved field from this browser to Firestore"><svg viewBox="0 0 16 16"><path d="M14 8a6 6 0 11-1.76-4.24M14 3v3.5h-3.5"/></svg>Sync All</button>
     <span class="save-ind" id="saveInd">&check; Saved</span>
     <button class="data-btn" onclick="exportData()" title="Download all brief data as JSON"><svg viewBox="0 0 16 16"><path d="M8 1v9m0 0l-3-3m3 3l3-3M2 12v1.5A1.5 1.5 0 003.5 15h9a1.5 1.5 0 001.5-1.5V12"/></svg>Export</button>
     <button class="data-btn" onclick="document.getElementById('importFileInput').click()" title="Load brief data from a JSON file"><svg viewBox="0 0 16 16"><path d="M8 10V1m0 0L5 4m3-3l3 3M2 12v1.5A1.5 1.5 0 003.5 15h9a1.5 1.5 0 001.5-1.5V12"/></svg>Import</button>
@@ -531,30 +531,6 @@ try {
     Briefs
     <span class="top-tab-count" id="briefsCount">15</span>
   </button>
-  <button class="top-tab" onclick="switchTopTab('hub',this)">
-    Strategy Hub
-  </button>
-</div>
-
-<!-- === STRATEGY HUB TAB ===================================== -->
-<div class="top-section" id="section-hub">
-  <div class="hub-wrap">
-    <h2 class="hub-h2">Strategy Hub</h2>
-    <p class="hub-sub">Brand-specific resources, references, and shared docs.</p>
-
-    <div class="hub-brand">
-      <div class="hub-brand-hdr">
-        <span class="hub-brand-code">KTSCH</span>
-        <span class="hub-brand-name">Kitsch</span>
-      </div>
-      <div class="hub-tab-row">
-        <a class="hub-tab" href="https://docs.google.com/spreadsheets/d/1IU1c-8m-vQfz8ZTRo8tEC4uWYjz00Ianktok2SVGH9E/edit?gid=1471582876#gid=1471582876" target="_blank" rel="noopener noreferrer">
-          <span class="hub-tab-label">Naming Convention</span>
-          <span class="hub-tab-arrow">&rarr;</span>
-        </a>
-      </div>
-    </div>
-  </div>
 </div>
 
 <!-- === BRIEFS TAB =========================================== -->
@@ -962,29 +938,140 @@ function ls(id, k) {
   try { return localStorage.getItem(cacheKey); } catch(e) { return null; }
 }
 
-// Write to cache + Firestore (with debounce) + localStorage fallback
+// === Sync state tracking ===
+var _syncState = { pending: 0, errors: 0, lastSavedAt: null, lastErrorMsg: '' };
+function _renderCloudStatus() {
+  var el = document.getElementById('cloudStatus');
+  var txt = document.getElementById('cloudText');
+  if (!el || !txt) return;
+  var state, label;
+  if (!_firestoreReady || !db) { state = 'offline'; label = 'Local only'; }
+  else if (_syncState.errors > 0) { state = 'error'; label = _syncState.errors + ' failed'; }
+  else if (_syncState.pending > 0) { state = 'syncing'; label = 'Saving…'; }
+  else if (_syncState.lastSavedAt) {
+    state = 'synced';
+    var ago = Math.floor((Date.now() - _syncState.lastSavedAt) / 1000);
+    label = ago < 5 ? 'Synced' : ago < 60 ? ('Synced ' + ago + 's ago') : ('Synced ' + Math.floor(ago/60) + 'm ago');
+  } else { state = 'synced'; label = 'Connected'; }
+  el.dataset.state = state;
+  txt.textContent = label;
+}
+setInterval(_renderCloudStatus, 5000); // refresh time-ago
+
+function showSyncDetails() {
+  var pend = _syncState.pending, err = _syncState.errors;
+  var msg = 'Cloud sync status:\n\n';
+  msg += '• Firebase ready: ' + (_firestoreReady && db ? 'yes' : 'NO — local only mode') + '\n';
+  msg += '• Pending writes: ' + pend + '\n';
+  msg += '• Failed writes: ' + err + '\n';
+  if (_syncState.lastErrorMsg) msg += '• Last error: ' + _syncState.lastErrorMsg + '\n';
+  if (_syncState.lastSavedAt) msg += '• Last successful save: ' + new Date(_syncState.lastSavedAt).toLocaleTimeString() + '\n';
+  msg += '\nIf you\'re seeing "failed" or "offline", click Sync All to push everything to the cloud.';
+  alert(msg);
+}
+
+// Write to cache + Firestore (with debounce + retry) + localStorage fallback
 function ss(id, k, v) {
-  // Update in-memory cache
   if (!_cache[id]) _cache[id] = {};
   _cache[id][k] = v;
-  // Always persist to localStorage as fallback
   try { localStorage.setItem('b_' + id + '_' + k, v); } catch(e) {}
-  // Debounced write to Firestore
   if (_firestoreReady && db) {
     var timerKey = id + '::' + k;
     if (_fsDebounceTimers[timerKey]) clearTimeout(_fsDebounceTimers[timerKey]);
     _fsDebounceTimers[timerKey] = setTimeout(function() {
       delete _fsDebounceTimers[timerKey];
-      var update = {};
-      update[k] = v;
-      _markLocalWrite(id);
-      db.collection('briefs').doc(id).set(update, { merge: true }).catch(function(err) {
-        console.warn('Firestore write failed for ' + id + '/' + k + ':', err);
-      });
-    }, 500);
+      _writeToFirestoreWithRetry(id, k, v, 0);
+    }, 350);
   }
   flashSave();
 }
+
+// Firestore write with up to 3 retries (exponential backoff)
+function _writeToFirestoreWithRetry(id, k, v, attempt) {
+  if (attempt === 0) { _syncState.pending++; _renderCloudStatus(); }
+  var update = {}; update[k] = v;
+  _markLocalWrite(id);
+  db.collection('briefs').doc(id).set(update, { merge: true })
+    .then(function() {
+      _syncState.pending = Math.max(0, _syncState.pending - 1);
+      _syncState.lastSavedAt = Date.now();
+      _renderCloudStatus();
+    })
+    .catch(function(err) {
+      console.warn('Firestore write failed (attempt ' + (attempt+1) + ') for ' + id + '/' + k + ':', err);
+      if (attempt < 2) {
+        setTimeout(function() { _writeToFirestoreWithRetry(id, k, v, attempt + 1); }, 600 * Math.pow(2, attempt));
+      } else {
+        _syncState.pending = Math.max(0, _syncState.pending - 1);
+        _syncState.errors++;
+        _syncState.lastErrorMsg = (err && err.message) || String(err);
+        _renderCloudStatus();
+      }
+    });
+}
+
+// Manually push every localStorage `b_*` field to Firestore. Use when user suspects
+// past edits never made it to the cloud. Batches by docId for efficiency.
+function syncAllToCloud() {
+  if (!_firestoreReady || !db) {
+    alert('Firebase isn\'t connected. Refresh the page or check your network.');
+    return;
+  }
+  // Gather all localStorage keys grouped by doc
+  var docs = {};
+  for (var i = 0; i < localStorage.length; i++) {
+    var key = localStorage.key(i);
+    if (!key || !key.startsWith('b_')) continue;
+    var rest = key.substring(2);
+    var u = rest.indexOf('_');
+    if (u < 0) continue;
+    var docId = rest.substring(0, u);
+    var field = rest.substring(u + 1);
+    if (!docs[docId]) docs[docId] = {};
+    docs[docId][field] = localStorage.getItem(key);
+  }
+  var docIds = Object.keys(docs);
+  if (docIds.length === 0) { alert('No local data to sync.'); return; }
+  if (!confirm('Push ' + docIds.length + ' brief(s) from this browser to Firestore?\n\nThis overwrites any cloud values for these fields with what\'s in your browser.')) return;
+
+  var btn = document.getElementById('syncAllBtn');
+  if (btn) { btn.disabled = true; btn.textContent = 'Syncing…'; }
+  _syncState.errors = 0; _syncState.lastErrorMsg = '';
+
+  var done = 0, failed = 0;
+  docIds.forEach(function(docId) {
+    _markLocalWrite(docId);
+    db.collection('briefs').doc(docId).set(docs[docId], { merge: true })
+      .then(function() { done++; })
+      .catch(function(err) { failed++; console.warn('Sync All failed for', docId, err); _syncState.lastErrorMsg = (err && err.message) || String(err); })
+      .finally(function() {
+        if (done + failed === docIds.length) {
+          if (btn) { btn.disabled = false; btn.innerHTML = '<svg viewBox="0 0 16 16"><path d="M14 8a6 6 0 11-1.76-4.24M14 3v3.5h-3.5"/></svg>Sync All'; }
+          _syncState.lastSavedAt = Date.now();
+          _renderCloudStatus();
+          alert('Sync All complete:\n• ' + done + ' brief(s) pushed\n• ' + failed + ' failed' + (failed ? '\n\nCheck console for details.' : ''));
+        }
+      });
+  });
+}
+
+// Flush any pending debounced writes when the user closes/leaves the tab.
+// Without this, edits made in the last 350ms never reach Firestore.
+window.addEventListener('beforeunload', function() {
+  Object.keys(_fsDebounceTimers).forEach(function(timerKey) {
+    clearTimeout(_fsDebounceTimers[timerKey]);
+    var parts = timerKey.split('::');
+    var id = parts[0], k = parts[1];
+    var v = _cache[id] && _cache[id][k];
+    if (v != null && _firestoreReady && db) {
+      var update = {}; update[k] = v;
+      _markLocalWrite(id);
+      // Fire-and-forget — beforeunload doesn't await promises but Firestore SDK
+      // will attempt the write before the page is fully torn down.
+      try { db.collection('briefs').doc(id).set(update, { merge: true }); } catch(e) {}
+    }
+  });
+});
 
 let saveTimer;
 function flashSave(){clearTimeout(saveTimer);const e=document.getElementById('saveInd');e.classList.add('show');saveTimer=setTimeout(()=>e.classList.remove('show'),1800)}
@@ -2080,30 +2167,45 @@ function _initFirestoreCache() {
     return;
   }
   _showLoadingIndicator();
+  // Hard 4s timeout: if Firestore never resolves/rejects (blocked, stalled, slow),
+  // render from localStorage + hardcoded JOBS so the user is never stuck on a spinner.
+  // The realtime listener still hooks up below if/when Firestore eventually responds.
+  var _bootDone = false;
+  function _finishBoot(fromCloud) {
+    if (_bootDone) return;
+    _bootDone = true;
+    _cacheReady = true;
+    _initBriefs();
+    _hideLoadingIndicator();
+    renderList();
+    checkAnchor();
+    if (fromCloud) _setupRealtimeListener();
+  }
+  var _bootTimeout = setTimeout(function() {
+    if (_bootDone) return;
+    console.warn('Firestore initial load timed out — rendering from localStorage. Realtime listener will hydrate when network catches up.');
+    _loadLocalStorageIntoCache();
+    _finishBoot(false);
+    // Try to hook up the realtime listener anyway — when it finally connects,
+    // it'll merge cloud data into the cache and re-render.
+    try { _setupRealtimeListener(); } catch(e) {}
+  }, 4000);
+
   db.collection('briefs').get().then(function(snapshot) {
+    clearTimeout(_bootTimeout);
     snapshot.forEach(function(doc) {
       _cache[doc.id] = doc.data();
-      // Also persist each field to localStorage for offline fallback
       var d = doc.data();
       Object.keys(d).forEach(function(k) {
         try { localStorage.setItem('b_' + doc.id + '_' + k, d[k]); } catch(e) {}
       });
     });
-    _cacheReady = true;
-    _initBriefs();
-    _hideLoadingIndicator();
-    renderList();
-    checkAnchor();
-    // Set up real-time listener
-    _setupRealtimeListener();
+    _finishBoot(true);
   }).catch(function(err) {
+    clearTimeout(_bootTimeout);
     console.warn('Firestore initial load failed, using localStorage:', err);
     _loadLocalStorageIntoCache();
-    _cacheReady = true;
-    _initBriefs();
-    _hideLoadingIndicator();
-    renderList();
-    checkAnchor();
+    _finishBoot(false);
   });
 }
 
