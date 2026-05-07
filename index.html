@@ -2497,14 +2497,20 @@ function extractJobsFromCSV(rows){
 }
 
 // === DRAG & DROP =============================================
+// Guarded: the dropZone element only exists on pages with the CSV import UI.
+// Without this guard, a missing element throws a TypeError at top-level and
+// halts the rest of the script, leaving _collapsedSections undefined and
+// crashing renderList (see git history).
 const dropZone=document.getElementById('dropZone');
-dropZone.addEventListener('dragover',e=>{e.preventDefault();dropZone.classList.add('dragover')});
-dropZone.addEventListener('dragleave',()=>dropZone.classList.remove('dragover'));
-dropZone.addEventListener('drop',e=>{
-  e.preventDefault();dropZone.classList.remove('dragover');
-  const file=e.dataTransfer.files[0];
-  if(file)processFile(file);
-});
+if(dropZone){
+  dropZone.addEventListener('dragover',e=>{e.preventDefault();dropZone.classList.add('dragover')});
+  dropZone.addEventListener('dragleave',()=>dropZone.classList.remove('dragover'));
+  dropZone.addEventListener('drop',e=>{
+    e.preventDefault();dropZone.classList.remove('dragover');
+    const file=e.dataTransfer.files[0];
+    if(file)processFile(file);
+  });
+}
 
 function handleFileSelect(input){
   const file=input.files[0];
